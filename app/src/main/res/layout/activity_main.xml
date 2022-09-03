@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvAppname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -15,7 +16,27 @@
         android:textColor="@color/black"
         android:textSize="30dp" />
 
-    <EditText
+    <ImageButton
+        android:id="@+id/btnKakaoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kakao_login_logo"
+        android:background="@null"
+        android:layout_centerInParent="true"
+        />
+    <TextView
+        android:id="@+id/tvLook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="구경하러가기"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_below="@+id/btnKakaoLogin"
+        android:layout_marginTop="40dp"
+        />
+
+   <!-- <EditText
         android:id="@+id/edtLoginId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,19 +67,11 @@
         android:ems="10"
         android:text="Login"
         android:textSize="18dp" />
-    <TextView
-        android:id="@+id/tvLook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="구경하러가기"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        />
-    <RelativeLayout
+        !-->
+
+
+
+    <!--<RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnLogin"
@@ -81,6 +94,6 @@
         android:text="회원가입"
         android:layout_toRightOf="@+id/tvRegisterQuestion"
         />
-    </RelativeLayout>
+    </RelativeLayout>!-->
 
 </RelativeLayout>
