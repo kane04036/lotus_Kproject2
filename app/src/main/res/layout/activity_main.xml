@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="App Name"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+    <EditText
+        android:id="@+id/edtLoginId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edtLoginPw"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="ID"
+        android:textSize="18dp"
+
+        />
+    <EditText
+        android:id="@+id/edtLoginPw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="Password"
+        android:textSize="18dp"
+        />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtLoginPw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:text="Login"
+        android:textSize="18dp" />
+    <TextView
+        android:id="@+id/tvLook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="구경하러가기"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        >
+    <TextView
+        android:id="@+id/tvRegisterQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="처음 오셨나요? "
+
+        />
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="회원가입"
+        android:layout_toRightOf="@+id/tvRegisterQuestion"
+        />
+    </RelativeLayout>
+
+</RelativeLayout>
