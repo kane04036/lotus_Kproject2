@@ -34,10 +34,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HomeActivity"/>
+        <activity android:name=".FragmentMainActivity"/>
         <activity android:name=".UserInfoActivity1"/>
         <activity android:name=".UserInfoActivity2"/>
         <activity android:name=".UserInfoActivity3"/>
+        <activity android:name=".UserInfoActivity4"/>
     </application>
 
 

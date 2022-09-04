@@ -22,6 +22,8 @@ public class UserInfoActivity1 extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userinfo);
+        overridePendingTransition(R.anim.none, R.anim.none);
+
         btnNextUserinfo1 = findViewById(R.id.btnNextUserinfo1);
         imageFemale = findViewById(R.id.imageFemale);
         imageMale = findViewById(R.id.imageMale);
@@ -56,5 +58,11 @@ public class UserInfoActivity1 extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.none, R.anim.none);
     }
 }
