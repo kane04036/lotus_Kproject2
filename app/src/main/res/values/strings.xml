@@ -20,9 +20,9 @@
         <item>ENTJ</item>
     </string-array>
 
-    <string name="tab_home">Home</string>
-    <string name="tab_search">Search</string>
-    <string name="tab_mypage">Mypage</string>
+    <string name="tab_home">홈</string>
+    <string name="tab_search">검색</string>
+    <string name="tab_mypage">마이페이지</string>
 
 
 </resources>

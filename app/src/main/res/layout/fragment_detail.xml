@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/detailTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <ImageButton
+        android:id="@+id/btnBackOfDetailPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_small"
+        android:background="@null"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        />
+    <TextView
+        android:id="@+id/tvMovieNameOfTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="영화제목이여요"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_alignTop="@+id/btnBackOfDetailPage"
+        />
+        <View
+            android:id="@+id/viewMovieDetail"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/btnBackOfDetailPage"
+            android:background="#b8b8b8"
+            android:layout_marginTop="5dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/detailTopBar"
+
+        >
+
+        <ImageView
+            android:id="@+id/imageMovieDetail"
+            android:layout_width="135dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_rectangle"
+            android:clipToOutline="true"
+            android:src="@drawable/movie_poster1" />
+
+        <TextView
+            android:id="@+id/tvMovieName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageMovieDetail"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/imageMovieDetail"
+            android:text="영화제목이여요"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvYearOfMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvMovieName"
+            android:layout_alignStart="@+id/tvMovieName"
+            android:text="2021" />
+
+        <TextView
+            android:id="@+id/tvGenre1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvYearOfMovie"
+            android:layout_alignStart="@+id/tvMovieName"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/genre_round_rectangle"
+            android:text="#스릴러" />
+
+        <TextView
+            android:id="@+id/tvGenre2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvGenre1"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvGenre1"
+            android:background="@drawable/genre_round_rectangle"
+            android:text="#미스테리" />
+
+        <TextView
+            android:id="@+id/tvGenre3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvGenre1"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tvGenre2"
+            android:background="@drawable/genre_round_rectangle"
+            android:text="#호러" />
+
+        <ImageButton
+            android:id="@+id/btnMovieBookMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvMovieLike"
+            android:layout_alignStart="@+id/tvGenre1"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:src="@drawable/bookmark_small" />
+
+        <TextView
+            android:id="@+id/tvMovieLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/btnMovieBookMark"
+            android:layout_alignBottom="@+id/imageMovieDetail"
+            android:text="뭅마크"
+            android:textColor="@color/black" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnMovieBookMark"
+            android:layout_alignStart="@id/btnMovieBookMark"
+         />
+
+    </RelativeLayout>
+
+</RelativeLayout>
