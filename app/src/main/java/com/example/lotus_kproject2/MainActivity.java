@@ -24,6 +24,8 @@ import com.kakao.sdk.user.UserApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
     ImageButton btnKakaoLogin;
     TextView tvLook;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         tvLook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FragmentMainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -120,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = "https://flask-sample-eezgq.run.goorm.io/umanager/login/kakao";
+        String URL = getString(R.string.url) + getString(R.string.kakaoLogin);
+        Log.d(TAG, "loginRequest: url: "+ URL);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, UserInfoActivity1.class);
                             startActivity(intent);
                         }else{
-                            Intent intent = new Intent(MainActivity.this, FragmentMainActivity.class);
+                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
                     }

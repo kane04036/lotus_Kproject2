@@ -18,7 +18,7 @@
             android:layout_alignBottom="@+id/edtSearch"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="3dp"
-            android:src="@drawable/search_small" />
+            android:src="@drawable/search_darkgray_small" />
 
         <EditText
             android:id="@+id/edtSearch"
@@ -28,7 +28,7 @@
             android:layout_toRightOf="@+id/imageSearch"
             android:hint="검색어를 입력하세요"
             android:background="@android:color/transparent"
-            android:textSize="15dp" />
+            android:textSize="20dp" />
     </RelativeLayout>
     <ListView
         android:layout_width="match_parent"

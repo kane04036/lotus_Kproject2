@@ -23,6 +23,8 @@
     <string name="tab_home">홈</string>
     <string name="tab_search">검색</string>
     <string name="tab_mypage">마이페이지</string>
+    <string name="url">https://flask-sample-eezgq.run.goorm.io</string>
+    <string name="kakaoLogin">/umanager/login/kakao</string>
 
 
 </resources>

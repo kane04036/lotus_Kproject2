@@ -40,6 +40,8 @@
         <activity android:name=".UserInfoActivity3"/>
         <activity android:name=".UserInfoActivity4"/>
         <activity android:name=".MovieDetailActivity"/>
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".SearchActivity"/>
     </application>
 
 

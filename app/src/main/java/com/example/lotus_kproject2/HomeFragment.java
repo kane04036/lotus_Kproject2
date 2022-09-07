@@ -10,8 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class HomeFragment extends Fragment {
+//    private FragmentManager fragmentManager = getChildFragmentManager();
+//    private DetailOfMovieFragment detailOfMovieFragment = new DetailOfMovieFragment();
     TextView tvHome;
     @Nullable
     @Override
@@ -24,6 +28,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), MovieDetailActivity.class);
                 startActivity(intent);
+//                FragmentTransaction transaction  = fragmentManager.beginTransaction();
+//                transaction.replace(R.id.frameLayout, detailOfMovieFragment).commitAllowingStateLoss();
+
             }
         });
         return view;

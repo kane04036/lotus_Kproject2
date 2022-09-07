@@ -4,36 +4,44 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class MovieDetailActivity extends AppCompatActivity {
     ImageView imageMovieDetail;
     TextView tvMovieNameOfTopBar, tvMovieName, tvYearOfMovie, tvGenre1, tvGenre2, tvGenre3;
     ImageButton btnBackOfDetailPage, btnMovieBookmark;
+    MaterialToolbar detailTopBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_detail);
+        setContentView(R.layout.activity_detail);
+        overridePendingTransition(R.anim.none, R.anim.none);
 
+        detailTopBar = findViewById(R.id.detailTopBar);
         imageMovieDetail = findViewById(R.id.imageMovieDetail);
         tvMovieName = findViewById(R.id.tvMovieName);
-        tvMovieNameOfTopBar = findViewById(R.id.tvMovieNameOfTopBar);
+//        tvMovieNameOfTopBar = findViewById(R.id.tvMovieNameOfTopBar);
         tvYearOfMovie = findViewById(R.id.tvYearOfMovie);
-        btnBackOfDetailPage = findViewById(R.id.btnBackOfDetailPage);
+//        btnBackOfDetailPage = findViewById(R.id.btnBackOfDetailPage);
         btnMovieBookmark = findViewById(R.id.btnMovieBookMark);
 
         imageMovieDetail.setClipToOutline(true);
+
+        detailTopBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         btnMovieBookmark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,4 +62,9 @@ public class MovieDetailActivity extends AppCompatActivity {
 //    }
 
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.none, R.anim.none);
+    }
 }

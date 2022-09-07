@@ -13,7 +13,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 public class FragmentMainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private SearchFragment searchFragment = new SearchFragment();
+    private SearchActivity searchActivity = new SearchActivity();
     private HomeFragment homeFragment = new HomeFragment();
     private MypageFragment mypageFragment = new MypageFragment();
     @Override
@@ -22,7 +22,7 @@ public class FragmentMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragmentmain);
 
         FragmentTransaction transaction  = fragmentManager.beginTransaction();
-        transaction.replace(R.id.framelayout, homeFragment).commitAllowingStateLoss();
+//        transaction.replace(R.id.framelayout, homeFragment).commitAllowingStateLoss();
 
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
@@ -95,13 +95,13 @@ public class FragmentMainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (position){
                     case 0:
-                        transaction.replace(R.id.framelayout, homeFragment).commitAllowingStateLoss();
+//                        transaction.replace(R.id.framelayout, homeFragment).commitAllowingStateLoss();
                         break;
                     case 1:
-                        transaction.replace(R.id.framelayout, searchFragment).commitAllowingStateLoss();
+//                        transaction.replace(R.id.framelayout, searchFragment).commitAllowingStateLoss();
                         break;
                     case 2:
-                        transaction.replace(R.id.framelayout, mypageFragment).commitAllowingStateLoss();
+//                        transaction.replace(R.id.framelayout, mypageFragment).commitAllowingStateLoss();
                         break;
 
                 }
