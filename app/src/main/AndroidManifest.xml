@@ -42,6 +42,8 @@
         <activity android:name=".MovieDetailActivity"/>
         <activity android:name=".HomeActivity"/>
         <activity android:name=".SearchActivity"/>
+        <activity android:name=".SearchResultActivity_main"/>
+        <activity android:name=".MovieDetail2"/>
     </application>
 
 

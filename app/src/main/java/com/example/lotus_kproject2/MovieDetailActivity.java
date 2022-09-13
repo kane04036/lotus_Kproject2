@@ -32,7 +32,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        tvMovieNameOfTopBar = findViewById(R.id.tvMovieNameOfTopBar);
         tvYearOfMovie = findViewById(R.id.tvYearOfMovie);
 //        btnBackOfDetailPage = findViewById(R.id.btnBackOfDetailPage);
-        btnMovieBookmark = findViewById(R.id.btnMovieBookMark);
+//        btnMovieBookmark = findViewById(R.id.btnMovieBookMark);
 
         imageMovieDetail.setClipToOutline(true);
 

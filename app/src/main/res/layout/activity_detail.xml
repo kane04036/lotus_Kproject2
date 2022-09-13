@@ -26,13 +26,12 @@
         android:id="@+id/imageMovieDetail"
         android:layout_width="135dp"
         android:layout_height="200dp"
+        android:layout_below="@+id/detailTopBarLayout"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/round_rectangle"
         android:clipToOutline="true"
-        android:src="@drawable/movie_poster1"
-        android:layout_below="@+id/detailTopBarLayout"
-        />
+        android:src="@drawable/movie_poster1" />
 
     <TextView
         android:id="@+id/tvMovieName"
@@ -84,30 +83,30 @@
         android:background="@drawable/genre_round_rectangle"
         android:text="#호러" />
 
-    <ImageButton
-        android:id="@+id/btnMovieBookMark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvMovieLike"
-        android:layout_alignStart="@+id/tvGenre1"
-        android:layout_marginTop="10dp"
-        android:background="@null"
-        android:src="@drawable/bookmark_small" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/btnMovieBookMark"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@+id/tvMovieLike"-->
+<!--        android:layout_alignStart="@+id/tvGenre1"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@null"-->
+<!--        android:src="@drawable/bookmark_small" />-->
 
-    <TextView
-        android:id="@+id/tvMovieLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btnMovieBookMark"
-        android:layout_alignBottom="@+id/imageMovieDetail"
-        android:text="뭅마크"
-        android:textColor="@color/black" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvMovieLike"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignStart="@+id/btnMovieBookMark"-->
+<!--        android:layout_alignBottom="@+id/imageMovieDetail"-->
+<!--        android:text="뭅마크"-->
+<!--        android:textColor="@color/black" />-->
 
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnMovieBookMark"
-        android:layout_alignStart="@id/btnMovieBookMark" />
+        android:layout_below="@id/tvGenre1"
+        android:layout_alignStart="@id/tvGenre1"/>
 
 </RelativeLayout>

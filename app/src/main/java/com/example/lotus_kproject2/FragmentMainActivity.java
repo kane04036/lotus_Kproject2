@@ -28,8 +28,8 @@ public class FragmentMainActivity extends AppCompatActivity {
 
 // Create items
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.home, R.color.tab_home);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_search, R.drawable.search, R.color.tab_search);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_mypage, R.drawable.profile, R.color.tab_profile);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_write, R.drawable.search, R.color.tab_search);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_notify, R.drawable.profile, R.color.tab_profile);
 
 // Add items
         bottomNavigation.addItem(item1);
