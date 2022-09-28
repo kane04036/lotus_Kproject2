@@ -6,11 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,95 +24,36 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SearchActivity extends AppCompatActivity implements View.OnKeyListener {
+import java.util.ArrayList;
+
+public class SearchActivity extends AppCompatActivity {
     EditText edtSearch;
+//    FragmentManager childFragmentManager = getChildFragmentManager();
+    private SearchResultActivity_main searchResultActivity_main = new SearchResultActivity_main();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.horizontalexit, R.anim.none);
         setContentView(R.layout.activity_search);
-
         edtSearch = findViewById(R.id.edtSearch);
 
         edtSearch.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if ((keyEvent.getAction() == keyEvent.ACTION_DOWN) && (keyCode == keyEvent.KEYCODE_ENTER)) {
-//                    searchRequest(edtSearch.getText().toString());
-                    Intent intent = new Intent(SearchActivity.this, SearchResultActivity_main.class);
+                    Intent intent = new Intent(getApplicationContext(), SearchResultActivity_main.class);
+                    intent.putExtra("searchWord", edtSearch.getText().toString());
                     startActivity(intent);
                     return true;
                 }
                 return false;
             }
         });
-
-
     }
 
-    public void searchRequest(String textSearch) {
-        RequestQueue Queue = Volley.newRequestQueue(SearchActivity.this);
 
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("name", textSearch);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String URL = getString(R.string.url) + "/test/search/naver_movie";
-        Log.d(TAG, "loginRequest: url: " + URL);
-
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    String name = response.getString("name");
-                    String director = response.getString("director");
-                    String actor = response.getString("actor");
-                    String rating = response.getString("rating");
-                    Log.d(TAG, "onResponse: name: " +name);
-                    Log.d(TAG, "onResponse: director:"+director);
-                    Log.d(TAG, "onResponse: actor: "+actor);
-                    Log.d(TAG, "onResponse: rating: "+rating);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        Queue.add(jsonObjectRequest);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        if (isFinishing())
-            overridePendingTransition(R.anim.none, R.anim.horizontalenter);
-
-    }
-
-    @Override
-    public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-        if (keyCode == keyEvent.KEYCODE_ENTER) {
-            Log.d(TAG, "onKey: enterKey pressed");
-            searchRequest(edtSearch.getText().toString());
-        }
-
-        return false;
-    }
 }

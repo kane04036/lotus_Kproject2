@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp">
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/ratingBarInLongReview"
+        style="@style/Widget.MaterialRatingBar.RatingBar"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tvLongReviewContents3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBarInLongReview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="괴물은 진짜 갓벽한 최고의 영화라고 생각합니다."
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvNicknameLongReview3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLongReviewContents3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:text="짜장면"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvNicknameLongReview3"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/tvNicknameLongReview3"
+        android:text="ISFP"
+        android:textSize="13dp" />
+
+    <RelativeLayout
+        android:id="@+id/dumbUpLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_toLeftOf="@+id/btnDumbUP"
+            android:layout_alignBottom="@+id/btnDumbUP"
+            android:layout_marginRight="3dp"
+            android:text="104" />
+
+        <ImageButton
+            android:id="@+id/btnDumbUP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/thumb_up_small" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

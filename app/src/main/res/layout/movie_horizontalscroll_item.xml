@@ -10,9 +10,9 @@
         >
 
         <ImageView
-            android:id="@+id/imageMovieResult"
-            android:layout_width="112dp"
-            android:layout_height="166dp"
+            android:id="@+id/imgMovieInHorizonScroll"
+            android:layout_width="81dp"
+            android:layout_height="120dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:scaleType="centerCrop"
@@ -21,14 +21,14 @@
             android:src="@drawable/movie_poster4" />
 
         <TextView
-            android:id="@+id/tvMovieNameResult"
+            android:id="@+id/tvMovNameInHorizonScroll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="movie"
             android:textColor="@color/black"
-            android:layout_below="@+id/imageMovieResult"
-            android:layout_alignStart="@id/imageMovieResult"
-            android:layout_alignEnd="@+id/imageMovieResult"
+            android:layout_below="@+id/imgMovieInHorizonScroll"
+            android:layout_alignStart="@id/imgMovieInHorizonScroll"
+            android:layout_alignEnd="@+id/imgMovieInHorizonScroll"
             android:textAlignment="center"
             android:layout_centerInParent="true"/>
     </RelativeLayout>

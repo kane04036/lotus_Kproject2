@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutMovieList">
+    <ImageView
+        android:id="@+id/imgMovieList"
+        android:layout_width="67dp"
+        android:layout_height="100dp"
+        android:src="@drawable/movie_poster1"
+        android:layout_margin="8dp"
+        />
+    <TextView
+        android:id="@+id/tvMovieNameInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="콜 미 바이 유어 네임"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/imgMovieList"
+        android:layout_alignTop="@+id/imgMovieList"
+        android:layout_marginTop="15dp"
+        />
+    <TextView
+        android:id="@+id/tvYearInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022"
+        android:textColor="@color/gray"
+        android:layout_below="@id/tvMovieNameInList"
+        android:layout_alignStart="@+id/tvMovieNameInList"
+        />
+    <Button
+        android:id="@+id/btnGoReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="리뷰쓰기"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/tvYearInList"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="@color/signature_color"
+        android:visibility="invisible"
+        />
+
+</RelativeLayout>

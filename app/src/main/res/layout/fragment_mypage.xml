@@ -1,13 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tvNicknameInMypage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="mypage"
-        android:textSize="50dp"
-        />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="짱아찌"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvTextForNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvNicknameInMypage"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/tvNicknameInMypage"
+        android:text="님"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvNicknameInMypage"
+        android:layout_toRightOf="@+id/tvTextForNickname"
+        android:text="ISFP"
+        android:textColor="@color/darkGray"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNicknameInMypage"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@color/lightGray"
+            android:padding="5dp"
+            android:text="프로필 수정"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@color/lightGray"
+            android:padding="5dp"
+            android:text="내 블로그"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvManageShortReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:text="한 줄 느낌 관리"
+        android:textColor="@color/black"
+        android:textSize="14dp" />
+
+    <View
+        android:id="@+id/viewAboveOfManageShortReview"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_above="@+id/tvManageShortReview"
+        android:background="@color/lightGray" />
+
+    <TextView
+        android:id="@+id/tvLookLikeMov"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/viewAboveOfManageShortReview"
+        android:padding="10dp"
+        android:text="찜한 영화 보기"
+        android:textColor="@color/black"
+        android:textSize="14dp" />
+
+    <View
+        android:id="@+id/viewAboveOfLikeMov"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_above="@+id/tvLookLikeMov"
+        android:background="@color/lightGray" />
+
+
+</RelativeLayout>

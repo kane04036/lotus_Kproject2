@@ -4,35 +4,36 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tvMbti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MBTI"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:layout_marginTop="170dp"
-        />
-
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold" />
     <Spinner
-        android:id="@+id/mbtiSpinner"
-        android:layout_width="wrap_content"
+        android:id="@+id/spinnerMbti"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/tvMbti"
+        android:layout_margin="15dp"
         android:textAlignment="center"
-
         />
+
+
+
     <ImageButton
-        android:id="@+id/btnNextUserinfo3"
+        android:id="@+id/btnNextInMbti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/next_button"
-        android:background="@null"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
         android:layout_marginRight="10dp"
-        />
+        android:layout_marginBottom="15dp"
+        android:background="@null"
+        android:layout_below="@+id/spinnerMbti"
+        android:src="@drawable/next_button_small" />
 
 
 </RelativeLayout>

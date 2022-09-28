@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lotus_kproject2">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -34,16 +35,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".FragmentMainActivity"/>
-        <activity android:name=".UserInfoActivity1"/>
-        <activity android:name=".UserInfoActivity2"/>
-        <activity android:name=".UserInfoActivity3"/>
-        <activity android:name=".UserInfoActivity4"/>
-        <activity android:name=".MovieDetailActivity"/>
-        <activity android:name=".HomeActivity"/>
+        <activity
+            android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".SearchActivity"/>
         <activity android:name=".SearchResultActivity_main"/>
-        <activity android:name=".MovieDetail2"/>
+        <activity android:name=".ReviewEditorActivity"/>
+        <activity android:name=".SearchMovForChooseActivity"/>
     </application>
 
 

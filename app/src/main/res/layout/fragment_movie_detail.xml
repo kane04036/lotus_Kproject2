@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:id="@+id/tvMovieName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imageMovieDetail"
+        android:layout_alignTop="@id/imageMovieDetail"
+        android:layout_marginLeft="5dp"
+        android:text="콜 미 바이 유어 네임"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageMovieDetail"
+        android:layout_width="180dp"
+        android:layout_height="260dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_rectangle"
+        android:clipToOutline="true"
+        android:src="@drawable/movie_poster1" />
+
+    <TextView
+        android:id="@+id/tvGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/imageMovieDetail"
+        android:layout_below="@+id/tvMovieName"
+        android:text="드라마"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/tvCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvGenre"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/tvGenre"
+        android:text="이탈리아"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/tvRunningTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvGenre"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/tvCountry"
+        android:text="132분"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/tvReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022.10.04"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_below="@+id/tvGenre"
+        android:layout_alignStart="@id/tvGenre"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tvDirector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvReleaseDate"
+        android:layout_alignStart="@id/tvGenre"
+        android:layout_marginTop="10dp"
+        android:text="루카 구아다니노"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/ratingBarInDetail"
+        style="@style/Widget.MaterialRatingBar.RatingBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/tvDirector"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/imageMovieDetail"
+     />
+<!--    <View-->
+<!--        android:id="@+id/wall1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="5dp"-->
+<!--        android:layout_below="@id/imageMovieDetail"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:background="@color/lightGray" />-->
+
+    <TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageMovieDetail"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="1983년 이탈리아, 열 일곱 소년 Elio(티모시 샬라메)는 아름다운 햇살이 내리쬐는 가족 별장에서 여름이 끝나기만을 기다리고 있다 어느 오후, 스물 넷 청년 Oliver(아미 해머)가 아버지(마이클 스..."
+        android:textColor="@color/black"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/tvReadMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/tvSummary"
+        android:layout_alignBottom="@+id/tvSummary"
+        android:layout_marginRight="5dp"
+        android:text="더보기"
+        android:textColor="@color/darkGray"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+<!--    <View-->
+<!--        android:id="@+id/wall2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="@color/lightGray"-->
+<!--        android:layout_below="@id/imageMovieDetail"-->
+<!--        android:layout_alignTop="@+id/reviewSelectLayout"-->
+
+<!--        />-->
+
+    <LinearLayout
+        android:id="@+id/reviewSelectLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSummary"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/tvTabBarLongReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:background="@drawable/line_rectangle"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="1dp"
+            android:text="감상평"/>
+        <TextView
+            android:id="@+id/tvTabBarShortReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="한 줄 느낌"
+            android:textSize="15dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textColor="@color/darkGray"
+            android:background="@drawable/filled_rectangle"
+            android:layout_marginRight="1dp"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/reviewSelectLayout"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </FrameLayout>
+
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvYearOfMovie"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvMovieName"-->
+<!--        android:layout_alignStart="@+id/tvMovieName"-->
+<!--        android:text="2021" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvGenre1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/tvYearOfMovie"-->
+<!--        android:layout_alignStart="@+id/tvMovieName"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@drawable/genre_round_rectangle"-->
+<!--        android:text="#스릴러" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvGenre2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignTop="@+id/tvGenre1"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_toRightOf="@id/tvGenre1"-->
+<!--        android:background="@drawable/genre_round_rectangle"-->
+<!--        android:text="#미스테리" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvGenre3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignTop="@+id/tvGenre1"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_toRightOf="@id/tvGenre2"-->
+<!--        android:background="@drawable/genre_round_rectangle"-->
+<!--        android:text="#호러" />-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/btnMovieBookMark"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@+id/tvMovieLike"-->
+<!--        android:layout_alignStart="@+id/tvGenre1"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@null"-->
+<!--        android:src="@drawable/bookmark_small" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvMovieLike"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignStart="@+id/btnMovieBookMark"-->
+<!--        android:layout_alignBottom="@+id/imageMovieDetail"-->
+<!--        android:text="뭅마크"-->
+<!--        android:textColor="@color/black" />-->
+
+<!--    <RatingBar-->
+<!--        android:id="@+id/ratingBar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvGenre1"-->
+<!--        android:layout_alignStart="@id/tvGenre1"/>-->
+
+</RelativeLayout>

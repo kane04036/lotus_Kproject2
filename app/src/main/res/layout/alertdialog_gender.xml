@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="성별"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/imageGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvGender"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        >
+        <ImageView
+            android:id="@+id/imgBtnFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/female_small" />
+
+        <ImageView
+            android:id="@+id/imgBtnMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/imgBtnFemale"
+            android:src="@drawable/male_small" />
+
+    </RelativeLayout>
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/btnNextInGender"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_below="@id/imageGroup"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_marginBottom="15dp"-->
+<!--        android:background="@null"-->
+<!--        android:src="@drawable/next_button_small" />-->
+    <Button
+        android:id="@+id/btnNextInGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다음"
+        android:backgroundTint="@color/lightGray"
+        android:textColor="@color/black"
+        android:layout_below="@id/imageGroup"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:minWidth="0dp"
+
+        />
+
+
+</RelativeLayout>

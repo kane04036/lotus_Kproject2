@@ -4,40 +4,43 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tvNickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="닉네임"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:layout_marginTop="170dp"
-        />
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold" />
+
     <EditText
-        android:id="@+id/edtRegisterNickname"
-        android:layout_width="wrap_content"
+        android:id="@+id/edtNickname"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="12"
-        android:layout_centerInParent="true"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/tvNickname"
         />
+
     <TextView
         android:id="@+id/tvValidNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtRegisterNickname"
-        android:layout_alignStart="@+id/edtRegisterNickname"
+        android:layout_below="@+id/edtNickname"
+        android:layout_alignStart="@+id/edtNickname"
         android:textColor="#fc0303"
         />
+
     <ImageButton
-        android:id="@+id/btnNextUserinfo4"
+        android:id="@+id/btnNextInNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/next_button"
-        android:background="@null"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
         android:layout_marginRight="10dp"
-        />
+        android:layout_marginBottom="15dp"
+        android:background="@null"
+        android:layout_below="@+id/edtNickname"
+        android:src="@drawable/done_button_small"/>
+
 
 </RelativeLayout>

@@ -2,29 +2,45 @@
     <string name="app_name">lotus_Kproject2</string>
 
     <string-array name="mbti_array">
-        <item>ISTJ</item>
-        <item>ISFJ</item>
+        <item>ENFJ</item>
+        <item>ENTJ</item>
+        <item>ENFP</item>
+        <item>ENTP</item>
+        <item>ESFP</item>
+        <item>ESFJ</item>
+        <item>ESTP</item>
+        <item>ESTJ</item>
+        <item>INFP</item>
         <item>INFJ</item>
+        <item>INTP</item>
         <item>INTJ</item>
         <item>ISTP</item>
         <item>ISFP</item>
-        <item>INFP</item>
-        <item>INTP</item>
-        <item>ESTP</item>
-        <item>ESFP</item>
-        <item>ENFP</item>
-        <item>ENTP</item>
-        <item>ESTJ</item>
-        <item>ESFJ</item>
-        <item>ENFJ</item>
-        <item>ENTJ</item>
+        <item>ISFJ</item>
+        <item>ISTJ</item>
+    </string-array>
+    <string-array name="age_range">
+        <item>10세 이하</item>
+        <item>11~15</item>
+        <item>16 ~ 20</item>
+        <item>21 ~ 25</item>
+        <item>26 ~ 30</item>
+        <item>31 ~ 35</item>
+        <item>36 ~ 40</item>
+        <item>41 ~ 45</item>
+        <item>46 ~ 50</item>
+        <item>51세 이상</item>
     </string-array>
 
     <string name="tab_home">홈</string>
     <string name="tab_write">글쓰기</string>
     <string name="tab_notify">알림</string>
+    <string name="tab_profile">마이페이지</string>
     <string name="url">https://flask-sample-eezgq.run.goorm.io</string>
     <string name="kakaoLogin">/umanager/login/kakao</string>
+    <string name="tokenCheck">/test/kakao/check_token</string>
+    <string name="thumbnail">/search_movie/thumbnail</string>
+    <string name="loginData">loginData</string>
 
 
 </resources>
