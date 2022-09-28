@@ -205,7 +205,7 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.show();
 
-        ImageButton btnNextInAge = dialogView.findViewById(R.id.btnNextInAge);
+        Button btnNextInAge = dialogView.findViewById(R.id.btnNextInAge);
         btnNextInAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -231,7 +231,7 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.show();
 
-        ImageButton btnNextInMBTI = dialogView.findViewById(R.id.btnNextInMbti);
+        Button btnNextInMBTI = dialogView.findViewById(R.id.btnNextInMbti);
         btnNextInMBTI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -250,7 +250,7 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.show();
 
-        ImageButton btnNextInNickname = dialogView.findViewById(R.id.btnNextInNickname);
+        Button btnNextInNickname = dialogView.findViewById(R.id.btnNextInNickname);
         EditText edtNickname = dialogView.findViewById(R.id.edtNickname);
         btnNextInNickname.setOnClickListener(new View.OnClickListener() {
             @Override

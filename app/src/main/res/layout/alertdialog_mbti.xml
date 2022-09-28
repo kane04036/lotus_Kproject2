@@ -22,18 +22,19 @@
         android:textAlignment="center"
         />
 
-
-
-    <ImageButton
+    <Button
         android:id="@+id/btnNextInMbti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerMbti"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@null"
-        android:layout_below="@+id/spinnerMbti"
-        android:src="@drawable/next_button_small" />
+        android:backgroundTint="@color/lightGray"
+        android:minWidth="0dp"
+        android:text="다음"
+        android:textColor="@color/black"
+
+        />
 
 
 </RelativeLayout>

@@ -31,16 +31,22 @@
         android:textColor="#fc0303"
         />
 
-    <ImageButton
+
+    <Button
         android:id="@+id/btnNextInNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/edtNickname"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@null"
-        android:layout_below="@+id/edtNickname"
-        android:src="@drawable/done_button_small"/>
+        android:backgroundTint="@color/lightGray"
+        android:minWidth="0dp"
+        android:text="다음"
+        android:textColor="@color/black"
+
+        />
+
+
 
 
 </RelativeLayout>

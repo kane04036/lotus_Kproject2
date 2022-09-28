@@ -53,13 +53,13 @@
         android:id="@+id/btnNextInGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="다음"
-        android:backgroundTint="@color/lightGray"
-        android:textColor="@color/black"
         android:layout_below="@id/imageGroup"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
+        android:backgroundTint="@color/lightGray"
         android:minWidth="0dp"
+        android:text="다음"
+        android:textColor="@color/black"
 
         />
 
