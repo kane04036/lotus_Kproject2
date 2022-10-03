@@ -14,6 +14,15 @@
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
 
+        <item name="android:textViewStyle">@style/koddiTextView</item>
+        <item name="android:buttonStyle">@style/koddiButton</item>
+
+    </style>
+    <style name="koddiTextView" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/koddiregular</item>
+    </style>
+    <style name="koddiButton" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/koddibold</item>
     </style>
 
 
