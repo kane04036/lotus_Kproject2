@@ -22,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -63,6 +65,11 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList registerResult = new ArrayList();
     AlertDialog alertDialog, genderAlertDialog, ageAlertDialog, mbtiAlertDialog, nicknameAlertDialog;
     AHBottomNavigation bottomNavigation;
+    TextView tvValidNickname;
+    View header;
+    TextView tvNicknameInDawer, tvMbtiInDrawer;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +110,17 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        header = navigationView.getHeaderView(0);
+        tvNicknameInDawer = header.findViewById(R.id.tvNicknameInDrawer);
+        tvMbtiInDrawer = header.findViewById(R.id.tvMbtiInDrawer);
+
+        sharedPreferences = getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
+        String nickname = sharedPreferences.getString("nickname", "");
+        String mbti = sharedPreferences.getString("mbti", "");
+
+        tvNicknameInDawer.setText(nickname);
+        tvMbtiInDrawer.setText(mbti);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -178,12 +196,13 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(femaleCheck || maleCheck){
                     if(femaleCheck){
-                        registerResult.add(1);
+                        registerResult.add(0,1);
                     }else{
-                        registerResult.add(0);
+                        registerResult.add(0,0);
                     }
                     alertDialog.dismiss();
                     showAgeAlertDialog();
+
                 }
 
             }
@@ -209,7 +228,7 @@ public class HomeActivity extends AppCompatActivity {
         btnNextInAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerResult.add(spinnerAge.getSelectedItemPosition());
+                registerResult.add(1,spinnerAge.getSelectedItemPosition());
                 alertDialog.dismiss();
                 showMBTIAlertDialog();
             }
@@ -235,7 +254,12 @@ public class HomeActivity extends AppCompatActivity {
         btnNextInMBTI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerResult.add(spinnerMbti.getSelectedItemPosition());
+                registerResult.add(2,spinnerMbti.getSelectedItemPosition());
+                sharedPreferences = getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("mbti", (String) spinnerMbti.getSelectedItem());
+                editor.commit();
+                tvMbtiInDrawer.setText((String) spinnerMbti.getSelectedItem());
                 alertDialog.dismiss();
                 showNicknameAlertDialog();
             }
@@ -252,34 +276,34 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btnNextInNickname = dialogView.findViewById(R.id.btnNextInNickname);
         EditText edtNickname = dialogView.findViewById(R.id.edtNickname);
+        tvValidNickname = dialogView.findViewById(R.id.tvValidNickname);
         btnNextInNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!edtNickname.getText().toString().replace(" ","").equals("")){
-                    registerResult.add(edtNickname.getText().toString());
-                    for(int i = 0; i < registerResult.size(); i++){
-                        Log.d(TAG, "onClick: registerResultArray:"+registerResult.get(i));
-                    }
+                if(edtNickname.getText().toString().replace(" ","").equals("")){
+                  tvValidNickname.setText("닉네임을 입력해주세요");
+                }
+                else{
+                    registerResult.add(3,edtNickname.getText().toString());
                     validNickCheck(edtNickname.getText().toString());
                 }
             }
         });
     }
 
-    public void validNickCheck(String nickname){
+    public void validNickCheck(String result_nickname){
 
         RequestQueue Queue = Volley.newRequestQueue(HomeActivity.this);
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("nickname", nickname);
-            Log.d(TAG, "validNickCheck: nickname:" + nickname);
+            jsonObject.put("nickname", result_nickname);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.url)+"/umanager/ck_nickname/kakao";
+        String URL = getString(R.string.server)+"/umanager/ck_nickname/kakao";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -287,10 +311,17 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     String res = response.getString("res");
-                    Log.d(TAG, "onResponse: Nickname Valid Result:"+res);
-                    if(res.equals("Success")){
-                        //여기서 회원가입 처리를 어떻게 할까...
+                    if(res.equals("201")){
                         kakaoRegister();
+                        alertDialog.dismiss();
+                        sharedPreferences = getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("nickname", result_nickname);
+                        editor.commit();
+                        tvNicknameInDawer.setText(result_nickname);
+                    }
+                    else if(res.equals("200")){
+                        tvValidNickname.setText("이미 사용중인 닉네임입니다.");
                     }
 
                 } catch (JSONException e) {
@@ -326,7 +357,7 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.url)+"/umanager/register/kakao";
+        String URL = getString(R.string.server)+"/umanager/register/kakao";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {

@@ -12,12 +12,13 @@
         />
     <TextView
         android:id="@+id/tvMovieNameInList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="콜 미 바이 유어 네임"
         android:textSize="15dp"
         android:textColor="@color/black"
         android:layout_toRightOf="@+id/imgMovieList"
+        android:layout_toLeftOf="@+id/btnGoReview"
         android:layout_alignTop="@+id/imgMovieList"
         android:layout_marginTop="15dp"
         />
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="리뷰쓰기"
         android:layout_alignParentRight="true"
-        android:layout_alignBaseline="@+id/tvYearInList"
+        android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:backgroundTint="@color/signature_color"
         android:visibility="invisible"

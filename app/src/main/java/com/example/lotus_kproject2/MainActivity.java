@@ -23,13 +23,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.kakao.sdk.auth.AuthApiClient;
 import com.kakao.sdk.common.KakaoSdk;
 import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.AccessTokenInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton btnKakaoLogin;
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        kakaoDelete();
+//        tokenCheck();
 
         tvLook = findViewById(R.id.tvLook);
         btnKakaoLogin = findViewById(R.id.btnKakaoLogin);
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                intent.putExtra("isNew","0");
+                intent.putExtra("isNew", "0");
                 startActivity(intent);
             }
         });
@@ -100,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("token", token);
                 editor.commit();
-                Log.d(TAG, "accountLogin: token Save Check: " + token);
 
                 getUserInfo();
             }
@@ -120,106 +125,32 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("memNum", memNum);
                 editor.commit();
 
-                tokenCheck();
+                kakaoLoginRequest();
             }
             return null;
         });
     }
 
     void tokenCheck() {
-        RequestQueue Queue = Volley.newRequestQueue(MainActivity.this);
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("token", token);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String URL = getString(R.string.url) + getString(R.string.tokenCheck);
-
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    String res = response.getString("res");
-                    Log.d(TAG, "onResponse: Token Check res:" + res);
-                    if (res.equals("200")) {
-                        loginRequest();
-                    } else {
-                        Log.d(TAG, "onResponse: tokenCheck Error res: " + res);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if (AuthApiClient.getInstance().hasToken()) {
+            UserApiClient.getInstance().accessTokenInfo(new Function2<AccessTokenInfo, Throwable, Unit>() {
+                @Override
+                public Unit invoke(AccessTokenInfo accessTokenInfo, Throwable throwable) {
+                    Log.d(TAG, "token Check AccessToken.getid: : "+ accessTokenInfo.getId());
+                    Log.d(TAG, "tokenCheck Throwable" + throwable.toString());
+                    return null;
                 }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        Queue.add(jsonObjectRequest);
+            });
+        }
     }
 
-
-    public void loginRequest() {
-        RequestQueue Queue = Volley.newRequestQueue(MainActivity.this);
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("num", memNum);
-            jsonObject.put("token", token);
-            Log.d(TAG, "loginRequest: num, token:" + memNum + token);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String URL = getString(R.string.url) + getString(R.string.kakaoLogin);
-
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    String res = response.getString("res");
-                    isNew = response.getString("isNew");
-                    Log.d(TAG, "onResponse:loginRequest: res, isnew: " + res + "and" + isNew);
-                    if (res.equals("200")) {
-                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                        intent.putExtra("isNew", isNew);
-                        startActivity(intent);
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        Queue.add(jsonObjectRequest);
-    }
-
-    public void kakaoDelete(){
+    public void kakaoDelete() {
         RequestQueue Queue = Volley.newRequestQueue(MainActivity.this);
 
         JSONObject jsonObject = new JSONObject();
         try {
             sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-            String tokenForDelete = sharedPreferences.getString("token",  "");
+            String tokenForDelete = sharedPreferences.getString("token", "");
             jsonObject.put("token", tokenForDelete);
 
 
@@ -227,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.url) + "/umanager/delete/kakao";
+        String URL = getString(R.string.server) + "/umanager/delete/kakao";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -251,5 +182,49 @@ public class MainActivity extends AppCompatActivity {
         Queue.add(jsonObjectRequest);
     }
 
+    void kakaoLoginRequest(){
+        RequestQueue Queue = Volley.newRequestQueue(MainActivity.this);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token", "");
+            String memNum = sharedPreferences.getString("memNum","");
+            jsonObject.put("token", token);
+            jsonObject.put("num", memNum);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.kakaoLogin);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: res and isNew:"+response.getString("res")+" "+response.getString("isNew"));
+                    if(response.getString("res").equals("200")){
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        intent.putExtra("isNew", response.getString("isNew"));
+                        startActivity(intent);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+    }
 
 }

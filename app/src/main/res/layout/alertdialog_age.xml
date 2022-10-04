@@ -24,14 +24,17 @@
 
 
 
-    <ImageButton
+    <Button
         android:id="@+id/btnNextInAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="15dp"
-        android:background="@null"
+        android:text="다음"
+        android:backgroundTint="@color/lightGray"
+        android:textColor="@color/black"
+        android:minWidth="0dp"
         android:layout_below="@+id/spinnerAge"
         android:src="@drawable/next_button_small" />
 

@@ -36,11 +36,13 @@
     <string name="tab_write">글쓰기</string>
     <string name="tab_notify">알림</string>
     <string name="tab_profile">마이페이지</string>
-    <string name="url">https://flask-sample-eezgq.run.goorm.io</string>
+    <string name="server">https://flask-sample-eezgq.run.goorm.io</string>
     <string name="kakaoLogin">/umanager/login/kakao</string>
     <string name="tokenCheck">/test/kakao/check_token</string>
     <string name="thumbnail">/search_movie/thumbnail</string>
     <string name="loginData">loginData</string>
+    <string name="movieSearch">/screen/search_movie</string>
+    <string name="userData">userData</string>
 
 
 </resources>

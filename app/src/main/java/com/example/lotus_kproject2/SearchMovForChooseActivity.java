@@ -40,6 +40,8 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
 
     ArrayList<String> imgArray = new ArrayList<>();
     ArrayList<String> nameArray = new ArrayList<>();
+    ArrayList<String> codeArray = new ArrayList<>();
+    ArrayList<String> yearArrray = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,46 +52,26 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
         edtSearchMov = findViewById(R.id.edtSearchMov);
         reviewAppBar = findViewById(R.id.topAppBarInEditor);
 
-        recyclerViewAdapter = new MovieListRecyclerViewAdapter(getApplicationContext());
+        String title = getIntent().getStringExtra("title");
+        String contents = getIntent().getStringExtra("contents");
+
+
+        recyclerViewAdapter = new MovieListRecyclerViewAdapter(getApplicationContext(), nameArray, imgArray, codeArray, yearArrray, title, contents);
         recyclerViewInMovSearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         recyclerViewInMovSearch.setAdapter(recyclerViewAdapter);
-
-        imgArray.add("https://www.themoviedb.org/t/p/w220_and_h330_face/aFVjf2zcFzoNgbDKDEHiIw2g1DR.jpg");
-        imgArray.add("https://www.themoviedb.org/t/p/w220_and_h330_face/5F5MYJgVrCBLMNHuM1PVC4OYFoe.jpg");
-        imgArray.add("https://www.themoviedb.org/t/p/w220_and_h330_face/bZLrpWM065h5bu1msUcPmLFsHBe.jpg");
-        imgArray.add("https://www.themoviedb.org/t/p/w220_and_h330_face/lAP4sWFCch4Ed3ylOdhprCge5Li.jpg");
-        imgArray.add("https://www.themoviedb.org/t/p/w220_and_h330_face/5F5MYJgVrCBLMNHuM1PVC4OYFoe.jpg");
-
-        nameArray.add("그루트의 첫 발자국");
-        nameArray.add("강철의 연금술사 완결편: 복수자 스카");
-        nameArray.add("토르: 러브 앤 썬더");
-        nameArray.add("노 리미트");
-        nameArray.add("사마리탄");
 
         edtSearchMov.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if ((keyEvent.getAction() == keyEvent.ACTION_DOWN) && (keyCode == keyEvent.KEYCODE_ENTER)) {
                     String searchWord = edtSearchMov.getText().toString();
-                    recyclerViewAdapter.setArray(imgArray, nameArray);
-                    recyclerViewAdapter.notifyDataSetChanged();
+                    movieSearch(searchWord);
                     return true;
                 }
                 return false;
             }
         });
 
-//        reviewAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                switch (item.getItemId()){
-//                    case R.id.menu_upload:
-//                        break;
-//
-//                }
-//                return false;
-//            }
-//        });
 
     }
 
@@ -105,29 +87,27 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.url) + getString(R.string.thumbnail);
-        Log.d(TAG, "movieSearch: url: " + URL);
+        String URL = getString(R.string.server) + "/search_movie/thumbnail";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    ArrayList<String> imageArray = new ArrayList<>();
-                    ArrayList<String> nameArray = new ArrayList<>();
                     Log.d(TAG, "onResponse: res:"+response.getString("res"));
-                    Log.d(TAG, "onResponse: data:"+response.getString("data"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    JSONArray nameJSonArray = dataJsonArray.getJSONArray(0);
-                    JSONArray imageJsonArray = dataJsonArray.getJSONArray(1);
-                    for(int i = 0; i< nameJSonArray.length(); i++){
-//                        String.valueOf(nameJSonArray.get(i)).replace("<b>"," ");
-//                        String.valueOf(nameJSonArray.get(i)).replace("</b>"," ");
-                        nameArray.add(String.valueOf(nameJSonArray.get(i)));
-                        imageArray.add(String.valueOf(imageJsonArray.get(i)));
-                    }
-                    recyclerViewAdapter.setArray(imageArray, nameArray);
+                    JSONArray nameJsonArray = dataJsonArray.getJSONArray(1);
+                    JSONArray codeJsonArray = dataJsonArray.getJSONArray(2);
+                    JSONArray imageJsonArray = dataJsonArray.getJSONArray(3);
+                    JSONArray yearJsonArray = dataJsonArray.getJSONArray(4);
 
+                    for(int i = 0; i< nameJsonArray.length(); i++){
+                        nameArray.add(String.valueOf(nameJsonArray.get(i)));
+                        imgArray.add(String.valueOf(imageJsonArray.get(i)));
+                        codeArray.add(String.valueOf(codeJsonArray.get(i)));
+                        yearArrray.add(String.valueOf(yearJsonArray.get(i)));
+                    }
+                    recyclerViewAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

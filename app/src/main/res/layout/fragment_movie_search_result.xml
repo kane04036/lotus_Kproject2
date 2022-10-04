@@ -76,212 +76,228 @@
                 android:orientation="horizontal" />
 
         </RelativeLayout>
+        <TextView
+            android:id="@+id/tvLongReview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="7dp"
+            android:text="감상평"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_below="@id/movieLayout"
+            android:textStyle="bold" />
 
-        <RelativeLayout
-            android:id="@+id/longReviewLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyViewLongReviewInResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/movieLayout"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_below="@+id/tvLongReview2" />
 
-            <TextView
-                android:id="@+id/tvLongReview2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="7dp"
-                android:text="감상평"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/longReviewLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/movieLayout"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginBottom="20dp">-->
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvLongReview2"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:background="@null"
-                android:src="@drawable/forward_small" />
+<!--           -->
 
-            <TextView
-                android:id="@+id/tvNicknameLongReview1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvLongReview2"
-                android:layout_alignStart="@+id/tvLongReview2"
-                android:text="헬로키티"
-                android:textColor="@color/darkGray"
-                android:textSize="13dp"
-                android:textStyle="bold" />
+<!--            <ImageButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@+id/tvLongReview2"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:background="@null"-->
+<!--                android:src="@drawable/forward_small" />-->
 
-            <TextView
-                android:id="@+id/dot1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvNicknameLongReview1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/tvNicknameLongReview1"
-                android:text="·"
-                android:textColor="@color/gray"
-                android:textSize="11dp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvNicknameLongReview1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/tvLongReview2"-->
+<!--                android:layout_alignStart="@+id/tvLongReview2"-->
+<!--                android:text="헬로키티"-->
+<!--                android:textColor="@color/darkGray"-->
+<!--                android:textSize="13dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/tvLongReviewContents1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvNicknameLongReview1"
-                android:layout_alignStart="@+id/tvNicknameLongReview1"
-                android:layout_marginRight="10dp"
-                android:text="이 시대 체고의 영화~~!"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/dot1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@+id/tvNicknameLongReview1"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:layout_marginRight="5dp"-->
+<!--                android:layout_toRightOf="@+id/tvNicknameLongReview1"-->
+<!--                android:text="·"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="11dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/tvLongReviewMovieName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tvNicknameLongReview1"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@+id/dot1"
-                android:text="한산: 용의 출현"
-                android:textSize="11dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvLongReviewContents1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/tvNicknameLongReview1"-->
+<!--                android:layout_alignStart="@+id/tvNicknameLongReview1"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:text="이 시대 체고의 영화~~!"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="15dp" />-->
 
-            <View
-                android:id="@+id/viewLongReview"
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:layout_below="@+id/tvLongReviewContents1"
-                android:layout_margin="10dp"
-                android:background="@color/gray"
+<!--            <TextView-->
+<!--                android:id="@+id/tvLongReviewMovieName1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@id/tvNicknameLongReview1"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_toRightOf="@+id/dot1"-->
+<!--                android:text="한산: 용의 출현"-->
+<!--                android:textSize="11dp" />-->
 
-                />
+<!--            <View-->
+<!--                android:id="@+id/viewLongReview"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="2px"-->
+<!--                android:layout_below="@+id/tvLongReviewContents1"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:background="@color/gray"-->
 
-            <TextView
-                android:id="@+id/tvNicknameLongReview2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/viewLongReview"
-                android:layout_alignStart="@+id/tvLongReview2"
-                android:text="수박화채"
-                android:textColor="@color/darkGray"
-                android:textSize="13dp"
-                android:textStyle="bold" />
+<!--                />-->
 
-            <TextView
-                android:id="@+id/dot2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvNicknameLongReview2"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/tvNicknameLongReview2"
-                android:text="·"
-                android:textColor="@color/gray"
-                android:textSize="11dp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvNicknameLongReview2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/viewLongReview"-->
+<!--                android:layout_alignStart="@+id/tvLongReview2"-->
+<!--                android:text="수박화채"-->
+<!--                android:textColor="@color/darkGray"-->
+<!--                android:textSize="13dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/tvLongReviewContents2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvNicknameLongReview2"
-                android:layout_alignStart="@id/tvLongReview2"
-                android:layout_marginRight="10dp"
-                android:text="배우들 도대체 어떻게 연기했냐?"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/dot2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@+id/tvNicknameLongReview2"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:layout_marginRight="5dp"-->
+<!--                android:layout_toRightOf="@+id/tvNicknameLongReview2"-->
+<!--                android:text="·"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="11dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/tvLongReviewMovieName2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tvNicknameLongReview2"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/dot2"
-                android:text="공조2: 인터내셔날"
-                android:textColor="@color/gray"
-                android:textSize="11dp" />
-        </RelativeLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/tvLongReviewContents2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/tvNicknameLongReview2"-->
+<!--                android:layout_alignStart="@id/tvLongReview2"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:text="배우들 도대체 어떻게 연기했냐?"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="15dp" />-->
 
-        <RelativeLayout
-            android:id="@+id/shortReviewLayout"
-            android:layout_width="match_parent"
+<!--            <TextView-->
+<!--                android:id="@+id/tvLongReviewMovieName2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@id/tvNicknameLongReview2"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_toRightOf="@id/dot2"-->
+<!--                android:text="공조2: 인터내셔날"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="11dp" />-->
+<!--        </RelativeLayout>-->
+        <TextView
+            android:id="@+id/tvShortReview2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/longReviewLayout"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="7dp"
+            android:text="한 줄 느낌"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_below="@+id/recyViewLongReviewInResult"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvShortReview2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="7dp"
-                android:text="한 줄 느낌"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyViewShortReviewInResult"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/tvShortReview2" />-->
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvShortReview2"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:background="@null"
-                android:src="@drawable/forward_small" />
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/shortReviewLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/longReviewLayout"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginBottom="20dp">-->
 
-            <TextView
-                android:id="@+id/tvShortReviewNickname1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvShortReview2"
-                android:layout_alignStart="@+id/tvShortReview2"
-                android:text="꿀꽈배기"
-                android:textColor="@color/darkGray"
-                android:textSize="13dp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/dot3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvShortReviewNickname1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/tvShortReviewNickname1"
-                android:text="·"
-                android:textColor="@color/gray"
-                android:textSize="11dp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvShortReviewMovieName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/tvShortReviewNickname1"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@+id/dot3"
-                android:text="육사오(6/45) "
-                android:textColor="@color/gray"
-                android:textSize="11dp" />
+<!--            <ImageButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@+id/tvShortReview2"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:background="@null"-->
+<!--                android:src="@drawable/forward_small" />-->
 
-            <TextView
-                android:id="@+id/tvShortReviewContents1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvShortReviewNickname1"
-                android:layout_alignStart="@id/tvShortReview2"
-                android:layout_marginRight="10dp"
-                android:text="와 넷플릭스 제작비 예산 초과되면 초과된만큼 제작사 지분을 회수해가는 페널티가 있어서 지우"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </RelativeLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/tvShortReviewNickname1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/tvShortReview2"-->
+<!--                android:layout_alignStart="@+id/tvShortReview2"-->
+<!--                android:text="꿀꽈배기"-->
+<!--                android:textColor="@color/darkGray"-->
+<!--                android:textSize="13dp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/dot3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@+id/tvShortReviewNickname1"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:layout_marginRight="5dp"-->
+<!--                android:layout_toRightOf="@+id/tvShortReviewNickname1"-->
+<!--                android:text="·"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="11dp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvShortReviewMovieName1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@id/tvShortReviewNickname1"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_toRightOf="@+id/dot3"-->
+<!--                android:text="육사오(6/45) "-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="11dp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvShortReviewContents1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/tvShortReviewNickname1"-->
+<!--                android:layout_alignStart="@id/tvShortReview2"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:text="와 넷플릭스 제작비 예산 초과되면 초과된만큼 제작사 지분을 회수해가는 페널티가 있어서 지우"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="15dp" />-->
+<!--        </RelativeLayout>-->
 
         <!--    <com.google.android.material.appbar.AppBarLayout-->
         <!--        android:id="@+id/bottom_navigationBar"-->

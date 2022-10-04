@@ -33,14 +33,22 @@ import java.util.ArrayList;
 
 public class MovieSearchResultFragment extends Fragment {
     MovieRecyclerViewAdapter recyclerViewAdapter;
+    LongReviewRecyclerViewAdapter longReviewAdapter;
 
     EditText edtSearchInMovieResult;
-    RecyclerView movieRecyclerView;
+    RecyclerView movieRecyclerView, longReivewRecyView;
     FrameLayout frameLayoutInMovieResult2;
 
     ArrayList<String> imgArray = new ArrayList<>();
     ArrayList<String> nameArray = new ArrayList<>();
     ArrayList<String> codeArray = new ArrayList<>();
+
+    ArrayList<String> reviewIdArray = new ArrayList<>();
+    ArrayList<String> movieCodeArray = new ArrayList<>();
+    ArrayList<Integer> starArray = new ArrayList<>();
+    ArrayList<String> userIdArray = new ArrayList<>();
+    ArrayList<String> titleArray = new ArrayList<>();
+    ArrayList<String> writingArray = new ArrayList<>();
 
     String searchWord;
 
@@ -53,7 +61,7 @@ public class MovieSearchResultFragment extends Fragment {
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 searchWord = result.getString("searchWord");
                 edtSearchInMovieResult.setText(searchWord);
-                movieThumbnailRequest(searchWord);
+                movieSearchRequest(searchWord);
             }
         });
     }
@@ -66,12 +74,17 @@ public class MovieSearchResultFragment extends Fragment {
         edtSearchInMovieResult = view.findViewById(R.id.edtSearchInMovieResult);;
         movieRecyclerView = view.findViewById(R.id.movieRecyclerView);
         frameLayoutInMovieResult2 = view.findViewById(R.id.frameLayoutInMovieResult2);
+        longReivewRecyView = view.findViewById(R.id.recyViewLongReviewInResult);
+//        shortReviewRecyView = view.findViewById(R.id.recyViewShortReviewInResult);
 
         recyclerViewAdapter = new MovieRecyclerViewAdapter(getActivity(), nameArray, imgArray, codeArray);
+        longReviewAdapter = new LongReviewRecyclerViewAdapter(getActivity(), reviewIdArray, movieCodeArray, starArray, userIdArray, titleArray, writingArray );
         movieRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
         movieRecyclerView.setAdapter(recyclerViewAdapter);
+        longReivewRecyView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        longReivewRecyView.setAdapter(longReviewAdapter);
 
-        recyclerViewAdapter.notifyDataSetChanged();
+
 
         return view;
 
@@ -79,7 +92,7 @@ public class MovieSearchResultFragment extends Fragment {
     }
 
 
-    public void movieThumbnailRequest(String textSearch) {
+    void movieSearchRequest(String textSearch) {
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject();
@@ -90,33 +103,39 @@ public class MovieSearchResultFragment extends Fragment {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.url) + getString(R.string.thumbnail);
-        Log.d(TAG, "movieSearch: url: " + URL);
+        String URL = getString(R.string.server) + getString(R.string.movieSearch);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    Log.d(TAG, "onResponse: res:" + response.getString("res"));
+                    Log.d(TAG, "onResponse: data"+response.getString("data"));
+
                     if(response.getString("res").equals("200")) {
                         nameArray.clear();
                         imgArray.clear();
                         codeArray.clear();
-                        Log.d(TAG, "onResponse: res:" + response.getString("res"));
-                        Log.d(TAG, "onResponse: data:" + response.getString("data"));
                         JSONArray dataJsonArray = response.getJSONArray("data");
-                        int numberOfMovie = (int)dataJsonArray.get(0);
-                        Log.d(TAG, "onResponse: numberOfMovie: "+ numberOfMovie);
-                        JSONArray nameJsonArray = (JSONArray) dataJsonArray.get(1);
-                        JSONArray codeJsonArray = (JSONArray) dataJsonArray.get(2);
-                        JSONArray imgJsonArray = (JSONArray) dataJsonArray.get(3);
-                        for(int i = 0; i < numberOfMovie; i++){
-                            nameArray.add(String.valueOf(nameJsonArray.get(i)));
-                            imgArray.add(String.valueOf(imgJsonArray.get(i)));
-                            codeArray.add(String.valueOf(codeJsonArray.get(i)));
+                        JSONArray movieJsonArray = (JSONArray) dataJsonArray.get(0);
+                        int movNum = (int) movieJsonArray.get(0);
+                        JSONArray movNameJsonArray = movieJsonArray.getJSONArray(1);
+                        JSONArray movCodeJsonArray = movieJsonArray.getJSONArray(2);
+                        JSONArray movImgJsonArray = movieJsonArray.getJSONArray(3);
+                        for(int i = 0; i < movNum; i++){
+                            nameArray.add(String.valueOf(movNameJsonArray.get(i)));
+                            imgArray.add(String.valueOf(movImgJsonArray.get(i)));
+                            codeArray.add(String.valueOf(movCodeJsonArray.get(i)));
+                            Log.d(TAG, "onResponse: nameArray"+nameArray.get(i));
                         }
-
                         recyclerViewAdapter.notifyDataSetChanged();
+
+                        JSONArray movDateJsonArray = movieJsonArray.getJSONArray(4);
+                        JSONArray longReviewJsonArray = dataJsonArray.getJSONArray(1);
+                        JSONObject longReviewJsonObj1 = longReviewJsonArray.getJSONObject(0);
+                        Log.d(TAG, "onResponse: longreview_ttile:"+longReviewJsonObj1.getString("title"));
+                        JSONArray shortReviewJsonArray = dataJsonArray.getJSONArray(2);
                     }
 
                 } catch (JSONException e) {

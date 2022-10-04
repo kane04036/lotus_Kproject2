@@ -35,7 +35,6 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         movieNameArray = nameArray;
         movieImageArray = imageArray;
         movieCodeArray = codeArray;
-        Log.d(TAG, "MovieRecyclerViewAdapter: 생성자 ");
 
         this.context = context;
     }
@@ -51,9 +50,6 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        for(int i = 0; i< movieImageArray.size(); i++) {
-            Log.d(TAG, "MovieRecyclerViewAdapter: imgArray: " + movieImageArray.get(i));
-        }
         holder.tvMovieNameResult.setText(movieNameArray.get(position));
         holder.imageMovieResult.setClipToOutline(true);
 
@@ -62,13 +58,6 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
                 load(movieImageArray.get(position)).error(R.drawable.gray_profile)
                 .fallback(R.drawable.profile)
                 .into(holder.imageMovieResult);
-
-//        if(movieImageArray.get(position).isEmpty()){
-//            holder.imageMovieResult.setImageResource(R.drawable.gray_profile);
-//        }
-//        else {
-//            Picasso.get().load(movieImageArray.get(position)).into(holder.imageMovieResult);
-//        }
 
         holder.imageMovieResult.setOnClickListener(new View.OnClickListener() {
             @Override

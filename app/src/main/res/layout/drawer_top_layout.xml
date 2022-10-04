@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <TextView
+        android:id="@+id/tvNicknameInDrawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="닉네임"
@@ -14,6 +15,7 @@
         android:layout_marginTop="15dp"
         />
     <TextView
+        android:id="@+id/tvMbtiInDrawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="개인데이터"
