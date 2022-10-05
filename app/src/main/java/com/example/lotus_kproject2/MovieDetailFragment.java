@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,9 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class MovieDetailFragment extends Fragment {
     TextView tvTabBarLongReview, tvTabBarShortReview;
-    private MaterialRatingBar ratingBar;
+    private MaterialRatingBar ratingBar, ratingBarInShortReview;
+    EditText edtShortReview;
+
 
     @Nullable
     @Override

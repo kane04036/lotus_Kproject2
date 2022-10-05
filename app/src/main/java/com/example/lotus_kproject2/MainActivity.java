@@ -45,10 +45,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        KakaoSdk.init(this, "8f9dcb3da65da193cccf8411c39b754c");
+        tokenCheckFirst();
+
         setContentView(R.layout.activity_main);
 
 //        kakaoDelete();
-//        tokenCheck();
 
         tvLook = findViewById(R.id.tvLook);
         btnKakaoLogin = findViewById(R.id.btnKakaoLogin);
@@ -62,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-        KakaoSdk.init(this, "8f9dcb3da65da193cccf8411c39b754c");
-
 
         btnKakaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (oAuthToken != null) {
                 Log.i(TAG, "login: 로그인 성공(토큰): " + oAuthToken.getAccessToken());
                 token = oAuthToken.getAccessToken();
-                getUserInfo();
+                tokenCheckSecond();
             }
             return null;
         });
@@ -101,47 +100,42 @@ public class MainActivity extends AppCompatActivity {
             } else if (oAuthToken != null) {
                 Log.i(TAG, "account : 로그인 성공(토큰): " + oAuthToken.getAccessToken());
                 token = oAuthToken.getAccessToken();
-
-                sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("token", token);
-                editor.commit();
-
-                getUserInfo();
+                tokenCheckSecond();
             }
             return null;
         });
     }
 
-    public void getUserInfo() {
-        String TAG = "getUserInfo";
-        UserApiClient.getInstance().me((user, meError) -> {
-            if (meError != null) {
-                Log.e(TAG, "getUserInfo: 사용자 정보 요청 실패", meError);
-            } else {
-                memNum = user.getId().toString();
-                sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("memNum", memNum);
-                editor.commit();
+    void tokenCheckFirst() {
+        UserApiClient.getInstance().accessTokenInfo((tokenInfo, tokenError)->{
+            if(tokenError != null){
+                Log.d(TAG, "tokenCheckFirst: 토큰 정보 보기 실패 "+tokenError);
+            }
+            else if(tokenInfo != null){
+                Log.d(TAG, "tokenCheckFirst: 토큰 정보보기 성공");
 
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                intent.putExtra("isNew", "0");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+            }
+            return null;
+        });
+    }
+
+    void tokenCheckSecond(){
+        UserApiClient.getInstance().accessTokenInfo((tokenInfo, tokenError)->{
+            if(tokenError != null){
+                Log.d(TAG, "tokenCheckSecond: 토큰 정보 보기 실패 "+tokenError);
+            }
+            else if(tokenInfo != null){
+                Log.d(TAG, "tokenCheckSecond: 토큰 정보보기 성공");
+                memNum = tokenInfo.getId().toString();
                 kakaoLoginRequest();
             }
             return null;
         });
-    }
-
-    void tokenCheck() {
-        if (AuthApiClient.getInstance().hasToken()) {
-            UserApiClient.getInstance().accessTokenInfo(new Function2<AccessTokenInfo, Throwable, Unit>() {
-                @Override
-                public Unit invoke(AccessTokenInfo accessTokenInfo, Throwable throwable) {
-                    Log.d(TAG, "token Check AccessToken.getid: : "+ accessTokenInfo.getId());
-                    Log.d(TAG, "tokenCheck Throwable" + throwable.toString());
-                    return null;
-                }
-            });
-        }
     }
 
     public void kakaoDelete() {
@@ -149,9 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-            String tokenForDelete = sharedPreferences.getString("token", "");
-            jsonObject.put("token", tokenForDelete);
+            jsonObject.put("token", token);
 
 
         } catch (Exception e) {
@@ -187,12 +179,8 @@ public class MainActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-            String token = sharedPreferences.getString("token", "");
-            String memNum = sharedPreferences.getString("memNum","");
             jsonObject.put("token", token);
             jsonObject.put("num", memNum);
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -207,8 +195,16 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Log.d(TAG, "onResponse: res and isNew:"+response.getString("res")+" "+response.getString("isNew"));
                     if(response.getString("res").equals("200")){
+
+                        sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("token", token);
+                        editor.putString("memNum", memNum);
+                        editor.commit();
+
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         intent.putExtra("isNew", response.getString("isNew"));
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
 

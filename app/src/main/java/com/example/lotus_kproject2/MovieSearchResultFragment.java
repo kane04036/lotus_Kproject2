@@ -138,6 +138,8 @@ public class MovieSearchResultFragment extends Fragment {
                         JSONArray shortReviewJsonArray = dataJsonArray.getJSONArray(2);
                     }
 
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -153,4 +155,8 @@ public class MovieSearchResultFragment extends Fragment {
         Queue.add(jsonObjectRequest);
     }
 
+
 }
+
+
+
