@@ -43,6 +43,7 @@
         <activity android:name=".SearchResultActivity_main"/>
         <activity android:name=".ReviewEditorActivity"/>
         <activity android:name=".SearchMovForChooseActivity"/>
+        <activity android:name=".MovieDetailActivity"/>
     </application>
 
 

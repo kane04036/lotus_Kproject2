@@ -63,11 +63,13 @@ public class HomeActivity extends AppCompatActivity {
     EditText edtSearch;
     Boolean femaleCheck = false, maleCheck = false;
     ArrayList registerResult = new ArrayList();
-    AlertDialog alertDialog, genderAlertDialog, ageAlertDialog, mbtiAlertDialog, nicknameAlertDialog;
+    AlertDialog alertDialog;
     AHBottomNavigation bottomNavigation;
     TextView tvValidNickname;
     View header;
     TextView tvNicknameInDawer, tvMbtiInDrawer;
+
+    private String isNew;
 
     SharedPreferences sharedPreferences;
 
@@ -87,9 +89,10 @@ public class HomeActivity extends AppCompatActivity {
 
         setBottomNavigation();
 
-        if (getIntent().getStringExtra("isNew").equals("1")) {
+        isNew = getIntent().getStringExtra("isNew");
+        if (isNew.equals("1"))
             showGenderAlertDialog();
-        }
+
 
         topAppbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

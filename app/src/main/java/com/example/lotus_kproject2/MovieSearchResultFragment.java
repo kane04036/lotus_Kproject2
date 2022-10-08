@@ -2,12 +2,15 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
@@ -34,9 +37,10 @@ import java.util.ArrayList;
 public class MovieSearchResultFragment extends Fragment {
     MovieRecyclerViewAdapter recyclerViewAdapter;
     LongReviewRecyclerViewAdapter longReviewAdapter;
+    LongReviewRecyclerViewAdapter shortReviewAdapter;
 
     EditText edtSearchInMovieResult;
-    RecyclerView movieRecyclerView, longReivewRecyView;
+    RecyclerView movieRecyclerView, longReivewRecyView, shortReviewRecyView;
     FrameLayout frameLayoutInMovieResult2;
 
     ArrayList<String> imgArray = new ArrayList<>();
@@ -45,10 +49,15 @@ public class MovieSearchResultFragment extends Fragment {
 
     ArrayList<String> reviewIdArray = new ArrayList<>();
     ArrayList<String> movieCodeArray = new ArrayList<>();
-    ArrayList<Integer> starArray = new ArrayList<>();
+    ArrayList<String> movieNameArray = new ArrayList<>();
     ArrayList<String> userIdArray = new ArrayList<>();
     ArrayList<String> titleArray = new ArrayList<>();
-    ArrayList<String> writingArray = new ArrayList<>();
+
+    ArrayList<String> reviewIdArray_short = new ArrayList<>();
+    ArrayList<String> movieCodeArray_short = new ArrayList<>();
+    ArrayList<String> movieNameArray_short = new ArrayList<>();
+    ArrayList<String> userIdArray_short = new ArrayList<>();
+    ArrayList<String> titleArray_short = new ArrayList<>();
 
     String searchWord;
 
@@ -75,14 +84,31 @@ public class MovieSearchResultFragment extends Fragment {
         movieRecyclerView = view.findViewById(R.id.movieRecyclerView);
         frameLayoutInMovieResult2 = view.findViewById(R.id.frameLayoutInMovieResult2);
         longReivewRecyView = view.findViewById(R.id.recyViewLongReviewInResult);
-//        shortReviewRecyView = view.findViewById(R.id.recyViewShortReviewInResult);
+        shortReviewRecyView = view.findViewById(R.id.recyViewShortReviewInResult);
 
         recyclerViewAdapter = new MovieRecyclerViewAdapter(getActivity(), nameArray, imgArray, codeArray);
-        longReviewAdapter = new LongReviewRecyclerViewAdapter(getActivity(), reviewIdArray, movieCodeArray, starArray, userIdArray, titleArray, writingArray );
+        longReviewAdapter = new LongReviewRecyclerViewAdapter(getActivity(), reviewIdArray, movieCodeArray, userIdArray, titleArray, movieNameArray);
+        shortReviewAdapter = new LongReviewRecyclerViewAdapter(getActivity(),reviewIdArray_short, movieCodeArray_short,userIdArray_short,titleArray_short,movieNameArray_short);
+
         movieRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
         movieRecyclerView.setAdapter(recyclerViewAdapter);
+
         longReivewRecyView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         longReivewRecyView.setAdapter(longReviewAdapter);
+
+        shortReviewRecyView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        shortReviewRecyView.setAdapter(shortReviewAdapter);
+
+        edtSearchInMovieResult.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == keyEvent.ACTION_DOWN) && (keyEvent.getKeyCode() == keyEvent.KEYCODE_ENTER)) {
+                    movieSearchRequest(edtSearchInMovieResult.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
 
@@ -111,7 +137,6 @@ public class MovieSearchResultFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: res:" + response.getString("res"));
-                    Log.d(TAG, "onResponse: data"+response.getString("data"));
 
                     if(response.getString("res").equals("200")) {
                         nameArray.clear();
@@ -123,19 +148,42 @@ public class MovieSearchResultFragment extends Fragment {
                         JSONArray movNameJsonArray = movieJsonArray.getJSONArray(1);
                         JSONArray movCodeJsonArray = movieJsonArray.getJSONArray(2);
                         JSONArray movImgJsonArray = movieJsonArray.getJSONArray(3);
+                        JSONArray movDateJsonArray = movieJsonArray.getJSONArray(4);
                         for(int i = 0; i < movNum; i++){
                             nameArray.add(String.valueOf(movNameJsonArray.get(i)));
                             imgArray.add(String.valueOf(movImgJsonArray.get(i)));
                             codeArray.add(String.valueOf(movCodeJsonArray.get(i)));
-                            Log.d(TAG, "onResponse: nameArray"+nameArray.get(i));
                         }
                         recyclerViewAdapter.notifyDataSetChanged();
 
-                        JSONArray movDateJsonArray = movieJsonArray.getJSONArray(4);
                         JSONArray longReviewJsonArray = dataJsonArray.getJSONArray(1);
-                        JSONObject longReviewJsonObj1 = longReviewJsonArray.getJSONObject(0);
-                        Log.d(TAG, "onResponse: longreview_ttile:"+longReviewJsonObj1.getString("title"));
                         JSONArray shortReviewJsonArray = dataJsonArray.getJSONArray(2);
+
+                        reviewIdArray.clear(); titleArray.clear(); movieNameArray.clear(); movieCodeArray.clear(); userIdArray.clear();
+                        for(int i=0; i< longReviewJsonArray.length(); i++){
+                            JSONObject reviewJsonObj = longReviewJsonArray.getJSONObject(i);
+                            reviewIdArray.add(reviewJsonObj.getString("_id"));
+                            titleArray.add(reviewJsonObj.getString("title"));
+                            movieNameArray.add(reviewJsonObj.getString("movie_name"));
+                            movieCodeArray.add(reviewJsonObj.getString("movie_id"));
+                            userIdArray.add(reviewJsonObj.getString("user_id"));
+                        }
+                        longReviewAdapter.notifyDataSetChanged();
+
+                        reviewIdArray_short.clear(); titleArray_short.clear(); movieNameArray_short.clear();
+                        movieCodeArray_short.clear(); userIdArray_short.clear();
+                        for(int i=0; i<shortReviewJsonArray.length(); i++){
+                            JSONObject reviewJsonObj = shortReviewJsonArray.getJSONObject(i);
+                            reviewIdArray_short.add(reviewJsonObj.getString("_id"));
+                            titleArray_short.add(reviewJsonObj.getString("writing"));
+                            movieNameArray_short.add(reviewJsonObj.getString("movie_name"));
+                            movieCodeArray_short.add(reviewJsonObj.getString("movie_id"));
+                            userIdArray_short.add(reviewJsonObj.getString("user_id"));
+                        }
+                        shortReviewAdapter.notifyDataSetChanged();
+
+                        hideKeyboard();
+
                     }
 
 
@@ -156,6 +204,14 @@ public class MovieSearchResultFragment extends Fragment {
     }
 
 
+    private void hideKeyboard()
+    {
+        if (getActivity() != null && getActivity().getCurrentFocus() != null)
+        {
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 }
 
 

@@ -1,6 +1,9 @@
 package com.example.lotus_kproject2;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,50 +19,52 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 public class LongReviewRecyclerViewAdapter extends RecyclerView.Adapter<LongReviewRecyclerViewAdapter.ViewHolder> {
     ArrayList<String> reviewIdArray = new ArrayList<>();
     ArrayList<String> movieCodeArray = new ArrayList<>();
-    ArrayList<Integer> starArray = new ArrayList<>();
     ArrayList<String> userIdArray = new ArrayList<>();
     ArrayList<String> titleArray = new ArrayList<>();
     ArrayList<String> writingArray = new ArrayList<>();
+    ArrayList<String> movieNameArray = new ArrayList<>();
+
     Context context;
     public LongReviewRecyclerViewAdapter(Context context, ArrayList reviewIdArray, ArrayList movieCodeArray,
-                                         ArrayList starArray, ArrayList userIdArray, ArrayList titleArray, ArrayList writingArray){
+                                          ArrayList userIdArray, ArrayList titleArray, ArrayList movieNameArray){
         this.context = context;
         this.reviewIdArray = reviewIdArray;
         this.movieCodeArray = movieCodeArray;
-        this.starArray = starArray;
         this.userIdArray = userIdArray;
         this.titleArray = titleArray;
-        this.writingArray = writingArray;
+        this.movieNameArray = movieNameArray;
+        Log.d(TAG, "LongReviewRecyclerViewAdapter: create");
 
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.long_review_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_item_searchresult, parent, false);
         return new LongReviewRecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.ratingBar.setNumStars(starArray.get(position));
-        holder.tvLongReivewTitle.setText(titleArray.get(position));
+        Log.d(TAG, "onBindViewHolder: bind");
+        holder.tvMovTitle.setText(movieNameArray.get(position));
+        holder.tvReviewTitle.setText(titleArray.get(position));
+        Log.d(TAG, "onBindViewHolder: title:"+titleArray.get(position));
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return reviewIdArray.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        MaterialRatingBar ratingBar;
-        TextView tvNicknameLongReview, tvMbti, tvLongReivewTitle;
+//        MaterialRatingBar ratingBar;
+//        TextView tvNicknameLongReview, tvMbti, tvLongReivewTitle;
+        TextView tvMovTitle, tvReviewTitle;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ratingBar = itemView.findViewById(R.id.ratingBarInLongReview);
-            tvNicknameLongReview = itemView.findViewById(R.id.tvNicknameLongReview3);
-            tvMbti = itemView.findViewById(R.id.tvMbtiInLongReview);
-            tvLongReivewTitle = itemView.findViewById(R.id.tvLongReviewTitle);
+            tvMovTitle = itemView.findViewById(R.id.tvMovTitle);
+            tvReviewTitle = itemView.findViewById(R.id.tvReviewTitle);
         }
     }
 }

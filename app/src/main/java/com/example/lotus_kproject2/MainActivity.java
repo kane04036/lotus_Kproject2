@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.load.engine.Resource;
 import com.kakao.sdk.auth.AuthApiClient;
 import com.kakao.sdk.common.KakaoSdk;
 import com.kakao.sdk.user.UserApiClient;
@@ -39,7 +41,7 @@ import kotlin.jvm.functions.Function2;
 public class MainActivity extends AppCompatActivity {
     ImageButton btnKakaoLogin;
     TextView tvLook;
-    String token, memNum, isNew;
+    private String token, memNum, isNew;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -193,8 +195,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: res and isNew:"+response.getString("res")+" "+response.getString("isNew"));
                     if(response.getString("res").equals("200")){
+                        int mbtiNum = response.getInt("mbti");
+                        Resources res = getResources();
+                        String[] mbtiArray = res.getStringArray(R.array.mbti_array);
+                        String userMbti = mbtiArray[mbtiNum];
 
                         sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -202,8 +207,15 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("memNum", memNum);
                         editor.commit();
 
+                        sharedPreferences = getSharedPreferences(getString(R.string.userData),Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                        editor1.putString("nickname",response.getString("nickname"));
+                        editor1.putString("mbti", userMbti);
+                        editor1.commit();
+
+                        isNew = response.getString("isNew");
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        intent.putExtra("isNew", response.getString("isNew"));
+                        intent.putExtra("isNew", isNew);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }

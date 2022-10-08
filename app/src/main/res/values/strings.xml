@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">lotus_Kproject2</string>
+    <string name="app_name">Fillow</string>
 
     <string-array name="mbti_array">
         <item>ENFJ</item>
@@ -43,6 +43,10 @@
     <string name="loginData">loginData</string>
     <string name="movieSearch">/screen/search_movie</string>
     <string name="userData">userData</string>
+    <string name="movieDetail">/search_movie/detail</string>
+    <string name="writeLongReview">/board/long_reviews/write</string>
+    <string name="preferAdd">/prefer/add</string>
+    <string name="preferSub">/prefer/sub</string>
 
 
 </resources>

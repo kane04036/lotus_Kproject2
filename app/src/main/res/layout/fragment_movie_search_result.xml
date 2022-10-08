@@ -8,11 +8,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:id="@+id/searchLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="7dp"
             android:background="@drawable/search_background"
             android:padding="5dp">
 
@@ -21,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/edtSearchInMovieResult"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="6dp"
                 android:layout_marginRight="3dp"
                 android:src="@drawable/search_darkgray_small" />
 
@@ -29,12 +33,14 @@
                 android:id="@+id/edtSearchInMovieResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
                 android:layout_marginRight="25dp"
                 android:layout_toRightOf="@+id/imageSearch"
                 android:background="@android:color/transparent"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textSize="20dp" />
+                android:text="살인의 추억 "
+                android:textSize="15dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -76,23 +82,35 @@
                 android:orientation="horizontal" />
 
         </RelativeLayout>
+
         <TextView
             android:id="@+id/tvLongReview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/movieLayout"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginBottom="10dp"
             android:text="감상평"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:layout_below="@id/movieLayout"
             android:textStyle="bold" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvLongReview2"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:src="@drawable/forward_small" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyViewLongReviewInResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvLongReview2" />
+            android:layout_below="@+id/tvLongReview2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" />
 
 <!--        <RelativeLayout-->
 <!--            android:id="@+id/longReviewLayout"-->
@@ -104,14 +122,7 @@
 
 <!--           -->
 
-<!--            <ImageButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignBottom="@+id/tvLongReview2"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@null"-->
-<!--                android:src="@drawable/forward_small" />-->
+
 
 <!--            <TextView-->
 <!--                android:id="@+id/tvNicknameLongReview1"-->
@@ -218,20 +229,31 @@
             android:id="@+id/tvShortReview2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/recyViewLongReviewInResult"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginBottom="10dp"
             android:text="한 줄 느낌"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:layout_below="@+id/recyViewLongReviewInResult"
             android:textStyle="bold" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvShortReview2"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:src="@drawable/forward_small" />
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recyViewShortReviewInResult"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/tvShortReview2" />-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyViewShortReviewInResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvShortReview2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
 
 <!--        <RelativeLayout-->
 <!--            android:id="@+id/shortReviewLayout"-->
@@ -243,14 +265,7 @@
 
 
 
-<!--            <ImageButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignBottom="@+id/tvShortReview2"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:background="@null"-->
-<!--                android:src="@drawable/forward_small" />-->
+
 
 <!--            <TextView-->
 <!--                android:id="@+id/tvShortReviewNickname1"-->

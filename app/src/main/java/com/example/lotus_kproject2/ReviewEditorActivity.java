@@ -2,6 +2,7 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,11 +11,15 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,6 +56,8 @@ public class ReviewEditorActivity extends AppCompatActivity {
         tvChooseMov = findViewById(R.id.tvChooseMov);
         topbar = findViewById(R.id.topAppBarInEditor);
 
+
+
         if (getIntent().getIntExtra("existMovie", 0) == 1) {
             movName = getIntent().getStringExtra("movName");
             movCode = getIntent().getStringExtra("movCode");
@@ -85,6 +92,7 @@ public class ReviewEditorActivity extends AppCompatActivity {
                 intent.putExtra("title", edtTitle.getText().toString());
                 intent.putExtra("contents", edtReview.getText().toString());
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -96,9 +104,10 @@ public class ReviewEditorActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("token", "");
+            sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
             jsonObject.put("writing", edtReview.getText().toString());
-            jsonObject.put("start","");
             jsonObject.put("movie_id", movCode);
             jsonObject.put("title", edtTitle.getText().toString());
 
@@ -106,7 +115,7 @@ public class ReviewEditorActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server) + getString(R.string.thumbnail);
+        String URL = getString(R.string.server) + getString(R.string.writeLongReview);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -114,6 +123,10 @@ public class ReviewEditorActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: res:" + response.getString("res"));
+                    if(response.getString("res").equals("200")){
+                        Toast.makeText(getApplicationContext(),"리뷰가 성공적으로 등록됐습니다.",Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

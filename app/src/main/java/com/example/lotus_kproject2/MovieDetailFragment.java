@@ -24,11 +24,12 @@ public class MovieDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_movie_detail, container, false);
+        View view = inflater.inflate(R.layout.activity_movie_detail, container, false);
+
 
         tvTabBarLongReview = view.findViewById(R.id.tvTabBarLongReview);
         tvTabBarShortReview = view.findViewById(R.id.tvTabBarShortReview);
-        ratingBar = view.findViewById(R.id.ratingBarInDetail);
+//        ratingBar = view.findViewById(R.id.ratingBarInDetail);
 
         tvTabBarShortReview.setIncludeFontPadding(false);
         tvTabBarLongReview.setIncludeFontPadding(false);

@@ -13,7 +13,10 @@
             android:id="@+id/searchLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="7dp"
             android:background="@drawable/search_background"
             android:padding="5dp">
 
@@ -21,8 +24,8 @@
                 android:id="@+id/imageSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/edtSearch"
-                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
                 android:layout_marginRight="3dp"
                 android:src="@drawable/search_darkgray_small" />
 
@@ -31,12 +34,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/imageSearch"
                 android:background="@android:color/transparent"
                 android:hint="검색어를 입력하세요"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textSize="20dp" />
+                android:textSize="17dp" />
         </RelativeLayout>
 
         <ListView

@@ -101,6 +101,7 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
                     JSONArray imageJsonArray = dataJsonArray.getJSONArray(3);
                     JSONArray yearJsonArray = dataJsonArray.getJSONArray(4);
 
+                    nameArray.clear(); imgArray.clear(); codeArray.clear(); yearArrray.clear();
                     for(int i = 0; i< nameJsonArray.length(); i++){
                         nameArray.add(String.valueOf(nameJsonArray.get(i)));
                         imgArray.add(String.valueOf(imageJsonArray.get(i)));

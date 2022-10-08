@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.util.Log;
@@ -50,20 +51,24 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvMovieNameResult.setText(movieNameArray.get(position));
+        holder.tvMovieNameResult.setText(movieNameArray.get(holder.getAdapterPosition()));
         holder.imageMovieResult.setClipToOutline(true);
 
 
         Glide.with(context).
-                load(movieImageArray.get(position)).error(R.drawable.gray_profile)
+                load(movieImageArray.get(holder.getAdapterPosition())).error(R.drawable.gray_profile)
                 .fallback(R.drawable.profile)
                 .into(holder.imageMovieResult);
+
 
         holder.imageMovieResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutInMovieResult, movieDetailFragment).commit();
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtra("movName", movieNameArray.get(holder.getAdapterPosition()));
+                intent.putExtra("movImage",movieImageArray.get(holder.getAdapterPosition()));
+                intent.putExtra("movCode",movieCodeArray.get(holder.getAdapterPosition()));
+                context.startActivity(intent);
             }
         });
     }

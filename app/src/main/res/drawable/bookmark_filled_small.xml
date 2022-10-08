@@ -3,5 +3,5 @@
     <item
         android:width="30dp"
         android:height="30dp"
-        android:drawable="@drawable/bookmark_filled" />
+        android:drawable="@drawable/heart_filled" />
 </layer-list>
