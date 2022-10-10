@@ -3,12 +3,221 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
+
+    <RelativeLayout
+        android:id="@+id/layoutHomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ISFP가 이번 주에 좋아한 영화"
+        android:layout_centerHorizontal="true">
 
+        <TextView
+            android:id="@+id/tvMbtiInHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="ISFP"
+            android:textColor="@color/signature_color"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvMbtiInHome"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/tvMbtiInHome"
+            android:text="가 이번 주에 좋아한 영화"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/imgMovMain2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutHomeTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:adjustViewBounds="true"
         />
+
+    <ImageView
+        android:id="@+id/imgMovMain1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgMovMain2"
+        android:layout_alignBottom="@+id/imgMovMain2"
+        android:layout_marginLeft="10dp"
+        android:adjustViewBounds="true"
+        />
+
+    <ImageView
+        android:id="@+id/imgMovMain3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgMovMain2"
+        android:layout_alignBottom="@+id/imgMovMain2"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:adjustViewBounds="true"
+        />
+
+    <ImageView
+        android:id="@+id/imgNext"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgMovMain2"
+        android:layout_alignBottom="@+id/imgMovMain2"
+        android:layout_toRightOf="@+id/imgMovMain2"
+        android:adjustViewBounds="true"
+        android:src="@drawable/forward_signature" />
+
+    <ImageView
+        android:id="@+id/imgPre"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgMovMain2"
+        android:layout_alignBottom="@+id/imgMovMain2"
+        android:layout_toLeftOf="@+id/imgMovMain2"
+        android:adjustViewBounds="true"
+        android:src="@drawable/back_signature" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgMovMain2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+
+        >
+
+        <TextView
+            android:id="@+id/tvMovTitleMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgStarFilledMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tvMovTitleMain"
+            android:src="@drawable/star_filled_small"
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imgStarFilledMain"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@id/imgStarFilledMain"
+            android:text="7.8"
+            android:textColor="@color/signature_color"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvMovGenreMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMovTitleMain"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/gray"
+            android:textSize="13dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layoutSub1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/layoutSub2"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/layoutSub2">
+
+        <ImageView
+            android:id="@+id/imgMovSub1"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvMovNameSub1"
+            android:adjustViewBounds="true"
+            />
+
+        <TextView
+            android:id="@+id/tvMovNameSub1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/layoutSub2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgMovSub2"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvMovNameSub2"
+            android:adjustViewBounds="true"
+            />
+
+        <TextView
+            android:id="@+id/tvMovNameSub2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layoutSub3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/layoutSub2"
+        android:layout_toRightOf="@+id/layoutSub2"
+        android:layout_marginLeft="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgMovSub3"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tvMovNameSub3"
+            android:adjustViewBounds="true"
+            />
+
+        <TextView
+            android:id="@+id/tvMovNameSub3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black" />
+    </RelativeLayout>
 
 
 

@@ -31,7 +31,9 @@
         <item>46 ~ 50</item>
         <item>51세 이상</item>
     </string-array>
-
+    
+    <string name="nativeAppKey">8f9dcb3da65da193cccf8411c39b754c</string>
+    
     <string name="tab_home">홈</string>
     <string name="tab_write">글쓰기</string>
     <string name="tab_notify">알림</string>
@@ -45,8 +47,12 @@
     <string name="userData">userData</string>
     <string name="movieDetail">/search_movie/detail</string>
     <string name="writeLongReview">/board/long_reviews/write</string>
+    <string name="writeShortReview">/board/short_reviews/write</string>
     <string name="preferAdd">/prefer/add</string>
     <string name="preferSub">/prefer/sub</string>
-
+    <string name="shortReviewViewInMovie">/board/short_reviews/view/movie_id</string>
+    <string name="longReviewViewInMovie">/board/long_reviews/view/movie_id</string>
+    <string name="recommendMov">/recommand/view/test</string>
+    <string name="viewLongReviewRecency">/board/short_reviews/view/recency</string>
 
 </resources>

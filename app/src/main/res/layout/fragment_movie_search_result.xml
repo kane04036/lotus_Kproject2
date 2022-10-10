@@ -48,8 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/searchLayout"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/tvMovie2"
@@ -57,7 +56,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="7dp"
                 android:text="영화"
                 android:textColor="@color/black"
                 android:textSize="20dp"
@@ -77,8 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvMovie2"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="10dp"
                 android:orientation="horizontal" />
 
         </RelativeLayout>
@@ -89,10 +86,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/movieLayout"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
             android:text="감상평"
             android:textColor="@color/black"
             android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold" />
         <ImageButton
             android:layout_width="wrap_content"
@@ -108,9 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvLongReview2"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_margin="10dp" />
 
 <!--        <RelativeLayout-->
 <!--            android:id="@+id/longReviewLayout"-->
@@ -232,10 +227,10 @@
             android:layout_below="@+id/recyViewLongReviewInResult"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
             android:text="한 줄 느낌"
             android:textColor="@color/black"
             android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:textStyle="bold" />
         <ImageButton
             android:layout_width="wrap_content"
@@ -251,9 +246,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvShortReview2"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            />
+            android:layout_margin="10dp"/>
 
 <!--        <RelativeLayout-->
 <!--            android:id="@+id/shortReviewLayout"-->

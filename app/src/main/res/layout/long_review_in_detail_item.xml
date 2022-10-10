@@ -2,36 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <TextView
-        android:id="@+id/tvMbtiInLongReviewDetail"
+        android:id="@+id/tvMbtiLongReviewInDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ISFP"
-        android:textSize="13dp"
-        android:textColor="@color/gray"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        />
+        android:text="ISFP"
+        android:textColor="@color/signature_color"
+        android:textStyle="bold"
+        android:layout_marginRight="5dp"
+        android:textSize="13dp" />
+
     <TextView
+        android:id="@+id/tvNicknameLongReviewInDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvMbtiLongReviewInDetail"
+        android:layout_toRightOf="@+id/tvMbtiLongReviewInDetail"
         android:text="짱아찌"
-        android:layout_toRightOf="@+id/tvMbtiInLongReviewDetail"
-        android:layout_alignBottom="@+id/tvMbtiInLongReviewDetail"
-        android:textSize="13dp"
         android:textColor="@color/black"
-        android:layout_marginLeft="5dp"
-        />
+        android:textSize="13dp" />
+
     <TextView
         android:id="@+id/tvLongReviewTitleInDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textColor="@color/black"
-        android:layout_below="@+id/tvMbtiInLongReviewDetail"
-        android:layout_alignStart="@+id/tvMbtiInLongReviewDetail"
+        android:layout_below="@+id/tvMbtiLongReviewInDetail"
+        android:layout_alignStart="@+id/tvMbtiLongReviewInDetail"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        />
+        android:textStyle="bold"
+        android:text="영화 봤는데 진짜 재밌더라"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +52,6 @@
         android:textColor="@color/black"
         android:layout_marginLeft="3dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
         android:layout_below="@+id/tvLongReviewTitleInDetail"
         />
 

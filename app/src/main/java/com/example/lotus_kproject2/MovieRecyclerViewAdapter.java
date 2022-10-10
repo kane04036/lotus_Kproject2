@@ -64,6 +64,8 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         holder.imageMovieResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "recyclerView: Mov Code"+movieCodeArray.get(holder.getAdapterPosition()));
+                Log.d(TAG, "recyclerView: Mov Name"+movieNameArray.get(holder.getAdapterPosition()));
                 Intent intent = new Intent(context, MovieDetailActivity.class);
                 intent.putExtra("movName", movieNameArray.get(holder.getAdapterPosition()));
                 intent.putExtra("movImage",movieImageArray.get(holder.getAdapterPosition()));

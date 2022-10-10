@@ -53,16 +53,14 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if (!imgArray.isEmpty()) {
-            if (yearArray.get(position).equals("")) {
-                holder.tvYearInList.setText("개봉일자 불명");
-            }
+
             holder.tvMovieNmaeInList.setText(nameArray.get(holder.getAdapterPosition()));
-            holder.tvYearInList.setText(yearArray.get(holder.getAdapterPosition()));
+            if (!yearArray.get(holder.getAdapterPosition()).isEmpty())
+                holder.tvYearInList.setText(yearArray.get(holder.getAdapterPosition()).substring(0, 4));
+            else
+                holder.tvYearInList.setText("개봉일자 불명");
             holder.imgMovieList.setClipToOutline(true);
             Glide.with(context).load(imgArray.get(holder.getAdapterPosition())).error(R.drawable.gray_profile).into(holder.imgMovieList);
-
-        }
 
         holder.layoutMovieList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +72,6 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
 //                intent.putExtra("title", title);
 //                intent.putExtra("contents", contents);
                 context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
-                ((Activity)context).finish();
             }
         });
 
@@ -121,6 +118,7 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
             tvYearInList = itemView.findViewById(R.id.tvYearInList);
         }
     }
+
 
 
 }

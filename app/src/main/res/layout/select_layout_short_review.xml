@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <me.zhanghai.android.materialratingbar.MaterialRatingBar
         android:id="@+id/ratingbarInShortReview"
         android:layout_width="110dp"
         android:layout_height="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_alignStart="@id/layoutShortReview" />
+        android:layout_alignStart="@id/layoutShortReview"
+        app:mrb_progressBackgroundTint="@color/gray"
+        app:mrb_progressTint="@color/signature_color"
+        app:mrb_secondaryProgressTint="@color/gray"
+        android:layout_marginTop="5dp" />
 
     <RelativeLayout
         android:id="@+id/layoutShortReview"
@@ -16,18 +21,18 @@
         android:layout_below="@+id/ratingbarInShortReview"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:paddingBottom="3dp"
-        android:background="@drawable/line_rectangle_90">
+        android:background="@drawable/line_rectangle_90"
+        android:paddingBottom="3dp">
 
         <EditText
             android:id="@+id/edtShortReview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:lines="2"
-            android:maxLength="50"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
+            android:background="@null"
+            android:minLines="2"
+            android:maxLength="100"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
@@ -35,9 +40,9 @@
             android:id="@+id/tvWritingCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
             android:layout_alignBottom="@+id/tvWritingTotalCount"
             android:layout_toLeftOf="@+id/tvWritingTotalCount"
+            android:text="0"
             android:textColor="@color/black"
             android:textSize="10dp" />
 
@@ -47,20 +52,34 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtShortReview"
             android:layout_alignParentRight="true"
-            android:text="/50"
-            android:textColor="@color/black"
             android:layout_marginRight="3dp"
+            android:text="/100"
+            android:textColor="@color/black"
             android:textSize="10dp" />
+
     </RelativeLayout>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/layoutShortReview"-->
-<!--        android:layout_marginRight="10dp"-->
-<!--        android:layout_marginLeft="10dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        />-->
+    <Button
+        android:id="@+id/btnUploadShortReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutShortReview"
+        android:layout_alignEnd="@+id/layoutShortReview"
+        android:backgroundTint="@color/signature_color"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:text="등록"
+        android:textSize="13dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyViewShortReviewInDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnUploadShortReview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp" />
 
 
 </RelativeLayout>

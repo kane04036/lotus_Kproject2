@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/tvMbtiShortReviewInDetail"
+        android:id="@+id/tvMbtiShortReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ISFP"
@@ -15,24 +15,24 @@
         android:textSize="12dp" />
 
     <TextView
-        android:id="@+id/tvNicknameShortReviewInDetail"
+        android:id="@+id/tvNicknameShortReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvMbtiShortReviewInDetail"
+        android:layout_alignBottom="@+id/tvMbtiShortReviewInBoard"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/tvMbtiShortReviewInDetail"
+        android:layout_toRightOf="@+id/tvMbtiShortReviewInBoard"
         android:text="짱아찌"
         android:textColor="@color/black"
         android:textSize="12dp" />
 
     <me.zhanghai.android.materialratingbar.MaterialRatingBar
-        android:id="@+id/ratingbarShortReviewInDetail"
+        android:id="@+id/ratingbarShortReviewInBoard"
         android:layout_width="80dp"
         android:layout_height="15dp"
         app:mrb_progressBackgroundTint="@color/gray"
         android:layout_alignParentRight="true"
         app:mrb_progressTint="@color/signature_color"
-        android:layout_alignTop="@+id/tvMbtiShortReviewInDetail"
+        android:layout_alignTop="@+id/tvMbtiShortReviewInBoard"
 
         app:mrb_secondaryProgressTint="@color/gray" />
 
@@ -40,8 +40,8 @@
         android:id="@+id/tvShortReviewWritingInDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingbarShortReviewInDetail"
-        android:layout_alignStart="@+id/tvMbtiShortReviewInDetail"
+        android:layout_below="@+id/ratingbarShortReviewInBoard"
+        android:layout_alignStart="@+id/tvMbtiShortReviewInBoard"
         android:layout_marginRight="10dp"
         android:text="영화 봤는데 진짜 재밌더라"
         android:layout_marginTop="5dp"

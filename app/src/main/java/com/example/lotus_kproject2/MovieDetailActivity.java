@@ -37,12 +37,16 @@ public class MovieDetailActivity extends AppCompatActivity {
     private LongReviewInDetailFragment longReviewInDetailFragment = new LongReviewInDetailFragment();
     private ShortReviewInDetailFragment shortReviewInDetailFragment = new ShortReviewInDetailFragment();
 
+
+
     MaterialToolbar topBarInDetail;
     TextView tvMovieName, tvGenre, tvCountry, tvRunningTime, tvReleaseDate, tvSummary, tvReadMore, tvTabBarLongReview, tvTabBarShortReview, tvDirector, tvActor, tvReadMoreActors;
     ImageView imageMovDetail, imgLike;
-    String summary, summary_sub, movCode, director, actors, actors_sub;
+    Integer prefer;
+    private String summary, summary_sub, movCode, director, actors, actors_sub, movName, movImg;
     FrameLayout frameLayoutInDetail;
     SharedPreferences sharedPreferences;
+    Bundle result = new Bundle();
 
     ArrayList<String> actorArray = new ArrayList<>();
 
@@ -56,6 +60,12 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         movCode = getIntent().getStringExtra("movCode");
         movieDetailRequest(movCode);
+
+        result.putString("movCode", movCode);
+        fragmentManager.setFragmentResult("movData_long", result);
+        fragmentManager.setFragmentResult("movData_short",result);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frameLayoutInDetail, longReviewInDetailFragment).commitAllowingStateLoss();
 
         topBarInDetail = findViewById(R.id.topBarInDetail);
         tvTabBarLongReview = findViewById(R.id.tvTabBarLongReview);
@@ -73,8 +83,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvActor = findViewById(R.id.tvActor);
         tvReadMoreActors = findViewById(R.id.tvReadMoreActors);
 
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayoutInDetail, longReviewInDetailFragment).commitAllowingStateLoss();
+
 
         tvReadMoreActors.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,11 +115,12 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
-        tvMovieName.setText(getIntent().getStringExtra("movName"));
-        Glide.with(getApplicationContext()).
-                load(getIntent().getStringExtra("movImage")).error(R.drawable.gray_profile)
-                .fallback(R.drawable.profile)
-                .into(imageMovDetail);
+//        tvMovieName.setText(getIntent().getStringExtra("movName"));
+//
+//        Glide.with(getApplicationContext()).
+//                load(getIntent().getStringExtra("movImage")).error(R.drawable.gray_profile)
+//                .fallback(R.drawable.profile)
+//                .into(imageMovDetail);
 
         topBarInDetail.setTitle(getIntent().getStringExtra("movName"));
 
@@ -136,6 +146,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
         tvTabBarLongReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,8 +155,10 @@ public class MovieDetailActivity extends AppCompatActivity {
                 tvTabBarShortReview.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filled_rectangle));
                 tvTabBarShortReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.darkGray));
 
-                FragmentTransaction transaction_longreview = fragmentManager.beginTransaction();
-                transaction_longreview.replace(R.id.frameLayoutInDetail, longReviewInDetailFragment).commitAllowingStateLoss();
+//                FragmentManager fragmentManager_long = getSupportFragmentManager();
+//                fragmentManager.setFragmentResult("movData_long",result);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frameLayoutInDetail, longReviewInDetailFragment).commitAllowingStateLoss();
             }
         });
 
@@ -157,8 +170,10 @@ public class MovieDetailActivity extends AppCompatActivity {
                 tvTabBarLongReview.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filled_rectangle));
                 tvTabBarLongReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.darkGray));
 
-                FragmentTransaction transaction_shortreview = fragmentManager.beginTransaction();
-                transaction_shortreview.replace(R.id.frameLayoutInDetail, shortReviewInDetailFragment).commitAllowingStateLoss();
+//                FragmentManager fragmentManager_short = getSupportFragmentManager();
+//                fragmentManager.setFragmentResult("movData_short", result);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frameLayoutInDetail, shortReviewInDetailFragment).commitAllowingStateLoss();
             }
         });
 
@@ -169,7 +184,10 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("id", movCode);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            Log.d(TAG, "movieDetailRequest: token:" + sharedPreferences.getString("token", ""));
 
 
         } catch (Exception e) {
@@ -184,22 +202,38 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: movDetail Result: " + response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
+                    JSONArray dataJsonArrayAll = response.getJSONArray("data");
+
+                    prefer = (Integer) dataJsonArrayAll.get(0);
+
+                    JSONArray dataJsonArray = dataJsonArrayAll.getJSONArray(1);
                     director = (String) dataJsonArray.get(4);
+                    movName = (String) dataJsonArray.get(0);
+                    String movCode = (String) dataJsonArray.get(1);
+                    Log.d(TAG, "onResponse: movCode:"+movCode);
+                    movImg = (String) dataJsonArray.get(3);
                     String runningTime = (String) dataJsonArray.get(2);
                     String country = (String) dataJsonArray.get(6);
                     String releaseData = (String) dataJsonArray.get(7);
+                    String genres = dataJsonArray.getString(8);
                     JSONArray actorJsonArray = dataJsonArray.getJSONArray(5);
-                    for(int i = 0; i< actorJsonArray.length(); i++){
+                    for (int i = 0; i < actorJsonArray.length(); i++) {
                         JSONObject actorObj = actorJsonArray.getJSONObject(i);
                         actorArray.add(actorObj.getString("actorNm"));
                     }
                     actors = actorArray.toString();
-                    actors = actors.replaceAll("\\[","");
-                    actors = actors.replaceAll("\\]","");
+                    actors = actors.replaceAll("\\[", "");
+                    actors = actors.replaceAll("\\]", "");
 
-                    actors_sub = actors.substring(0,30);
-                    tvActor.setText(actors_sub+"...");
+                    if (actors.length() > 30) {
+                        actors_sub = actors.substring(0, 30);
+                        tvActor.setText(actors_sub + "...");
+                    } else{
+                        actors_sub = actors;
+                        tvActor.setText(actors_sub);
+                        tvReadMoreActors.setText("");
+                    }
+
 
                     summary = (String) dataJsonArray.get(9);
                     if (summary.length() > 100) {
@@ -210,12 +244,27 @@ public class MovieDetailActivity extends AppCompatActivity {
                         tvReadMore.setText("");
                     }
 
+                    if (releaseData.length() > 4)
+                        releaseData = releaseData.substring(0, 4);
+                    else
+                        tvReleaseDate.setText("개봉일자 불명");
+
                     tvSummary.setText(summary_sub + "...");
                     tvReleaseDate.setText(releaseData);
                     tvCountry.setText(country);
                     tvRunningTime.setText(runningTime + "분");
                     tvDirector.setText(director);
+                    tvMovieName.setText(movName);
 
+                    Glide.with(getApplicationContext()).load(movImg).error(R.drawable.gray_profile).into(imageMovDetail);
+
+                    if (prefer == 1) {
+                        imgLike.setImageResource(R.drawable.bookmark_filled_small);
+                        isLike = true;
+                    } else {
+                        imgLike.setImageResource(R.drawable.bookmark_small);
+                        isLike = false;
+                    }
 
 
                 } catch (JSONException e) {
@@ -239,12 +288,12 @@ public class MovieDetailActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+            String actorsForPreferAdd = actorArray.get(0) + "|" + actorArray.get(1) + "|" + actorArray.get(2);
 
             jsonObject.put("contentID", movCode);
-            jsonObject.put("director",director);
-            jsonObject.put("actor","");
-            jsonObject.put("token",sharedPreferences.getString("token",""));
-
+            jsonObject.put("director", director);
+            jsonObject.put("actor", actorsForPreferAdd);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -279,8 +328,10 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", "");
+            sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
 
+            jsonObject.put("contentID", movCode);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -2,12 +2,14 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
@@ -109,6 +111,7 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
                         yearArrray.add(String.valueOf(yearJsonArray.get(i)));
                     }
                     recyclerViewAdapter.notifyDataSetChanged();
+                    hideKeyboard();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -123,5 +126,13 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
             }
         });
         Queue.add(jsonObjectRequest);
+    }
+    private void hideKeyboard()
+    {
+        if (getApplicationContext() != null && getCurrentFocus() != null)
+        {
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        KakaoSdk.init(this, "8f9dcb3da65da193cccf8411c39b754c");
+        KakaoSdk.init(this, getString(R.string.nativeAppKey));
+//        kakaoDelete();
         tokenCheckFirst();
 
         setContentView(R.layout.activity_main);
 
-//        kakaoDelete();
 
         tvLook = findViewById(R.id.tvLook);
         btnKakaoLogin = findViewById(R.id.btnKakaoLogin);
@@ -62,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
         tvLook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("token", "775PQ319abhja9");
+                editor.putString("memNum", "1111111111");
+                editor.commit();
+
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 intent.putExtra("isNew", "0");
                 startActivity(intent);
@@ -88,7 +94,15 @@ public class MainActivity extends AppCompatActivity {
             } else if (oAuthToken != null) {
                 Log.i(TAG, "login: 로그인 성공(토큰): " + oAuthToken.getAccessToken());
                 token = oAuthToken.getAccessToken();
-                tokenCheckSecond();
+                UserApiClient.getInstance().me((user, throwable) -> {
+                    if(error != null){
+                        Log.d(TAG, "login: error");
+                    }else if(user != null){
+                        memNum = user.getId().toString();
+                        kakaoLoginRequest();
+                    }
+                    return null;
+                });
             }
             return null;
         });
@@ -102,7 +116,15 @@ public class MainActivity extends AppCompatActivity {
             } else if (oAuthToken != null) {
                 Log.i(TAG, "account : 로그인 성공(토큰): " + oAuthToken.getAccessToken());
                 token = oAuthToken.getAccessToken();
-                tokenCheckSecond();
+                UserApiClient.getInstance().me((user, throwable) -> {
+                    if(error != null){
+                        Log.d(TAG, "login: error");
+                    }else if(user != null){
+                        memNum = user.getId().toString();
+                        kakaoLoginRequest();
+                    }
+                    return null;
+                });
             }
             return null;
         });
@@ -116,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
             else if(tokenInfo != null){
                 Log.d(TAG, "tokenCheckFirst: 토큰 정보보기 성공");
 
+//                sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putString("token",token );
+//                editor.putString("memNum", tokenInfo.getId().toString());
+//                editor.commit();
+                Log.d(TAG, "tokenCheckFirst: memNum"+tokenInfo.getId().toString());
+                Log.d(TAG, "tokenCheckFirst: token:"+tokenInfo.toString());
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 intent.putExtra("isNew", "0");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -195,25 +224,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    isNew = response.getString("isNew");
                     if(response.getString("res").equals("200")){
-                        int mbtiNum = response.getInt("mbti");
-                        Resources res = getResources();
-                        String[] mbtiArray = res.getStringArray(R.array.mbti_array);
-                        String userMbti = mbtiArray[mbtiNum];
+                        if(isNew.equals("0")){
+                            int mbtiNum = response.getInt("mbti");
+                            Resources res = getResources();
+                            String[] mbtiArray = res.getStringArray(R.array.mbti_array);
+                            String userMbti = mbtiArray[mbtiNum];
 
+                            sharedPreferences = getSharedPreferences(getString(R.string.userData),Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                            editor1.putString("nickname",response.getString("nickname"));
+                            editor1.putString("mbti", userMbti);
+                            editor1.commit();
+                        }
                         sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("token", token);
                         editor.putString("memNum", memNum);
                         editor.commit();
 
-                        sharedPreferences = getSharedPreferences(getString(R.string.userData),Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor1 = sharedPreferences.edit();
-                        editor1.putString("nickname",response.getString("nickname"));
-                        editor1.putString("mbti", userMbti);
-                        editor1.commit();
-
-                        isNew = response.getString("isNew");
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         intent.putExtra("isNew", isNew);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -233,6 +263,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Queue.add(jsonObjectRequest);
+    }
+
+    private void accessTokenInfo(){
+        UserApiClient.getInstance().accessTokenInfo(new Function2<AccessTokenInfo, Throwable, Unit>() {
+            @Override
+            public Unit invoke(AccessTokenInfo accessTokenInfo, Throwable throwable) {
+                Log.d(TAG, "accessTokenInfo: "+accessTokenInfo.toString());
+                return null;
+            }
+        });
     }
 
 }

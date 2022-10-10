@@ -143,6 +143,7 @@ public class MovieSearchResultFragment extends Fragment {
                         imgArray.clear();
                         codeArray.clear();
                         JSONArray dataJsonArray = response.getJSONArray("data");
+                        Log.d(TAG, "onResponse: datajson"+dataJsonArray);
                         JSONArray movieJsonArray = (JSONArray) dataJsonArray.get(0);
                         int movNum = (int) movieJsonArray.get(0);
                         JSONArray movNameJsonArray = movieJsonArray.getJSONArray(1);
@@ -154,6 +155,11 @@ public class MovieSearchResultFragment extends Fragment {
                             imgArray.add(String.valueOf(movImgJsonArray.get(i)));
                             codeArray.add(String.valueOf(movCodeJsonArray.get(i)));
                         }
+                        Log.d(TAG, "onResponse: arraysize(name, img, code)"+nameArray.size()+","+imgArray.size()+"+"+codeArray.size());
+                        Log.d(TAG, "onResponse: firstCode:"+codeArray.get(0));
+                        Log.d(TAG, "onResponse: firstName:"+nameArray.get(0));
+                        Log.d(TAG, "onResponse: firstCode:"+codeArray.get(0));
+
                         recyclerViewAdapter.notifyDataSetChanged();
 
                         JSONArray longReviewJsonArray = dataJsonArray.getJSONArray(1);
