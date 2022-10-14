@@ -53,6 +53,6 @@
     <string name="shortReviewViewInMovie">/board/short_reviews/view/movie_id</string>
     <string name="longReviewViewInMovie">/board/long_reviews/view/movie_id</string>
     <string name="recommendMov">/recommand/view/test</string>
-    <string name="viewLongReviewRecency">/board/short_reviews/view/recency</string>
+    <string name="viewLongReviewRecency">/board/long_reviews/view/recency</string>
 
 </resources>

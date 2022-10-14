@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         KakaoSdk.init(this, getString(R.string.nativeAppKey));
 //        kakaoDelete();
         tokenCheckFirst();
-
+//        accessTokenInfo();
         setContentView(R.layout.activity_main);
 
 

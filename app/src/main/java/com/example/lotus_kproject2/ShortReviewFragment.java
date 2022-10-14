@@ -17,15 +17,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class ShortReviewFragment extends Fragment {
+    RecyclerView recyclerView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.select_layout_short_review, container, false);
+        View view = inflater.inflate(R.layout.fragment_shortreview_board, container, false);
 
         return view;
     }

@@ -1,5 +1,8 @@
 package com.example.lotus_kproject2;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount: datalist.size():"+dataLists.size());
         return dataLists.size();
     }
 

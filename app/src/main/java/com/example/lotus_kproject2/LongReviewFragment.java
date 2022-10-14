@@ -3,6 +3,7 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,13 +34,7 @@ import java.util.ArrayList;
 public class LongReviewFragment extends Fragment {
     private RecyclerView recyclerView;
     ArrayList<LongReviewDataList> dataLists = new ArrayList<>();
-    LongReviewBoardRecyclerViewAdapter adapter = new LongReviewBoardRecyclerViewAdapter(dataLists);
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        longReviewDataRequest();
-    }
+    LongReviewBoardRecyclerViewAdapter adapter;
 
     @Nullable
     @Override
@@ -47,8 +42,12 @@ public class LongReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_longreview_board, container, false);
 
         recyclerView = view.findViewById(R.id.recyViewLongReviewBoard);
+        adapter = new LongReviewBoardRecyclerViewAdapter(dataLists);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
+
+        longReviewDataRequest();
 
         return view;
     }
@@ -58,7 +57,8 @@ public class LongReviewFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
-
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(String.valueOf(R.string.loginData),Context.MODE_PRIVATE);
+            jsonObject.put("token",sharedPreferences.getString("token","") );
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,9 +70,9 @@ public class LongReviewFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: res:" + response.getString("res"));
+                    JSONArray dataJsonArray = response.getJSONArray("data");
+                    dataLists.clear();
                     if(response.getString("res").equals("200")){
-                        JSONArray dataJsonArray = response.getJSONArray("data");
                         for(int i = 0; i<dataJsonArray.length(); i++){
                             JSONObject object = dataJsonArray.getJSONObject(i);
                             int mbtiNum = object.getInt("user_mbti");

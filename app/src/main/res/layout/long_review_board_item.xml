@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tvNicknameInLongReviewBoard"
         android:text="살인의 추억"
-        android:textColor="@color/darkGray"
-        android:textSize="13dp" />
+        android:textColor="@color/gray"
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/tvMbtiInLongReviewBoard"
@@ -53,7 +53,7 @@
         android:layout_marginTop="5dp"
         android:maxLines="2"
         android:text="긴 리뷰 내용 일부"
-        android:textColor="@color/gray"
+        android:textColor="@color/darkGray"
         android:textSize="12dp" />
     <ImageView
         android:layout_width="wrap_content"

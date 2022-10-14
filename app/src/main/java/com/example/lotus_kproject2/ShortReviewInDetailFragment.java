@@ -57,6 +57,7 @@ public class ShortReviewInDetailFragment extends Fragment {
     private ArrayList<String> writingIdArray = new ArrayList<>();
     private ArrayList<String> userIdArray = new ArrayList<>();
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +69,13 @@ public class ShortReviewInDetailFragment extends Fragment {
                 Log.d(TAG, "ChildFragment : movCode:"+movCode);
             }
         });
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         shortReviewListRequest(movCode);
+
     }
 
     @Nullable
@@ -161,6 +167,7 @@ public class ShortReviewInDetailFragment extends Fragment {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("movie_id", movCode);
+            Log.d(TAG, "shortReviewListRequest: movCode"+movCode);
 
         } catch (Exception e) {
             e.printStackTrace();

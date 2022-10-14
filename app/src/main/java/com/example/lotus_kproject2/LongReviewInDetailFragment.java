@@ -57,6 +57,13 @@ public class LongReviewInDetailFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        longReviewListRequest(movCode);
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,7 +79,6 @@ public class LongReviewInDetailFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(longReviewInDetailRecyclerViewAdapter);
 
-        longReviewListRequest(movCode);
 
         return view;
     }
@@ -83,6 +89,7 @@ public class LongReviewInDetailFragment extends Fragment {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("movie_id", movCode);
+            Log.d(TAG, "longReviewListRequest: movieId"+movCode);
 
         } catch (Exception e) {
             e.printStackTrace();
