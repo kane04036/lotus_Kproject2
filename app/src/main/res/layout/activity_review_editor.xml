@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             app:menu="@menu/review_top_app_bar"
             app:navigationIcon="@drawable/back_simple_small"
-            app:title="리뷰 작성"
+            app:title="리뷰 쓰기"
             app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -35,14 +35,16 @@
             android:id="@+id/tvChooseMov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="영화 선택하러 가기 "
+            android:text="영화 선택하기 "
+            android:fontFamily="@font/koddibold"
             android:textColor="@color/black"
-            android:layout_marginLeft="3dp"
-            android:textSize="18dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:textSize="15dp" />
 
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_alignBottom="@+id/tvChooseMov"
             android:layout_toRightOf="@+id/tvChooseMov"
             android:src="@drawable/forward_small"
@@ -57,9 +59,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/LayoutChooseMov"
         android:hint="제목을 입력하세요"
-        android:textSize="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:textSize="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        />
 
     <EditText
         android:id="@+id/edtReview"
@@ -68,9 +72,9 @@
         android:layout_below="@+id/edtTitle"
         android:gravity="top"
         android:hint="내용을 입력하세요"
-        android:textSize="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         />
 
 

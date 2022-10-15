@@ -3,6 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_choose_mov.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_home.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_main.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_movie_detail.xml" value="0.2" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_movierecommand.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_movieresult_for_fragment.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_review_editor.xml" value="0.264" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_search.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/alertdialog_age.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/alertdialog_gender.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_home.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_longreview_board.xml" value="0.10671039354187689" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_movie.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_movie_search_result.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_movierecommand.xml" value="0.2" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_myblog.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_shortreview_board.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/movie_horizontalscroll_item.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/select_layout_long_review.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/short_review_board_item.xml" value="0.2203125" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/short_review_in_detail_item.xml" value="0.2203125" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/font/font1.xml" value="0.10555555555555556" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/layout/activity_main.xml" value="0.5043478260869565" />
