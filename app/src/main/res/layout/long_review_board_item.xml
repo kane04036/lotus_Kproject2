@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvLongReviewTitleInBoard"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:maxLines="2"
         android:text="긴 리뷰 내용 일부"
         android:textColor="@color/darkGray"

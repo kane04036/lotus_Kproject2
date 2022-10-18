@@ -126,15 +126,13 @@ public class MovieRecommandFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: res: recommandMov" + response.getString("res"));
-                    Log.d(TAG, "onResponse: data" + response.getString("data"));
-
+                    Log.d(TAG, "onResponse: res: recommandMov: " + response.getString("res"));
                     if (response.getString("res").equals("200")) {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         recmdMovLists.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONArray tmpJsonArray = dataJsonArray.getJSONArray(i);
-                            recmdMovLists.add(new RecommendMovieList((String) tmpJsonArray.get(0), (String) tmpJsonArray.get(1), (String) tmpJsonArray.get(2), (String) tmpJsonArray.get(3)));
+                            recmdMovLists.add(new RecommendMovieList( tmpJsonArray.getString(0),  tmpJsonArray.getString(1),  tmpJsonArray.getString(2),  tmpJsonArray.getString(3)));
                         }
                         Glide.with(getActivity()).load(recmdMovLists.get(0).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain1);
                         Glide.with(getActivity()).load(recmdMovLists.get(1).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain2);

@@ -42,7 +42,9 @@
             android:id="@+id/recyclerViewInMovSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/layoutSearchMov" />
+            android:layout_below="@+id/layoutSearchMov"
+            android:layout_margin="10dp"
+            />
     </RelativeLayout>
 
 </FrameLayout>
