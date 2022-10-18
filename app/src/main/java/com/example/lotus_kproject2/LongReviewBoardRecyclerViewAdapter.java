@@ -31,7 +31,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
         holder.tvNickname.setText(dataLists.get(holder.getAdapterPosition()).getNickname());
         holder.tvMbti.setText(dataLists.get(holder.getAdapterPosition()).getMbti());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
-        holder.tvMovName.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
+        holder.tvMovName.setText("<"+dataLists.get(holder.getAdapterPosition()).getMovName()+">");
     }
 
     @Override

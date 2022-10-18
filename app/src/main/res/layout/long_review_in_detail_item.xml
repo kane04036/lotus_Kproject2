@@ -7,7 +7,7 @@
         android:id="@+id/tvMbtiLongReviewInDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="ISFP"
         android:textColor="@color/signature_color"
         android:textStyle="bold"
@@ -53,6 +53,13 @@
         android:layout_marginLeft="3dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvLongReviewTitleInDetail"
+        android:layout_marginBottom="10dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lightGray"
+        android:layout_below="@+id/tvThumbUpNum"
         />
 
 </RelativeLayout>
