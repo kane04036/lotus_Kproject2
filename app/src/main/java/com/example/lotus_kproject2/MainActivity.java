@@ -136,34 +136,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "tokenCheckFirst: 토큰 정보 보기 실패 "+tokenError);
             }
             else if(tokenInfo != null){
-                Log.d(TAG, "tokenCheckFirst: 토큰 정보보기 성공");
-
-//                sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("token",token );
-//                editor.putString("memNum", tokenInfo.getId().toString());
-//                editor.commit();
-                Log.d(TAG, "tokenCheckFirst: memNum"+tokenInfo.getId().toString());
-                Log.d(TAG, "tokenCheckFirst: token:"+tokenInfo.toString());
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 intent.putExtra("isNew", "0");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
-            }
-            return null;
-        });
-    }
-
-    void tokenCheckSecond(){
-        UserApiClient.getInstance().accessTokenInfo((tokenInfo, tokenError)->{
-            if(tokenError != null){
-                Log.d(TAG, "tokenCheckSecond: 토큰 정보 보기 실패 "+tokenError);
-            }
-            else if(tokenInfo != null){
-                Log.d(TAG, "tokenCheckSecond: 토큰 정보보기 성공");
-                memNum = tokenInfo.getId().toString();
-                kakaoLoginRequest();
             }
             return null;
         });

@@ -42,7 +42,7 @@ public class MovieRecommandFragment extends Fragment {
     int position = 1;
 
     ImageView imgMovMain1, imgMovMain2, imgMovMain3, imgNext, imgPre, imgMovSub1, imgMovSub2, imgMovSub3;
-    TextView tvMovTitleMain, tvMovGenreMain, tvMovNameSub1, tvMovNameSub2, tvMovNameSub3;
+    private TextView tvMovTitleMain, tvMovGenreMain, tvMovNameSub1, tvMovNameSub2, tvMovNameSub3,tvMbti;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +69,10 @@ public class MovieRecommandFragment extends Fragment {
         tvMovNameSub1 = view.findViewById(R.id.tvMovNameSub1);
         tvMovNameSub2 = view.findViewById(R.id.tvMovNameSub2);
         tvMovNameSub3 = view.findViewById(R.id.tvMovNameSub3);
+        tvMbti = view.findViewById(R.id.tvMbtiInHome);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
+        tvMbti.setText(sharedPreferences.getString("mbti",""));
 
         imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +112,7 @@ public class MovieRecommandFragment extends Fragment {
         JSONObject jsonObject = new JSONObject();
         try {
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-            token = sharedPreferences.getString("token", "");
-            jsonObject.put("token", token);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
             jsonObject.put("userNum", sharedPreferences.getString("memNum", ""));
 
         } catch (Exception e) {
@@ -145,9 +148,7 @@ public class MovieRecommandFragment extends Fragment {
                         tvMovNameSub1.setText(recmdMovLists.get(3).getMovName());
                         tvMovNameSub2.setText(recmdMovLists.get(4).getMovName());
                         tvMovNameSub3.setText(recmdMovLists.get(5).getMovName());
-
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -54,5 +54,9 @@
     <string name="longReviewViewInMovie">/board/long_reviews/view/movie_id</string>
     <string name="recommendMov">/recommand/view/test</string>
     <string name="viewLongReviewRecency">/board/long_reviews/view/recency</string>
+    <string name="viewLongReviewUserId">/board/long_reviews/view</string>
+    <string name="viewShortReviewRecency">/board/short_reviews/view/recency</string>
+    <string name="viewShortReviewUserId">/board/short_reviews/view</string>
+    <string name="viewPrefer">/prefer/view</string>
 
 </resources>

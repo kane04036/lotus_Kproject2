@@ -54,6 +54,7 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
+
             holder.tvMovieNmaeInList.setText(nameArray.get(holder.getAdapterPosition()));
             if (!yearArray.get(holder.getAdapterPosition()).isEmpty())
                 holder.tvYearInList.setText(yearArray.get(holder.getAdapterPosition()).substring(0, 4));
@@ -69,8 +70,6 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
                 intent.putExtra("existMovie", 1);
                 intent.putExtra("movName", nameArray.get(holder.getAdapterPosition()));
                 intent.putExtra("movCode", codeArray.get(holder.getAdapterPosition()));
-//                intent.putExtra("title", title);
-//                intent.putExtra("contents", contents);
                 context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
             }
         });
@@ -81,19 +80,6 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
             holder.btnGoReview.setVisibility(View.INVISIBLE);
         }
 
-//        holder.btnGoReview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, ReviewEditorActivity.class);
-//                intent.putExtra("existMovie", 1);
-//                intent.putExtra("movName", nameArray.get(position));
-//                intent.putExtra("movCode", codeArray.get(position));
-//                intent.putExtra("title", title);
-//                intent.putExtra("contents", contents);
-//                context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
-//
-//            }
-//        });
 
 
     }

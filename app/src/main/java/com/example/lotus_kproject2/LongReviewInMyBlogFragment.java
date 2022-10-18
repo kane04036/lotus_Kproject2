@@ -1,9 +1,10 @@
 package com.example.lotus_kproject2;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import static android.content.ContentValues.TAG;
+
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,10 +29,29 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class LongReviewFragment extends Fragment {
-    private RecyclerView recyclerView;
+public class LongReviewInMyBlogFragment extends Fragment {
+    String userId;
     ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    private LongReviewBoardRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
+    private LongReviewInMyBlogRecyclerViewAdapter adapter = new LongReviewInMyBlogRecyclerViewAdapter(dataLists);
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getParentFragmentManager().setFragmentResultListener("userData_long", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                userId = result.getString("userId");
+                Log.d(TAG, "ChildFragment longReview : userId:" + userId);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        longReviewRequest(userId);
+    }
 
     @Nullable
     @Override
@@ -38,49 +59,49 @@ public class LongReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_longreview_board, container, false);
 
         recyclerView = view.findViewById(R.id.recyViewLongReviewBoard);
-        adapter = new LongReviewBoardRecyclerViewAdapter(dataLists);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
-
-        longReviewDataRequest();
 
         return view;
     }
 
-    private void longReviewDataRequest(){
+    void longReviewRequest(String userId) {
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject();
         try {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(String.valueOf(R.string.loginData),Context.MODE_PRIVATE);
-            jsonObject.put("token",sharedPreferences.getString("token","") );
+            jsonObject.put("user_id", userId);
+            Log.d(TAG, "longReviewRequest: userid:"+userId);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server) + getString(R.string.viewLongReviewRecency);
+        String URL = getString(R.string.server) + getString(R.string.viewLongReviewUserId);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    Log.d(TAG, "long review in blog|res:" + response.getString("res"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    dataLists.clear();
-                    if(response.getString("res").equals("200")){
-                        for(int i = 0; i<dataJsonArray.length(); i++){
-                            JSONObject object = dataJsonArray.getJSONObject(i);
-                            int mbtiNum = object.getInt("user_mbti");
-                            Resources res = getResources();
-                            String[] mbtiArray = res.getStringArray(R.array.mbti_array);
+                    Log.d(TAG, "onResponse: longreview blog data:"+dataJsonArray);
+                    if (response.getString("res").equals("200")) {
+                        dataLists.clear();
+                        for (int i = 0; i < dataJsonArray.length(); i++) {
+                            JSONObject dataObj = dataJsonArray.getJSONObject(i);
 
-                            dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
-                                    object.getString("title"), object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing")));
+                            Resources res = getResources();
+                            String[] mbtiList = res.getStringArray(R.array.mbti_array);
+
+                            dataLists.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"),
+                                    dataObj.getString("movie_name"), dataObj.getString("title"), dataObj.getString("user_id"),
+                                    mbtiList[dataObj.getInt("user_mbti")],dataObj.getString("user_nickname"),dataObj.getString("writing")));
                         }
                         adapter.notifyDataSetChanged();
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -95,5 +116,6 @@ public class LongReviewFragment extends Fragment {
             }
         });
         Queue.add(jsonObjectRequest);
+
     }
 }

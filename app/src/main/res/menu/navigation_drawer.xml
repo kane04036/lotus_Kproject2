@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/drawer_group1"
-        android:checkableBehavior="single"
-        >
+    <group android:id="@+id/drawer_group1">
         <item
             android:id="@+id/drawer_mypage"
-            android:title="마이페이지"
             android:icon="@drawable/profile"
-            />
+            android:title="마이페이지" />
         <item
             android:id="@+id/drawer_long"
-            android:title="긴 글 리뷰"
             android:icon="@drawable/long_text"
-            />
+            android:title="긴 글 리뷰" />
         <item
             android:id="@+id/drawer_short"
-            android:title="짧은 리뷰"
             android:icon="@drawable/short_text"
-            />
+            android:title="짧은 리뷰" />
         <item
             android:id="@+id/drawer_movie"
-            android:title="영화"
             android:icon="@drawable/movie"
-            />
+            android:title="영화" />
+    </group>
+    <group android:id="@+id/drawer_group2">
+        <item
+            android:id="@+id/drawer_preferMovie"
+            android:icon="@drawable/heart"
+            android:title="찜한 영화" />
+
+    </group>
+    <group android:id="@+id/drawer_group3">
+        <item
+            android:id="@+id/drawer_manage"
+            android:icon="@drawable/setting"
+            android:title="설정" />
+        <item
+            android:id="@+id/drawer_notice"
+            android:icon="@drawable/notice"
+            android:title="공지사항" />
     </group>
 </menu>

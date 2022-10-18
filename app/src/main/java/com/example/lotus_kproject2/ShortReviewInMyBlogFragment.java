@@ -2,24 +2,17 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,12 +29,29 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import me.zhanghai.android.materialratingbar.MaterialRatingBar;
+public class ShortReviewInMyBlogFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
+    private ShortReviewInMyBlogRecyclerViewAdapter adapter = new ShortReviewInMyBlogRecyclerViewAdapter(dataLists);
+    String userId;
 
-public class ShortReviewFragment extends Fragment {
-    RecyclerView recyclerView;
-    ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    ShortReviewBoardRecyclerViewAdapter adapter = new ShortReviewBoardRecyclerViewAdapter(dataLists);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getParentFragmentManager().setFragmentResultListener("userData_short", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                userId = result.getString("userId");
+                Log.d(TAG, "ChildFragment longReview : userId:" + userId);
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        shortReviewRequest(userId);
+    }
 
     @Nullable
     @Override
@@ -52,34 +62,36 @@ public class ShortReviewFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
-        shortReviewRequest();
-
         return view;
     }
-    private void shortReviewRequest(){
+
+    private void shortReviewRequest(String userId) {
+
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject();
         try {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(String.valueOf(R.string.loginData), Context.MODE_PRIVATE);
-            jsonObject.put("token",sharedPreferences.getString("token","") );
+            jsonObject.put("user_id", userId);
+            Log.d(TAG, "longReviewRequest: userid:" + userId);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server) + getString(R.string.viewShortReviewRecency);
+        String URL = getString(R.string.server) + getString(R.string.viewShortReviewUserId);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: short review board request:"+response.getString("res"));
+
+                    Log.d(TAG, "onResponse: short review myblog request:" + response.getString("res"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: short review data:"+dataJsonArray);
+                    Log.d(TAG, "onResponse: short review myblog data:" + dataJsonArray);
                     dataLists.clear();
-                    if(response.getString("res").equals("200")){
-                        for(int i = 0; i<dataJsonArray.length(); i++){
+                    if (response.getString("res").equals("200")) {
+                        for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject object = dataJsonArray.getJSONObject(i);
                             int mbtiNum = object.getInt("user_mbti");
                             Resources res = getResources();
@@ -89,8 +101,8 @@ public class ShortReviewFragment extends Fragment {
                             Log.d(TAG, "onRes");
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
-                                     object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"),star));
+                                    object.getString("user_id"), mbtiArray[mbtiNum],
+                                    object.getString("user_nickname"), object.getString("writing"), star));
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -108,5 +120,7 @@ public class ShortReviewFragment extends Fragment {
             }
         });
         Queue.add(jsonObjectRequest);
+
     }
+
 }

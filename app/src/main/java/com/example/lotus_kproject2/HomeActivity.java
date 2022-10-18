@@ -56,6 +56,8 @@ public class HomeActivity extends AppCompatActivity {
     private ShortReviewFragment shortReviewFragment = new ShortReviewFragment();
     private MovieFragment movieFragment = new MovieFragment();
     private MovieRecommandFragment movieRecommandFragment = new MovieRecommandFragment();
+    private MyBlogFragment myBlogFragment = new MyBlogFragment();
+    private PreferFragment preferFragment = new PreferFragment();
 
     DrawerLayout drawrLayout;
     MaterialToolbar topAppbar;
@@ -147,6 +149,10 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.drawer_movie:
                         topAppbar.setTitle("영화");
                         transaction.replace(R.id.frameLayout, movieFragment).commitAllowingStateLoss();
+                        break;
+                    case R.id.drawer_preferMovie:
+                        topAppbar.setTitle("찜한 영화");
+                        transaction.replace(R.id.frameLayout, preferFragment).commitAllowingStateLoss();
                         break;
                 }
                 drawrLayout.close();
@@ -397,7 +403,7 @@ public class HomeActivity extends AppCompatActivity {
 
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.home, R.color.tab_home);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.tab_write), R.drawable.plus);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_profile, R.drawable.profile, R.color.tab_profile);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem("내 블로그", R.drawable.profile, R.color.tab_profile);
 
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
@@ -432,8 +438,8 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 2:
-                        topAppbar.setTitle("마이페이지");
-                        transaction.replace(R.id.frameLayout, mypageFragment).commitAllowingStateLoss();
+                        topAppbar.setTitle("내 블로그");
+                        transaction.replace(R.id.frameLayout, myBlogFragment).commitAllowingStateLoss();
                         break;
 
                 }

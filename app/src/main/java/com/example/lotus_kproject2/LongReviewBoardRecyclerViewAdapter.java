@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<LongReviewBoardRecyclerViewAdapter.ViewHolder> {
-    ArrayList<LongReviewDataList> dataLists = new ArrayList<>();
-    public LongReviewBoardRecyclerViewAdapter(ArrayList<LongReviewDataList> dataLists){
+    ArrayList<ReviewDataList> dataLists = new ArrayList<>();
+    public LongReviewBoardRecyclerViewAdapter(ArrayList<ReviewDataList> dataLists){
         this.dataLists = dataLists;
     }
     @NonNull

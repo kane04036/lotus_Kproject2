@@ -43,7 +43,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     TextView tvMovieName, tvGenre, tvCountry, tvRunningTime, tvReleaseDate, tvSummary, tvReadMore, tvTabBarLongReview, tvTabBarShortReview, tvDirector, tvActor, tvReadMoreActors;
     ImageView imageMovDetail, imgLike;
     Integer prefer;
-    private String summary, summary_sub, movCode, director, actors, actors_sub, movName, movImg;
+    private String summary, summary_sub, movCode, director, actors, actors_sub, movName, movImg, releaseDate, releaseDate_sub;
     FrameLayout frameLayoutInDetail;
     SharedPreferences sharedPreferences;
     Bundle result = new Bundle();
@@ -136,12 +136,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!isLike) {
-                    isLike = true;
-                    imgLike.setImageResource(R.drawable.bookmark_filled_small);
                     preferAddRequest();
                 } else {
-                    isLike = false;
-                    imgLike.setImageResource(R.drawable.bookmark_small);
                     preferSubRequest();
                 }
             }
@@ -214,7 +210,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     movImg = (String) dataJsonArray.get(3);
                     String runningTime = (String) dataJsonArray.get(2);
                     String country = (String) dataJsonArray.get(6);
-                    String releaseData = (String) dataJsonArray.get(7);
+                    releaseDate = (String) dataJsonArray.get(7);
                     String genres = dataJsonArray.getString(8);
                     JSONArray actorJsonArray = dataJsonArray.getJSONArray(5);
                     for (int i = 0; i < actorJsonArray.length(); i++) {
@@ -244,13 +240,13 @@ public class MovieDetailActivity extends AppCompatActivity {
                         tvReadMore.setText("");
                     }
 
-                    if (releaseData.length() > 4)
-                        releaseData = releaseData.substring(0, 4);
+                    if (releaseDate.length() > 4)
+                        releaseDate_sub = releaseDate.substring(0, 4);
                     else
                         tvReleaseDate.setText("개봉일자 불명");
 
                     tvSummary.setText(summary_sub + "...");
-                    tvReleaseDate.setText(releaseData);
+                    tvReleaseDate.setText(releaseDate_sub);
                     tvCountry.setText(country);
                     tvRunningTime.setText(runningTime + "분");
                     tvDirector.setText(director);
@@ -294,6 +290,9 @@ public class MovieDetailActivity extends AppCompatActivity {
             jsonObject.put("director", director);
             jsonObject.put("actor", actorsForPreferAdd);
             jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("title",movName);
+            jsonObject.put("thumbnail", movImg);
+            jsonObject.put("year", releaseDate);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -307,6 +306,10 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: prefer Add Result: " + response.getString("res"));
+                    if(response.getString("res").equals("200")){
+                        imgLike.setImageResource(R.drawable.bookmark_filled_small);
+                        isLike = true;
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -345,6 +348,10 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: prefer Sub Result: " + response.getString("res"));
+                    if(response.getString("res").equals("200")){
+                        imgLike.setImageResource(R.drawable.bookmark_small);
+                        isLike = false;
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

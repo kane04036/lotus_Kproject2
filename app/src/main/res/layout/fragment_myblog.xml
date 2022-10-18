@@ -10,12 +10,13 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/koddiextrabold"
         android:text="짱아찌"
         android:textColor="@color/black"
-        android:fontFamily="@font/koddiextrabold"
         android:textSize="25dp" />
 
     <TextView
+        android:id="@+id/tvMbtiInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvNickNameInMyBlog"
@@ -24,73 +25,43 @@
         android:text="ISFP"
         android:textSize="15dp" />
 
-
-
-    <ImageView
-        android:id="@+id/imgSearchInMyBlog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvNickNameInMyBlog"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        android:src="@drawable/search_small" />
-
     <LinearLayout
+        android:id="@+id/reviewSelectLayoutInMyBlog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imgSearchInMyBlog"
-        android:background="@color/lightGray"
-        android:padding="5dp"
-        android:orientation="vertical">
+        android:layout_below="@+id/tvNickNameInMyBlog"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvTabBarLongReviewInMyBlog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:background="@drawable/line_rectangle"
+            android:text="감상평"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="팔로워"
-                android:textAlignment="center"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="팔로잉"
-                android:textAlignment="center"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvTabBarShortReviewInMyBlog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="78"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="90"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/filled_rectangle"
+            android:text="한 줄 느낌"
+            android:textAlignment="center"
+            android:textColor="@color/darkGray"
+            android:textSize="15dp" />
     </LinearLayout>
+    <FrameLayout
+        android:id="@+id/frameLayoutInMyBlog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/reviewSelectLayoutInMyBlog"
+        />
+
 
 </RelativeLayout>

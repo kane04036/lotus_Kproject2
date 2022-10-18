@@ -58,24 +58,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LayoutChooseMov"
-        android:hint="제목을 입력하세요"
-        android:textSize="30dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
-        />
+        android:layout_marginRight="15dp"
+        android:hint="제목을 입력하세요"
+        android:textSize="22dp" />
 
     <EditText
         android:id="@+id/edtReview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/edtTitle"
-        android:gravity="top"
-        android:hint="내용을 입력하세요"
-        android:textSize="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        />
+        android:gravity="top"
+        android:hint="내용을 입력하세요"
+        android:textSize="18dp" />
 
 
 </RelativeLayout>

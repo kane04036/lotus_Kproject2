@@ -38,12 +38,11 @@
                 android:textSize="20dp" />
         </RelativeLayout>
 
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/recyclerViewInMovSearch"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_below="@+id/layoutSearchMov"
-          />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewInMovSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layoutSearchMov" />
     </RelativeLayout>
 
 </FrameLayout>

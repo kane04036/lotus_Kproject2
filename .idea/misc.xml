@@ -3,27 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_choose_mov.xml" value="0.22395833333333334" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_home.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_main.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_movie_detail.xml" value="0.2" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_movierecommand.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_movieresult_for_fragment.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_review_editor.xml" value="0.264" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/activity_search.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/alertdialog_age.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/alertdialog_gender.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_home.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_longreview_board.xml" value="0.10671039354187689" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_movie.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_movie_search_result.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_movierecommand.xml" value="0.2" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_myblog.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/fragment_shortreview_board.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/movie_horizontalscroll_item.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/select_layout_long_review.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/short_review_board_item.xml" value="0.2203125" />
-        <entry key="..\:/Users/82108/AndroidStudioProjects/kp2/app/src/main/res/layout/short_review_in_detail_item.xml" value="0.2203125" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/font/font1.xml" value="0.10555555555555556" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/layout/activity_main.xml" value="0.5043478260869565" />
@@ -44,6 +23,7 @@
         <entry key="app/src/main/res/drawable/filled_rectangle.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/drawable/forward_small.xml" value="0.26944444444444443" />
         <entry key="app/src/main/res/drawable/genre_round_rectangle.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/drawable/gray_line_rectangle.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3277777777777778" />
         <entry key="app/src/main/res/drawable/line_rectangle.xml" value="0.2814814814814815" />
         <entry key="app/src/main/res/drawable/line_rectangle_90.xml" value="0.4015384615384615" />
@@ -86,6 +66,7 @@
         <entry key="app/src/main/res/layout/alertdialog_mbti.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/alertdialog_nickname.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/drawer_top_layout.xml" value="0.29846014492753625" />
+        <entry key="app/src/main/res/layout/fragment_blog.xml" value="0.2817028985507246" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_longreview.xml" value="0.20364583333333333" />
@@ -96,13 +77,17 @@
         <entry key="app/src/main/res/layout/fragment_movierecommand.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_myblog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_prefer.xml" value="0.22291666666666668" />
+        <entry key="app/src/main/res/layout/fragment_prefer_list.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_shortreview.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/fragment_shortreview_board.xml" value="0.21510416666666668" />
         <entry key="app/src/main/res/layout/long_review_board_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/long_review_in_detail_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/long_review_item.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/long_review_item_myblog.xml" value="0.2726449275362319" />
         <entry key="app/src/main/res/layout/long_review_list_item.xml" value="0.37318840579710144" />
+        <entry key="app/src/main/res/layout/long_review_myblog_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/movie_detail.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/movie_horizontalscroll_item.xml" value="0.31657608695652173" />
         <entry key="app/src/main/res/layout/movie_list_item.xml" value="0.18" />
@@ -112,8 +97,9 @@
         <entry key="app/src/main/res/layout/search_result_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/select_layout_long_review.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/select_layout_short_review.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/short_review_board_item.xml" value="0.22395833333333334" />
+        <entry key="app/src/main/res/layout/short_review_board_item.xml" value="0.35090394655360707" />
         <entry key="app/src/main/res/layout/short_review_in_detail_item.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/short_review_myblog_item.xml" value="0.33" />
         <entry key="app/src/main/res/menu/detail_top_bar.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/menu/mbti_spinner.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.39166666666666666" />

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvMovNameInLongReviewMyblog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="살인의 추억"
+        android:textColor="@color/gray"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/tvLongReviewTitleInMyBlog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMovNameInLongReviewMyblog"
+        android:layout_alignStart="@+id/tvMovNameInLongReviewMyblog"
+        android:text="영화 봤는데 진짜 재밌더라"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvLongReviewWritingInMyBlog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLongReviewTitleInMyBlog"
+        android:layout_marginTop="5dp"
+        android:maxLines="2"
+        android:text="긴 리뷰 내용 일부"
+        android:textColor="@color/darkGray"
+        android:textSize="12dp" />
+    <ImageView
+        android:id="@+id/imgThumbUpLongReviewMyBlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/thumb_up_small"
+        android:layout_toLeftOf="@id/tvThumbUpNumInMyBlog"
+        android:layout_alignBottom="@+id/tvThumbUpNumInMyBlog"
+        />
+    <TextView
+        android:id="@+id/tvThumbUpNumInMyBlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="120"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="3dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvLongReviewWritingInMyBlog"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/lightGray"
+        android:layout_below="@id/tvThumbUpNumInMyBlog"
+        android:layout_marginTop="5dp"
+        />
+
+</RelativeLayout>
