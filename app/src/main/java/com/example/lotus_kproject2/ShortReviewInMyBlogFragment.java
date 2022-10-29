@@ -71,14 +71,14 @@ public class ShortReviewInMyBlogFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("user_id", userId);
+//            jsonObject.put("user_id", userId);
             Log.d(TAG, "longReviewRequest: userid:" + userId);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server) + getString(R.string.viewShortReviewUserId);
+        String URL = getString(R.string.server) + getString(R.string.viewShortReviewRecency);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -88,7 +88,8 @@ public class ShortReviewInMyBlogFragment extends Fragment {
 
                     Log.d(TAG, "onResponse: short review myblog request:" + response.getString("res"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: short review myblog data:" + dataJsonArray);
+                    Log.d(TAG, "onResponse: short review myblog data:" + response.getString("data"));
+
                     dataLists.clear();
                     if (response.getString("res").equals("200")) {
                         for (int i = 0; i < dataJsonArray.length(); i++) {
@@ -98,7 +99,7 @@ public class ShortReviewInMyBlogFragment extends Fragment {
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                             float star = Float.parseFloat(object.getString("star"));
-                            Log.d(TAG, "onRes");
+
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("user_id"), mbtiArray[mbtiNum],

@@ -104,6 +104,7 @@ public class MovieSearchResultFragment extends Fragment {
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if ((keyEvent.getAction() == keyEvent.ACTION_DOWN) && (keyEvent.getKeyCode() == keyEvent.KEYCODE_ENTER)) {
                     movieSearchRequest(edtSearchInMovieResult.getText().toString());
+                    Log.d(TAG, "onKey: enter click");
                     return true;
                 }
                 return false;
@@ -136,7 +137,7 @@ public class MovieSearchResultFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: res:" + response.getString("res"));
+                    Log.d(TAG, "onResponse: res screen/search_movie:" + response.getString("res"));
 
                     if(response.getString("res").equals("200")) {
                         nameArray.clear();

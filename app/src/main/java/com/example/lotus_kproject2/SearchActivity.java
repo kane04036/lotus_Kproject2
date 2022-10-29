@@ -45,6 +45,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if ((keyEvent.getAction() == keyEvent.ACTION_DOWN) && (keyCode == keyEvent.KEYCODE_ENTER)) {
+                    Log.d(TAG, "onKey: enter click");
                     Intent intent = new Intent(getApplicationContext(), SearchResultActivity_main.class);
                     intent.putExtra("searchWord", edtSearch.getText().toString());
                     startActivity(intent);

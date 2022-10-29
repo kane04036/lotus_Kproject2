@@ -24,6 +24,16 @@
         android:textColor="@color/black"
         android:textSize="13dp" />
 
+    <ImageView
+        android:id="@+id/imgMoreLongReviewInDetail"
+        android:layout_width="15dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more"
+        android:adjustViewBounds="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvNicknameLongReviewInDetail"
+        />
+
     <TextView
         android:id="@+id/tvLongReviewTitleInDetail"
         android:layout_width="match_parent"

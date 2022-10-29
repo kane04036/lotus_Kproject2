@@ -82,7 +82,7 @@
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_shortreview.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/fragment_shortreview_board.xml" value="0.21510416666666668" />
-        <entry key="app/src/main/res/layout/long_review_board_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/long_review_board_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/long_review_in_detail_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/long_review_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/long_review_item_myblog.xml" value="0.2726449275362319" />

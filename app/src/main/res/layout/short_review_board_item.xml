@@ -30,10 +30,21 @@
         android:layout_width="80dp"
         android:layout_height="15dp"
         android:layout_alignTop="@+id/tvMbtiShortReviewInBoard"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/imgMoreShortReviewInBoard"
         app:mrb_progressBackgroundTint="@color/gray"
         app:mrb_progressTint="@color/signature_color"
+        android:layout_marginRight="5dp"
         app:mrb_secondaryProgressTint="@color/gray" />
+
+    <ImageView
+        android:id="@+id/imgMoreShortReviewInBoard"
+        android:layout_width="15dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more"
+        android:adjustViewBounds="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvMbtiShortReviewInBoard"
+        />
 
     <TextView
         android:id="@+id/tvShortReviewWritingInBoard"
@@ -65,6 +76,7 @@
         android:text="120"
         android:textColor="@color/black"
         android:textSize="12dp" />
+
 
     <View
         android:layout_width="match_parent"
