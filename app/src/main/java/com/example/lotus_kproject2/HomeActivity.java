@@ -42,6 +42,8 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.kakao.sdk.common.KakaoSdk;
+import com.kakao.sdk.user.UserApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,9 +51,11 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
 public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private MypageFragment mypageFragment = new MypageFragment();
     private LongReviewFragment longReviewFragment = new LongReviewFragment();
     private ShortReviewFragment shortReviewFragment = new ShortReviewFragment();
     private MovieFragment movieFragment = new MovieFragment();
@@ -134,26 +138,22 @@ public class HomeActivity extends AppCompatActivity {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
                 switch (item.getItemId()) {
-                    case R.id.drawer_mypage:
-                        topAppbar.setTitle("마이페이지");
-                        transaction.replace(R.id.frameLayout, mypageFragment).commitAllowingStateLoss();
-                        break;
                     case R.id.drawer_long:
-                        topAppbar.setTitle("긴 글 리뷰 게시판");
+                        topAppbar.setTitle("감상평 게시판");
                         transaction.replace(R.id.frameLayout, longReviewFragment).commitAllowingStateLoss();
                         break;
                     case R.id.drawer_short:
-                        topAppbar.setTitle("짧은 글 리뷰 게시판");
+                        topAppbar.setTitle("한 줄 느낌 게시판");
                         transaction.replace(R.id.frameLayout, shortReviewFragment).commitAllowingStateLoss();
-                        break;
-                    case R.id.drawer_movie:
-                        topAppbar.setTitle("영화");
-                        transaction.replace(R.id.frameLayout, movieFragment).commitAllowingStateLoss();
                         break;
                     case R.id.drawer_preferMovie:
                         topAppbar.setTitle("찜한 영화");
                         transaction.replace(R.id.frameLayout, preferFragment).commitAllowingStateLoss();
                         break;
+                    case R.id.drawer_logout:
+                        logout();
+                        break;
+
                 }
                 drawrLayout.close();
                 return false;
@@ -164,6 +164,30 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+    private void logout(){
+        KakaoSdk.init(getApplicationContext(), getString(R.string.nativeAppKey));
+        UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+            @Override
+            public Unit invoke(Throwable throwable) {
+                return null;
+            }
+        });
+        SharedPreferences pref = getSharedPreferences(getString(R.string.loginData), MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove("token");
+        editor.remove("memNum");
+        editor.commit();
+
+        SharedPreferences pref2 = getSharedPreferences(getString(R.string.userData), MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = pref2.edit();
+        editor2.remove("mbti");
+        editor2.remove("nickname");
+        editor2.commit();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
     void showGenderAlertDialog(){
         View dialogView = getLayoutInflater().inflate(R.layout.alertdialog_gender, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);

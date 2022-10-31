@@ -2,10 +2,13 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +18,10 @@ import java.util.ArrayList;
 
 public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<LongReviewBoardRecyclerViewAdapter.ViewHolder> {
     ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    public LongReviewBoardRecyclerViewAdapter(ArrayList<ReviewDataList> dataLists){
+    Context context;
+    public LongReviewBoardRecyclerViewAdapter(Context context,ArrayList<ReviewDataList> dataLists){
         this.dataLists = dataLists;
+        this.context = context;
     }
     @NonNull
     @Override
@@ -32,6 +37,32 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
         holder.tvMbti.setText(dataLists.get(holder.getAdapterPosition()).getMbti());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.tvMovName.setText("<"+dataLists.get(holder.getAdapterPosition()).getMovName()+">");
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailOfBoardActivity.class);
+                intent.putExtra("mbti",dataLists.get(holder.getAdapterPosition()).getMbti());
+                intent.putExtra("nickname",dataLists.get(holder.getAdapterPosition()).getNickname());
+                intent.putExtra("title",dataLists.get(holder.getAdapterPosition()).getTitle());
+                intent.putExtra("writing",dataLists.get(holder.getAdapterPosition()).getWriting());
+                intent.putExtra("boardId", dataLists.get(holder.getAdapterPosition()).getWritingId());
+                intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
+                context.startActivity(intent);
+            }
+        });
+
+        holder.tvNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, OtherUserBlogActivity.class);
+                intent.putExtra("nickname", dataLists.get(holder.getAdapterPosition()).getNickname());
+                intent.putExtra("mbti", dataLists.get(holder.getAdapterPosition()).getMbti());
+                intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -42,6 +73,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvMovName, tvMbti, tvNickname, tvTitle, tvWriting;
+        RelativeLayout layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMovName = itemView.findViewById(R.id.tvMovNameInLongReviewBoard);
@@ -49,6 +81,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
             tvNickname = itemView.findViewById(R.id.tvNicknameInLongReviewBoard);
             tvTitle = itemView.findViewById(R.id.tvLongReviewTitleInBoard);
             tvWriting = itemView.findViewById(R.id.tvLongReviewWritingInBoard);
+            layout = itemView.findViewById(R.id.layoutLongReviewItemInBoard);
         }
     }
 }

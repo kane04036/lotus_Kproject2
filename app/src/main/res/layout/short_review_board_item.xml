@@ -5,13 +5,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:id="@+id/tvMovNameShortReviewInBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="살인의 추억"
+        android:textColor="@color/gray"
+        android:textSize="12dp" />
+    <TextView
         android:id="@+id/tvMbtiShortReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMovNameShortReviewInBoard"
         android:text="ISFP"
         android:textStyle="bold"
         android:textColor="@color/signature_color"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textSize="12dp" />
 
     <TextView
@@ -40,11 +49,10 @@
         android:id="@+id/imgMoreShortReviewInBoard"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/more"
-        android:adjustViewBounds="true"
-        android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/tvMbtiShortReviewInBoard"
-        />
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/more" />
 
     <TextView
         android:id="@+id/tvShortReviewWritingInBoard"

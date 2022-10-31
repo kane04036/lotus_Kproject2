@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -24,16 +25,10 @@ public class MyBlogFragment extends Fragment {
     LongReviewInMyBlogFragment longReviewInMyBlogFragment = new LongReviewInMyBlogFragment();
     ShortReviewInMyBlogFragment shortReviewInMyBlogFragment = new ShortReviewInMyBlogFragment();
 
-    private TextView tvTabBarLongReviewInMyBlog, tvTabBarShortReviewInMyBlog, tvNickname, tvMbti;
+    private TextView tvTabBarLongReviewInMyBlog, tvTabBarShortReviewInMyBlog, tvNickname, tvMbti, tvFollowingNum, tvFollowerNum;
     FrameLayout frameLayoutInMyBlog;
 
     Bundle result = new Bundle();
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Nullable
     @Override
@@ -54,6 +49,8 @@ public class MyBlogFragment extends Fragment {
         frameLayoutInMyBlog = view.findViewById(R.id.frameLayoutInMyBlog);
         tvNickname = view.findViewById(R.id.tvNickNameInMyBlog);
         tvMbti = view.findViewById(R.id.tvMbtiInMyBlog);
+        tvFollowerNum = view.findViewById(R.id.tvFollowerNumberInMyBlog);
+        tvFollowingNum = view.findViewById(R.id.tvFollowingNumberInMyBlog);
 
         SharedPreferences sharedPreferences_userData = getActivity().getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
         tvNickname.setText(sharedPreferences_userData.getString("nickname",""));

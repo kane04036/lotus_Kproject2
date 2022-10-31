@@ -3,21 +3,13 @@
 
     <group android:id="@+id/drawer_group1">
         <item
-            android:id="@+id/drawer_mypage"
-            android:icon="@drawable/profile"
-            android:title="마이페이지" />
-        <item
             android:id="@+id/drawer_long"
             android:icon="@drawable/long_text"
-            android:title="긴 글 리뷰" />
+            android:title="감상평 게시판" />
         <item
             android:id="@+id/drawer_short"
             android:icon="@drawable/short_text"
-            android:title="짧은 리뷰" />
-        <item
-            android:id="@+id/drawer_movie"
-            android:icon="@drawable/movie"
-            android:title="영화" />
+            android:title="한 줄 느낌 게시판" />
     </group>
     <group android:id="@+id/drawer_group2">
         <item
@@ -35,5 +27,12 @@
             android:id="@+id/drawer_notice"
             android:icon="@drawable/notice"
             android:title="공지사항" />
+    </group>
+    <group android:id="@+id/drawer_group4">
+        <item
+            android:id="@+id/drawer_logout"
+            android:icon="@drawable/logout"
+            android:title="로그아웃" />
+
     </group>
 </menu>

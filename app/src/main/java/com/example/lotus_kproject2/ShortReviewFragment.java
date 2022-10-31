@@ -41,13 +41,14 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 public class ShortReviewFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    ShortReviewBoardRecyclerViewAdapter adapter = new ShortReviewBoardRecyclerViewAdapter(dataLists);
+    ShortReviewBoardRecyclerViewAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shortreview_board, container, false);
 
+        adapter = new ShortReviewBoardRecyclerViewAdapter(getActivity(), dataLists);
         recyclerView = view.findViewById(R.id.recyViewShortReviewBoard);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);

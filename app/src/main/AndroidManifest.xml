@@ -45,6 +45,8 @@
         <activity android:name=".ReviewEditorActivity"/>
         <activity android:name=".SearchMovForChooseActivity"/>
         <activity android:name=".MovieDetailActivity"/>
+        <activity android:name=".DetailOfBoardActivity"/>
+        <activity android:name=".OtherUserBlogActivity"/>
     </application>
 
 

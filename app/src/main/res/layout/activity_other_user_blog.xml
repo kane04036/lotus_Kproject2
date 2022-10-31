@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvNickNameInUserBlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/koddiextrabold"
+        android:text="짱아찌"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/tvMbtiInUserBlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvNickNameInUserBlog"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/tvNickNameInUserBlog"
+        android:text="ISFP"
+        android:textStyle="bold"
+        android:textColor="@color/signature_color"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/btnFollow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvMbtiInUserBlog"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/tvMbtiInUserBlog"
+        android:background="@drawable/round_rectangle_signaturecolor"
+        android:text="팔로우"
+        android:textColor="@color/white"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"
+        android:layout_above="@+id/layoutFollowingTextInUserBlog"
+        android:layout_marginTop="20dp"
+        />
+    <LinearLayout
+        android:id="@+id/layoutFollowingTextInUserBlog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvNickNameInUserBlog"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="팔로잉"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="팔로워"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutFollowingInfoInUserBlog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutFollowingTextInUserBlog"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tvFollowingNumInUserBlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="0"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:id="@+id/tvFollowerNumInUserBlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="0"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"
+        android:layout_below="@+id/layoutFollowingInfoInUserBlog"
+        />
+
+    <LinearLayout
+        android:id="@+id/reviewSelectLayoutInUserBlog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutFollowingInfoInUserBlog"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvTabBarLongReviewInUserBlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/line_rectangle"
+            android:text="감상평"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/tvTabBarShortReviewInUserBlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/filled_rectangle"
+            android:text="한 줄 느낌"
+            android:textAlignment="center"
+            android:textColor="@color/darkGray"
+            android:textSize="15dp" />
+    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/frameLayoutInUserBlog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/reviewSelectLayoutInUserBlog"
+        />
+
+
+</RelativeLayout>

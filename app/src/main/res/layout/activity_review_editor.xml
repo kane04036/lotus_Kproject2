@@ -62,7 +62,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="15dp"
         android:hint="제목을 입력하세요"
-        android:textSize="22dp" />
+        android:textSize="18dp" />
 
     <EditText
         android:id="@+id/edtReview"
@@ -73,7 +73,7 @@
         android:layout_marginRight="15dp"
         android:gravity="top"
         android:hint="내용을 입력하세요"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
 
 </RelativeLayout>

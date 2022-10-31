@@ -58,5 +58,7 @@
     <string name="viewShortReviewRecency">/board/short_reviews/view/recency</string>
     <string name="viewShortReviewUserId">/board/short_reviews/view</string>
     <string name="viewPrefer">/prefer/view</string>
+    <string name="report">/board/report</string>
+    <string name="follow">/follow/following</string>
 
 </resources>

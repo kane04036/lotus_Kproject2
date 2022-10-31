@@ -38,7 +38,7 @@ public class LongReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_longreview_board, container, false);
 
         recyclerView = view.findViewById(R.id.recyViewLongReviewBoard);
-        adapter = new LongReviewBoardRecyclerViewAdapter(dataLists);
+        adapter = new LongReviewBoardRecyclerViewAdapter(getActivity(), dataLists);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);

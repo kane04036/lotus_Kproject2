@@ -46,5 +46,9 @@ public class ReviewDataList {
         return movName;
     }
 
-    public Float getStar(){return star;}
+    public String getWritingId() { return writingId; }
+
+    public String getUserId() { return userId; }
+
+    public Float getStar() {return star;}
 }

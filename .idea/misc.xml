@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/drawable/line_rectangle_90.xml" value="0.4015384615384615" />
         <entry key="app/src/main/res/drawable/male_small.xml" value="0.34074074074074073" />
         <entry key="app/src/main/res/drawable/menu_small.xml" value="0.3277777777777778" />
+        <entry key="app/src/main/res/drawable/more_small.xml" value="0.4015384615384615" />
         <entry key="app/src/main/res/drawable/next_button_small.xml" value="0.34074074074074073" />
         <entry key="app/src/main/res/drawable/plus_small.xml" value="0.33240740740740743" />
         <entry key="app/src/main/res/drawable/round_rectangle.xml" value="0.33240740740740743" />
@@ -47,15 +48,18 @@
         <entry key="app/src/main/res/layout/activity_detail2.xml" value="0.29846014492753625" />
         <entry key="app/src/main/res/layout/activity_fragmentmain.xml" value="0.2530487804878049" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_long_review_detail_of_board.xml" value="0.418230588591298" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3319746376811594" />
         <entry key="app/src/main/res/layout/activity_movie_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_movierecommand.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/activity_movieresult_for_fragment.xml" value="0.3170289855072464" />
+        <entry key="app/src/main/res/layout/activity_other_user_blog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_register1.xml" value="0.3319746376811594" />
         <entry key="app/src/main/res/layout/activity_review_editor.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_search_movie_for_review.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/activity_search_result.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_user_blog.xml" value="0.38405797101449274" />
         <entry key="app/src/main/res/layout/activity_userinfo.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_userinfo1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_userinfo2.xml" value="0.3211050724637681" />
@@ -75,7 +79,7 @@
         <entry key="app/src/main/res/layout/fragment_movie_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_movie_search_result.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_movierecommand.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_myblog.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_myblog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_prefer.xml" value="0.22291666666666668" />
         <entry key="app/src/main/res/layout/fragment_prefer_list.xml" value="0.22291666666666668" />
@@ -87,7 +91,7 @@
         <entry key="app/src/main/res/layout/long_review_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/long_review_item_myblog.xml" value="0.2726449275362319" />
         <entry key="app/src/main/res/layout/long_review_list_item.xml" value="0.37318840579710144" />
-        <entry key="app/src/main/res/layout/long_review_myblog_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/long_review_myblog_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/movie_detail.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/movie_horizontalscroll_item.xml" value="0.31657608695652173" />
         <entry key="app/src/main/res/layout/movie_list_item.xml" value="0.18" />
@@ -103,8 +107,10 @@
         <entry key="app/src/main/res/menu/detail_top_bar.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/menu/mbti_spinner.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.39166666666666666" />
+        <entry key="app/src/main/res/menu/popup_menu_in_writing.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/review_top_app_bar.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.39166666666666666" />
+        <entry key="app/src/main/res/menu/top_app_bar_for_more_function.xml" value="0.39166666666666666" />
       </map>
     </option>
   </component>

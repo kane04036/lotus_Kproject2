@@ -31,7 +31,7 @@ public class ShortReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.ratingBar.setRating(dataLists.get(holder.getAdapterPosition()).getStar());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
-
+        holder.tvMovName.setText("<"+dataLists.get(holder.getAdapterPosition()).getMovName()+">");
     }
 
     @Override
@@ -41,12 +41,14 @@ public class ShortReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         MaterialRatingBar ratingBar;
-        TextView tvWriting, tvThumbupNum;
+        TextView tvWriting, tvThumbupNum, tvMovName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ratingBar = itemView.findViewById(R.id.ratingbarShortReviewInBoard);
-            tvWriting = itemView.findViewById(R.id.tvLongReviewWritingInBoard);
-            tvThumbupNum = itemView.findViewById(R.id.tvThumbUpNumInBoard);
+            ratingBar = itemView.findViewById(R.id.ratingbarShortReviewInMyBlog);
+            tvWriting = itemView.findViewById(R.id.tvShortReviewWritingInMyBlog);
+            tvThumbupNum = itemView.findViewById(R.id.tvThumbUpNumInMyBlog);
+            tvMovName = itemView.findViewById(R.id.tvMovNameInShortReviewMyBlog);
         }
     }
+
 }

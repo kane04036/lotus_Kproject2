@@ -29,7 +29,7 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvMovName.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
+        holder.tvMovName.setText("<"+dataLists.get(holder.getAdapterPosition()).getMovName()+">");
         holder.tvTitle.setText(dataLists.get(holder.getAdapterPosition()).getTitle());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
     }

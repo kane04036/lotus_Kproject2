@@ -7,6 +7,7 @@
         android:id="@+id/tvMovNameInLongReviewMyblog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="살인의 추억"
         android:textColor="@color/gray"
         android:textSize="12dp" />

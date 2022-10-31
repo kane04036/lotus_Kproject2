@@ -146,10 +146,6 @@ public class SearchResultActivity_main extends AppCompatActivity {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
                 switch (item.getItemId()) {
-                    case R.id.drawer_mypage:
-                        topAppbarInMovieResult.setTitle("마이페이지");
-                        transaction.replace(R.id.frameLayoutInMovieResult, mypageFragment).commitAllowingStateLoss();
-                        break;
                     case R.id.drawer_long:
                         topAppbarInMovieResult.setTitle("긴 글 리뷰 게시판");
                         transaction.replace(R.id.frameLayoutInMovieResult, longReviewFragment).commitAllowingStateLoss();
@@ -158,10 +154,7 @@ public class SearchResultActivity_main extends AppCompatActivity {
                         topAppbarInMovieResult.setTitle("짧은 글 리뷰 게시판");
                         transaction.replace(R.id.frameLayoutInMovieResult, shortReviewFragment).commitAllowingStateLoss();
                         break;
-                    case R.id.drawer_movie:
-                        topAppbarInMovieResult.setTitle("영화");
-                        transaction.replace(R.id.frameLayoutInMovieResult, movieFragment).commitAllowingStateLoss();
-                        break;
+
                 }
                 drawerLayoutInMovieResult.close();
                 return false;

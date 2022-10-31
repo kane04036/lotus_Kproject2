@@ -42,7 +42,7 @@ public class ShortReviewInMyBlogFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 userId = result.getString("userId");
-                Log.d(TAG, "ChildFragment longReview : userId:" + userId);
+                Log.d(TAG, "ChildFragment short review : userId:" + userId);
             }
         });
     }
@@ -71,14 +71,14 @@ public class ShortReviewInMyBlogFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
-//            jsonObject.put("user_id", userId);
+            jsonObject.put("user_id", userId);
             Log.d(TAG, "longReviewRequest: userid:" + userId);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server) + getString(R.string.viewShortReviewRecency);
+        String URL = getString(R.string.server) + getString(R.string.viewShortReviewUserId);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -99,6 +99,7 @@ public class ShortReviewInMyBlogFragment extends Fragment {
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                             float star = Float.parseFloat(object.getString("star"));
+                            Log.d(TAG, "onResponse: star:"+Float.parseFloat(object.getString("star")));
 
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
