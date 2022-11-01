@@ -2,6 +2,7 @@ package com.example.lotus_kproject2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,6 +20,11 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.kakao.sdk.common.KakaoSdk;
+import com.kakao.sdk.user.UserApiClient;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class SearchResultActivity_main extends AppCompatActivity {
     private MypageFragment mypageFragment = new MypageFragment();
@@ -27,13 +33,16 @@ public class SearchResultActivity_main extends AppCompatActivity {
     private MovieFragment movieFragment = new MovieFragment();
     private MovieRecommandFragment movieRecommandFragment = new MovieRecommandFragment();
     private MovieSearchResultFragment movieSearchResultFragment = new MovieSearchResultFragment();
+    private PreferFragment preferFragment = new PreferFragment();
+    private MyBlogFragment myBlogFragment = new MyBlogFragment();
+    private HomeActivity homeActivity = new HomeActivity();
 
-    MaterialToolbar topAppbarInMovieResult;
-    AHBottomNavigation bottomNavigationInMovieResult;
-    FrameLayout frameLayoutInMovieResult;
-    DrawerLayout drawerLayoutInMovieResult;
-    NavigationView navigationViewInMovieResult;
-    String searchWord;
+    private MaterialToolbar topAppbar;
+    private AHBottomNavigation bottomNavigationInMovieResult;
+    private FrameLayout frameLayoutInMovieResult;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private String searchWord;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -45,14 +54,15 @@ public class SearchResultActivity_main extends AppCompatActivity {
         setContentView(R.layout.activity_movieresult_for_fragment);
         overridePendingTransition(R.anim.none, R.anim.none);
 
-        topAppbarInMovieResult = findViewById(R.id.topAppBarInMovieResult);
+        topAppbar = findViewById(R.id.topAppBarInMovieResult);
         bottomNavigationInMovieResult = (AHBottomNavigation) findViewById(R.id.bottomNavigationInMovieResult);
         frameLayoutInMovieResult = findViewById(R.id.frameLayoutInMovieResult);
-        drawerLayoutInMovieResult = findViewById(R.id.drawerLayoutInMovieResult);
-        navigationViewInMovieResult = findViewById(R.id.navigationViewInMovieResult);
+        drawerLayout = findViewById(R.id.drawerLayoutInMovieResult);
+        navigationView = findViewById(R.id.navigationViewInMovieResult);
 
         setBottomNavigationInMovieResult();
-        topAppbarInMovieResult.setTitle("검색");
+        topAppbar.setTitle("검색");
+        setDrawer();
 
 
 
@@ -65,10 +75,10 @@ public class SearchResultActivity_main extends AppCompatActivity {
         bundle.putString("searchWord", searchWord);
         fragmentManager.setFragmentResult("searchWord", bundle);
 
-        topAppbarInMovieResult.setNavigationOnClickListener(new View.OnClickListener() {
+        topAppbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawerLayoutInMovieResult.open();
+                drawerLayout.open();
             }
         });
 
@@ -114,21 +124,24 @@ public class SearchResultActivity_main extends AppCompatActivity {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+                Intent intent;
                 switch (position) {
                     case 0:
-                        topAppbarInMovieResult.setTitle("Fillow");
-                        transaction.replace(R.id.frameLayoutInMovieResult, movieRecommandFragment).commitAllowingStateLoss();
+//                        topAppbar.setTitle("Fillow");
+//                        transaction.replace(R.id.frameLayout, movieRecommandFragment).commitAllowingStateLoss();
+                        intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                         break;
                     case 1:
-                        topAppbarInMovieResult.setTitle("글쓰기");
-//                        transaction.replace(R.id.frameLayout, searcchActivity).commitAllowingStateLoss();
-                        Intent intent = new Intent(getApplicationContext(), ReviewEditorActivity.class);
+                        topAppbar.setTitle("글쓰기");
+                        intent = new Intent(getApplicationContext(), ReviewEditorActivity.class);
                         intent.putExtra("existMovie", 0);
                         startActivity(intent);
                         break;
                     case 2:
-                        topAppbarInMovieResult.setTitle("알림");
-                        transaction.replace(R.id.frameLayoutInMovieResult, mypageFragment).commitAllowingStateLoss();
+                        topAppbar.setTitle("내 블로그");
+                        transaction.replace(R.id.frameLayoutInMovieResult, myBlogFragment).commitAllowingStateLoss();
                         break;
 
                 }
@@ -136,31 +149,59 @@ public class SearchResultActivity_main extends AppCompatActivity {
             }
         });
 
-
     }
     private void setDrawer(){
-        navigationViewInMovieResult.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                navigationViewInMovieResult.setCheckedItem(item);
+                navigationView.setCheckedItem(item);
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
 
                 switch (item.getItemId()) {
                     case R.id.drawer_long:
-                        topAppbarInMovieResult.setTitle("긴 글 리뷰 게시판");
+                        topAppbar.setTitle("감상평 게시판");
                         transaction.replace(R.id.frameLayoutInMovieResult, longReviewFragment).commitAllowingStateLoss();
                         break;
                     case R.id.drawer_short:
-                        topAppbarInMovieResult.setTitle("짧은 글 리뷰 게시판");
+                        topAppbar.setTitle("한 줄 느낌 게시판");
                         transaction.replace(R.id.frameLayoutInMovieResult, shortReviewFragment).commitAllowingStateLoss();
+                        break;
+                    case R.id.drawer_preferMovie:
+                        topAppbar.setTitle("찜한 영화");
+                        transaction.replace(R.id.frameLayoutInMovieResult, preferFragment).commitAllowingStateLoss();
+                        break;
+                    case R.id.drawer_logout:
+                        logout();
                         break;
 
                 }
-                drawerLayoutInMovieResult.close();
+                drawerLayout.close();
                 return false;
             }
         });
+    }
+    private void logout(){
+        KakaoSdk.init(getApplicationContext(), getString(R.string.nativeAppKey));
+        UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+            @Override
+            public Unit invoke(Throwable throwable) {
+                return null;
+            }
+        });
+        SharedPreferences pref = getSharedPreferences(getString(R.string.loginData), MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove("token");
+        editor.remove("memNum");
+        editor.commit();
 
+        SharedPreferences pref2 = getSharedPreferences(getString(R.string.userData), MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = pref2.edit();
+        editor2.remove("mbti");
+        editor2.remove("nickname");
+        editor2.commit();
 
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

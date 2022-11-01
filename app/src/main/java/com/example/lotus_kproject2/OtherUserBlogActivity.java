@@ -34,7 +34,7 @@ public class OtherUserBlogActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
 
     private MaterialToolbar appbar;
-    private TextView tvNickname, tvMbti, tvFollowingNum, tvFollowerNum,tvTabBarLongReview,tvTabBarShortReview, btnFollow;
+    private TextView tvNickname, tvMbti, tvFollowingNum, tvFollowerNum, tvTabBarLongReview, tvTabBarShortReview, btnFollow;
     private String memNum;
 
     Bundle result = new Bundle();
@@ -104,16 +104,17 @@ public class OtherUserBlogActivity extends AppCompatActivity {
             }
         });
     }
-    private void requestFollow(String memNum){
+
+    private void requestFollow(String memNum) {
         RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject jsonObject = new JSONObject();
         try {
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-            Log.d(TAG, "preferListRequest: token:"+sharedPreferences.getString("token",""));
-            jsonObject.put("token",sharedPreferences.getString("token","") );
-            jsonObject.put("user_id",sharedPreferences.getString("memNum","") );
-            jsonObject.put("target_id",memNum);
+            Log.d(TAG, "preferListRequest: token:" + sharedPreferences.getString("token", ""));
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("user_id", sharedPreferences.getString("memNum", ""));
+            jsonObject.put("target_id", memNum);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,8 +127,8 @@ public class OtherUserBlogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: follow request res:"+response.getString("res"));
-                    if(response.getString("res").equals("200")){
+                    Log.d(TAG, "onResponse: follow request res:" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
                         btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
                     }
 
@@ -144,5 +145,44 @@ public class OtherUserBlogActivity extends AppCompatActivity {
             }
         });
         Queue.add(jsonObjectRequest);
+    }
+
+    private void viewFollower() {
+        RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user_id", memNum);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.viewFollower);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: follow request res:" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
+                        btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+
     }
 }

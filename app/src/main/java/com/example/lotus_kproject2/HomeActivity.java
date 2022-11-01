@@ -95,9 +95,11 @@ public class HomeActivity extends AppCompatActivity {
 
         setBottomNavigation();
 
-        isNew = getIntent().getStringExtra("isNew");
-        if (isNew.equals("1"))
-            showGenderAlertDialog();
+        if (getIntent().hasExtra("isNew")) {
+            isNew = getIntent().getStringExtra("isNew");
+            if (isNew.equals("1"))
+                showGenderAlertDialog();
+        }
 
 
         topAppbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -163,8 +165,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
-    private void logout(){
+    private void logout() {
         KakaoSdk.init(getApplicationContext(), getString(R.string.nativeAppKey));
         UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
             @Override
@@ -188,7 +189,8 @@ public class HomeActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-    void showGenderAlertDialog(){
+
+    void showGenderAlertDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.alertdialog_gender, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setView(dialogView);
@@ -206,7 +208,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 femaleCheck = true;
                 imageFemale.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
-                if(maleCheck){
+                if (maleCheck) {
                     imageMale.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.DST);
                     maleCheck = false;
                 }
@@ -217,7 +219,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 maleCheck = true;
                 imageMale.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
-                if(femaleCheck){
+                if (femaleCheck) {
                     imageFemale.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.DST);
                     femaleCheck = false;
                 }
@@ -227,11 +229,11 @@ public class HomeActivity extends AppCompatActivity {
         btnNextInGender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(femaleCheck || maleCheck){
-                    if(femaleCheck){
-                        registerResult.add(0,1);
-                    }else{
-                        registerResult.add(0,0);
+                if (femaleCheck || maleCheck) {
+                    if (femaleCheck) {
+                        registerResult.add(0, 1);
+                    } else {
+                        registerResult.add(0, 0);
                     }
                     alertDialog.dismiss();
                     showAgeAlertDialog();
@@ -241,14 +243,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-    void showAgeAlertDialog(){
+
+    void showAgeAlertDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.alertdialog_age, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setView(dialogView);
 
         final Spinner spinnerAge = dialogView.findViewById(R.id.spinnerAge);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
-                R.array.age_range , android.R.layout.simple_spinner_item);
+                R.array.age_range, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
         spinnerAge.setAdapter(adapter);
 
@@ -261,13 +264,14 @@ public class HomeActivity extends AppCompatActivity {
         btnNextInAge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerResult.add(1,spinnerAge.getSelectedItemPosition());
+                registerResult.add(1, spinnerAge.getSelectedItemPosition());
                 alertDialog.dismiss();
                 showMBTIAlertDialog();
             }
         });
     }
-    void showMBTIAlertDialog(){
+
+    void showMBTIAlertDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.alertdialog_mbti, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setView(dialogView);
@@ -287,7 +291,7 @@ public class HomeActivity extends AppCompatActivity {
         btnNextInMBTI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerResult.add(2,spinnerMbti.getSelectedItemPosition());
+                registerResult.add(2, spinnerMbti.getSelectedItemPosition());
                 sharedPreferences = getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("mbti", (String) spinnerMbti.getSelectedItem());
@@ -298,7 +302,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-    void showNicknameAlertDialog(){
+
+    void showNicknameAlertDialog() {
         View dialogView = getLayoutInflater().inflate(R.layout.alertdialog_nickname, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
@@ -313,18 +318,17 @@ public class HomeActivity extends AppCompatActivity {
         btnNextInNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(edtNickname.getText().toString().replace(" ","").equals("")){
-                  tvValidNickname.setText("닉네임을 입력해주세요");
-                }
-                else{
-                    registerResult.add(3,edtNickname.getText().toString());
+                if (edtNickname.getText().toString().replace(" ", "").equals("")) {
+                    tvValidNickname.setText("닉네임을 입력해주세요");
+                } else {
+                    registerResult.add(3, edtNickname.getText().toString());
                     validNickCheck(edtNickname.getText().toString());
                 }
             }
         });
     }
 
-    public void validNickCheck(String result_nickname){
+    public void validNickCheck(String result_nickname) {
 
         RequestQueue Queue = Volley.newRequestQueue(HomeActivity.this);
 
@@ -336,7 +340,7 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server)+"/umanager/ck_nickname/kakao";
+        String URL = getString(R.string.server) + "/umanager/ck_nickname/kakao";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -344,7 +348,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     String res = response.getString("res");
-                    if(res.equals("201")){
+                    if (res.equals("201")) {
                         kakaoRegister();
                         alertDialog.dismiss();
                         sharedPreferences = getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
@@ -352,8 +356,7 @@ public class HomeActivity extends AppCompatActivity {
                         editor.putString("nickname", result_nickname);
                         editor.commit();
                         tvNicknameInDawer.setText(result_nickname);
-                    }
-                    else if(res.equals("200")){
+                    } else if (res.equals("200")) {
                         tvValidNickname.setText("이미 사용중인 닉네임입니다.");
                     }
 
@@ -371,11 +374,12 @@ public class HomeActivity extends AppCompatActivity {
         });
         Queue.add(jsonObjectRequest);
     }
-    public void kakaoRegister(){
+
+    public void kakaoRegister() {
         RequestQueue Queue = Volley.newRequestQueue(HomeActivity.this);
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("token","");
-        String memNum = sharedPreferences.getString("memNum","");
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", "");
+        String memNum = sharedPreferences.getString("memNum", "");
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -390,7 +394,7 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server)+"/umanager/register/kakao";
+        String URL = getString(R.string.server) + "/umanager/register/kakao";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -398,12 +402,11 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     String res = response.getString("res");
-                    Log.d(TAG, "onResponse: kakaoRegister Result:"+res);
-                    if(res.equals("200")){
+                    Log.d(TAG, "onResponse: kakaoRegister Result:" + res);
+                    if (res.equals("200")) {
                         //여기서 회원가입 처리를 어떻게 할까...
                         alertDialog.dismiss();
-                    }
-                    else{
+                    } else {
                         alertDialog.dismiss();
                     }
 
@@ -422,8 +425,9 @@ public class HomeActivity extends AppCompatActivity {
         Queue.add(jsonObjectRequest);
 
     }
+
     @SuppressLint("ResourceType")
-    private void setBottomNavigation(){
+    private void setBottomNavigation() {
 
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_home, R.drawable.home, R.color.tab_home);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem(getString(R.string.tab_write), R.drawable.plus);

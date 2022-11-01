@@ -52,7 +52,6 @@ public class LongReviewInDetailFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 movCode = result.getString("movCode");
-                Log.d(TAG, "ChildFragment longReview : movCode:"+movCode);
             }
         });
     }

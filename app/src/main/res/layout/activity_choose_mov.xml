@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/layoutSearchMov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/search_background"
+        android:layout_toLeftOf="@+id/tvCancelInMovSelect"
+        android:padding="5dp">
 
-        <RelativeLayout
-            android:id="@+id/layoutSearchMov"
+        <ImageView
+            android:id="@+id/imageSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:background="@drawable/search_background"
-            android:padding="5dp">
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
+            android:src="@drawable/search_darkgray_small" />
 
-            <ImageView
-                android:id="@+id/imageSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/edtSearchMov"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="3dp"
-                android:src="@drawable/search_darkgray_small" />
-
-            <EditText
-                android:id="@+id/edtSearchMov"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_toRightOf="@+id/imageSearch"
-                android:background="@android:color/transparent"
-                android:hint="검색어를 입력하세요"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textSize="20dp" />
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewInMovSearch"
+        <EditText
+            android:id="@+id/edtSearchMov"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/layoutSearchMov"
-            android:layout_margin="10dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/imageSearch"
+            android:background="@android:color/transparent"
+            android:hint="검색어를 입력하세요"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="17dp" />
+
+
     </RelativeLayout>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tvCancelInMovSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="취소"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:layout_marginRight="7dp"
+        android:layout_alignBottom="@+id/layoutSearchMov"
+        android:layout_marginBottom="7dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewInMovSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layoutSearchMov"
+        android:layout_margin="10dp" />
+</RelativeLayout>
+

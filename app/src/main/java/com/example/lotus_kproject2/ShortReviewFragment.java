@@ -77,7 +77,6 @@ public class ShortReviewFragment extends Fragment {
                 try {
                     Log.d(TAG, "onResponse: short review board request:"+response.getString("res"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: short review data:"+dataJsonArray);
                     dataLists.clear();
                     if(response.getString("res").equals("200")){
                         for(int i = 0; i<dataJsonArray.length(); i++){
@@ -87,7 +86,6 @@ public class ShortReviewFragment extends Fragment {
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                             float star = Float.parseFloat(object.getString("star"));
-                            Log.d(TAG, "onRes");
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                      object.getString("user_id"), mbtiArray[mbtiNum],

@@ -60,5 +60,9 @@
     <string name="viewPrefer">/prefer/view</string>
     <string name="report">/board/report</string>
     <string name="follow">/follow/following</string>
+    <string name="shortLikeAdd">/short_like/add</string>
+    <string name="viewFollower">/follow/view_follower</string>
+    <string name="viewShortReviewKeyWord">/board/short_reviews/view/keyword</string>
+    <string name="viewLongReviewKeyWord">/board/long_reviews/view/keyword</string>
 
 </resources>

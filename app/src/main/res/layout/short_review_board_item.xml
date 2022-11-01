@@ -8,15 +8,23 @@
         android:id="@+id/tvMovNameShortReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/imgMovInShortReviewBoard"
         android:text="살인의 추억"
-        android:textColor="@color/gray"
-        android:textSize="12dp" />
+        android:textColor="@color/black"
+        android:textSize="11dp" />
+
+    <ImageView
+        android:id="@+id/imgMovInShortReviewBoard"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/movie_poster4" />
     <TextView
         android:id="@+id/tvMbtiShortReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMovNameShortReviewInBoard"
+        android:layout_toLeftOf="@+id/tvNicknameShortReviewInBoard"
         android:text="ISFP"
         android:textStyle="bold"
         android:textColor="@color/signature_color"
@@ -27,30 +35,32 @@
         android:id="@+id/tvNicknameShortReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvMbtiShortReviewInBoard"
+        android:layout_alignTop="@+id/imgMovInShortReviewBoard"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/tvMbtiShortReviewInBoard"
+        android:layout_toLeftOf="@+id/imgMoreShortReviewInBoard"
         android:text="짱아찌"
         android:textColor="@color/black"
-        android:textSize="12dp" />
+        android:textSize="12dp"
+        android:textStyle="bold" />
 
     <me.zhanghai.android.materialratingbar.MaterialRatingBar
         android:id="@+id/ratingbarShortReviewInBoard"
         android:layout_width="80dp"
         android:layout_height="15dp"
-        android:layout_alignTop="@+id/tvMbtiShortReviewInBoard"
-        android:layout_toLeftOf="@+id/imgMoreShortReviewInBoard"
+        android:layout_alignTop="@+id/imgMovInShortReviewBoard"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/imgMovInShortReviewBoard"
         app:mrb_progressBackgroundTint="@color/gray"
         app:mrb_progressTint="@color/signature_color"
-        android:layout_marginRight="5dp"
         app:mrb_secondaryProgressTint="@color/gray" />
 
     <ImageView
         android:id="@+id/imgMoreShortReviewInBoard"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvMbtiShortReviewInBoard"
+        android:layout_alignTop="@+id/imgMovInShortReviewBoard"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
         android:adjustViewBounds="true"
         android:src="@drawable/more" />
 
@@ -58,29 +68,30 @@
         android:id="@+id/tvShortReviewWritingInBoard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingbarShortReviewInBoard"
-        android:layout_alignStart="@+id/tvMbtiShortReviewInBoard"
+        android:layout_below="@id/ratingbarShortReviewInBoard"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/imgMovInShortReviewBoard"
         android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
-        android:textSize="15dp" />
+        android:textSize="12dp" />
     <ImageView
+        android:id="@+id/imgThumbUpInShortReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/thumb_up_small"
-        android:layout_toLeftOf="@id/tvThumbUpNumInBoard"
-        android:layout_alignBottom="@+id/tvThumbUpNumInBoard"
+        android:layout_toLeftOf="@id/tvThumbUpNumInShortReviewBoard"
+        android:layout_alignBottom="@+id/tvThumbUpNumInShortReviewBoard"
         />
 
     <TextView
-        android:id="@+id/tvThumbUpNumInBoard"
+        android:id="@+id/tvThumbUpNumInShortReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvShortReviewWritingInBoard"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="3dp"
-        android:layout_marginBottom="10dp"
+        android:layout_alignBottom="@+id/tvMovNameShortReviewInBoard"
         android:text="120"
         android:textColor="@color/black"
         android:textSize="12dp" />
@@ -89,7 +100,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_below="@id/tvThumbUpNumInBoard"
+        android:layout_below="@id/tvThumbUpNumInShortReviewBoard"
+        android:layout_marginTop="5dp"
         android:background="@color/lightGray" />
 
 

@@ -42,7 +42,6 @@ public class ShortReviewInMyBlogFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 userId = result.getString("userId");
-                Log.d(TAG, "ChildFragment short review : userId:" + userId);
             }
         });
     }
@@ -72,7 +71,6 @@ public class ShortReviewInMyBlogFragment extends Fragment {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("user_id", userId);
-            Log.d(TAG, "longReviewRequest: userid:" + userId);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +86,6 @@ public class ShortReviewInMyBlogFragment extends Fragment {
 
                     Log.d(TAG, "onResponse: short review myblog request:" + response.getString("res"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: short review myblog data:" + response.getString("data"));
 
                     dataLists.clear();
                     if (response.getString("res").equals("200")) {
@@ -99,8 +96,6 @@ public class ShortReviewInMyBlogFragment extends Fragment {
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                             float star = Float.parseFloat(object.getString("star"));
-                            Log.d(TAG, "onResponse: star:"+Float.parseFloat(object.getString("star")));
-
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("user_id"), mbtiArray[mbtiNum],

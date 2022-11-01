@@ -33,7 +33,6 @@ public class LongReviewRecyclerViewAdapter extends RecyclerView.Adapter<LongRevi
         this.userIdArray = userIdArray;
         this.titleArray = titleArray;
         this.movieNameArray = movieNameArray;
-        Log.d(TAG, "LongReviewRecyclerViewAdapter: create");
 
     }
     @NonNull
@@ -45,10 +44,8 @@ public class LongReviewRecyclerViewAdapter extends RecyclerView.Adapter<LongRevi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: bind");
         holder.tvMovTitle.setText(movieNameArray.get(position));
         holder.tvReviewTitle.setText(titleArray.get(position));
-        Log.d(TAG, "onBindViewHolder: title:"+titleArray.get(position));
     }
 
 

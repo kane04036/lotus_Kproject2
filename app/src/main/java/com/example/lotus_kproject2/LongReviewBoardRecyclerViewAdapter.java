@@ -48,6 +48,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
                 intent.putExtra("writing",dataLists.get(holder.getAdapterPosition()).getWriting());
                 intent.putExtra("boardId", dataLists.get(holder.getAdapterPosition()).getWritingId());
                 intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
@@ -59,6 +60,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
                 intent.putExtra("nickname", dataLists.get(holder.getAdapterPosition()).getNickname());
                 intent.putExtra("mbti", dataLists.get(holder.getAdapterPosition()).getMbti());
                 intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
             }
@@ -67,7 +69,6 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: datalist.size():"+dataLists.size());
         return dataLists.size();
     }
 

@@ -56,17 +56,15 @@ public class ReviewEditorActivity extends AppCompatActivity {
         tvChooseMov = findViewById(R.id.tvChooseMov);
         topbar = findViewById(R.id.topAppBarInEditor);
 
-
-
-        if (getIntent().getIntExtra("existMovie", 0) == 1) {
+        if(getIntent().hasExtra("movName")){
             movName = getIntent().getStringExtra("movName");
             movCode = getIntent().getStringExtra("movCode");
+
             if (getIntent().getStringExtra("title") != null)
                 edtTitle.setText(String.valueOf(getIntent().getStringExtra("title")));
             if (getIntent().getStringExtra("contents") != null)
                 edtReview.setText(String.valueOf(getIntent().getStringExtra("contents")));
             tvChooseMov.setText(movName);
-
         }
 
         topbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -122,10 +120,19 @@ public class ReviewEditorActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    SharedPreferences sharedPreferences_user = getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences_login = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+
                     Log.d(TAG, "onResponse: res:" + response.getString("res"));
                     if(response.getString("res").equals("200")){
-                        Toast.makeText(getApplicationContext(),"리뷰가 성공적으로 등록됐습니다.",Toast.LENGTH_SHORT).show();
-                        finish();
+                        Intent intent = new Intent(getApplicationContext(), DetailOfBoardActivity.class);
+                        intent.putExtra("title", edtTitle.getText().toString());
+                        intent.putExtra("writing", edtReview.getText().toString());
+                        intent.putExtra("nickname", sharedPreferences_user.getString("nickname",""));
+                        intent.putExtra("mbti", sharedPreferences_user.getString("mbti",""));
+                        intent.putExtra("userId",sharedPreferences_login.getString("memNum",""));
+                        intent.putExtra("boardId","1234556");
+                        startActivity(intent);
                     }
 
                 } catch (JSONException e) {

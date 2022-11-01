@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,16 +35,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SearchMovForChooseActivity extends AppCompatActivity {
-    RecyclerView recyclerViewInMovSearch;
-    RelativeLayout layoutSearchMov;
-    EditText edtSearchMov;
-    MovieListRecyclerViewAdapter recyclerViewAdapter;
-    MaterialToolbar reviewAppBar;
+    private RecyclerView recyclerViewInMovSearch;
+    private RelativeLayout layoutSearchMov;
+    private EditText edtSearchMov;
+    private MovieListRecyclerViewAdapter recyclerViewAdapter;
+    private MaterialToolbar reviewAppBar;
+    private TextView tvCancel;
 
-    ArrayList<String> imgArray = new ArrayList<>();
-    ArrayList<String> nameArray = new ArrayList<>();
-    ArrayList<String> codeArray = new ArrayList<>();
-    ArrayList<String> yearArrray = new ArrayList<>();
+    private ArrayList<String> imgArray = new ArrayList<>();
+    private ArrayList<String> nameArray = new ArrayList<>();
+    private ArrayList<String> codeArray = new ArrayList<>();
+    private ArrayList<String> yearArrray = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +56,17 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
         layoutSearchMov = findViewById(R.id.layoutSearchMov);
         edtSearchMov = findViewById(R.id.edtSearchMov);
         reviewAppBar = findViewById(R.id.topAppBarInEditor);
+        tvCancel = findViewById(R.id.tvCancelInMovSelect);
 
         String title = getIntent().getStringExtra("title");
         String contents = getIntent().getStringExtra("contents");
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
         recyclerViewAdapter = new MovieListRecyclerViewAdapter(getApplicationContext(), nameArray, imgArray, codeArray, yearArrray, title, contents);

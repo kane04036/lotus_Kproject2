@@ -33,6 +33,8 @@
         <entry key="app/src/main/res/drawable/next_button_small.xml" value="0.34074074074074073" />
         <entry key="app/src/main/res/drawable/plus_small.xml" value="0.33240740740740743" />
         <entry key="app/src/main/res/drawable/round_rectangle.xml" value="0.33240740740740743" />
+        <entry key="app/src/main/res/drawable/round_rectangle_gray.xml" value="0.4078125" />
+        <entry key="app/src/main/res/drawable/round_rectangle_lightgray.xml" value="0.4078125" />
         <entry key="app/src/main/res/drawable/round_rectangle_signaturecolor.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/drawable/search_background.xml" value="0.33240740740740743" />
         <entry key="app/src/main/res/drawable/search_darkgray_small.xml" value="0.21979166666666666" />
@@ -40,6 +42,7 @@
         <entry key="app/src/main/res/drawable/selected_drawer.xml" value="0.3277777777777778" />
         <entry key="app/src/main/res/drawable/star_filled_small.xml" value="0.27760416666666665" />
         <entry key="app/src/main/res/drawable/thumb_up_small.xml" value="0.3287037037037037" />
+        <entry key="app/src/main/res/drawable/thumbs_up_filled_small.xml" value="0.4078125" />
         <entry key="app/src/main/res/drawable/topline_rectangle.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/drawable/upload_small.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/drawable/white_round_rectangle.xml" value="0.33240740740740743" />
@@ -50,16 +53,17 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_long_review_detail_of_board.xml" value="0.418230588591298" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3319746376811594" />
+        <entry key="app/src/main/res/layout/activity_more_list.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/activity_movie_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_movierecommand.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/activity_movieresult_for_fragment.xml" value="0.3170289855072464" />
-        <entry key="app/src/main/res/layout/activity_other_user_blog.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_other_user_blog.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_register1.xml" value="0.3319746376811594" />
         <entry key="app/src/main/res/layout/activity_review_editor.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.44895833333333335" />
         <entry key="app/src/main/res/layout/activity_search_movie_for_review.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/activity_search_result.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_user_blog.xml" value="0.38405797101449274" />
+        <entry key="app/src/main/res/layout/activity_user_blog.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_userinfo.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_userinfo1.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_userinfo2.xml" value="0.3211050724637681" />
@@ -86,7 +90,7 @@
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_shortreview.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/layout/fragment_shortreview_board.xml" value="0.21510416666666668" />
-        <entry key="app/src/main/res/layout/long_review_board_item.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/long_review_board_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/long_review_in_detail_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/long_review_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/long_review_item_myblog.xml" value="0.2726449275362319" />
@@ -101,7 +105,7 @@
         <entry key="app/src/main/res/layout/search_result_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/select_layout_long_review.xml" value="0.2671875" />
         <entry key="app/src/main/res/layout/select_layout_short_review.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/short_review_board_item.xml" value="0.35090394655360707" />
+        <entry key="app/src/main/res/layout/short_review_board_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/short_review_in_detail_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/short_review_myblog_item.xml" value="0.33" />
         <entry key="app/src/main/res/menu/detail_top_bar.xml" value="0.20364583333333333" />

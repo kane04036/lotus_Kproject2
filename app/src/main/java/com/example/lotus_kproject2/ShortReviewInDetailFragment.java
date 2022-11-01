@@ -66,7 +66,6 @@ public class ShortReviewInDetailFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 movCode = result.getString("movCode");
-                Log.d(TAG, "ChildFragment : movCode:"+movCode);
             }
         });
     }
@@ -143,7 +142,7 @@ public class ShortReviewInDetailFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "short Review: res:" + response.getString("res"));
+                    Log.d(TAG, "short Review write: res:" + response.getString("res"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

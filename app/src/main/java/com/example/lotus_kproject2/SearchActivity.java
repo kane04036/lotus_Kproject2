@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,15 +32,22 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
-    EditText edtSearch;
-//    FragmentManager childFragmentManager = getChildFragmentManager();
-    private SearchResultActivity_main searchResultActivity_main = new SearchResultActivity_main();
+    private EditText edtSearch;
+    private TextView tvCancel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         edtSearch = findViewById(R.id.edtSearch);
+        tvCancel = findViewById(R.id.tvCancel);
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         edtSearch.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -48,6 +56,7 @@ public class SearchActivity extends AppCompatActivity {
                     Log.d(TAG, "onKey: enter click");
                     Intent intent = new Intent(getApplicationContext(), SearchResultActivity_main.class);
                     intent.putExtra("searchWord", edtSearch.getText().toString());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     return true;
                 }

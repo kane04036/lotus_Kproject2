@@ -42,7 +42,6 @@ public class LongReviewInMyBlogFragment extends Fragment {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 userId = result.getString("userId");
-                Log.d(TAG, "ChildFragment longReview : userId:" + userId);
             }
         });
     }
@@ -71,7 +70,6 @@ public class LongReviewInMyBlogFragment extends Fragment {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("user_id", userId);
-            Log.d(TAG, "longReviewRequest: userid:"+userId);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,7 +84,6 @@ public class LongReviewInMyBlogFragment extends Fragment {
                 try {
                     Log.d(TAG, "long review in blog|res:" + response.getString("res"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: longreview blog data:"+dataJsonArray);
                     if (response.getString("res").equals("200")) {
                         dataLists.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {

@@ -9,18 +9,32 @@
         android:id="@+id/tvMovNameInLongReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_alignTop="@+id/imgMovInLongReviewBoard"
+        android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
+        android:layout_toLeftOf="@+id/tvMbtiInLongReviewBoard"
         android:text="살인의 추억"
-        android:textColor="@color/gray"
-        android:textSize="12dp" />
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textSize="11dp" />
+
+    <ImageView
+        android:id="@+id/imgMovInLongReviewBoard"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/movie_poster4" />
 
     <TextView
         android:id="@+id/tvMbtiInLongReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_alignTop="@+id/tvMovNameInLongReviewBoard"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/tvMovNameInLongReviewBoard"
+        android:layout_toLeftOf="@+id/tvNicknameInLongReviewBoard"
         android:text="ISFP"
         android:textColor="@color/signature_color"
         android:textSize="12dp"
@@ -30,31 +44,42 @@
         android:id="@+id/tvNicknameInLongReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvMbtiInLongReviewBoard"
-        android:layout_toRightOf="@+id/tvMbtiInLongReviewBoard"
+        android:layout_alignTop="@+id/tvMbtiInLongReviewBoard"
+        android:layout_alignParentRight="true"
         android:text="짱아찌"
         android:textColor="@color/black"
-        android:textSize="12dp" />
+        android:textSize="12dp"
+        android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imgMoreLongReviewInBoard"
-        android:layout_width="15dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/more"
-        android:adjustViewBounds="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/tvNicknameInLongReviewBoard"
-        />
+    <View
+        android:id="@+id/lineBelowMovNameLongReviewBoard"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/tvMovNameInLongReviewBoard"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
+        android:background="@color/lightGray" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imgMoreLongReviewInBoard"-->
+<!--        android:layout_width="15dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignTop="@+id/tvNicknameInLongReviewBoard"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:src="@drawable/more" />-->
 
     <TextView
         android:id="@+id/tvLongReviewTitleInBoard"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvNicknameInLongReviewBoard"
-        android:layout_alignStart="@+id/tvMovNameInLongReviewBoard"
+        android:layout_below="@+id/lineBelowMovNameLongReviewBoard"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="1dp"
+        android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
         android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
-        android:textSize="15dp"
+        android:textSize="12dp"
         android:textStyle="bold" />
 
     <TextView
@@ -62,19 +87,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvLongReviewTitleInBoard"
+        android:layout_alignStart="@+id/tvLongReviewTitleInBoard"
         android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
         android:maxLines="2"
         android:text="긴 리뷰 내용 일부"
         android:textColor="@color/darkGray"
-        android:textSize="12dp" />
+        android:textSize="11dp" />
 
     <ImageView
         android:id="@+id/imgThumbUpLongReviewInBoard"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvThumbUpNum"
-        android:layout_toLeftOf="@id/tvThumbUpNum"
         android:adjustViewBounds="true"
+        android:layout_toLeftOf="@+id/tvThumbUpNum"
+        android:layout_alignBottom="@+id/tvThumbUpNum"
         android:src="@drawable/thumb_up_small" />
     <TextView
         android:id="@+id/tvThumbUpNum"
@@ -84,9 +111,8 @@
         android:textSize="11dp"
         android:textColor="@color/black"
         android:layout_marginLeft="3dp"
-        android:layout_marginTop="3dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvLongReviewWritingInBoard"
+        android:layout_alignBottom="@+id/imgMovInLongReviewBoard"
         />
 
     <View
@@ -94,6 +120,6 @@
         android:layout_height="1px"
         android:layout_below="@id/imgThumbUpLongReviewInBoard"
         android:layout_marginTop="10dp"
-        android:background="@color/lightGray" />
+        android:background="@color/gray" />
 
 </RelativeLayout>

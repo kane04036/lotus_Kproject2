@@ -183,9 +183,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("id", movCode);
             jsonObject.put("token", sharedPreferences.getString("token", ""));
-            Log.d(TAG, "movieDetailRequest: token:" + sharedPreferences.getString("token", ""));
-
-
+            Log.d(TAG, "movieDetailRequest: token:" + sharedPreferences.getString("token", "")+"code:"+movCode);
         } catch (Exception e) {
             e.printStackTrace();
         }

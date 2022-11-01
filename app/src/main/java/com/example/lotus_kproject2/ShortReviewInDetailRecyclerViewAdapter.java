@@ -58,7 +58,6 @@ public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter
 //        holder.ratingBar.setEnabled(false);
         holder.ratingBar.setIsIndicator(true);
         holder.tvWriting.setText(writingArray.get(holder.getAdapterPosition()));
-        Log.d(TAG, "onBindViewHolder: writing"+writingArray.get(holder.getAdapterPosition()));
     }
 
     @Override
