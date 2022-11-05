@@ -115,12 +115,6 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
 
-//        tvMovieName.setText(getIntent().getStringExtra("movName"));
-//
-//        Glide.with(getApplicationContext()).
-//                load(getIntent().getStringExtra("movImage")).error(R.drawable.gray_profile)
-//                .fallback(R.drawable.profile)
-//                .into(imageMovDetail);
 
         topBarInDetail.setTitle(getIntent().getStringExtra("movName"));
 
@@ -249,6 +243,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     tvRunningTime.setText(runningTime + "분");
                     tvDirector.setText(director);
                     tvMovieName.setText(movName);
+                    topBarInDetail.setTitle(movName);
 
                     Glide.with(getApplicationContext()).load(movImg).error(R.drawable.gray_profile).into(imageMovDetail);
 

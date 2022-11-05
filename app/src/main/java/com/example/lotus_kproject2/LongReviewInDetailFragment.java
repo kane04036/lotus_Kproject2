@@ -31,18 +31,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class LongReviewInDetailFragment extends Fragment {
-    RecyclerView recyclerView;
-    LongReviewInDetailRecyclerViewAdapter longReviewInDetailRecyclerViewAdapter;
-    String movCode;
+    private RecyclerView recyclerView;
+    private LongReviewInDetailRecyclerViewAdapter longReviewInDetailRecyclerViewAdapter;
+    private String movCode;
+    private ArrayList<ReviewDataList> dataList = new ArrayList<>();
 
-    private ArrayList<String> nicknameArray = new ArrayList<>();
-    private ArrayList<String> mbtiArray = new ArrayList<>();
-    private ArrayList<String> writingArray = new ArrayList<>();
-    private ArrayList<String> thumbUpArray = new ArrayList<>();
-    private ArrayList<String> movCodeArray = new ArrayList<>();
-    private ArrayList<String> writingIdArray = new ArrayList<>();
-    private ArrayList<String> userIdArray = new ArrayList<>();
-    private ArrayList<String> titleArray = new ArrayList<>();
+//    private ArrayList<String> nicknameArray = new ArrayList<>();
+//    private ArrayList<String> mbtiArray = new ArrayList<>();
+//    private ArrayList<String> writingArray = new ArrayList<>();
+//    private ArrayList<String> thumbUpArray = new ArrayList<>();
+//    private ArrayList<String> movCodeArray = new ArrayList<>();
+//    private ArrayList<String> writingIdArray = new ArrayList<>();
+//    private ArrayList<String> userIdArray = new ArrayList<>();
+//    private ArrayList<String> titleArray = new ArrayList<>();
 
 
     @Override
@@ -69,10 +70,8 @@ public class LongReviewInDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.select_layout_long_review, container, false);
 
 
-
         recyclerView = view.findViewById(R.id.recyViewLongReviewInDetail);
-        longReviewInDetailRecyclerViewAdapter = new LongReviewInDetailRecyclerViewAdapter(getActivity(), mbtiArray, nicknameArray,
-                writingArray, titleArray, thumbUpArray, movCodeArray, writingIdArray, userIdArray);
+        longReviewInDetailRecyclerViewAdapter = new LongReviewInDetailRecyclerViewAdapter(getActivity(), dataList);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -88,7 +87,7 @@ public class LongReviewInDetailFragment extends Fragment {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("movie_id", movCode);
-            Log.d(TAG, "longReviewListRequest: movieId"+movCode);
+            Log.d(TAG, "longReviewListRequest: movieId" + movCode);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,33 +101,24 @@ public class LongReviewInDetailFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "long Review View with movie_id: res:" + response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: long review list:" + dataJsonArray);
+
                     if (response.getString("res").equals("200")) {
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray likeArray = response.getJSONArray("like");
+
                         Resources res = getResources();
                         String[] mbtiList = res.getStringArray(R.array.mbti_array);
 
-                        writingArray.clear();
-                        movCodeArray.clear();
-                        writingIdArray.clear();
-                        userIdArray.clear();
-                        nicknameArray.clear();
-                        mbtiArray.clear();
-                        titleArray.clear();
+                        dataList.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject dataObj = dataJsonArray.getJSONObject(i);
 
-                            writingIdArray.add(dataObj.getString("_id"));
-                            movCodeArray.add(dataObj.getString("movie_id"));
-                            writingArray.add(dataObj.getString("writing"));
-                            userIdArray.add(dataObj.getString("user_id"));
-                            nicknameArray.add(dataObj.getString("user_nickname"));
-                            titleArray.add(dataObj.getString("title"));
-                            mbtiArray.add(mbtiList[dataObj.getInt("user_mbti")]);
-
+                            dataList.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"), dataObj.getString("movie_name"),
+                                    dataObj.getString("title"), dataObj.getString("user_id"), mbtiList[dataObj.getInt("user_mbti")], dataObj.getString("user_nickname"),
+                                    dataObj.getString("writing"), likeArray.getString(i)));
                         }
-                        Log.d(TAG, "onResponse: longreview title.size():" + titleArray.size());
-//                        longReviewInDetailRecyclerViewAdapter.notifyDataSetChanged();
+                        longReviewInDetailRecyclerViewAdapter.notifyDataSetChanged();
+
                     }
 
 

@@ -20,6 +20,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MyBlogFragment extends Fragment {
     FragmentManager fragmentManager;
     LongReviewInMyBlogFragment longReviewInMyBlogFragment = new LongReviewInMyBlogFragment();
@@ -29,6 +40,8 @@ public class MyBlogFragment extends Fragment {
     FrameLayout frameLayoutInMyBlog;
 
     Bundle result = new Bundle();
+
+    String follower, following;
 
     @Nullable
     @Override
@@ -43,6 +56,7 @@ public class MyBlogFragment extends Fragment {
         fragmentManager.setFragmentResult("userData_long", result);
         fragmentManager.setFragmentResult("userData_short", result);
 
+        requestMyBlogData(sharedPreferences_loginData.getString("memNum", ""));
 
         tvTabBarLongReviewInMyBlog = view.findViewById(R.id.tvTabBarLongReviewInMyBlog);
         tvTabBarShortReviewInMyBlog = view.findViewById(R.id.tvTabBarShortReviewInMyBlog);
@@ -86,6 +100,48 @@ public class MyBlogFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void requestMyBlogData(String memNum){
+        RequestQueue Queue = Volley.newRequestQueue(getActivity());
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userNm", memNum);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.mypage);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: my page: res:"+response.getString("res"));
+                    if(response.getString("res").equals("200")){
+                        JSONArray dataArray = response.getJSONArray("data");
+                        tvFollowerNum.setText(dataArray.getString(3));
+                        tvFollowingNum.setText(dataArray.getString(4));
+                        Log.d(TAG, "onResponse: following:"+dataArray.getString(4)+"follower:"+dataArray.getString(3));
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
     }
 
 }

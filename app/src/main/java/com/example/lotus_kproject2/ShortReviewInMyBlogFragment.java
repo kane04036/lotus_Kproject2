@@ -27,12 +27,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ShortReviewInMyBlogFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    private ShortReviewInMyBlogRecyclerViewAdapter adapter = new ShortReviewInMyBlogRecyclerViewAdapter(dataLists);
+    private ShortReviewInMyBlogRecyclerViewAdapter adapter;
     String userId;
 
     @Override
@@ -44,6 +45,8 @@ public class ShortReviewInMyBlogFragment extends Fragment {
                 userId = result.getString("userId");
             }
         });
+
+        adapter = new ShortReviewInMyBlogRecyclerViewAdapter(getActivity(), dataLists);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class ShortReviewInMyBlogFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shortreview_board, container, false);
 
         recyclerView = view.findViewById(R.id.recyViewShortReviewBoard);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
         return view;
@@ -83,24 +86,35 @@ public class ShortReviewInMyBlogFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-
                     Log.d(TAG, "onResponse: short review myblog request:" + response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
-
-                    dataLists.clear();
                     if (response.getString("res").equals("200")) {
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray movieInfoArray = response.getJSONArray("movie_info");
+                        Log.d(TAG, "onResponse: short review dataJsonarray size:" + dataJsonArray.length());
+                        dataLists.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject object = dataJsonArray.getJSONObject(i);
+                            Log.d(TAG, "onResponse: short review object" + object);
+                            JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
+                            MovieDataList movieData = new MovieDataList(movieInfoObject.getString(2), movieInfoObject.getString(1),
+                                    movieInfoObject.getString(3), movieInfoObject.getString(4));
+
                             int mbtiNum = object.getInt("user_mbti");
                             Resources res = getResources();
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                             float star = Float.parseFloat(object.getString("star"));
 
+
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), star));
+                                    object.getString("user_nickname"), object.getString("writing"), star, likeArray.getString(i), movieData));
+
+                            Log.d(TAG, "onResponse: short review size in loop" + dataLists.size());
+
                         }
+                        Log.d(TAG, "onResponse: short review count:" + dataLists.size());
                         adapter.notifyDataSetChanged();
                     }
 

@@ -33,7 +33,7 @@ public class LongReviewInMyBlogFragment extends Fragment {
     String userId;
     ArrayList<ReviewDataList> dataLists = new ArrayList<>();
     private RecyclerView recyclerView;
-    private LongReviewInMyBlogRecyclerViewAdapter adapter = new LongReviewInMyBlogRecyclerViewAdapter(dataLists);
+    private LongReviewInMyBlogRecyclerViewAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class LongReviewInMyBlogFragment extends Fragment {
                 userId = result.getString("userId");
             }
         });
+        adapter = new LongReviewInMyBlogRecyclerViewAdapter(getActivity(), dataLists);
     }
 
     @Override
@@ -83,8 +84,9 @@ public class LongReviewInMyBlogFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "long review in blog|res:" + response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
                     if (response.getString("res").equals("200")) {
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray likeArray = response.getJSONArray("like");
                         dataLists.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject dataObj = dataJsonArray.getJSONObject(i);
@@ -94,7 +96,8 @@ public class LongReviewInMyBlogFragment extends Fragment {
 
                             dataLists.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"),
                                     dataObj.getString("movie_name"), dataObj.getString("title"), dataObj.getString("user_id"),
-                                    mbtiList[dataObj.getInt("user_mbti")],dataObj.getString("user_nickname"),dataObj.getString("writing")));
+                                    mbtiList[dataObj.getInt("user_mbti")],dataObj.getString("user_nickname"),
+                                    dataObj.getString("writing"), likeArray.getString(i)));
                         }
                         adapter.notifyDataSetChanged();
                     }

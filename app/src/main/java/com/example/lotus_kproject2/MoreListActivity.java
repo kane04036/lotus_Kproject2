@@ -98,10 +98,10 @@ public class MoreListActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: short review board request:" + response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: short review data:" + dataJsonArray);
-                    shortReviewDataList.clear();
                     if (response.getString("res").equals("200")) {
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray likeArray = response.getJSONArray("like");
+                        shortReviewDataList.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject object = dataJsonArray.getJSONObject(i);
                             int mbtiNum = object.getInt("user_mbti");
@@ -112,7 +112,7 @@ public class MoreListActivity extends AppCompatActivity {
 
                             shortReviewDataList.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), star));
+                                    object.getString("user_nickname"), object.getString("writing"), star,likeArray.getString(i)));
                         }
                         shortReviewAdapter.notifyDataSetChanged();
                     }
@@ -150,9 +150,12 @@ public class MoreListActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: request long review:"+response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
-                    longReviewDataList.clear();
+
                     if(response.getString("res").equals("200")){
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray likeArray = response.getJSONArray("like");
+                        longReviewDataList.clear();
+
                         for(int i = 0; i<dataJsonArray.length(); i++){
                             JSONObject object = dataJsonArray.getJSONObject(i);
                             int mbtiNum = object.getInt("user_mbti");
@@ -161,7 +164,7 @@ public class MoreListActivity extends AppCompatActivity {
 
                             longReviewDataList.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("title"), object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing")));
+                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getString(i)));
                         }
                         longReviewAdapter.notifyDataSetChanged();
                     }

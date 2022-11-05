@@ -33,31 +33,31 @@
         android:text="긴 리뷰 내용 일부"
         android:textColor="@color/darkGray"
         android:textSize="12dp" />
+
     <ImageView
         android:id="@+id/imgThumbUpLongReviewMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/thumb_up_small"
-        android:layout_toLeftOf="@id/tvThumbUpNumInMyBlog"
         android:layout_alignBottom="@+id/tvThumbUpNumInMyBlog"
-        />
+        android:layout_toLeftOf="@id/tvThumbUpNumInMyBlog"
+        android:src="@drawable/thumb_up_small" />
+
     <TextView
         android:id="@+id/tvThumbUpNumInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="120"
-        android:textSize="12dp"
-        android:textColor="@color/black"
-        android:layout_marginLeft="3dp"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/tvLongReviewWritingInMyBlog"
-        />
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="3dp"
+        android:text="120"
+        android:textColor="@color/black"
+        android:textSize="12dp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/lightGray"
         android:layout_below="@id/tvThumbUpNumInMyBlog"
         android:layout_marginTop="5dp"
-        />
+        android:background="@color/lightGray" />
 
 </RelativeLayout>

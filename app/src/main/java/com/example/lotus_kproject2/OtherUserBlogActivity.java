@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,10 +53,14 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         tvTabBarShortReview = findViewById(R.id.tvTabBarShortReviewInUserBlog);
         frameLayout = findViewById(R.id.frameLayoutInUserBlog);
         btnFollow = findViewById(R.id.btnFollow);
+        tvFollowerNum = findViewById(R.id.tvFollowerNumber);
+        tvFollowingNum = findViewById(R.id.tvFollowingNumber);
 
         tvNickname.setText(getIntent().getStringExtra("nickname"));
         tvMbti.setText(getIntent().getStringExtra("mbti"));
         memNum = getIntent().getStringExtra("userId");
+
+        requestMyPageData(memNum);
 
         appbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,28 +152,33 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         Queue.add(jsonObjectRequest);
     }
 
-    private void viewFollower() {
+    private void requestMyPageData(String memNum) {
         RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("user_id", memNum);
+            jsonObject.put("userNm", memNum);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        String URL = getString(R.string.server) + getString(R.string.viewFollower);
+        String URL = getString(R.string.server) + getString(R.string.mypage);
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: follow request res:" + response.getString("res"));
-                    if (response.getString("res").equals("200")) {
-                        btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
+                    Log.d(TAG, "onResponse: my page: res:"+response.getString("res"));
+                    if(response.getString("res").equals("200")){
+                        JSONArray dataArray = response.getJSONArray("data");
+                        tvFollowerNum.setText(dataArray.getString(3));
+                        tvFollowingNum.setText(dataArray.getString(4));
+                        Log.d(TAG, "onResponse: following:"+dataArray.getString(4)+"follower:"+dataArray.getString(3));
+
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

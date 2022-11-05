@@ -66,18 +66,26 @@ public class LongReviewFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONArray dataJsonArray = response.getJSONArray("data");
-                    dataLists.clear();
+
                     if(response.getString("res").equals("200")){
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray movieInfoArray = response.getJSONArray("movie_info");
+                        dataLists.clear();
                         for(int i = 0; i<dataJsonArray.length(); i++){
                             JSONObject object = dataJsonArray.getJSONObject(i);
+                            JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
+
                             int mbtiNum = object.getInt("user_mbti");
                             Resources res = getResources();
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
+                            MovieDataList movieData = new MovieDataList(movieInfoObject.getString(2),movieInfoObject.getString(1),
+                                    movieInfoObject.getString(3),movieInfoObject.getString(4));
+
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("title"), object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing")));
+                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getString(i), movieData));
                         }
                         adapter.notifyDataSetChanged();
                     }

@@ -270,8 +270,6 @@ public class MovieSearchResultFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: res screen/search_movie:" + response.getString("res"));
-
                     if (response.getString("res").equals("200")) {
                         nameArray.clear();
                         imgArray.clear();

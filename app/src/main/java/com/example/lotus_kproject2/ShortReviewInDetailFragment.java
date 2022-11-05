@@ -34,29 +34,31 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.util.ArrayList;
 
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class ShortReviewInDetailFragment extends Fragment {
-    MaterialRatingBar ratingBarInShortReview;
-    EditText edtShortReview;
-    TextView tvWritingCount;
-    Button btnUploadShortReview;
-    String movCode;
-    RecyclerView recyViewShortReviewInDetail;
-    ShortReviewInDetailRecyclerViewAdapter shortReviewInDetailRecyclerViewAdapter;
+    private MaterialRatingBar ratingBarInShortReview;
+    private EditText edtShortReview;
+    private TextView tvWritingCount;
+    private Button btnUploadShortReview;
+    private String movCode;
+    private RecyclerView recyViewShortReviewInDetail;
+    private ShortReviewInDetailRecyclerViewAdapter shortReviewInDetailRecyclerViewAdapter;
 
-    private ArrayList<String> nicknameArray = new ArrayList<>();
-    private ArrayList<String> mbtiArray = new ArrayList<>();
-    private ArrayList<String> writingArray = new ArrayList<>();
-    private ArrayList<Double> starArray = new ArrayList<>();
-    private ArrayList<String> thumbUpArray = new ArrayList<>();
-    private ArrayList<String> movCodeArray = new ArrayList<>();
-    private ArrayList<String> writingIdArray = new ArrayList<>();
-    private ArrayList<String> userIdArray = new ArrayList<>();
+    private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
 
+//    private ArrayList<String> nicknameArray = new ArrayList<>();
+//    private ArrayList<String> mbtiArray = new ArrayList<>();
+//    private ArrayList<String> writingArray = new ArrayList<>();
+//    private ArrayList<Double> starArray = new ArrayList<>();
+//    private ArrayList<String> thumbUpArray = new ArrayList<>();
+//    private ArrayList<String> movCodeArray = new ArrayList<>();
+//    private ArrayList<String> writingIdArray = new ArrayList<>();
+//    private ArrayList<String> userIdArray = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,8 +85,7 @@ public class ShortReviewInDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.select_layout_short_review, container, false);
 
 
-        shortReviewInDetailRecyclerViewAdapter = new ShortReviewInDetailRecyclerViewAdapter(getActivity(),mbtiArray, nicknameArray, starArray,writingArray,
-                thumbUpArray,movCodeArray,writingIdArray,userIdArray);
+        shortReviewInDetailRecyclerViewAdapter = new ShortReviewInDetailRecyclerViewAdapter(getActivity(), dataLists);
 
         ratingBarInShortReview = view.findViewById(R.id.ratingbarInShortReview);
         edtShortReview = view.findViewById(R.id.edtShortReview);
@@ -92,7 +93,7 @@ public class ShortReviewInDetailFragment extends Fragment {
         btnUploadShortReview = view.findViewById(R.id.btnUploadShortReview);
         recyViewShortReviewInDetail = view.findViewById(R.id.recyViewShortReviewInDetail);
 
-        recyViewShortReviewInDetail.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
+        recyViewShortReviewInDetail.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyViewShortReviewInDetail.setAdapter(shortReviewInDetailRecyclerViewAdapter);
 
         edtShortReview.addTextChangedListener(new TextWatcher() {
@@ -119,7 +120,8 @@ public class ShortReviewInDetailFragment extends Fragment {
         });
         return view;
     }
-    private void uploadShortReview(String movCode, String writing, float stars){
+
+    private void uploadShortReview(String movCode, String writing, float stars) {
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject();
@@ -143,7 +145,10 @@ public class ShortReviewInDetailFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "short Review write: res:" + response.getString("res"));
-
+                    edtShortReview.setText("");
+                    ratingBarInShortReview.setRating(0);
+                    edtShortReview.clearFocus();
+                    shortReviewListRequest(movCode);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -160,13 +165,12 @@ public class ShortReviewInDetailFragment extends Fragment {
 
     }
 
-    private void shortReviewListRequest(String movCode){
+    private void shortReviewListRequest(String movCode) {
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("movie_id", movCode);
-            Log.d(TAG, "shortReviewListRequest: movCode"+movCode);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,23 +185,16 @@ public class ShortReviewInDetailFragment extends Fragment {
                 try {
                     Log.d(TAG, "short Review View with movie_id: res:" + response.getString("res"));
                     JSONArray dataJsonArray = response.getJSONArray("data");
-                    Log.d(TAG, "onResponse: short review list:"+dataJsonArray);
-                    if(response.getString("res").equals("200")) {
+                    JSONArray likeArray = response.getJSONArray("like");
+                    if (response.getString("res").equals("200")) {
                         Resources res = getResources();
                         String[] mbtiList = res.getStringArray(R.array.mbti_array);
-
-                        writingArray.clear(); movCodeArray.clear(); starArray.clear();
-                        writingIdArray.clear(); userIdArray.clear(); nicknameArray.clear(); mbtiArray.clear();
+                        dataLists.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject dataObj = dataJsonArray.getJSONObject(i);
-
-                            writingIdArray.add(dataObj.getString("_id"));
-                            movCodeArray.add(dataObj.getString("movie_id"));
-                            starArray.add(dataObj.getDouble("star"));
-                            writingArray.add(dataObj.getString("writing"));
-                            userIdArray.add(dataObj.getString("user_id"));
-                            nicknameArray.add(dataObj.getString("user_nickname"));
-                            mbtiArray.add(mbtiList[dataObj.getInt("user_mbti")]);
+                            dataLists.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"), dataObj.getString("movie_name"),
+                                    dataObj.getString("user_id"), mbtiList[dataObj.getInt("user_mbti")], dataObj.getString("user_nickname"),
+                                    dataObj.getString("writing"), Float.valueOf(dataObj.getInt("star")), likeArray.getString(i)));
                         }
                         shortReviewInDetailRecyclerViewAdapter.notifyDataSetChanged();
                     }

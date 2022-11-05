@@ -103,27 +103,6 @@
             android:textSize="17dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imgStarFilledMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/tvMovTitleMain"
-            android:src="@drawable/star_filled_small"
-
-
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imgStarFilledMain"
-            android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@id/imgStarFilledMain"
-            android:text="7.8"
-            android:textColor="@color/signature_color"
-            android:textSize="17dp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvMovGenreMain"

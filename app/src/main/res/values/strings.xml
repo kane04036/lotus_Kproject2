@@ -64,5 +64,6 @@
     <string name="viewFollower">/follow/view_follower</string>
     <string name="viewShortReviewKeyWord">/board/short_reviews/view/keyword</string>
     <string name="viewLongReviewKeyWord">/board/long_reviews/view/keyword</string>
+    <string name="mypage">/screen/mypage</string>
 
 </resources>

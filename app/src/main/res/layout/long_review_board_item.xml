@@ -100,11 +100,11 @@
         android:layout_width="15dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:layout_toLeftOf="@+id/tvThumbUpNum"
-        android:layout_alignBottom="@+id/tvThumbUpNum"
+        android:layout_toLeftOf="@+id/tvThumbUpNumLongReviewInBoard"
+        android:layout_alignBottom="@+id/tvThumbUpNumLongReviewInBoard"
         android:src="@drawable/thumb_up_small" />
     <TextView
-        android:id="@+id/tvThumbUpNum"
+        android:id="@+id/tvThumbUpNumLongReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="120"

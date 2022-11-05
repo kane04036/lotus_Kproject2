@@ -63,9 +63,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvNickNameInUserBlog"
         android:layout_alignStart="@+id/tvNickNameInUserBlog"
+        android:layout_marginLeft="3dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="3dp"
-        android:layout_marginLeft="3dp"
         android:text="팔로잉"
         android:textColor="@color/black"
         android:textSize="12dp" />

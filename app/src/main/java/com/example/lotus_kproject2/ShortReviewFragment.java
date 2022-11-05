@@ -43,6 +43,7 @@ public class ShortReviewFragment extends Fragment {
     ArrayList<ReviewDataList> dataLists = new ArrayList<>();
     ShortReviewBoardRecyclerViewAdapter adapter;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,11 +77,18 @@ public class ShortReviewFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: short review board request:"+response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
-                    dataLists.clear();
+
                     if(response.getString("res").equals("200")){
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray movieInfoArray = response.getJSONArray("movie_info");
+
+                        dataLists.clear();
                         for(int i = 0; i<dataJsonArray.length(); i++){
                             JSONObject object = dataJsonArray.getJSONObject(i);
+                            JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
+                            MovieDataList movieData = new MovieDataList(movieInfoObject.getString(2), movieInfoObject.getString(1),
+                                    movieInfoObject.getString(3), movieInfoObject.getString(4));
                             int mbtiNum = object.getInt("user_mbti");
                             Resources res = getResources();
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
@@ -89,7 +97,7 @@ public class ShortReviewFragment extends Fragment {
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                      object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"),star));
+                                    object.getString("user_nickname"), object.getString("writing"),star,likeArray.getString(i), movieData));
                         }
                         adapter.notifyDataSetChanged();
                     }

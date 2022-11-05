@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
@@ -32,7 +34,8 @@ import org.json.JSONObject;
 
 public class DetailOfBoardActivity extends AppCompatActivity {
     private String writingId, userId;
-    private TextView tvTitle, tvMbti, tvNickname, tvWriting;
+    private TextView tvTitle, tvMbti, tvNickname, tvWriting, tvMovName, tvMovDate, tvThumbUpNum;
+    private ImageView imgMov;
     private MaterialToolbar appbar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +47,12 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         tvNickname = findViewById(R.id.tvNickNameShortReviewInDetailOfBoard);
         tvWriting = findViewById(R.id.tvWritingInDetailOfBoard);
         appbar = findViewById(R.id.topAppBarInDetailOfBoard);
+        tvMovName = findViewById(R.id.tvMovNameInMovInfo);
+        tvMovDate = findViewById(R.id.tvMovDateInMovInfo);
+        imgMov = findViewById(R.id.imgMovInMovInfo);
+        tvThumbUpNum = findViewById(R.id.tvThumbUpNumInDetailOfBoard);
+
+        String movName = getIntent().getStringExtra("movName");
 
         writingId = getIntent().getStringExtra("boardId");
         tvTitle.setText(getIntent().getStringExtra("title"));
@@ -51,7 +60,14 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         tvNickname.setText(getIntent().getStringExtra("nickname"));
         tvMbti.setText(getIntent().getStringExtra("mbti"));
         userId = getIntent().getStringExtra("userId");
+        tvMovName.setText(movName);
+        Glide.with(getApplicationContext()).load(getIntent().getStringExtra("movImg")).error(R.drawable.gray_profile).into(imgMov);
+        tvThumbUpNum.setText(getIntent().getStringExtra("likeNum"));
 
+        if(!getIntent().getStringExtra("movDate").isEmpty()){
+            tvMovDate.setText(getIntent().getStringExtra("movDate").substring(0,4));
+
+        }
 
         tvNickname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +86,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
 
         appbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,6 +62,9 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.ratingBar.setRating(dataLists.get(holder.getAdapterPosition()).getStar());
         holder.tvMovName.setText("<" + dataLists.get(holder.getAdapterPosition()).getMovName() + ">");
+        holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
+        Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
+                .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +87,7 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
                     public void onResponse(JSONObject response) {
                         try {
                             Log.d(TAG, "onResponse: board like: res" + response.getString("res"));
-                            if(response.getString("res").equals("200")){
+                            if (response.getString("res").equals("200")) {
                                 holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
                             }
 
@@ -141,7 +145,7 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: "+dataLists.size());
+        Log.d(TAG, "getItemCount: " + dataLists.size());
 
         return dataLists.size();
     }
@@ -149,7 +153,7 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMbti, tvNickname, tvWriting, tvThumbUpNum, tvMovName;
         MaterialRatingBar ratingBar;
-        ImageView imgMore, imgThumbUp;
+        ImageView imgMore, imgThumbUp, imgMov;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -161,6 +165,7 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
             imgMore = itemView.findViewById(R.id.imgMoreShortReviewInBoard);
             tvThumbUpNum = itemView.findViewById(R.id.tvThumbUpNumInShortReviewBoard);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpInShortReviewBoard);
+            imgMov = itemView.findViewById(R.id.imgMovInShortReviewBoard);
 
         }
     }
@@ -204,41 +209,4 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
 
     }
 
-    private void requestLikeNum() {
-        RequestQueue Queue = Volley.newRequestQueue(context);
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
-            jsonObject.put("token", sharedPreferences.getString("token", ""));
-//            jsonObject.put("boardID", boardId);
-            jsonObject.put("tp", "0");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        String URL = context.getString(R.string.server) + context.getString(R.string.report);
-
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Log.d(TAG, "onResponse: report: res" + response.getString("res"));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        Queue.add(jsonObjectRequest);
-
-    }
 }
