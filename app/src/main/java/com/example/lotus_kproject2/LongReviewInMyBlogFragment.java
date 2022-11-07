@@ -2,6 +2,8 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,7 +72,9 @@ public class LongReviewInMyBlogFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("user_id", userId);
+            jsonObject.put("token",sharedPreferences.getString("token",""));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,17 +91,26 @@ public class LongReviewInMyBlogFragment extends Fragment {
                     if (response.getString("res").equals("200")) {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray isLikeArray = response.getJSONArray("isLike");
+                        JSONArray movieInfoArray = response.getJSONArray("movie_info");
+
                         dataLists.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject dataObj = dataJsonArray.getJSONObject(i);
+                            JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
+                            Log.d(TAG, "onResponse: longreview movie info"+movieInfoObject);
 
                             Resources res = getResources();
                             String[] mbtiList = res.getStringArray(R.array.mbti_array);
 
+                            MovieDataList movieData = new MovieDataList(movieInfoObject.getString(2),movieInfoObject.getString(1),
+                                    movieInfoObject.getString(3),movieInfoObject.getString(4));
+
+
                             dataLists.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"),
                                     dataObj.getString("movie_name"), dataObj.getString("title"), dataObj.getString("user_id"),
                                     mbtiList[dataObj.getInt("user_mbti")],dataObj.getString("user_nickname"),
-                                    dataObj.getString("writing"), likeArray.getString(i)));
+                                    dataObj.getString("writing"), likeArray.getString(i), movieData, isLikeArray.getString(i)));
                         }
                         adapter.notifyDataSetChanged();
                     }

@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +51,11 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
         holder.tvTitle.setText(dataLists.get(holder.getAdapterPosition()).getTitle());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
+        Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
+                .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
+        if(dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+            holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }
 
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +71,7 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
                     e.printStackTrace();
                 }
 
-                String URL = context.getString(R.string.server) + context.getString(R.string.shortLikeAdd);
+                String URL = context.getString(R.string.server) + context.getString(R.string.longLikeAdd);
 
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -103,7 +109,7 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgThumbUp;
+        ImageView imgThumbUp, imgMov;
         TextView tvMovName, tvTitle, tvWriting, tvThumbUpNum;
 
         public ViewHolder(@NonNull View itemView) {
@@ -113,6 +119,7 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
             tvWriting = itemView.findViewById(R.id.tvLongReviewWritingInMyBlog);
             tvThumbUpNum = itemView.findViewById(R.id.tvThumbUpNumInMyBlog);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpLongReviewMyBlog);
+            imgMov = itemView.findViewById(R.id.imgMovInLongReviewMyBlog);
         }
     }
 }

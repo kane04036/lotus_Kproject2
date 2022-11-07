@@ -43,7 +43,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     TextView tvMovieName, tvGenre, tvCountry, tvRunningTime, tvReleaseDate, tvSummary, tvReadMore, tvTabBarLongReview, tvTabBarShortReview, tvDirector, tvActor, tvReadMoreActors;
     ImageView imageMovDetail, imgLike;
     Integer prefer;
-    private String summary, summary_sub, movCode, director, actors, actors_sub, movName, movImg, releaseDate, releaseDate_sub;
+    private String summary, summary_sub, movCode, director, actors, actors_sub, movName, movImg, releaseDate, releaseDate_sub,genres;
     FrameLayout frameLayoutInDetail;
     SharedPreferences sharedPreferences;
     Bundle result = new Bundle();
@@ -82,6 +82,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvDirector = findViewById(R.id.tvDirector);
         tvActor = findViewById(R.id.tvActor);
         tvReadMoreActors = findViewById(R.id.tvReadMoreActors);
+        tvGenre = findViewById(R.id.tvGenre);
 
 
 
@@ -143,7 +144,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 tvTabBarLongReview.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.line_rectangle));
                 tvTabBarLongReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
                 tvTabBarShortReview.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filled_rectangle));
-                tvTabBarShortReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.darkGray));
+                tvTabBarShortReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
 
 //                FragmentManager fragmentManager_long = getSupportFragmentManager();
 //                fragmentManager.setFragmentResult("movData_long",result);
@@ -158,7 +159,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 tvTabBarShortReview.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.line_rectangle));
                 tvTabBarShortReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
                 tvTabBarLongReview.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.filled_rectangle));
-                tvTabBarLongReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.darkGray));
+                tvTabBarLongReview.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
 
 //                FragmentManager fragmentManager_short = getSupportFragmentManager();
 //                fragmentManager.setFragmentResult("movData_short", result);
@@ -203,7 +204,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                     String runningTime = (String) dataJsonArray.get(2);
                     String country = (String) dataJsonArray.get(6);
                     releaseDate = (String) dataJsonArray.get(7);
-                    String genres = dataJsonArray.getString(8);
+                    genres = dataJsonArray.getString(8);
+                    genres = genres.replaceAll(","," | ");
                     JSONArray actorJsonArray = dataJsonArray.getJSONArray(5);
                     for (int i = 0; i < actorJsonArray.length(); i++) {
                         JSONObject actorObj = actorJsonArray.getJSONObject(i);
@@ -244,6 +246,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     tvDirector.setText(director);
                     tvMovieName.setText(movName);
                     topBarInDetail.setTitle(movName);
+                    tvGenre.setText(genres);
 
                     Glide.with(getApplicationContext()).load(movImg).error(R.drawable.gray_profile).into(imageMovDetail);
 

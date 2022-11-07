@@ -30,20 +30,12 @@ import java.util.concurrent.BlockingDeque;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<ShortReviewInDetailRecyclerViewAdapter.ViewHolder> {
-//    private ArrayList<String> nicknameArray = new ArrayList<>();
-//    private ArrayList<String> mbtiArray = new ArrayList<>();
-//    private ArrayList<String> writingArray = new ArrayList<>();
-//    private ArrayList<Double> starArray = new ArrayList<>();
-//    private ArrayList<String> thumbUpArray = new ArrayList<>();
-//    private ArrayList<String> movCodeArray = new ArrayList<>();
-//    private ArrayList<String> writingIdArray = new ArrayList<>();
-//    private ArrayList<String> userIdArray = new ArrayList<>();
-
     private Context context;
     private ArrayList<ReviewDataList> dataList = new ArrayList<>();
 
 
     public ShortReviewInDetailRecyclerViewAdapter(Context context, ArrayList dataList) {
+        Log.d(TAG, "ShortReviewInDetailRecyclerViewAdapter: creator");
         this.dataList = dataList;
         this.context = context;
     }
@@ -63,6 +55,9 @@ public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter
         holder.ratingBar.setIsIndicator(true);
         holder.tvWriting.setText(dataList.get(holder.getAdapterPosition()).getWriting());
         holder.tvThumbupNum.setText(dataList.get(holder.getAdapterPosition()).getLikeNum());
+        if(dataList.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+            holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }
 
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override

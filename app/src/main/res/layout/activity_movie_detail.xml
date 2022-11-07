@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -55,28 +54,28 @@
                 android:background="@drawable/round_rectangle"
                 android:clipToOutline="true" />
 
-            <ImageView
-                android:id="@+id/imgStarFilled"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvReleaseDate"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/imageMovieDetail"
-                android:src="@drawable/star_filled_small"
+<!--            <ImageView-->
+<!--                android:id="@+id/imgStarFilled"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/tvReleaseDate"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_toRightOf="@id/imageMovieDetail"-->
+<!--                android:src="@drawable/star_filled_small"-->
 
-                />
+<!--                />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/imgStarFilled"
-                android:layout_marginLeft="3dp"
-                android:layout_toRightOf="@+id/imgStarFilled"
-                android:text="7.8"
-                android:textColor="@color/signature_color"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignBottom="@id/imgStarFilled"-->
+<!--                android:layout_marginLeft="3dp"-->
+<!--                android:layout_toRightOf="@+id/imgStarFilled"-->
+<!--                android:text="7.8"-->
+<!--                android:textColor="@color/signature_color"-->
+<!--                android:textSize="17dp"-->
+<!--                android:textStyle="bold" />-->
 
             <TextView
                 android:id="@+id/tvGenre"
@@ -94,9 +93,9 @@
                 android:id="@+id/tvCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/tvGenre"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@id/tvGenre"
+                android:layout_alignStart="@+id/tvGenre"
+                android:layout_below="@id/tvReleaseDate"
+                android:layout_marginTop="10dp"
                 android:text="미국"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
@@ -105,9 +104,9 @@
                 android:id="@+id/tvRunningTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/tvGenre"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/tvCountry"
+                android:layout_alignStart="@+id/tvGenre"
+                android:layout_below="@id/tvCountry"
+                android:layout_marginTop="10dp"
                 android:text="139분"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
@@ -138,7 +137,7 @@
                 android:id="@+id/imgLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/imgStarFilled"
+                android:layout_alignStart="@id/tvGenre"
                 android:layout_alignBottom="@id/imageMovieDetail"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
@@ -274,6 +273,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/line_rectangle"
                     android:text="감상평"
+                    android:textStyle="bold"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
@@ -282,12 +282,12 @@
                     android:id="@+id/tvTabBarShortReview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="1dp"
                     android:layout_weight="1"
                     android:background="@drawable/filled_rectangle"
                     android:text="한 줄 느낌"
+                    android:textStyle="bold"
                     android:textAlignment="center"
-                    android:textColor="@color/darkGray"
+                    android:textColor="@color/white"
                     android:textSize="15dp" />
             </LinearLayout>
 

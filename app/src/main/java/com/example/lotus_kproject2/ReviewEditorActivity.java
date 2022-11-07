@@ -131,7 +131,8 @@ public class ReviewEditorActivity extends AppCompatActivity {
                         intent.putExtra("nickname", sharedPreferences_user.getString("nickname",""));
                         intent.putExtra("mbti", sharedPreferences_user.getString("mbti",""));
                         intent.putExtra("userId",sharedPreferences_login.getString("memNum",""));
-                        intent.putExtra("boardId","1234556");
+                        intent.putExtra("boardId","00000");
+                        intent.putExtra("movCode", movCode);
                         startActivity(intent);
                     }
 

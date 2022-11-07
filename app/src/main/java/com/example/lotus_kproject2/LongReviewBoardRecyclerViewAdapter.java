@@ -55,7 +55,9 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
         holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
         Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
                 .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
-
+        if(dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+            holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,10 +69,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
                 intent.putExtra("writing",dataLists.get(holder.getAdapterPosition()).getWriting());
                 intent.putExtra("boardId", dataLists.get(holder.getAdapterPosition()).getWritingId());
                 intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
-                intent.putExtra("movImg",dataLists.get(holder.getAdapterPosition()).getMovieData().getMovImg());
-                intent.putExtra("movName",dataLists.get(holder.getAdapterPosition()).getMovieData().getMovName());
                 intent.putExtra("movCode",dataLists.get(holder.getAdapterPosition()).getMovieData().getMovCode());
-                intent.putExtra("movDate",dataLists.get(holder.getAdapterPosition()).getMovieData().getReleaseDate());
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -105,7 +104,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
                     e.printStackTrace();
                 }
 
-                String URL = context.getString(R.string.server) + context.getString(R.string.shortLikeAdd);
+                String URL = context.getString(R.string.server) + context.getString(R.string.longLikeAdd);
 
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {

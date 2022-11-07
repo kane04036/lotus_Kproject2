@@ -101,6 +101,8 @@ public class MoreListActivity extends AppCompatActivity {
                     if (response.getString("res").equals("200")) {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray isLikeArray = response.getJSONArray("isLike");
+
                         shortReviewDataList.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject object = dataJsonArray.getJSONObject(i);
@@ -112,7 +114,7 @@ public class MoreListActivity extends AppCompatActivity {
 
                             shortReviewDataList.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), star,likeArray.getString(i)));
+                                    object.getString("user_nickname"), object.getString("writing"), star,likeArray.getString(i),isLikeArray.getString(i)));
                         }
                         shortReviewAdapter.notifyDataSetChanged();
                     }
@@ -154,6 +156,8 @@ public class MoreListActivity extends AppCompatActivity {
                     if(response.getString("res").equals("200")){
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray isLikeArray = response.getJSONArray("isLike");
+
                         longReviewDataList.clear();
 
                         for(int i = 0; i<dataJsonArray.length(); i++){
@@ -164,7 +168,7 @@ public class MoreListActivity extends AppCompatActivity {
 
                             longReviewDataList.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("title"), object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getString(i)));
+                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getString(i),isLikeArray.getString(i)));
                         }
                         longReviewAdapter.notifyDataSetChanged();
                     }

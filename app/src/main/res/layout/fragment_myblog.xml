@@ -171,6 +171,7 @@
             android:background="@drawable/line_rectangle"
             android:text="감상평"
             android:textAlignment="center"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
@@ -178,12 +179,12 @@
             android:id="@+id/tvTabBarShortReviewInMyBlog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:background="@drawable/filled_rectangle"
             android:text="한 줄 느낌"
             android:textAlignment="center"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="15dp" />
     </LinearLayout>
     <FrameLayout

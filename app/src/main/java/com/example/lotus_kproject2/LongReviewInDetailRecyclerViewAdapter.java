@@ -57,6 +57,10 @@ public class LongReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<
         holder.tvMbti.setText(dataList.get(holder.getAdapterPosition()).getMbti());
         holder.tvNickname.setText(dataList.get(holder.getAdapterPosition()).getNickname());
         holder.tvThumbUPNum.setText(dataList.get(holder.getAdapterPosition()).getLikeNum());
+        holder.tvWriting.setText(dataList.get(holder.getAdapterPosition()).getWriting());
+        if(dataList.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+            holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }
 
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +76,7 @@ public class LongReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<
                     e.printStackTrace();
                 }
 
-                String URL = context.getString(R.string.server) + context.getString(R.string.shortLikeAdd);
+                String URL = context.getString(R.string.server) + context.getString(R.string.longLikeAdd);
 
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
@@ -110,7 +114,7 @@ public class LongReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvMbti, tvNickname, tvTitle,tvThumbUPNum;
+        TextView tvMbti, tvNickname, tvTitle,tvThumbUPNum,tvWriting;
         ImageView imgThumbUp;
 
         public ViewHolder(@NonNull View itemView) {
@@ -120,6 +124,7 @@ public class LongReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<
             tvTitle = itemView.findViewById(R.id.tvLongReviewTitleInDetail);
             tvThumbUPNum = itemView.findViewById(R.id.tvThumbUpNumLongReviewInDetail);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpLongReviewInDetail);
+            tvWriting = itemView.findViewById(R.id.tvLongReviewWritingInDetail);
         }
     }
 }

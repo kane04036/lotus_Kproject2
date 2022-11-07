@@ -2,6 +2,8 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,8 +75,9 @@ public class ShortReviewInMyBlogFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("user_id", userId);
-
+            jsonObject.put("token",sharedPreferences.getString("token",""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -90,12 +93,12 @@ public class ShortReviewInMyBlogFragment extends Fragment {
                     if (response.getString("res").equals("200")) {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray isLikeArray = response.getJSONArray("isLike");
                         JSONArray movieInfoArray = response.getJSONArray("movie_info");
                         Log.d(TAG, "onResponse: short review dataJsonarray size:" + dataJsonArray.length());
                         dataLists.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject object = dataJsonArray.getJSONObject(i);
-                            Log.d(TAG, "onResponse: short review object" + object);
                             JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
                             MovieDataList movieData = new MovieDataList(movieInfoObject.getString(2), movieInfoObject.getString(1),
                                     movieInfoObject.getString(3), movieInfoObject.getString(4));
@@ -109,12 +112,9 @@ public class ShortReviewInMyBlogFragment extends Fragment {
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), star, likeArray.getString(i), movieData));
-
-                            Log.d(TAG, "onResponse: short review size in loop" + dataLists.size());
+                                    object.getString("user_nickname"), object.getString("writing"), star, likeArray.getString(i), movieData,isLikeArray.getString(i)));
 
                         }
-                        Log.d(TAG, "onResponse: short review count:" + dataLists.size());
                         adapter.notifyDataSetChanged();
                     }
 

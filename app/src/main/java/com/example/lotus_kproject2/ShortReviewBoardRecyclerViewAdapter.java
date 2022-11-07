@@ -65,6 +65,9 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
         holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
         Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
                 .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
+        if(dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+            holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +92,7 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
                             Log.d(TAG, "onResponse: board like: res" + response.getString("res"));
                             if (response.getString("res").equals("200")) {
                                 holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+                                holder.tvThumbUpNum.setText(Integer.valueOf(dataLists.get(holder.getAdapterPosition()).getLikeNum())+1);
                             }
 
 

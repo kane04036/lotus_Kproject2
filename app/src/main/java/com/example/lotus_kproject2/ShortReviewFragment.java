@@ -63,7 +63,7 @@ public class ShortReviewFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(String.valueOf(R.string.loginData), Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("token",sharedPreferences.getString("token","") );
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,6 +82,9 @@ public class ShortReviewFragment extends Fragment {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray movieInfoArray = response.getJSONArray("movie_info");
+                        JSONArray isLikeArray = response.getJSONArray("isLike");
+                        Log.d(TAG, "onResponse: isLike"+isLikeArray);
+
 
                         dataLists.clear();
                         for(int i = 0; i<dataJsonArray.length(); i++){
@@ -97,7 +100,7 @@ public class ShortReviewFragment extends Fragment {
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                      object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"),star,likeArray.getString(i), movieData));
+                                    object.getString("user_nickname"), object.getString("writing"),star,likeArray.getString(i), movieData,isLikeArray.getString(i)));
                         }
                         adapter.notifyDataSetChanged();
                     }

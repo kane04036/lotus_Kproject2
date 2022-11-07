@@ -11,7 +11,7 @@
         android:layout_marginRight="5dp"
         android:text="ISFP"
         android:textColor="@color/signature_color"
-        android:textSize="13dp"
+        android:textSize="12dp"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_toRightOf="@+id/tvMbtiLongReviewInDetail"
         android:text="짱아찌"
         android:textColor="@color/black"
-        android:textSize="13dp" />
+        android:textSize="12dp" />
 
     <ImageView
         android:id="@+id/imgMoreLongReviewInDetail"
@@ -41,10 +41,20 @@
         android:layout_alignStart="@+id/tvMbtiLongReviewInDetail"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
-        android:textSize="15dp"
+        android:textSize="13dp"
         android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvLongReviewWritingInDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_below="@+id/tvLongReviewTitleInDetail"
+        android:layout_marginTop="2dp"
+        android:textSize="11dp"
+        android:textColor="@color/gray"
+
+        />
 
     <ImageView
         android:id="@+id/imgThumbUpLongReviewInDetail"
@@ -58,10 +68,11 @@
         android:id="@+id/tvThumbUpNumLongReviewInDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvLongReviewTitleInDetail"
+        android:layout_below="@+id/tvLongReviewWritingInDetail"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
         android:text="120"
         android:textColor="@color/black"
         android:textSize="12dp" />

@@ -3,6 +3,7 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,7 +87,9 @@ public class LongReviewInDetailFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
             jsonObject.put("movie_id", movCode);
+            jsonObject.put("token", sharedPreferences.getString("token",""));
             Log.d(TAG, "longReviewListRequest: movieId" + movCode);
 
         } catch (Exception e) {
@@ -105,6 +108,7 @@ public class LongReviewInDetailFragment extends Fragment {
                     if (response.getString("res").equals("200")) {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray isLikeArray = response.getJSONArray("isLike");
 
                         Resources res = getResources();
                         String[] mbtiList = res.getStringArray(R.array.mbti_array);
@@ -115,7 +119,7 @@ public class LongReviewInDetailFragment extends Fragment {
 
                             dataList.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"), dataObj.getString("movie_name"),
                                     dataObj.getString("title"), dataObj.getString("user_id"), mbtiList[dataObj.getInt("user_mbti")], dataObj.getString("user_nickname"),
-                                    dataObj.getString("writing"), likeArray.getString(i)));
+                                    dataObj.getString("writing"), likeArray.getString(i),isLikeArray.getString(i)));
                         }
                         longReviewInDetailRecyclerViewAdapter.notifyDataSetChanged();
 

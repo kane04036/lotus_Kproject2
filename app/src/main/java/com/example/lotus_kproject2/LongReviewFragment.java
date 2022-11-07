@@ -1,9 +1,12 @@
 package com.example.lotus_kproject2;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +56,9 @@ public class LongReviewFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(String.valueOf(R.string.loginData),Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
             jsonObject.put("token",sharedPreferences.getString("token","") );
+            Log.d(TAG, "longReviewDataRequest: token: "+sharedPreferences.getString("token",""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,7 +74,10 @@ public class LongReviewFragment extends Fragment {
                     if(response.getString("res").equals("200")){
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
+                        JSONArray isLikeArray = response.getJSONArray("isLike");
                         JSONArray movieInfoArray = response.getJSONArray("movie_info");
+                        Log.d(TAG, "onResponse: isLike"+isLikeArray);
+
                         dataLists.clear();
                         for(int i = 0; i<dataJsonArray.length(); i++){
                             JSONObject object = dataJsonArray.getJSONObject(i);
@@ -85,7 +92,7 @@ public class LongReviewFragment extends Fragment {
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("title"), object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getString(i), movieData));
+                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getString(i), movieData,isLikeArray.getString(i)));
                         }
                         adapter.notifyDataSetChanged();
                     }

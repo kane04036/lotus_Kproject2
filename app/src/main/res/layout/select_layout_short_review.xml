@@ -1,88 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <me.zhanghai.android.materialratingbar.MaterialRatingBar
-        android:id="@+id/ratingbarInShortReview"
-        android:layout_width="110dp"
-        android:layout_height="20dp"
-        android:layout_alignStart="@id/layoutShortReview"
-        app:mrb_progressBackgroundTint="@color/gray"
-        app:mrb_progressTint="@color/signature_color"
-        app:mrb_secondaryProgressTint="@color/gray"
-        android:layout_marginTop="5dp" />
+    android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/layoutShortReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingbarInShortReview"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/line_rectangle_90"
-        android:paddingBottom="3dp">
+        android:id="@+id/layoutWriteShortReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:id="@+id/ratingbarInShortReview"
+            android:layout_width="110dp"
+            android:layout_height="20dp"
+            android:layout_alignStart="@id/layoutShortReview"
+            android:layout_marginTop="5dp"
+            app:mrb_progressBackgroundTint="@color/gray"
+            app:mrb_progressTint="@color/signature_color"
+            app:mrb_secondaryProgressTint="@color/gray" />
 
-        <EditText
-            android:id="@+id/edtShortReview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:background="@null"
-            android:minLines="2"
-            android:maxLength="100"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/tvWritingCount"
+        <RelativeLayout
+            android:id="@+id/layoutShortReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tvWritingTotalCount"
-            android:layout_toLeftOf="@+id/tvWritingTotalCount"
-            android:text="0"
-            android:textColor="@color/black"
-            android:textSize="10dp" />
+            android:layout_below="@+id/ratingbarInShortReview"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/line_rectangle_round"
+            android:paddingBottom="3dp">
 
-        <TextView
-            android:id="@+id/tvWritingTotalCount"
+            <EditText
+                android:id="@+id/edtShortReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@null"
+                android:maxLength="100"
+                android:minLines="2"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tvWritingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvWritingTotalCount"
+                android:layout_toLeftOf="@+id/tvWritingTotalCount"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/tvWritingTotalCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edtShortReview"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                android:text="/100"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnUploadShortReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/edtShortReview"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="3dp"
-            android:text="/100"
-            android:textColor="@color/black"
-            android:textSize="10dp" />
+            android:layout_below="@id/layoutShortReview"
+            android:layout_alignEnd="@+id/layoutShortReview"
+            android:backgroundTint="@color/lightGray"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="등록"
+            android:textSize="13dp" />
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/btnUploadShortReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layoutShortReview"
-        android:layout_alignEnd="@+id/layoutShortReview"
-        android:backgroundTint="@color/signature_color"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:text="등록"
-        android:textSize="13dp" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyViewShortReviewInDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnUploadShortReview"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/layoutWriteShortReview"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
+    <RelativeLayout
+        android:id="@+id/layoutMyShortReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round_rectangle_lightgray"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        >
 
+        <TextView
+            android:id="@+id/tvMyReviewComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나의 리뷰"
+            android:textColor="@color/gray"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvMbtiShortReviewInDetailMine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMyReviewComment"
+            android:layout_marginTop="3dp"
+            android:text="ISFP"
+            android:textColor="@color/signature_color"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNicknameShortReviewInDetailMine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvMbtiShortReviewInDetailMine"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tvMbtiShortReviewInDetailMine"
+            android:text="짱아찌"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:id="@+id/ratingbarShortReviewInDetailMine"
+            android:layout_width="80dp"
+            android:layout_height="15dp"
+            android:layout_alignTop="@+id/tvMbtiShortReviewInDetailMine"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/imgMoreShortReviewInDetailMine"
+            app:mrb_progressBackgroundTint="@color/gray"
+            app:mrb_progressTint="@color/signature_color"
+            app:mrb_secondaryProgressTint="@color/gray" />
+
+        <ImageView
+            android:id="@+id/imgMoreShortReviewInDetailMine"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvNicknameShortReviewInDetailMine"
+            android:layout_alignParentRight="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/more" />
+
+        <TextView
+            android:id="@+id/tvShortReviewWritingInDetailMine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingbarShortReviewInDetailMine"
+            android:layout_alignStart="@+id/tvMbtiShortReviewInDetailMine"
+            android:layout_marginTop="5dp"
+            android:text="영화 봤는데 진짜 재밌더라"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/imgThumbUpShortReviewInDetailMine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvThumbUpNumShortReviewInDetailMine"
+            android:layout_toLeftOf="@id/tvThumbUpNumShortReviewInDetailMine"
+            android:src="@drawable/thumb_up_small" />
+
+        <TextView
+            android:id="@+id/tvThumbUpNumShortReviewInDetailMine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvShortReviewWritingInDetailMine"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="3dp"
+            android:layout_marginBottom="10dp"
+            android:text="120"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+
+        <!--        <View-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="3dp"-->
+        <!--            android:layout_below="@id/tvThumbUpNumShortReviewInDetailMine"-->
+        <!--            android:background="@color/lightGray" />-->
+
+    </RelativeLayout>
 </RelativeLayout>
+
+
 
 

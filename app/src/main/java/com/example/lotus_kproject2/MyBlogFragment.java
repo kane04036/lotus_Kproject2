@@ -79,7 +79,7 @@ public class MyBlogFragment extends Fragment {
                 tvTabBarLongReviewInMyBlog.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.line_rectangle));
                 tvTabBarLongReviewInMyBlog.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
                 tvTabBarShortReviewInMyBlog.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.filled_rectangle));
-                tvTabBarShortReviewInMyBlog.setTextColor(ContextCompat.getColor(getActivity(), R.color.darkGray));
+                tvTabBarShortReviewInMyBlog.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frameLayoutInMyBlog, longReviewInMyBlogFragment).commitAllowingStateLoss();
@@ -92,7 +92,7 @@ public class MyBlogFragment extends Fragment {
                 tvTabBarShortReviewInMyBlog.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.line_rectangle));
                 tvTabBarShortReviewInMyBlog.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
                 tvTabBarLongReviewInMyBlog.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.filled_rectangle));
-                tvTabBarLongReviewInMyBlog.setTextColor(ContextCompat.getColor(getActivity(), R.color.darkGray));
+                tvTabBarLongReviewInMyBlog.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frameLayoutInMyBlog, shortReviewInMyBlogFragment).commitAllowingStateLoss();

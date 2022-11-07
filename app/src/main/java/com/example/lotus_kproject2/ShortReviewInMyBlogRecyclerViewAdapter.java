@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +53,12 @@ public class ShortReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.tvMovName.setText("<" + dataLists.get(holder.getAdapterPosition()).getMovName() + ">");
         holder.tvThumbupNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
+        Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
+                .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
+
+        if(dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+            holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }
 
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +113,7 @@ public class ShortReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter
     public static class ViewHolder extends RecyclerView.ViewHolder {
         MaterialRatingBar ratingBar;
         TextView tvWriting, tvThumbupNum, tvMovName;
-        ImageView imgThumbUp;
+        ImageView imgThumbUp, imgMov;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -115,6 +122,7 @@ public class ShortReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter
             tvThumbupNum = itemView.findViewById(R.id.tvThumbUpNumShortReviewInMyBlog);
             tvMovName = itemView.findViewById(R.id.tvMovNameInShortReviewMyBlog);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpShortReviewInMyBlog);
+            imgMov = itemView.findViewById(R.id.imgMovInShortReviewMyBlog);
         }
     }
 

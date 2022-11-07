@@ -40,7 +40,7 @@ public class MovieDetailFragment extends Fragment {
                 tvTabBarLongReview.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.line_rectangle));
                 tvTabBarLongReview.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
                 tvTabBarShortReview.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.filled_rectangle));
-                tvTabBarShortReview.setTextColor(ContextCompat.getColor(getActivity(), R.color.darkGray));
+                tvTabBarShortReview.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
             }
         });
 
@@ -50,7 +50,7 @@ public class MovieDetailFragment extends Fragment {
                 tvTabBarShortReview.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.line_rectangle));
                 tvTabBarShortReview.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
                 tvTabBarLongReview.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.filled_rectangle));
-                tvTabBarLongReview.setTextColor(ContextCompat.getColor(getActivity(), R.color.darkGray));
+                tvTabBarLongReview.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
 
             }
         });

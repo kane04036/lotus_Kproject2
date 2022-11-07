@@ -42,6 +42,7 @@
     <string name="kakaoLogin">/umanager/login/kakao</string>
     <string name="tokenCheck">/test/kakao/check_token</string>
     <string name="thumbnail">/search_movie/thumbnail</string>
+    <string name="thumbnail_seq">/search_movie/thumbnail_seq</string>
     <string name="loginData">loginData</string>
     <string name="movieSearch">/screen/search_movie</string>
     <string name="userData">userData</string>
@@ -65,5 +66,11 @@
     <string name="viewShortReviewKeyWord">/board/short_reviews/view/keyword</string>
     <string name="viewLongReviewKeyWord">/board/long_reviews/view/keyword</string>
     <string name="mypage">/screen/mypage</string>
+    <string name="longLikeAdd">/long_like/add</string>
+    <string name="modifyShortReview">/board/short_reviews/update</string>
+    <string name="deleteShortReview">/board/short_reviews/delete</string>
+    <string name="modifyLongReview">/board/long_reviews/update</string>
+    <string name="deleteLongReview">/board/long_reviews/delete</string>
 
+    
 </resources>
