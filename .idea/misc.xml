@@ -54,6 +54,8 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_long_review_detail_of_board.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3319746376811594" />
+        <entry key="app/src/main/res/layout/activity_modify_long_review.xml" value="0.39166666666666666" />
+        <entry key="app/src/main/res/layout/activity_modify_short_review.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/activity_more_list.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/activity_movie_detail.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_movierecommand.xml" value="0.31567028985507245" />
@@ -70,6 +72,7 @@
         <entry key="app/src/main/res/layout/activity_userinfo2.xml" value="0.3211050724637681" />
         <entry key="app/src/main/res/layout/activity_userinfo3.xml" value="0.3211050724637681" />
         <entry key="app/src/main/res/layout/activity_userinfo4.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_view_short_review.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/alertdialog_age.xml" value="0.3161231884057971" />
         <entry key="app/src/main/res/layout/alertdialog_gender.xml" value="0.33" />
         <entry key="app/src/main/res/layout/alertdialog_mbti.xml" value="0.171875" />
@@ -114,6 +117,7 @@
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/popup_menu_in_writing.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/popup_menu_my_review.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/menu/popup_menu_short_review_in_myblog.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/review_top_app_bar.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/top_app_bar_for_more_function.xml" value="0.39166666666666666" />

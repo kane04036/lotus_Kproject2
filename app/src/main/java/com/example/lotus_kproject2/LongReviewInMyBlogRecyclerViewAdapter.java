@@ -3,12 +3,14 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,7 +49,7 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvMovName.setText("<"+dataLists.get(holder.getAdapterPosition()).getMovName()+">");
+        holder.tvMovName.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
         holder.tvTitle.setText(dataLists.get(holder.getAdapterPosition()).getTitle());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
@@ -56,6 +58,23 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
         if(dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")){
             holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
         }
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailOfBoardActivity.class);
+                intent.putExtra("mbti",dataLists.get(holder.getAdapterPosition()).getMbti());
+                intent.putExtra("likeNum",dataLists.get(holder.getAdapterPosition()).getLikeNum());
+                intent.putExtra("nickname",dataLists.get(holder.getAdapterPosition()).getNickname());
+                intent.putExtra("title",dataLists.get(holder.getAdapterPosition()).getTitle());
+                intent.putExtra("writing",dataLists.get(holder.getAdapterPosition()).getWriting());
+                intent.putExtra("boardId", dataLists.get(holder.getAdapterPosition()).getWritingId());
+                intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
+                intent.putExtra("movCode",dataLists.get(holder.getAdapterPosition()).getMovieData().getMovCode());
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
 
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +130,8 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgThumbUp, imgMov;
         TextView tvMovName, tvTitle, tvWriting, tvThumbUpNum;
+        RelativeLayout layout;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -120,6 +141,7 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
             tvThumbUpNum = itemView.findViewById(R.id.tvThumbUpNumInMyBlog);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpLongReviewMyBlog);
             imgMov = itemView.findViewById(R.id.imgMovInLongReviewMyBlog);
+            layout = itemView.findViewById(R.id.layoutLongReviewItemInBlog);
         }
     }
 }

@@ -70,7 +70,9 @@ public class ShortReviewInMyBlogFragment extends Fragment {
     }
 
     private void shortReviewRequest(String userId) {
-
+        if (getActivity() == null) {
+            return;
+        }
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject();

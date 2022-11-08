@@ -99,4 +99,8 @@ public class ReviewDataList {
     public String getIsLike() {
         return isLike;
     }
+
+    public String getMovId() {
+        return movId;
+    }
 }

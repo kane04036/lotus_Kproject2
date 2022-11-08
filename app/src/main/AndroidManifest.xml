@@ -48,6 +48,8 @@
         <activity android:name=".DetailOfBoardActivity"/>
         <activity android:name=".OtherUserBlogActivity"/>
         <activity android:name=".MoreListActivity"/>
+        <activity android:name=".ModifyShortReviewActivity"/>
+        <activity android:name=".ModifyLongReviewActivity"/>
     </application>
 
 

@@ -60,6 +60,12 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         tvMbti.setText(getIntent().getStringExtra("mbti"));
         memNum = getIntent().getStringExtra("userId");
 
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
+        if(memNum.equals(sharedPreferences.getString("memNum",""))){
+            btnFollow.setVisibility(View.INVISIBLE);
+            btnFollow.setEnabled(false);
+        }
+
         requestMyPageData(memNum);
 
         appbar.setNavigationOnClickListener(new View.OnClickListener() {

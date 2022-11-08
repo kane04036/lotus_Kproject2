@@ -7,7 +7,10 @@
     <RelativeLayout
         android:id="@+id/layoutWriteShortReview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+
+        >
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/ratingbarInShortReview"
             android:layout_width="110dp"
@@ -35,10 +38,12 @@
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:background="@null"
+                android:hint="영화에 대해 한 줄 느낌을 남겨주세요."
                 android:maxLength="100"
-                android:minLines="2"
+                android:minLines="3"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:gravity="top"
+                android:textSize="13dp" />
 
             <TextView
                 android:id="@+id/tvWritingCount"
@@ -84,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layoutWriteShortReview"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:paddingLeft="10dp"
@@ -102,6 +107,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
+        android:visibility="invisible"
         >
 
         <TextView
@@ -179,9 +185,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvShortReviewWritingInDetailMine"
-            android:layout_marginTop="5dp"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:text="120"
             android:textColor="@color/black"

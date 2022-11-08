@@ -87,7 +87,6 @@ public class ShortReviewInDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.select_layout_short_review, container, false);
 
-
         shortReviewInDetailRecyclerViewAdapter = new ShortReviewInDetailRecyclerViewAdapter(getActivity(), dataLists);
 
         ratingBarInShortReview = view.findViewById(R.id.ratingbarInShortReview);
@@ -318,7 +317,8 @@ public class ShortReviewInDetailFragment extends Fragment {
             jsonObject.put("token", sharedPreferences.getString("token", ""));
             jsonObject.put("boardID", myReview.getWritingId());
             jsonObject.put("writing", writing);
-            Log.d(TAG, "modifyReview: token:"+sharedPreferences.getString("token", "")+" id:"+myReview.getWritingId()+"  writing" + writing);
+            jsonObject.put("star",ratingBarInShortReview.getRating());
+            Log.d(TAG, "modifyReview: token:"+sharedPreferences.getString("token", "")+" id:"+myReview.getWritingId()+"  writing" + writing+"  star:"+ratingBarInShortReview.getRating());
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -79,6 +79,7 @@ public class MovieRecommandFragment extends Fragment {
             public void onClick(View view) {
                 int len = recmdMovLists.size()-1;
                 position++;
+
                 Glide.with(getActivity()).load(recmdMovLists.get(position%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain1);
                 Glide.with(getActivity()).load(recmdMovLists.get((position + 1)%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain2);
                 Glide.with(getActivity()).load(recmdMovLists.get((position + 2)%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain3);
@@ -94,6 +95,7 @@ public class MovieRecommandFragment extends Fragment {
                 position--;
                 if(position < 0)
                     position = len;
+
                 Glide.with(getActivity()).load(recmdMovLists.get(position%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain1);
                 Glide.with(getActivity()).load(recmdMovLists.get((position + 1)%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain2);
                 Glide.with(getActivity()).load(recmdMovLists.get((position + 2)%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain3);
@@ -134,6 +136,7 @@ public class MovieRecommandFragment extends Fragment {
                             JSONArray tmpJsonArray = dataJsonArray.getJSONArray(i);
                             recmdMovLists.add(new RecommendMovieList( tmpJsonArray.getString(0),  tmpJsonArray.getString(1),  tmpJsonArray.getString(2),  tmpJsonArray.getString(3)));
                         }
+
                         Glide.with(getActivity()).load(recmdMovLists.get(0).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain1);
                         Glide.with(getActivity()).load(recmdMovLists.get(1).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain2);
                         Glide.with(getActivity()).load(recmdMovLists.get(2).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain3);

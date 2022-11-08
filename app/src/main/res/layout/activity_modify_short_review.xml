@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarLayoutInModifyShortReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBarInModifyShortReview"
+            style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/review_top_app_bar"
+            app:navigationIcon="@drawable/back_simple_small"
+            app:title="한 줄 느낌 수정하기"
+            app:titleCentered="true" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/ratingbarInModifyShortReview"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/appbarLayoutInModifyShortReview"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        app:mrb_progressBackgroundTint="@color/gray"
+        app:mrb_progressTint="@color/signature_color"
+        app:mrb_secondaryProgressTint="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/layoutModifyShortReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingbarInModifyShortReview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/line_rectangle_round"
+        android:paddingBottom="3dp">
+
+        <EditText
+            android:id="@+id/edtModifyShortReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@null"
+            android:maxLength="100"
+            android:minLines="5"
+            android:textColor="@color/black"
+            android:gravity="top"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tvWritingCountInModifyShortReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvWritingTotalCountInModifyShortReview"
+            android:layout_toLeftOf="@+id/tvWritingTotalCountInModifyShortReview"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="11dp" />
+
+        <TextView
+            android:id="@+id/tvWritingTotalCountInModifyShortReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtModifyShortReview"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="3dp"
+            android:text="/100"
+            android:textColor="@color/black"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

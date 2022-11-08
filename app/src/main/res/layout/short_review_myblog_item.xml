@@ -35,7 +35,7 @@
         app:mrb_secondaryProgressTint="@color/gray" />
 
     <ImageView
-        android:id="@+id/imgMoreShortReviewInBoard"
+        android:id="@+id/imgMoreShortReviewInBlog"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvMovNameInShortReviewMyBlog"

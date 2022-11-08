@@ -2,7 +2,9 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -33,10 +35,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DetailOfBoardActivity extends AppCompatActivity {
-    private String writingId, userId, movCode, movImgUrl, movName, movDate;
+    private String writingId, userId, movCode, movImgUrl, movName, movDate,title, writing;
     private TextView tvTitle, tvMbti, tvNickname, tvWriting, tvMovName, tvMovDate, tvThumbUpNum;
     private ImageView imgMov;
     private MaterialToolbar appbar;
+    private Boolean isMine = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,15 +56,26 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         imgMov = findViewById(R.id.imgMovInMovInfo);
         tvThumbUpNum = findViewById(R.id.tvThumbUpNumInDetailOfBoard);
 
+        title = getIntent().getStringExtra("title");
+        writing = getIntent().getStringExtra("writing");
+
         writingId = getIntent().getStringExtra("boardId");
-        tvTitle.setText(getIntent().getStringExtra("title"));
-        tvWriting.setText(getIntent().getStringExtra("writing"));
+        tvTitle.setText(title);
+        tvWriting.setText(writing);
         tvNickname.setText(getIntent().getStringExtra("nickname"));
         tvMbti.setText(getIntent().getStringExtra("mbti"));
         userId = getIntent().getStringExtra("userId");
         tvThumbUpNum.setText(getIntent().getStringExtra("likeNum"));
         movCode = getIntent().getStringExtra("movCode");
         requestMovInfo(movCode);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
+       if(userId.equals(sharedPreferences.getString("memNum",""))){
+           isMine = true;
+       }else{
+           isMine = false;
+       }
+
 
         tvNickname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +101,11 @@ public class DetailOfBoardActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_more:
-                        showPopUpMenu();
+                        if (isMine) {
+                            showPopupMenuMe();
+                        } else {
+                            showPopupMenuOtherUser();
+                        }
                         break;
                 }
                 return false;
@@ -97,24 +115,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
 
     }
 
-    private void showPopUpMenu() {
-        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), appbar, Gravity.END);
-        getMenuInflater().inflate(R.menu.popup_menu_in_writing, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.menu_report:
-                        reportReview();
-                        break;
-                }
-                return false;
-            }
-        });
-        popupMenu.show();
-    }
-
-    private void reportReview() {
+    private void reportReview(String writingId) {
         RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject jsonObject = new JSONObject();
@@ -178,13 +179,12 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                         movName = dataArray.getString(1);
                         movImgUrl = dataArray.getString(3);
                         movDate = dataArray.getString(4);
-                        Log.d(TAG, "onResponse: thumbnail seq img url:"+movImgUrl);
+                        Log.d(TAG, "onResponse: thumbnail seq img url:" + movImgUrl);
                         tvMovName.setText(movName);
                         Glide.with(getApplicationContext()).load(movImgUrl).error(R.drawable.gray_profile).into(imgMov);
                         if (!movDate.isEmpty()) {
                             tvMovDate.setText(movDate.substring(0, 4));
-                        }
-                        else{
+                        } else {
                             tvMovDate.setText("개봉일자불명");
                         }
                     }
@@ -203,4 +203,103 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         });
         Queue.add(jsonObjectRequest);
     }
+
+    private void showPopupMenuOtherUser() {
+        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), appbar, Gravity.END);
+        getMenuInflater().inflate(R.menu.popup_menu_in_writing, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_report:
+                        reportReview(writingId);
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+
+    }
+
+    private void showPopupMenuMe() {
+        final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), appbar, Gravity.END);
+        getMenuInflater().inflate(R.menu.popup_menu_short_review_in_myblog, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_modify_in_myBlog:
+                        Intent intent = new Intent(getApplicationContext(),ModifyLongReviewActivity.class);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title",title);
+                        bundle.putString("writing",writing);
+                        bundle.putString("movName",movName);
+                        bundle.putString("writingId",writingId);
+
+                        intent.putExtra("reviewData",bundle);
+                        startActivity(intent);
+                        break;
+                    case R.id.menu_delete_in_myBlog:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DetailOfBoardActivity.this);
+                        builder.setMessage("감상평을 삭제하시겠습니?");
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                deleteReview(writingId);
+                            }
+                        });
+                        builder.setNegativeButton("취소", null);
+                        builder.show();
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
+
+    }
+    private void deleteReview(String boardId) {
+        RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences("loginData", Context.MODE_PRIVATE);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("boardID", boardId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.deleteLongReview);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: delete: res" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
+                        onBackPressed();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+
+    }
+
+
 }

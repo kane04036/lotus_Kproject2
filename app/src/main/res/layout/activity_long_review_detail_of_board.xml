@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewBelowTitle"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/round_rectangle_lightgray"
@@ -133,10 +133,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutMovieInfo"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
-            android:lineSpacingExtra="4dp"
             android:layout_marginBottom="10dp"
+            android:lineSpacingExtra="4dp"
             android:text="비트코인 등 가상화폐 투자를 통해 큰 수익을 낸 투자자들이 아파트 등 부동산을 사는 경우가 늘었습니다. '집을 사면 그만 아니냐'고 생각할 수 있지만 투자자들은 세무조사 또는 소명 요청 대상자로 선정돼 어려움을 겪는 경우가 많습니다.
 일부 부동산을 취득할 때 매수자는 자금의 출처를 밝히는 '자금조달계획서'를 제출해야 합니다. 과세 관청이 매수자 소득을 파악할 수 있는 자료를 근거로 자금조달계획서와 비교해 세무조사를 하기 때문입니다.
 '자금조달계획서'를 내야하는 부동산 종류는 △투기과열지구나 조정대상지역에 있는 집 △비규제지역에 있는 6억원 이상 주택 △법인이 취득하는 주택 △수도권과 광역시, 세종시 소재 1억원 이상 토지 △수도"

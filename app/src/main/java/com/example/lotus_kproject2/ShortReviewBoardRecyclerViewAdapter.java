@@ -2,7 +2,9 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -61,7 +63,7 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
         holder.tvNickname.setText(dataLists.get(holder.getAdapterPosition()).getNickname());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.ratingBar.setRating(dataLists.get(holder.getAdapterPosition()).getStar());
-        holder.tvMovName.setText("<" + dataLists.get(holder.getAdapterPosition()).getMovName() + ">");
+        holder.tvMovName.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
         holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
         Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
                 .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
@@ -124,25 +126,83 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
             }
         });
 
+//        holder.imgMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final PopupMenu popupMenu = new PopupMenu(context, holder.imgMore);
+//                MenuInflater inflater = popupMenu.getMenuInflater();
+//                inflater.inflate(R.menu.popup_menu_in_writing, popupMenu.getMenu());
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem menuItem) {
+//                        switch (menuItem.getItemId()) {
+//                            case R.id.menu_report:
+//                                reportReview(dataLists.get(holder.getAdapterPosition()).getWritingId());
+//                                break;
+//                        }
+//                        return false;
+//                    }
+//                });
+//                popupMenu.show();
+//            }
+//        });
+        SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
         holder.imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final PopupMenu popupMenu = new PopupMenu(context, holder.imgMore);
-                MenuInflater inflater = popupMenu.getMenuInflater();
-                inflater.inflate(R.menu.popup_menu_in_writing, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.menu_report:
-                                reportReview(dataLists.get(holder.getAdapterPosition()).getWritingId());
-                                break;
+                if (dataLists.get(holder.getAdapterPosition()).getUserId().equals(sharedPreferences.getString("memNum", ""))) {
+                    final PopupMenu popupMenu = new PopupMenu(context, holder.imgMore);
+                    MenuInflater inflater = popupMenu.getMenuInflater();
+                    inflater.inflate(R.menu.popup_menu_short_review_in_myblog, popupMenu.getMenu());
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.menu_modify_in_myBlog:
+                                    Intent intent = new Intent(context, ModifyShortReviewActivity.class);
+                                    intent.putExtra("star", String.valueOf(dataLists.get(holder.getAdapterPosition()).getStar()));
+                                    intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovId());
+                                    intent.putExtra("writing", dataLists.get(holder.getAdapterPosition()).getWriting());
+                                    intent.putExtra("boardId", dataLists.get(holder.getAdapterPosition()).getWritingId());
+                                    context.startActivity(intent);
+                                    break;
+                                case R.id.menu_delete_in_myBlog:
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                    builder.setMessage("한 줄 느낌을 삭제하시겠습니까?");
+                                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            deleteReview(dataLists.get(holder.getAdapterPosition()).getWritingId(), holder.getAdapterPosition());
+
+                                        }
+                                    });
+                                    builder.setNegativeButton("취소", null);
+                                    builder.show();
+                                    break;
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                });
-                popupMenu.show();
+                    });
+                    popupMenu.show();
+                }else{
+                    final PopupMenu popupMenu = new PopupMenu(context, holder.imgMore);
+                    MenuInflater inflater = popupMenu.getMenuInflater();
+                    inflater.inflate(R.menu.popup_menu_in_writing, popupMenu.getMenu());
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.menu_report:
+                                    reportReview(dataLists.get(holder.getAdapterPosition()).getWritingId());
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    popupMenu.show();
+                }
             }
+
         });
 
     }
@@ -195,6 +255,49 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: report: res" + response.getString("res"));
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+
+    }
+    private void deleteReview(String boardId, Integer index) {
+        RequestQueue Queue = Volley.newRequestQueue(context);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("boardID", boardId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = context.getString(R.string.server) + context.getString(R.string.deleteShortReview);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: delete: res" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
+                        Log.d(TAG, "onResponse: remove index:" + index);
+                        dataLists.remove(index);
+                        notifyItemRemoved(index);
+                        notifyItemRangeChanged(0, dataLists.size());
+                    }
 
 
                 } catch (JSONException e) {
