@@ -37,6 +37,9 @@ public class OtherUserBlogActivity extends AppCompatActivity {
     private MaterialToolbar appbar;
     private TextView tvNickname, tvMbti, tvFollowingNum, tvFollowerNum, tvTabBarLongReview, tvTabBarShortReview, btnFollow;
     private String memNum;
+    private Boolean isFollow = false;
+    private Integer followingNum, followerNum;
+
 
     Bundle result = new Bundle();
 
@@ -78,7 +81,11 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestFollow(memNum);
+                if(!isFollow) {
+                    requestFollow(memNum);
+                }else{
+                    requestCancelFollow();
+                }
             }
         });
 
@@ -126,7 +133,6 @@ public class OtherUserBlogActivity extends AppCompatActivity {
             jsonObject.put("token", sharedPreferences.getString("token", ""));
             jsonObject.put("user_id", sharedPreferences.getString("memNum", ""));
             jsonObject.put("target_id", memNum);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,6 +147,9 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse: follow request res:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
                         btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
+                        followerNum += 1;
+                        tvFollowerNum.setText(String.valueOf(followingNum));
+                        isFollow = true;
                     }
 
                 } catch (JSONException e) {
@@ -163,7 +172,9 @@ public class OtherUserBlogActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
             jsonObject.put("userNm", memNum);
+            jsonObject.put("token", sharedPreferences.getString("token",""));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,12 +190,62 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse: my page: res:"+response.getString("res"));
                     if(response.getString("res").equals("200")){
                         JSONArray dataArray = response.getJSONArray("data");
-                        tvFollowerNum.setText(dataArray.getString(3));
-                        tvFollowingNum.setText(dataArray.getString(4));
+                        followerNum = dataArray.getInt(3);
+                        followingNum = dataArray.getInt(4);
+                        tvFollowerNum.setText(String.valueOf(followerNum));
+                        tvFollowingNum.setText(String.valueOf(followingNum));
+                        if(dataArray.getString(5).equals("1")){
+                            btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
+                            isFollow = true;
+                        }
                         Log.d(TAG, "onResponse: following:"+dataArray.getString(4)+"follower:"+dataArray.getString(3));
 
                     }
 
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+
+    }
+    private void requestCancelFollow(){
+        RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+            Log.d(TAG, "preferListRequest: token:" + sharedPreferences.getString("token", ""));
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("user_id", sharedPreferences.getString("memNum", ""));
+            jsonObject.put("target_id", memNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.cancelFollow);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: follow cancel request res:" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
+                        btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_signaturecolor));
+                        followerNum -=1;
+                        tvFollowerNum.setText(String.valueOf(followerNum));
+                        isFollow = false;
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

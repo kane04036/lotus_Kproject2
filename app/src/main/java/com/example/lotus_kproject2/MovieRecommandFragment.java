@@ -136,6 +136,9 @@ public class MovieRecommandFragment extends Fragment {
                             JSONArray tmpJsonArray = dataJsonArray.getJSONArray(i);
                             recmdMovLists.add(new RecommendMovieList( tmpJsonArray.getString(0),  tmpJsonArray.getString(1),  tmpJsonArray.getString(2),  tmpJsonArray.getString(3)));
                         }
+                        if(getActivity()==null){
+                            return;
+                        }
 
                         Glide.with(getActivity()).load(recmdMovLists.get(0).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain1);
                         Glide.with(getActivity()).load(recmdMovLists.get(1).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain2);

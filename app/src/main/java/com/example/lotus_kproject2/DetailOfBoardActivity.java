@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -35,11 +36,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DetailOfBoardActivity extends AppCompatActivity {
-    private String writingId, userId, movCode, movImgUrl, movName, movDate,title, writing;
+    private String writingId, userId, movCode, movImgUrl, movName, movDate, title, writing;
     private TextView tvTitle, tvMbti, tvNickname, tvWriting, tvMovName, tvMovDate, tvThumbUpNum;
     private ImageView imgMov;
     private MaterialToolbar appbar;
     private Boolean isMine = false;
+    private ReviewDataList reviewData;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,26 +58,32 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         tvMovDate = findViewById(R.id.tvMovDateInMovInfo);
         imgMov = findViewById(R.id.imgMovInMovInfo);
         tvThumbUpNum = findViewById(R.id.tvThumbUpNumInDetailOfBoard);
+        progressBar = findViewById(R.id.progressInDetailOfBoard);
 
-        title = getIntent().getStringExtra("title");
-        writing = getIntent().getStringExtra("writing");
 
-        writingId = getIntent().getStringExtra("boardId");
-        tvTitle.setText(title);
-        tvWriting.setText(writing);
-        tvNickname.setText(getIntent().getStringExtra("nickname"));
-        tvMbti.setText(getIntent().getStringExtra("mbti"));
-        userId = getIntent().getStringExtra("userId");
-        tvThumbUpNum.setText(getIntent().getStringExtra("likeNum"));
+        writingId = getIntent().getStringExtra("writingId");
         movCode = getIntent().getStringExtra("movCode");
         requestMovInfo(movCode);
+        requestReview(writingId);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
-       if(userId.equals(sharedPreferences.getString("memNum",""))){
-           isMine = true;
-       }else{
-           isMine = false;
-       }
+        imgMov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MovieDetailActivity.class);
+                intent.putExtra("movCode",movCode);
+                startActivity(intent);
+            }
+        });
+        tvMovName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MovieDetailActivity.class);
+                intent.putExtra("movCode",movCode);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         tvNickname.setOnClickListener(new View.OnClickListener() {
@@ -230,15 +239,14 @@ public class DetailOfBoardActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_modify_in_myBlog:
-                        Intent intent = new Intent(getApplicationContext(),ModifyLongReviewActivity.class);
-
+                        Intent intent = new Intent(getApplicationContext(), ModifyLongReviewActivity.class);
                         Bundle bundle = new Bundle();
-                        bundle.putString("title",title);
-                        bundle.putString("writing",writing);
-                        bundle.putString("movName",movName);
-                        bundle.putString("writingId",writingId);
-
-                        intent.putExtra("reviewData",bundle);
+                        bundle.putString("title", reviewData.getTitle());
+                        bundle.putString("writing", reviewData.getWriting());
+                        bundle.putString("movName", reviewData.getMovName());
+                        bundle.putString("writingId", reviewData.getWritingId());
+                        bundle.putString("movCode",reviewData.getMovId());
+                        intent.putExtra("reviewData", bundle);
                         startActivity(intent);
                         break;
                     case R.id.menu_delete_in_myBlog:
@@ -260,6 +268,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         popupMenu.show();
 
     }
+
     private void deleteReview(String boardId) {
         RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -282,6 +291,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse: delete: res" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
                         onBackPressed();
+                        finish();
                     }
 
 
@@ -301,5 +311,78 @@ public class DetailOfBoardActivity extends AppCompatActivity {
 
     }
 
+    private void requestReview(String writingId) {
+        RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
 
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
+            jsonObject.put("board_id", writingId);
+            jsonObject.put("token",sharedPreferences.getString("token",""));
+            Log.d(TAG, "requestReview: board id:"+writingId+"  token:"+sharedPreferences.getString("token",""));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.viewLongReviewWritingId);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: request long review with writing id: res" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        JSONObject reviewObject = response.getJSONObject("data");
+
+                        Resources res = getResources();
+                        String[] mbtiArray = res.getStringArray(R.array.mbti_array);
+                        String userMbti = mbtiArray[reviewObject.getInt("user_mbti")];
+
+                        reviewData = new ReviewDataList(reviewObject.getString("_id"), reviewObject.getString("movie_id"),
+                                reviewObject.getString("movie_name"), reviewObject.getString("title"),
+                                reviewObject.getString("user_id"), userMbti,
+                                reviewObject.getString("user_nickname"), reviewObject.getString("writing"),
+                                response.getString("like"), response.getString("isLike"));
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+                        if (reviewData.getUserId().equals(sharedPreferences.getString("memNum", ""))) {
+                            isMine = true;
+                        } else {
+                            isMine = false;
+                        }
+
+                        tvTitle.setText(reviewData.getTitle());
+                        tvWriting.setText(reviewData.getWriting());
+                        tvNickname.setText(reviewData.getNickname());
+                        tvMbti.setText(reviewData.getMbti());
+                        tvThumbUpNum.setText(reviewData.getLikeNum());
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        requestMovInfo(movCode);
+        requestReview(writingId);
+    }
 }

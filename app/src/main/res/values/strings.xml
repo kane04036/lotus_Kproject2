@@ -71,6 +71,7 @@
     <string name="deleteShortReview">/board/short_reviews/delete</string>
     <string name="modifyLongReview">/board/long_reviews/update</string>
     <string name="deleteLongReview">/board/long_reviews/delete</string>
-
+    <string name="viewLongReviewWritingId">/board/long_reviews/view/board_id</string>
+    <string name="cancelFollow">/follow/following_cancel</string>
     
 </resources>

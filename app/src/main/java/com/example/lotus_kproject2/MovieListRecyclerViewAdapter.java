@@ -41,6 +41,8 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
         this.nameArray = nameArray;
         this.codeArray = codeArray;
         this.yearArray = yearArray;
+        this.title = title;
+        this.contents = contents;
         this.context = context;
     }
 
@@ -67,9 +69,10 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ReviewEditorActivity.class);
-                intent.putExtra("existMovie", 1);
                 intent.putExtra("movName", nameArray.get(holder.getAdapterPosition()));
                 intent.putExtra("movCode", codeArray.get(holder.getAdapterPosition()));
+                intent.putExtra("title", title);
+                intent.putExtra("contents",contents);
                 context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
             }
         });

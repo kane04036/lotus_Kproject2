@@ -62,13 +62,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailOfBoardActivity.class);
-                intent.putExtra("mbti",dataLists.get(holder.getAdapterPosition()).getMbti());
-                intent.putExtra("likeNum",dataLists.get(holder.getAdapterPosition()).getLikeNum());
-                intent.putExtra("nickname",dataLists.get(holder.getAdapterPosition()).getNickname());
-                intent.putExtra("title",dataLists.get(holder.getAdapterPosition()).getTitle());
-                intent.putExtra("writing",dataLists.get(holder.getAdapterPosition()).getWriting());
-                intent.putExtra("boardId", dataLists.get(holder.getAdapterPosition()).getWritingId());
-                intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
+                intent.putExtra("writingId", dataLists.get(holder.getAdapterPosition()).getWritingId());
                 intent.putExtra("movCode",dataLists.get(holder.getAdapterPosition()).getMovieData().getMovCode());
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

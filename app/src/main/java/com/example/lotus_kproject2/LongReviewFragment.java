@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ public class LongReviewFragment extends Fragment {
     private RecyclerView recyclerView;
     ArrayList<ReviewDataList> dataLists = new ArrayList<>();
     private LongReviewBoardRecyclerViewAdapter adapter;
+    private ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -42,6 +44,7 @@ public class LongReviewFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyViewLongReviewBoard);
         adapter = new LongReviewBoardRecyclerViewAdapter(getActivity(), dataLists);
+        progressBar = view.findViewById(R.id.progressInLongBoard);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
@@ -72,6 +75,7 @@ public class LongReviewFragment extends Fragment {
                 try {
 
                     if(response.getString("res").equals("200")){
+                        progressBar.setVisibility(View.INVISIBLE);
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
@@ -84,6 +88,10 @@ public class LongReviewFragment extends Fragment {
                             JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
 
                             int mbtiNum = object.getInt("user_mbti");
+
+                            if(getActivity() == null){
+                                return;
+                            }
                             Resources res = getResources();
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 

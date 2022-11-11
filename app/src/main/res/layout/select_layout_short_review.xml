@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-
         >
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/ratingbarInShortReview"
@@ -35,8 +34,9 @@
                 android:id="@+id/edtShortReview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@null"
                 android:hint="영화에 대해 한 줄 느낌을 남겨주세요."
                 android:maxLength="100"

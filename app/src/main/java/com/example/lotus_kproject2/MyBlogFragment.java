@@ -107,7 +107,9 @@ public class MyBlogFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
             jsonObject.put("userNm", memNum);
+            jsonObject.put("token", sharedPreferences.getString("token",""));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,7 +34,8 @@ import java.util.ArrayList;
 public class PreferFragment extends Fragment {
     private ArrayList<MovieDataList> dataLists = new ArrayList<>();
     private PreferListRecyclerViewAdapter adapter;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -42,6 +44,7 @@ public class PreferFragment extends Fragment {
 
         adapter = new PreferListRecyclerViewAdapter(getActivity(),dataLists);
         recyclerView = view.findViewById(R.id.recyViewPrefer);
+        progressBar = view.findViewById(R.id.progressInPrefer);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
@@ -74,6 +77,7 @@ public class PreferFragment extends Fragment {
                     Log.d(TAG, "onResponse: prefer request data:"+dataJsonArray);
                     dataLists.clear();
                     if(response.getString("res").equals("200")){
+                        progressBar.setVisibility(View.INVISIBLE);
                         for(int i = 0; i<dataJsonArray.length(); i++){
                             JSONArray tmpJsonArray = dataJsonArray.getJSONArray(i);
                             dataLists.add(new MovieDataList(tmpJsonArray.getString(0), tmpJsonArray.getString(1),tmpJsonArray.getString(2), tmpJsonArray.getString(3)));

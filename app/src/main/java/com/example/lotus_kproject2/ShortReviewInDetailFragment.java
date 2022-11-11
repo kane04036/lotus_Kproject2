@@ -209,8 +209,10 @@ public class ShortReviewInDetailFragment extends Fragment {
                         edtShortReview.clearFocus();
                         shortReviewListRequest(movCode);
                     } else if (response.getString("res").equals("201")) {
+                        if(getActivity() == null){return;}
                         Toast.makeText(getActivity(), "이미 작성된 리뷰가 있습니다.", Toast.LENGTH_SHORT).show();
                     } else {
+                        if(getActivity() == null){return;}
                         Toast.makeText(getActivity(), "리뷰 작성에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                     }
 
@@ -257,6 +259,9 @@ public class ShortReviewInDetailFragment extends Fragment {
                         JSONArray mineArray = response.getJSONArray("mine");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
 
+                        if(getActivity() == null){
+                            return;
+                        }
                         Resources res = getResources();
                         String[] mbtiList = res.getStringArray(R.array.mbti_array);
 

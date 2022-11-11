@@ -110,6 +110,9 @@ public class LongReviewInDetailFragment extends Fragment {
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
 
+                        if(getActivity() == null){
+                            return;
+                        }
                         Resources res = getResources();
                         String[] mbtiList = res.getStringArray(R.array.mbti_array);
 

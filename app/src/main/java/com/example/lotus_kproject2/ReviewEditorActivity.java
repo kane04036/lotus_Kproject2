@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +39,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ReviewEditorActivity extends AppCompatActivity {
-    EditText edtTitle, edtReview;
-    TextView tvChooseMov;
-    String movName, movCode;
+    private EditText edtTitle, edtReview;
+    private TextView tvChooseMov;
+    private String movName, movCode;
     private MaterialToolbar topbar;
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -55,15 +57,15 @@ public class ReviewEditorActivity extends AppCompatActivity {
         edtReview = findViewById(R.id.edtReview);
         tvChooseMov = findViewById(R.id.tvChooseMov);
         topbar = findViewById(R.id.topAppBarInEditor);
+        progressBar = findViewById(R.id.progressInEditor);
+
 
         if(getIntent().hasExtra("movName")){
             movName = getIntent().getStringExtra("movName");
             movCode = getIntent().getStringExtra("movCode");
 
-            if (getIntent().getStringExtra("title") != null)
-                edtTitle.setText(String.valueOf(getIntent().getStringExtra("title")));
-            if (getIntent().getStringExtra("contents") != null)
-                edtReview.setText(String.valueOf(getIntent().getStringExtra("contents")));
+            edtTitle.setText(String.valueOf(getIntent().getStringExtra("title")));
+            edtReview.setText(String.valueOf(getIntent().getStringExtra("contents")));
             tvChooseMov.setText(movName);
         }
 
@@ -72,6 +74,7 @@ public class ReviewEditorActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_upload:
+                        progressBar.setVisibility(View.VISIBLE);
                         longReviewWrite();
                 }
                 return false;
@@ -90,7 +93,6 @@ public class ReviewEditorActivity extends AppCompatActivity {
                 intent.putExtra("title", edtTitle.getText().toString());
                 intent.putExtra("contents", edtReview.getText().toString());
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -125,14 +127,18 @@ public class ReviewEditorActivity extends AppCompatActivity {
 
                     Log.d(TAG, "onResponse: res:" + response.getString("res"));
                     if(response.getString("res").equals("200")){
+                        progressBar.setVisibility(View.INVISIBLE);
+                        topbar.setEnabled(false);
                         Intent intent = new Intent(getApplicationContext(), DetailOfBoardActivity.class);
-                        intent.putExtra("title", edtTitle.getText().toString());
-                        intent.putExtra("writing", edtReview.getText().toString());
-                        intent.putExtra("nickname", sharedPreferences_user.getString("nickname",""));
-                        intent.putExtra("mbti", sharedPreferences_user.getString("mbti",""));
-                        intent.putExtra("userId",sharedPreferences_login.getString("memNum",""));
-                        intent.putExtra("boardId","00000");
-                        intent.putExtra("movCode", movCode);
+//                        intent.putExtra("title", edtTitle.getText().toString());
+//                        intent.putExtra("writing", edtReview.getText().toString());
+//                        intent.putExtra("nickname", sharedPreferences_user.getString("nickname",""));
+//                        intent.putExtra("mbti", sharedPreferences_user.getString("mbti",""));
+//                        intent.putExtra("userId",sharedPreferences_login.getString("memNum",""));
+//                        intent.putExtra("boardId","00000");
+//                        intent.putExtra("movCode", movCode);
+                        intent.putExtra("writingId",response.getString("data"));
+                        intent.putExtra("movCode",movCode);
                         startActivity(intent);
                     }
 

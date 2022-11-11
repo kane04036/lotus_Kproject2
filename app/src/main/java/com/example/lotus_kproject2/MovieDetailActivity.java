@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -38,15 +39,15 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ShortReviewInDetailFragment shortReviewInDetailFragment = new ShortReviewInDetailFragment();
 
 
-
-    MaterialToolbar topBarInDetail;
-    TextView tvMovieName, tvGenre, tvCountry, tvRunningTime, tvReleaseDate, tvSummary, tvReadMore, tvTabBarLongReview, tvTabBarShortReview, tvDirector, tvActor, tvReadMoreActors;
-    ImageView imageMovDetail, imgLike;
-    Integer prefer;
-    private String summary, summary_sub, movCode, director, actors, actors_sub, movName, movImg, releaseDate, releaseDate_sub,genres;
-    FrameLayout frameLayoutInDetail;
-    SharedPreferences sharedPreferences;
-    Bundle result = new Bundle();
+    private MaterialToolbar topBarInDetail;
+    private TextView tvMovieName, tvGenre, tvCountry, tvRunningTime, tvReleaseDate, tvSummary, tvReadMore, tvTabBarLongReview, tvTabBarShortReview, tvDirector, tvActor, tvReadMoreActors;
+    private ImageView imageMovDetail, imgLike;
+    private Integer prefer;
+    private String summary, summary_sub, movCode, director, actors, actors_sub, movName, movImg, releaseDate, releaseDate_sub, genres;
+    private FrameLayout frameLayoutInDetail;
+    private SharedPreferences sharedPreferences;
+    private Bundle result = new Bundle();
+    private ProgressBar progressBar;
 
     ArrayList<String> actorArray = new ArrayList<>();
 
@@ -63,7 +64,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         result.putString("movCode", movCode);
         fragmentManager.setFragmentResult("movData_long", result);
-        fragmentManager.setFragmentResult("movData_short",result);
+        fragmentManager.setFragmentResult("movData_short", result);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frameLayoutInDetail, longReviewInDetailFragment).commitAllowingStateLoss();
 
@@ -83,7 +84,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvActor = findViewById(R.id.tvActor);
         tvReadMoreActors = findViewById(R.id.tvReadMoreActors);
         tvGenre = findViewById(R.id.tvGenre);
-
+        progressBar = findViewById(R.id.progressInDetail);
 
 
         tvReadMoreActors.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +179,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("id", movCode);
             jsonObject.put("token", sharedPreferences.getString("token", ""));
-            Log.d(TAG, "movieDetailRequest: token:" + sharedPreferences.getString("token", "")+"code:"+movCode);
+            Log.d(TAG, "movieDetailRequest: token:" + sharedPreferences.getString("token", "") + "code:" + movCode);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,71 +192,75 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: movDetail Result: " + response.getString("res"));
-                    JSONArray dataJsonArrayAll = response.getJSONArray("data");
 
-                    prefer = (Integer) dataJsonArrayAll.get(0);
+                    if (response.getString("res").equals("200")) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        JSONArray dataJsonArrayAll = response.getJSONArray("data");
 
-                    JSONArray dataJsonArray = dataJsonArrayAll.getJSONArray(1);
-                    director = (String) dataJsonArray.get(4);
-                    movName = (String) dataJsonArray.get(0);
-                    String movCode = (String) dataJsonArray.get(1);
-                    Log.d(TAG, "onResponse: movCode:"+movCode);
-                    movImg = (String) dataJsonArray.get(3);
-                    String runningTime = (String) dataJsonArray.get(2);
-                    String country = (String) dataJsonArray.get(6);
-                    releaseDate = (String) dataJsonArray.get(7);
-                    genres = dataJsonArray.getString(8);
-                    genres = genres.replaceAll(","," | ");
-                    JSONArray actorJsonArray = dataJsonArray.getJSONArray(5);
-                    for (int i = 0; i < actorJsonArray.length(); i++) {
-                        JSONObject actorObj = actorJsonArray.getJSONObject(i);
-                        actorArray.add(actorObj.getString("actorNm"));
-                    }
-                    actors = actorArray.toString();
-                    actors = actors.replaceAll("\\[", "");
-                    actors = actors.replaceAll("\\]", "");
+                        prefer = (Integer) dataJsonArrayAll.get(0);
 
-                    if (actors.length() > 30) {
-                        actors_sub = actors.substring(0, 30);
-                        tvActor.setText(actors_sub + "...");
-                    } else{
-                        actors_sub = actors;
-                        tvActor.setText(actors_sub);
-                        tvReadMoreActors.setText("");
-                    }
+                        JSONArray dataJsonArray = dataJsonArrayAll.getJSONArray(1);
+                        director = (String) dataJsonArray.get(4);
+                        movName = (String) dataJsonArray.get(0);
+                        String movCode = (String) dataJsonArray.get(1);
+                        Log.d(TAG, "onResponse: movCode:" + movCode);
+                        movImg = (String) dataJsonArray.get(3);
+                        String runningTime = (String) dataJsonArray.get(2);
+                        String country = (String) dataJsonArray.get(6);
+                        releaseDate = (String) dataJsonArray.get(7);
+                        genres = dataJsonArray.getString(8);
+                        genres = genres.replaceAll(",", " | ");
+                        JSONArray actorJsonArray = dataJsonArray.getJSONArray(5);
+                        for (int i = 0; i < actorJsonArray.length(); i++) {
+                            JSONObject actorObj = actorJsonArray.getJSONObject(i);
+                            actorArray.add(actorObj.getString("actorNm"));
+                        }
+                        actors = actorArray.toString();
+                        actors = actors.replaceAll("\\[", "");
+                        actors = actors.replaceAll("\\]", "");
+
+                        if (actors.length() > 30) {
+                            actors_sub = actors.substring(0, 30);
+                            tvActor.setText(actors_sub + "...");
+                        } else {
+                            actors_sub = actors;
+                            tvActor.setText(actors_sub);
+                            tvReadMoreActors.setText("");
+                        }
 
 
-                    summary = (String) dataJsonArray.get(9);
-                    if (summary.length() > 100) {
-                        summary_sub = summary.substring(0, 100);
-                    } else {
-                        summary_sub = summary;
-                        summary_long = false;
-                        tvReadMore.setText("");
-                    }
+                        summary = (String) dataJsonArray.get(9);
+                        if (summary.length() > 100) {
+                            summary_sub = summary.substring(0, 100);
+                        } else {
+                            summary_sub = summary;
+                            summary_long = false;
+                            tvReadMore.setText("");
+                        }
 
-                    if (releaseDate.length() > 4)
-                        releaseDate_sub = releaseDate.substring(0, 4);
-                    else
-                        tvReleaseDate.setText("개봉일자 불명");
+                        if (releaseDate.length() > 4)
+                            releaseDate_sub = releaseDate.substring(0, 4);
+                        else
+                            tvReleaseDate.setText("개봉일자 불명");
 
-                    tvSummary.setText(summary_sub + "...");
-                    tvReleaseDate.setText(releaseDate_sub);
-                    tvCountry.setText(country);
-                    tvRunningTime.setText(runningTime + "분");
-                    tvDirector.setText(director);
-                    tvMovieName.setText(movName);
-                    topBarInDetail.setTitle(movName);
-                    tvGenre.setText(genres);
+                        tvSummary.setText(summary_sub + "...");
+                        tvReleaseDate.setText(releaseDate_sub);
+                        tvCountry.setText(country);
+                        tvRunningTime.setText(runningTime + "분");
+                        tvDirector.setText(director);
+                        tvMovieName.setText(movName);
+                        topBarInDetail.setTitle(movName);
+                        tvGenre.setText(genres);
 
-                    Glide.with(getApplicationContext()).load(movImg).error(R.drawable.gray_profile).into(imageMovDetail);
+                        Glide.with(getApplicationContext()).load(movImg).error(R.drawable.gray_profile).into(imageMovDetail);
 
-                    if (prefer == 1) {
-                        imgLike.setImageResource(R.drawable.bookmark_filled_small);
-                        isLike = true;
-                    } else {
-                        imgLike.setImageResource(R.drawable.bookmark_small);
-                        isLike = false;
+                        if (prefer == 1) {
+                            imgLike.setImageResource(R.drawable.bookmark_filled_small);
+                            isLike = true;
+                        } else {
+                            imgLike.setImageResource(R.drawable.bookmark_small);
+                            isLike = false;
+                        }
                     }
 
 
@@ -286,7 +291,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             jsonObject.put("director", director);
             jsonObject.put("actor", actorsForPreferAdd);
             jsonObject.put("token", sharedPreferences.getString("token", ""));
-            jsonObject.put("title",movName);
+            jsonObject.put("title", movName);
             jsonObject.put("thumbnail", movImg);
             jsonObject.put("year", releaseDate);
 
@@ -302,7 +307,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: prefer Add Result: " + response.getString("res"));
-                    if(response.getString("res").equals("200")){
+                    if (response.getString("res").equals("200")) {
                         imgLike.setImageResource(R.drawable.bookmark_filled_small);
                         isLike = true;
                     }
@@ -344,7 +349,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: prefer Sub Result: " + response.getString("res"));
-                    if(response.getString("res").equals("200")){
+                    if (response.getString("res").equals("200")) {
                         imgLike.setImageResource(R.drawable.bookmark_small);
                         isLike = false;
                     }

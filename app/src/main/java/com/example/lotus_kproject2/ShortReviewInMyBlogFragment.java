@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,7 +37,8 @@ public class ShortReviewInMyBlogFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
     private ShortReviewInMyBlogRecyclerViewAdapter adapter;
-    String userId;
+    private String userId;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class ShortReviewInMyBlogFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shortreview_board, container, false);
 
         recyclerView = view.findViewById(R.id.recyViewShortReviewBoard);
+        progressBar = view.findViewById(R.id.progressInShortBoard);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -93,6 +96,7 @@ public class ShortReviewInMyBlogFragment extends Fragment {
                 try {
                     Log.d(TAG, "onResponse: short review myblog request:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
+                        progressBar.setVisibility(View.INVISIBLE);
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
@@ -106,6 +110,8 @@ public class ShortReviewInMyBlogFragment extends Fragment {
                                     movieInfoObject.getString(3), movieInfoObject.getString(4));
 
                             int mbtiNum = object.getInt("user_mbti");
+
+                            if(getActivity() == null){return;}
                             Resources res = getResources();
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 

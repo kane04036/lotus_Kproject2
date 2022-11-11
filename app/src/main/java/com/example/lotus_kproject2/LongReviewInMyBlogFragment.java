@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,10 +33,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class LongReviewInMyBlogFragment extends Fragment {
-    String userId;
-    ArrayList<ReviewDataList> dataLists = new ArrayList<>();
+    private String userId;
+    private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
     private RecyclerView recyclerView;
     private LongReviewInMyBlogRecyclerViewAdapter adapter;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class LongReviewInMyBlogFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_longreview_board, container, false);
 
         recyclerView = view.findViewById(R.id.recyViewLongReviewBoard);
+        progressBar = view.findViewById(R.id.progressInLongBoard);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
@@ -89,6 +92,7 @@ public class LongReviewInMyBlogFragment extends Fragment {
                 try {
                     Log.d(TAG, "long review in blog|res:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
+                        progressBar.setVisibility(View.INVISIBLE);
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
@@ -100,6 +104,9 @@ public class LongReviewInMyBlogFragment extends Fragment {
                             JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
                             Log.d(TAG, "onResponse: longreview movie info"+movieInfoObject);
 
+                            if(getActivity() == null){
+                                return;
+                            }
                             Resources res = getResources();
                             String[] mbtiList = res.getStringArray(R.array.mbti_array);
 

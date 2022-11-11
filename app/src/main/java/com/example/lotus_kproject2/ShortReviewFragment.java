@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,9 +40,10 @@ import java.util.ArrayList;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 public class ShortReviewFragment extends Fragment {
-    RecyclerView recyclerView;
-    ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    ShortReviewBoardRecyclerViewAdapter adapter;
+    private RecyclerView recyclerView;
+    private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
+    private ShortReviewBoardRecyclerViewAdapter adapter;
+    private ProgressBar progressBar;
 
 
     @Nullable
@@ -51,6 +53,8 @@ public class ShortReviewFragment extends Fragment {
 
         adapter = new ShortReviewBoardRecyclerViewAdapter(getActivity(), dataLists);
         recyclerView = view.findViewById(R.id.recyViewShortReviewBoard);
+        progressBar = view.findViewById(R.id.progressInShortBoard);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
@@ -79,6 +83,7 @@ public class ShortReviewFragment extends Fragment {
                     Log.d(TAG, "onResponse: short review board request:"+response.getString("res"));
 
                     if(response.getString("res").equals("200")){
+                        progressBar.setVisibility(View.INVISIBLE);
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray movieInfoArray = response.getJSONArray("movie_info");
@@ -93,6 +98,11 @@ public class ShortReviewFragment extends Fragment {
                             MovieDataList movieData = new MovieDataList(movieInfoObject.getString(2), movieInfoObject.getString(1),
                                     movieInfoObject.getString(3), movieInfoObject.getString(4));
                             int mbtiNum = object.getInt("user_mbti");
+
+                            if(getActivity() == null){
+                                return;
+                            }
+
                             Resources res = getResources();
                             String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 

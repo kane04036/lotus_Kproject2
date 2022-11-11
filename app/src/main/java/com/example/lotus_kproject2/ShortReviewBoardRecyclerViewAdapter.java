@@ -295,8 +295,6 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
                     if (response.getString("res").equals("200")) {
                         Log.d(TAG, "onResponse: remove index:" + index);
                         dataLists.remove(index);
-                        notifyItemRemoved(index);
-                        notifyItemRangeChanged(0, dataLists.size());
                     }
 
 
