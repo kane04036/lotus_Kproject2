@@ -31,13 +31,16 @@ import java.util.ArrayList;
 public class MoreListActivity extends AppCompatActivity {
     private LongReviewBoardRecyclerViewAdapter longReviewAdapter;
     private ShortReviewBoardRecyclerViewAdapter shortReviewAdapter;
-    private MovieListRecyclerViewAdapter movieAdapter;
+    private PreferListRecyclerViewAdapter movieAdapter;
 
     private MaterialToolbar appbar;
     private RecyclerView recyclerView;
 
     private ArrayList<ReviewDataList> shortReviewDataList = new ArrayList<>();
     private ArrayList<ReviewDataList> longReviewDataList = new ArrayList<>();
+    private ArrayList<MovieDataList> movieDataList = new ArrayList<>();
+    SharedPreferences sharedPreferences;
+
     private String keyword;
     private Integer type;
 
@@ -48,6 +51,7 @@ public class MoreListActivity extends AppCompatActivity {
 
         keyword = getIntent().getStringExtra("keyword");
         type = getIntent().getIntExtra("type",4);
+        sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
 
         appbar = findViewById(R.id.topBarMoreList);
         recyclerView = findViewById(R.id.recyViewMoreList);
@@ -61,12 +65,14 @@ public class MoreListActivity extends AppCompatActivity {
 
         longReviewAdapter = new LongReviewBoardRecyclerViewAdapter(getApplicationContext(), longReviewDataList);
         shortReviewAdapter = new ShortReviewBoardRecyclerViewAdapter(getApplicationContext(), shortReviewDataList);
+        movieAdapter = new PreferListRecyclerViewAdapter(getApplicationContext(),movieDataList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false));
 
 
         switch (type){
             case 0:
+                recyclerView.setAdapter(movieAdapter);
                 break;
             case 1:
                 recyclerView.setAdapter(longReviewAdapter);
@@ -85,6 +91,7 @@ public class MoreListActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("token",sharedPreferences.getString("token",""));
             jsonObject.put("keyword", keyword);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,19 +109,27 @@ public class MoreListActivity extends AppCompatActivity {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
+                        JSONArray movInfoArray = response.getJSONArray("movie_info");
+
+                        if(getApplicationContext() == null){
+                            return;
+                        }
+                        Resources res = getResources();
+                        String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                         shortReviewDataList.clear();
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject object = dataJsonArray.getJSONObject(i);
+                            JSONArray movInfoObject = movInfoArray.getJSONArray(i);
                             int mbtiNum = object.getInt("user_mbti");
-                            Resources res = getResources();
-                            String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                             float star = Float.parseFloat(object.getString("star"));
+                            MovieDataList movieData = new MovieDataList(movInfoObject.getString(2),movInfoObject.getString(1),
+                                    movInfoObject.getString(3),movInfoObject.getString(4));
 
                             shortReviewDataList.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), star,likeArray.getInt(i),isLikeArray.getString(i)));
+                                    object.getString("user_nickname"), object.getString("writing"), star,likeArray.getInt(i),movieData,isLikeArray.getString(i)));
                         }
                         shortReviewAdapter.notifyDataSetChanged();
                     }
@@ -140,6 +155,7 @@ public class MoreListActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("keyword",keyword );
+            jsonObject.put("token",sharedPreferences.getString("token",""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -157,18 +173,27 @@ public class MoreListActivity extends AppCompatActivity {
                         JSONArray dataJsonArray = response.getJSONArray("data");
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
+                        JSONArray movInfoArray = response.getJSONArray("movie_info");
+
+                        if(getApplicationContext() == null){
+                            return;
+                        }
+                        Resources res = getResources();
+                        String[] mbtiArray = res.getStringArray(R.array.mbti_array);
 
                         longReviewDataList.clear();
-
                         for(int i = 0; i<dataJsonArray.length(); i++){
                             JSONObject object = dataJsonArray.getJSONObject(i);
+                            JSONArray movInfoObject = movInfoArray.getJSONArray(i);
+
                             int mbtiNum = object.getInt("user_mbti");
-                            Resources res = getResources();
-                            String[] mbtiArray = res.getStringArray(R.array.mbti_array);
+
+                            MovieDataList movieData = new MovieDataList(movInfoObject.getString(2),movInfoObject.getString(1),
+                                    movInfoObject.getString(3),movInfoObject.getString(4));
 
                             longReviewDataList.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("title"), object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getInt(i),isLikeArray.getString(i)));
+                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getInt(i),movieData,isLikeArray.getString(i)));
                         }
                         longReviewAdapter.notifyDataSetChanged();
                     }
@@ -186,6 +211,8 @@ public class MoreListActivity extends AppCompatActivity {
             }
         });
         Queue.add(jsonObjectRequest);
+    }
+    private void requestMovieData(){
 
     }
 }

@@ -276,7 +276,7 @@ public class ShortReviewInDetailFragment extends Fragment {
                             tvMyNickname.setText(myReview.getNickname());
                             tvMyWriting.setText(myReview.getWriting());
                             tvMyMbti.setText(myReview.getMbti());
-                            tvMyThumbUpNum.setText(myReview.getLikeNum());
+                            tvMyThumbUpNum.setText(String.valueOf(myReview.getLikeNum()));
                             myRatingBar.setRating(myReview.getStar());
                             if (myReview.getIsLike().equals("1")) {
                                 imgMyThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);

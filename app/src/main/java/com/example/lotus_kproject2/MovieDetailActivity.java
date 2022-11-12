@@ -238,13 +238,14 @@ public class MovieDetailActivity extends AppCompatActivity {
                             tvReadMore.setText("");
                         }
 
-                        if (releaseDate.length() > 4)
+                        if (releaseDate.length() > 4) {
                             releaseDate_sub = releaseDate.substring(0, 4);
+                            tvReleaseDate.setText(releaseDate_sub);
+                        }
                         else
                             tvReleaseDate.setText("개봉일자 불명");
 
                         tvSummary.setText(summary_sub + "...");
-                        tvReleaseDate.setText(releaseDate_sub);
                         tvCountry.setText(country);
                         tvRunningTime.setText(runningTime + "분");
                         tvDirector.setText(director);

@@ -3,8 +3,7 @@
     android:id="@+id/frameLayoutInMovieResult2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    >
+    android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,22 +60,25 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imgBtnMoreMovie"
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvMovie2"
                 android:layout_alignBottom="@+id/tvMovie2"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
+                android:adjustViewBounds="true"
                 android:background="@null"
-                android:src="@drawable/forward_small" />
+                android:src="@drawable/forward" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movieRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvMovie2"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal" />
 
         </RelativeLayout>
@@ -93,15 +95,17 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imgBtnMoreLongReview"
-            android:layout_width="wrap_content"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvLongReview2"
             android:layout_alignBottom="@+id/tvLongReview2"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:adjustViewBounds="true"
             android:background="@null"
-            android:src="@drawable/forward_small" />
+            android:src="@drawable/forward" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyViewLongReviewInResult"
@@ -124,15 +128,17 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imgBtnMoreShortReview"
-            android:layout_width="wrap_content"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvShortReview2"
             android:layout_alignBottom="@+id/tvShortReview2"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:adjustViewBounds="true"
             android:background="@null"
-            android:src="@drawable/forward_small" />
+            android:src="@drawable/forward" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyViewShortReviewInResult"

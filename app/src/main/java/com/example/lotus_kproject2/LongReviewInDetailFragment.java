@@ -59,8 +59,8 @@ public class LongReviewInDetailFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         longReviewListRequest(movCode);
 
     }

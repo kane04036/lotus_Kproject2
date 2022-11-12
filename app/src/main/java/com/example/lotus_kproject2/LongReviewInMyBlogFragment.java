@@ -50,11 +50,11 @@ public class LongReviewInMyBlogFragment extends Fragment {
         });
         adapter = new LongReviewInMyBlogRecyclerViewAdapter(getActivity(), dataLists);
     }
-
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         longReviewRequest(userId);
+
     }
 
     @Nullable

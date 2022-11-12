@@ -27,16 +27,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecyclerViewAdapter.ViewHolder> {
-    ArrayList<String> movieImageArray;
-    ArrayList<String> movieNameArray;
-    ArrayList<String> movieCodeArray;
+//    ArrayList<String> movieImageArray;
+//    ArrayList<String> movieNameArray;
+//    ArrayList<String> movieCodeArray;
+
+    ArrayList<MovieDataList> dataLists = new ArrayList<>();
     Fragment movieDetailFragment = new MovieDetailFragment();
     Context context;
-    public MovieRecyclerViewAdapter(Context context, ArrayList nameArray, ArrayList imageArray, ArrayList codeArray){
-        movieNameArray = nameArray;
-        movieImageArray = imageArray;
-        movieCodeArray = codeArray;
-
+    public MovieRecyclerViewAdapter(Context context, ArrayList dataLists){
+        this.dataLists = dataLists;
         this.context = context;
     }
     @NonNull
@@ -51,12 +50,11 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvMovieNameResult.setText(movieNameArray.get(holder.getAdapterPosition()));
+        holder.tvMovieNameResult.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
         holder.imageMovieResult.setClipToOutline(true);
 
-
         Glide.with(context).
-                load(movieImageArray.get(holder.getAdapterPosition())).error(R.drawable.gray_profile)
+                load(dataLists.get(holder.getAdapterPosition()).getMovImg()).error(R.drawable.gray_profile)
                 .fallback(R.drawable.profile)
                 .into(holder.imageMovieResult);
 
@@ -64,12 +62,10 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         holder.imageMovieResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "recyclerView: Mov Code"+movieCodeArray.get(holder.getAdapterPosition()));
-                Log.d(TAG, "recyclerView: Mov Name"+movieNameArray.get(holder.getAdapterPosition()));
                 Intent intent = new Intent(context, MovieDetailActivity.class);
-                intent.putExtra("movName", movieNameArray.get(holder.getAdapterPosition()));
-                intent.putExtra("movImage",movieImageArray.get(holder.getAdapterPosition()));
-                intent.putExtra("movCode",movieCodeArray.get(holder.getAdapterPosition()));
+                intent.putExtra("movName", dataLists.get(holder.getAdapterPosition()).getMovName());
+                intent.putExtra("movImage",dataLists.get(holder.getAdapterPosition()).getMovImg());
+                intent.putExtra("movCode",dataLists.get(holder.getAdapterPosition()).getMovCode());
                 context.startActivity(intent);
             }
         });
@@ -77,7 +73,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
 
     @Override
     public int getItemCount() {
-        return movieCodeArray.size();
+        return dataLists.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

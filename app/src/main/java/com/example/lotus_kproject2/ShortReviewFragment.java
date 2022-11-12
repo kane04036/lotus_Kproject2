@@ -61,9 +61,10 @@ public class ShortReviewFragment extends Fragment {
         return view;
     }
 
+
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         shortReviewRequest();
     }
 

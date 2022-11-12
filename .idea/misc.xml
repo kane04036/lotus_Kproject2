@@ -102,6 +102,7 @@
         <entry key="app/src/main/res/layout/long_review_item_myblog.xml" value="0.2726449275362319" />
         <entry key="app/src/main/res/layout/long_review_list_item.xml" value="0.37318840579710144" />
         <entry key="app/src/main/res/layout/long_review_myblog_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/long_review_search_result_item.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/movie_detail.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/movie_horizontalscroll_item.xml" value="0.31657608695652173" />
         <entry key="app/src/main/res/layout/movie_list_item.xml" value="0.18" />
@@ -114,6 +115,7 @@
         <entry key="app/src/main/res/layout/short_review_board_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/short_review_in_detail_item.xml" value="0.375" />
         <entry key="app/src/main/res/layout/short_review_myblog_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/short_review_search_result_item.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/detail_top_bar.xml" value="0.20364583333333333" />
         <entry key="app/src/main/res/menu/mbti_spinner.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/navigation_drawer.xml" value="0.39166666666666666" />
