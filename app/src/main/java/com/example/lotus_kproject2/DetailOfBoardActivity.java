@@ -36,11 +36,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DetailOfBoardActivity extends AppCompatActivity {
-    private String writingId, userId, movCode, movImgUrl, movName, movDate, title, writing;
+    private String writingId, movCode, movImgUrl, movName, movDate;
     private TextView tvTitle, tvMbti, tvNickname, tvWriting, tvMovName, tvMovDate, tvThumbUpNum;
-    private ImageView imgMov;
+    private ImageView imgMov, imgThumbUP;
     private MaterialToolbar appbar;
-    private Boolean isMine = false;
+    private Boolean isMine = false, isLike = false;
     private ReviewDataList reviewData;
     private ProgressBar progressBar;
 
@@ -59,12 +59,14 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         imgMov = findViewById(R.id.imgMovInMovInfo);
         tvThumbUpNum = findViewById(R.id.tvThumbUpNumInDetailOfBoard);
         progressBar = findViewById(R.id.progressInDetailOfBoard);
+        imgThumbUP = findViewById(R.id.imgThumbUpInDetailOfBoard);
 
 
         writingId = getIntent().getStringExtra("writingId");
         movCode = getIntent().getStringExtra("movCode");
         requestMovInfo(movCode);
         requestReview(writingId);
+        Log.d(TAG, "writingID: "+writingId);
 
         imgMov.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,14 +87,24 @@ public class DetailOfBoardActivity extends AppCompatActivity {
 
 
 
+        imgThumbUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isLike)
+                    requestLikeCancel(writingId);
+                else
+                    requestLikeAdd(writingId);
+            }
+        });
 
         tvNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), OtherUserBlogActivity.class);
-                intent.putExtra("nickname", getIntent().getStringExtra("nickname"));
-                intent.putExtra("mbti", getIntent().getStringExtra("mbti"));
-                intent.putExtra("userId", userId);
+                intent.putExtra("nickname", reviewData.getNickname());
+                intent.putExtra("mbti", reviewData.getMbti());
+                intent.putExtra("userId", reviewData.getUserId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -345,7 +357,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                                 reviewObject.getString("movie_name"), reviewObject.getString("title"),
                                 reviewObject.getString("user_id"), userMbti,
                                 reviewObject.getString("user_nickname"), reviewObject.getString("writing"),
-                                response.getString("like"), response.getString("isLike"));
+                                response.getInt("like"), response.getString("isLike"));
 
                         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
                         if (reviewData.getUserId().equals(sharedPreferences.getString("memNum", ""))) {
@@ -358,7 +370,10 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                         tvWriting.setText(reviewData.getWriting());
                         tvNickname.setText(reviewData.getNickname());
                         tvMbti.setText(reviewData.getMbti());
-                        tvThumbUpNum.setText(reviewData.getLikeNum());
+                        tvThumbUpNum.setText(String.valueOf(reviewData.getLikeNum()));
+                        if(reviewData.getIsLike().equals("1")){
+                            imgThumbUP.setImageResource(R.drawable.thumb_up_filled_medium);
+                        }
 
                     }
 
@@ -377,6 +392,89 @@ public class DetailOfBoardActivity extends AppCompatActivity {
         });
         Queue.add(jsonObjectRequest);
 
+    }
+    private void requestLikeAdd(String boardId){
+        RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences("loginData", Context.MODE_PRIVATE);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("board_id", boardId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.longLikeAdd);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: board like: res" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
+                        imgThumbUP.setImageResource(R.drawable.thumb_up_filled_medium);
+                        Integer likeNum = reviewData.getLikeNum() +1;
+                        tvThumbUpNum.setText(String.valueOf(likeNum));
+                        reviewData.setLikeNum(likeNum);
+                        reviewData.setIsLike("1");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+
+    }
+    private void requestLikeCancel(String boardId){
+        RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sharedPreferences = getSharedPreferences("loginData", Context.MODE_PRIVATE);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("board_id", boardId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = getString(R.string.server) + getString(R.string.longLikeCancel);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d(TAG, "onResponse: board like cancel: res" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
+                        imgThumbUP.setImageResource(R.drawable.thumb_up_medium);
+                        Integer likeNum = reviewData.getLikeNum() -1;
+                        tvThumbUpNum.setText(String.valueOf(likeNum));
+                        reviewData.setLikeNum(likeNum);
+                        reviewData.setIsLike("0");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
     }
 
     @Override

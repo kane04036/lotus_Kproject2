@@ -271,7 +271,7 @@ public class ShortReviewInDetailFragment extends Fragment {
                             JSONObject myReviewObject = mineArray.getJSONObject(0);
                             myReview = new ReviewDataList(myReviewObject.getString("_id"), myReviewObject.getString("movie_id"), myReviewObject.getString("movie_name"),
                                     myReviewObject.getString("user_id"), mbtiList[myReviewObject.getInt("user_mbti")], myReviewObject.getString("user_nickname"),
-                                    myReviewObject.getString("writing"), Float.valueOf(myReviewObject.getString("star")), mineArray.getString(1), mineArray.getString(3));
+                                    myReviewObject.getString("writing"), Float.valueOf(myReviewObject.getString("star")), mineArray.getInt(1), mineArray.getString(3));
 
                             tvMyNickname.setText(myReview.getNickname());
                             tvMyWriting.setText(myReview.getWriting());
@@ -292,7 +292,7 @@ public class ShortReviewInDetailFragment extends Fragment {
                             JSONObject dataObj = dataJsonArray.getJSONObject(i);
                             dataLists.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"), dataObj.getString("movie_name"),
                                     dataObj.getString("user_id"), mbtiList[dataObj.getInt("user_mbti")], dataObj.getString("user_nickname"),
-                                    dataObj.getString("writing"), Float.valueOf(dataObj.getInt("star")), likeArray.getString(i), isLikeArray.getString(i)));
+                                    dataObj.getString("writing"), Float.valueOf(dataObj.getInt("star")), likeArray.getInt(i), isLikeArray.getString(i)));
                         }
                         shortReviewInDetailRecyclerViewAdapter.notifyDataSetChanged();
                     }

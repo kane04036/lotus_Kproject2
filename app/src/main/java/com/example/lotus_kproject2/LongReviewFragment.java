@@ -49,9 +49,12 @@ public class LongReviewFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
-        longReviewDataRequest();
-
         return view;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        longReviewDataRequest();
     }
 
     private void longReviewDataRequest(){
@@ -100,7 +103,7 @@ public class LongReviewFragment extends Fragment {
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                     object.getString("title"), object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getString(i), movieData,isLikeArray.getString(i)));
+                                    object.getString("user_nickname"), object.getString("writing"), likeArray.getInt(i), movieData,isLikeArray.getString(i)));
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -119,4 +122,6 @@ public class LongReviewFragment extends Fragment {
         });
         Queue.add(jsonObjectRequest);
     }
+
+
 }

@@ -63,8 +63,8 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         tvMbti.setText(getIntent().getStringExtra("mbti"));
         memNum = getIntent().getStringExtra("userId");
 
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
-        if(memNum.equals(sharedPreferences.getString("memNum",""))){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
+        if (memNum.equals(sharedPreferences.getString("memNum", ""))) {
             btnFollow.setVisibility(View.INVISIBLE);
             btnFollow.setEnabled(false);
         }
@@ -81,9 +81,9 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         btnFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isFollow) {
+                if (!isFollow) {
                     requestFollow(memNum);
-                }else{
+                } else {
                     requestCancelFollow();
                 }
             }
@@ -172,9 +172,9 @@ public class OtherUserBlogActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("userNm", memNum);
-            jsonObject.put("token", sharedPreferences.getString("token",""));
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,18 +187,18 @@ public class OtherUserBlogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: my page: res:"+response.getString("res"));
-                    if(response.getString("res").equals("200")){
+                    Log.d(TAG, "onResponse: my page: res:" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
                         JSONArray dataArray = response.getJSONArray("data");
                         followerNum = dataArray.getInt(3);
                         followingNum = dataArray.getInt(4);
                         tvFollowerNum.setText(String.valueOf(followerNum));
                         tvFollowingNum.setText(String.valueOf(followingNum));
-                        if(dataArray.getString(5).equals("1")){
+                        if (dataArray.getString(5).equals("1")) {
                             btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
                             isFollow = true;
                         }
-                        Log.d(TAG, "onResponse: following:"+dataArray.getString(4)+"follower:"+dataArray.getString(3));
+                        Log.d(TAG, "onResponse: following:" + dataArray.getString(4) + "follower:" + dataArray.getString(3));
 
                     }
 
@@ -218,7 +218,8 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         Queue.add(jsonObjectRequest);
 
     }
-    private void requestCancelFollow(){
+
+    private void requestCancelFollow() {
         RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject jsonObject = new JSONObject();
@@ -242,7 +243,7 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse: follow cancel request res:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
                         btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_signaturecolor));
-                        followerNum -=1;
+                        followerNum -= 1;
                         tvFollowerNum.setText(String.valueOf(followerNum));
                         isFollow = false;
                     }

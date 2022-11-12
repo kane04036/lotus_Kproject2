@@ -3,11 +3,12 @@ package com.example.lotus_kproject2;
 import java.util.ArrayList;
 
 public class ReviewDataList {
-    private String writingId, movId, movName, title, userId, mbti, nickname, writing, likeNum,isLike;
+    private String writingId, movId, movName, title, userId, mbti, nickname, writing,isLike;
     private float star;
+    private Integer likeNum;
     private MovieDataList movieData;
 
-    public ReviewDataList(String writingId, String movId, String movName, String title, String userId, String mbti, String nickname, String writing, String likeNum,String isLike) {
+    public ReviewDataList(String writingId, String movId, String movName, String title, String userId, String mbti, String nickname, String writing, Integer likeNum,String isLike) {
         this.writingId = writingId;
         this.movId = movId;
         this.movName = movName;
@@ -19,7 +20,7 @@ public class ReviewDataList {
         this.likeNum = likeNum;
         this.isLike = isLike;
     }
-    public ReviewDataList(String writingId, String movId, String movName, String title, String userId, String mbti, String nickname, String writing, String likeNum, MovieDataList movieData, String isLike) {
+    public ReviewDataList(String writingId, String movId, String movName, String title, String userId, String mbti, String nickname, String writing, Integer likeNum, MovieDataList movieData, String isLike) {
         this.writingId = writingId;
         this.movId = movId;
         this.movName = movName;
@@ -33,7 +34,7 @@ public class ReviewDataList {
         this.isLike = isLike;
     }
 
-    public ReviewDataList(String writingId, String movId, String movName, String userId, String mbti, String nickname, String writing,float star, String likeNum,String isLike) {
+    public ReviewDataList(String writingId, String movId, String movName, String userId, String mbti, String nickname, String writing,float star, Integer likeNum,String isLike) {
         this.writingId = writingId;
         this.movId = movId;
         this.movName = movName;
@@ -47,7 +48,7 @@ public class ReviewDataList {
     }
 
     public ReviewDataList(String writingId, String movId, String movName, String userId, String mbti, String nickname,
-                          String writing, float star, String likeNum, MovieDataList movieData,String isLike) {
+                          String writing, float star, Integer likeNum, MovieDataList movieData,String isLike) {
         this.writingId = writingId;
         this.movId = movId;
         this.movName = movName;
@@ -88,7 +89,7 @@ public class ReviewDataList {
 
     public Float getStar() {return star;}
 
-    public String getLikeNum() {
+    public Integer getLikeNum() {
         return likeNum;
     }
 
@@ -102,5 +103,13 @@ public class ReviewDataList {
 
     public String getMovId() {
         return movId;
+    }
+
+    public void setIsLike(String isLike) {
+        this.isLike = isLike;
+    }
+
+    public void setLikeNum(Integer likeNum){
+        this.likeNum = likeNum;
     }
 }

@@ -52,65 +52,109 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.short_review_board_item, parent, false);
-        Log.d(TAG, "onCreateViewHolder: ");
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: shortreviewboardadapter");
         holder.tvMbti.setText(dataLists.get(holder.getAdapterPosition()).getMbti());
         holder.tvNickname.setText(dataLists.get(holder.getAdapterPosition()).getNickname());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.ratingBar.setRating(dataLists.get(holder.getAdapterPosition()).getStar());
         holder.tvMovName.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
-        holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
+        holder.tvThumbUpNum.setText(String.valueOf(dataLists.get(holder.getAdapterPosition()).getLikeNum()));
         Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
                 .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
-        if(dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+        if (dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")) {
             holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }else {
+            holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
         }
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestQueue Queue = Volley.newRequestQueue(context);
+                if (dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")) {
+                    RequestQueue Queue = Volley.newRequestQueue(context);
 
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
-                    jsonObject.put("token", sharedPreferences.getString("token", ""));
-                    jsonObject.put("board_id", dataLists.get(holder.getAdapterPosition()).getWritingId());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
+                        jsonObject.put("token", sharedPreferences.getString("token", ""));
+                        jsonObject.put("board_id", dataLists.get(holder.getAdapterPosition()).getWritingId());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-                String URL = context.getString(R.string.server) + context.getString(R.string.shortLikeAdd);
+                    String URL = context.getString(R.string.server) + context.getString(R.string.shortLikeCancel);
 
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Log.d(TAG, "onResponse: board like: res" + response.getString("res"));
-                            if (response.getString("res").equals("200")) {
-                                holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
-                                holder.tvThumbUpNum.setText(Integer.valueOf(dataLists.get(holder.getAdapterPosition()).getLikeNum())+1);
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.d(TAG, "onResponse: board like cancel: res" + response.getString("res"));
+                                if (response.getString("res").equals("200")) {
+                                    holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
+                                    Integer likeNum = dataLists.get(holder.getAdapterPosition()).getLikeNum() - 1;
+                                    holder.tvThumbUpNum.setText(String.valueOf(likeNum));
+                                    dataLists.get(holder.getAdapterPosition()).setLikeNum(likeNum);
+                                    dataLists.get(holder.getAdapterPosition()).setIsLike("0");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
+                        }
+                    });
+                    Queue.add(jsonObjectRequest);
+                } else {
+                    RequestQueue Queue = Volley.newRequestQueue(context);
 
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
+                        jsonObject.put("token", sharedPreferences.getString("token", ""));
+                        jsonObject.put("board_id", dataLists.get(holder.getAdapterPosition()).getWritingId());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
 
-                    }
-                });
-                Queue.add(jsonObjectRequest);
+                    String URL = context.getString(R.string.server) + context.getString(R.string.shortLikeAdd);
+
+
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.d(TAG, "onResponse: board like: res" + response.getString("res"));
+                                if (response.getString("res").equals("200")) {
+                                    holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+                                    Integer likeNum = dataLists.get(holder.getAdapterPosition()).getLikeNum() + 1;
+                                    holder.tvThumbUpNum.setText(String.valueOf(likeNum));
+                                    dataLists.get(holder.getAdapterPosition()).setLikeNum(likeNum);
+                                    dataLists.get(holder.getAdapterPosition()).setIsLike("1");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+                    Queue.add(jsonObjectRequest);
+
+                }
             }
         });
 
@@ -209,8 +253,6 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: " + dataLists.size());
-
         return dataLists.size();
     }
 

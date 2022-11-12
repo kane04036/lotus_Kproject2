@@ -58,10 +58,15 @@ public class ShortReviewFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
-        shortReviewRequest();
-
         return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        shortReviewRequest();
+    }
+
     private void shortReviewRequest(){
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
@@ -110,7 +115,7 @@ public class ShortReviewFragment extends Fragment {
 
                             dataLists.add(new ReviewDataList(object.getString("_id"), object.getString("movie_id"), object.getString("movie_name"),
                                      object.getString("user_id"), mbtiArray[mbtiNum],
-                                    object.getString("user_nickname"), object.getString("writing"),star,likeArray.getString(i), movieData,isLikeArray.getString(i)));
+                                    object.getString("user_nickname"), object.getString("writing"),star,likeArray.getInt(i), movieData,isLikeArray.getString(i)));
                         }
                         adapter.notifyDataSetChanged();
                     }

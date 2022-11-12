@@ -52,8 +52,8 @@ public class LongReviewInMyBlogFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         longReviewRequest(userId);
     }
 
@@ -117,7 +117,7 @@ public class LongReviewInMyBlogFragment extends Fragment {
                             dataLists.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"),
                                     dataObj.getString("movie_name"), dataObj.getString("title"), dataObj.getString("user_id"),
                                     mbtiList[dataObj.getInt("user_mbti")],dataObj.getString("user_nickname"),
-                                    dataObj.getString("writing"), likeArray.getString(i), movieData, isLikeArray.getString(i)));
+                                    dataObj.getString("writing"), likeArray.getInt(i), movieData, isLikeArray.getString(i)));
                         }
                         adapter.notifyDataSetChanged();
                     }

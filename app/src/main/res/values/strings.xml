@@ -62,11 +62,13 @@
     <string name="report">/board/report</string>
     <string name="follow">/follow/following</string>
     <string name="shortLikeAdd">/short_like/add</string>
+    <string name="shortLikeCancel">/short_like/sub</string>
     <string name="viewFollower">/follow/view_follower</string>
     <string name="viewShortReviewKeyWord">/board/short_reviews/view/keyword</string>
     <string name="viewLongReviewKeyWord">/board/long_reviews/view/keyword</string>
     <string name="mypage">/screen/mypage</string>
     <string name="longLikeAdd">/long_like/add</string>
+    <string name="longLikeCancel">/long_like/sub</string>
     <string name="modifyShortReview">/board/short_reviews/update</string>
     <string name="deleteShortReview">/board/short_reviews/delete</string>
     <string name="modifyLongReview">/board/long_reviews/update</string>

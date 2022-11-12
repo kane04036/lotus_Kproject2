@@ -28,16 +28,20 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<LongReviewBoardRecyclerViewAdapter.ViewHolder> {
-    ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    Context context;
-    Bundle bundle = new Bundle();
-    public LongReviewBoardRecyclerViewAdapter(Context context,ArrayList<ReviewDataList> dataLists){
+    private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
+    private Boolean isLike = false;
+    private Context context;
+    private Bundle bundle = new Bundle();
+
+    public LongReviewBoardRecyclerViewAdapter(Context context, ArrayList<ReviewDataList> dataLists) {
         this.dataLists = dataLists;
         this.context = context;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,18 +56,20 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
         holder.tvMbti.setText(dataLists.get(holder.getAdapterPosition()).getMbti());
         holder.tvWriting.setText(dataLists.get(holder.getAdapterPosition()).getWriting());
         holder.tvMovName.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
-        holder.tvThumbUpNum.setText(dataLists.get(holder.getAdapterPosition()).getLikeNum());
+        holder.tvThumbUpNum.setText(String.valueOf(dataLists.get(holder.getAdapterPosition()).getLikeNum()));
         Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
                 .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
-        if(dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")){
+        if (dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")) {
             holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+        }else {
+            holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
         }
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailOfBoardActivity.class);
                 intent.putExtra("writingId", dataLists.get(holder.getAdapterPosition()).getWritingId());
-                intent.putExtra("movCode",dataLists.get(holder.getAdapterPosition()).getMovieData().getMovCode());
+                intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovieData().getMovCode());
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -76,8 +82,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
                 Intent intent = new Intent(context, OtherUserBlogActivity.class);
                 intent.putExtra("nickname", dataLists.get(holder.getAdapterPosition()).getNickname());
                 intent.putExtra("mbti", dataLists.get(holder.getAdapterPosition()).getMbti());
-                intent.putExtra("userId",dataLists.get(holder.getAdapterPosition()).getUserId());
-
+                intent.putExtra("userId", dataLists.get(holder.getAdapterPosition()).getUserId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
@@ -87,44 +92,88 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestQueue Queue = Volley.newRequestQueue(context);
+                if (dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")) {
+                    RequestQueue Queue = Volley.newRequestQueue(context);
 
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
-                    jsonObject.put("token", sharedPreferences.getString("token", ""));
-                    jsonObject.put("board_id", dataLists.get(holder.getAdapterPosition()).getWritingId());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
+                        jsonObject.put("token", sharedPreferences.getString("token", ""));
+                        jsonObject.put("board_id", dataLists.get(holder.getAdapterPosition()).getWritingId());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-                String URL = context.getString(R.string.server) + context.getString(R.string.longLikeAdd);
+                    String URL = context.getString(R.string.server) + context.getString(R.string.longLikeCancel);
 
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Log.d(TAG, "onResponse: board like: res" + response.getString("res"));
-                            if (response.getString("res").equals("200")) {
-                                holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
-                                holder.tvThumbUpNum.setText(String.valueOf(Integer.parseInt(dataLists.get(holder.getAdapterPosition()).getLikeNum())+1));
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.d(TAG, "onResponse: board like cancel: res" + response.getString("res"));
+                                if (response.getString("res").equals("200")) {
+                                    holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
+                                    Integer likeNum = dataLists.get(holder.getAdapterPosition()).getLikeNum() - 1;
+                                    holder.tvThumbUpNum.setText(String.valueOf(likeNum));
+                                    dataLists.get(holder.getAdapterPosition()).setLikeNum(likeNum);
+                                    dataLists.get(holder.getAdapterPosition()).setIsLike("0");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
+                        }
+                    });
+                    Queue.add(jsonObjectRequest);
+                } else {
+                    RequestQueue Queue = Volley.newRequestQueue(context);
 
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
+                        jsonObject.put("token", sharedPreferences.getString("token", ""));
+                        jsonObject.put("board_id", dataLists.get(holder.getAdapterPosition()).getWritingId());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
 
-                    }
-                });
-                Queue.add(jsonObjectRequest);
+                    String URL = context.getString(R.string.server) + context.getString(R.string.longLikeAdd);
+
+
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.d(TAG, "onResponse: board like: res" + response.getString("res"));
+                                if (response.getString("res").equals("200")) {
+                                    holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
+                                    Integer likeNum = dataLists.get(holder.getAdapterPosition()).getLikeNum() + 1;
+                                    holder.tvThumbUpNum.setText(String.valueOf(likeNum));
+                                    dataLists.get(holder.getAdapterPosition()).setLikeNum(likeNum);
+                                    dataLists.get(holder.getAdapterPosition()).setIsLike("1");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+                    Queue.add(jsonObjectRequest);
+
+                }
             }
         });
     }
@@ -134,10 +183,11 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
         return dataLists.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvMovName, tvMbti, tvNickname, tvTitle, tvWriting,tvThumbUpNum;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvMovName, tvMbti, tvNickname, tvTitle, tvWriting, tvThumbUpNum;
         RelativeLayout layout;
         ImageView imgMov, imgThumbUp;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMovName = itemView.findViewById(R.id.tvMovNameInLongReviewBoard);
@@ -150,5 +200,9 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
             layout = itemView.findViewById(R.id.layoutLongReviewItemInBoard);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpLongReviewInBoard);
         }
+    }
+
+    private void requestThumbUP(int index) {
+
     }
 }
