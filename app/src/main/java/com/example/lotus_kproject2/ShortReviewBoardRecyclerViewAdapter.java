@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -197,26 +198,6 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
             }
         });
 
-//        holder.imgMore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final PopupMenu popupMenu = new PopupMenu(context, holder.imgMore);
-//                MenuInflater inflater = popupMenu.getMenuInflater();
-//                inflater.inflate(R.menu.popup_menu_in_writing, popupMenu.getMenu());
-//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem menuItem) {
-//                        switch (menuItem.getItemId()) {
-//                            case R.id.menu_report:
-//                                reportReview(dataLists.get(holder.getAdapterPosition()).getWritingId());
-//                                break;
-//                        }
-//                        return false;
-//                    }
-//                });
-//                popupMenu.show();
-//            }
-//        });
         SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
         holder.imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,7 +247,16 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
                                 case R.id.menu_report:
-                                    reportReview(dataLists.get(holder.getAdapterPosition()).getWritingId());
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                    builder.setMessage("해당 한 줄 느낌을 신고하시겠습니까?");
+                                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            reportReview(dataLists.get(holder.getAdapterPosition()).getWritingId());
+                                        }
+                                    });
+                                    builder.setNegativeButton("취소", null);
+                                    builder.show();
                                     break;
                             }
                             return false;
@@ -325,8 +315,11 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: report: res" + response.getString("res"));
-
+                    if(response.getString("res").equals("200")){
+                        Toast.makeText(context,"신고가 완료되었습니다.",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context,"오류로 인해 신고가 되지 않았습니다.",Toast.LENGTH_SHORT).show();
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

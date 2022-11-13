@@ -3,15 +3,21 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,6 +68,36 @@ public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter
         }else {
             holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
         }
+
+        holder.imgMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final PopupMenu popupMenu = new PopupMenu(context, holder.imgMore);
+                MenuInflater inflater = popupMenu.getMenuInflater();
+                inflater.inflate(R.menu.popup_menu_in_writing, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.menu_report:
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setMessage("해당 한 줄 느낌을 신고하시겠습니까?");
+                                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        reportReview(dataList.get(holder.getAdapterPosition()).getWritingId());
+                                    }
+                                });
+                                builder.setNegativeButton("취소", null);
+                                builder.show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
 
         holder.tvNickname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +210,7 @@ public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvNickname, tvMbti, tvWriting, tvThumbupNum;
         private MaterialRatingBar ratingBar;
-        private ImageView imgThumbUp;
+        private ImageView imgThumbUp, imgMore;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -184,6 +220,48 @@ public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter
             tvThumbupNum = itemView.findViewById(R.id.tvThumbUpNumShortReviewInDetail);
             ratingBar = itemView.findViewById(R.id.ratingbarShortReviewInDetail);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpShortReviewInDetail);
+            imgMore = itemView.findViewById(R.id.imgMoreShortReviewInDetail);
         }
+    }
+    private void reportReview(String boardId) {
+        RequestQueue Queue = Volley.newRequestQueue(context);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences("loginData", Context.MODE_PRIVATE);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            jsonObject.put("boardID", boardId);
+            jsonObject.put("tp", "0");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String URL = context.getString(R.string.server) + context.getString(R.string.report);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if(response.getString("res").equals("200")){
+                        Toast.makeText(context,"신고가 완료되었습니다.",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context,"오류로 인해 신고가 되지 않았습니다.",Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Queue.add(jsonObjectRequest);
+
     }
 }

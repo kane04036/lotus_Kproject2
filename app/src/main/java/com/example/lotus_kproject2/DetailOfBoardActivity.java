@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -170,6 +171,11 @@ public class DetailOfBoardActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d(TAG, "onResponse: report: res" + response.getString("res"));
+                    if(response.getString("res").equals("200")){
+                        Toast.makeText(getApplicationContext(),"신고가 완료되었습니다.",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(),"오류로 인해 신고가 처리되지 않았습니다.",Toast.LENGTH_SHORT).show();
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -244,7 +250,16 @@ public class DetailOfBoardActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_report:
-                        reportReview(writingId);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DetailOfBoardActivity.this);
+                        builder.setMessage("해당 감상평을 신고하시겠습니까?");
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                reportReview(writingId);
+                            }
+                        });
+                        builder.setNegativeButton("취소", null);
+                        builder.show();
                         break;
                 }
                 return false;
