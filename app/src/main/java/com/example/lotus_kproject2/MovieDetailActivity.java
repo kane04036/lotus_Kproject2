@@ -3,9 +3,11 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -91,7 +94,20 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvGenre = findViewById(R.id.tvGenre);
         progressBar = findViewById(R.id.progressInDetail);
 
-
+        topBarInDetail.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_plus:
+                        Intent intent = new Intent(getApplicationContext(),ReviewEditorActivity.class);
+                        intent.putExtra("movName",movName);
+                        intent.putExtra("movCode",movCode);
+                        startActivity(intent);
+                        overridePendingTransition(0,0);
+                }
+                return false;
+            }
+        });
         tvReadMoreActors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -105,6 +105,7 @@
             android:layout_below="@+id/imgSad"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
             android:text="아직 리뷰가 없어요. \n첫번째 리뷰어가 되어주세요!"
             android:textAlignment="center"
             android:textColor="@color/black"

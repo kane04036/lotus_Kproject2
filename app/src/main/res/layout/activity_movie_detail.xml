@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/back_simple_small"
+            app:menu="@menu/top_app_bar_plus"
             app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -205,9 +206,9 @@
                 android:layout_height="1px"
                 android:layout_below="@+id/tvReadMore"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="15dp"
                 android:background="@color/lightGray" />
 
             <TextView
@@ -272,7 +273,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvReadMoreActors"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
