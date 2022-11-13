@@ -70,6 +70,26 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
         }else {
             holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
         }
+
+        holder.imgMov.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+        holder.tvMovName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

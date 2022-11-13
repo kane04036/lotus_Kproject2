@@ -3,12 +3,14 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,6 +55,17 @@ public class LongReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<
         }else {
             holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
         }
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailOfBoardActivity.class);
+                intent.putExtra("writingId", dataList.get(holder.getAdapterPosition()).getWritingId());
+                intent.putExtra("movCode", dataList.get(holder.getAdapterPosition()).getMovId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
 
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +165,7 @@ public class LongReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvMbti, tvNickname, tvTitle,tvThumbUPNum,tvWriting;
         ImageView imgThumbUp;
+        RelativeLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -161,6 +175,7 @@ public class LongReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter<
             tvThumbUPNum = itemView.findViewById(R.id.tvThumbUpNumLongReviewInDetail);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpLongReviewInDetail);
             tvWriting = itemView.findViewById(R.id.tvLongReviewWritingInDetail);
+            layout = itemView.findViewById(R.id.layoutLongReviewItemInDetail);
         }
     }
 }

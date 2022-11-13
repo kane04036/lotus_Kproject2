@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/layout/activity_choose_mov.xml" value="0.3052536231884058" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_detail2.xml" value="0.29846014492753625" />
+        <entry key="app/src/main/res/layout/activity_follower_list.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/activity_fragmentmain.xml" value="0.2530487804878049" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_long_review_detail_of_board.xml" value="0.375" />
@@ -80,6 +81,8 @@
         <entry key="app/src/main/res/layout/alertdialog_mbti.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/alertdialog_nickname.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/drawer_top_layout.xml" value="0.29846014492753625" />
+        <entry key="app/src/main/res/layout/flower_list_item.xml" value="0.39166666666666666" />
+        <entry key="app/src/main/res/layout/following_list_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_blog.xml" value="0.2817028985507246" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />

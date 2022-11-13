@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvNicknameInFollowingList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="짱아찌"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/btnFollowInList"
+        android:layout_alignBottom="@+id/btnFollowInList"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISFP"
+        android:textColor="@color/signature_color"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/tvNicknameInFollowingList"
+        android:layout_alignBottom="@+id/tvNicknameInFollowingList"
+        android:layout_alignTop="@+id/tvNicknameInFollowingList"
+        android:gravity="center"
+        android:textSize="12dp"
+        />
+
+    <TextView
+        android:id="@+id/btnFollowInList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/round_rectangle_signaturecolor"
+        android:text="팔로우"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        />
+
+</RelativeLayout>

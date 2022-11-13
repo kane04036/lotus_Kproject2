@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -84,7 +85,7 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                 if (!isFollow) {
                     requestFollow(memNum);
                 } else {
-                    requestCancelFollow();
+                    requestCancelFollow(memNum);
                 }
             }
         });
@@ -147,6 +148,8 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse: follow request res:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
                         btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
+                        btnFollow.setText("팔로잉");
+                        btnFollow.setTextColor(Color.BLACK);
                         followerNum += 1;
                         tvFollowerNum.setText(String.valueOf(followingNum));
                         isFollow = true;
@@ -196,7 +199,14 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                         tvFollowingNum.setText(String.valueOf(followingNum));
                         if (dataArray.getString(5).equals("1")) {
                             btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_gray));
+                            btnFollow.setText("팔로잉");
+                            btnFollow.setTextColor(Color.BLACK);
                             isFollow = true;
+                        }else{
+                            btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_signaturecolor));
+                            btnFollow.setText("팔로우");
+                            btnFollow.setTextColor(Color.WHITE);
+                            isFollow = false;
                         }
                         Log.d(TAG, "onResponse: following:" + dataArray.getString(4) + "follower:" + dataArray.getString(3));
 
@@ -219,13 +229,12 @@ public class OtherUserBlogActivity extends AppCompatActivity {
 
     }
 
-    private void requestCancelFollow() {
+    private void requestCancelFollow(String memNum) {
         RequestQueue Queue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject jsonObject = new JSONObject();
         try {
             SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-            Log.d(TAG, "preferListRequest: token:" + sharedPreferences.getString("token", ""));
             jsonObject.put("token", sharedPreferences.getString("token", ""));
             jsonObject.put("user_id", sharedPreferences.getString("memNum", ""));
             jsonObject.put("target_id", memNum);
@@ -243,6 +252,8 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                     Log.d(TAG, "onResponse: follow cancel request res:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
                         btnFollow.setBackground(getDrawable(R.drawable.round_rectangle_signaturecolor));
+                        btnFollow.setTextColor(Color.WHITE);
+                        btnFollow.setText("팔로우");
                         followerNum -= 1;
                         tvFollowerNum.setText(String.valueOf(followerNum));
                         isFollow = false;

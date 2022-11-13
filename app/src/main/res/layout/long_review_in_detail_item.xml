@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutLongReviewItemInDetail"
+    >
 
     <TextView
         android:id="@+id/tvMbtiLongReviewInDetail"
@@ -9,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
-        android:text="ISFP"
         android:textColor="@color/signature_color"
         android:textSize="12dp"
         android:textStyle="bold" />
@@ -20,18 +21,18 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvMbtiLongReviewInDetail"
         android:layout_toRightOf="@+id/tvMbtiLongReviewInDetail"
-        android:text="짱아찌"
         android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="12dp" />
 
-    <ImageView
-        android:id="@+id/imgMoreLongReviewInDetail"
-        android:layout_width="15dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvNicknameLongReviewInDetail"
-        android:layout_alignParentRight="true"
-        android:adjustViewBounds="true"
-        android:src="@drawable/more" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imgMoreLongReviewInDetail"-->
+<!--        android:layout_width="15dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignTop="@+id/tvNicknameLongReviewInDetail"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:src="@drawable/more" />-->
 
     <TextView
         android:id="@+id/tvLongReviewTitleInDetail"
@@ -43,7 +44,7 @@
         android:layout_marginRight="10dp"
         android:textColor="@color/black"
         android:textSize="13dp"
-        android:textStyle="bold" />
+         />
     <TextView
         android:id="@+id/tvLongReviewWritingInDetail"
         android:layout_width="match_parent"
@@ -73,7 +74,6 @@
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="5dp"
-        android:text="120"
         android:textColor="@color/black"
         android:textSize="12dp" />
 
