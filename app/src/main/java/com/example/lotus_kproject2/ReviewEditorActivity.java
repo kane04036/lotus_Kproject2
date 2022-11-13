@@ -1,6 +1,7 @@
 package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
 
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +47,22 @@ public class ReviewEditorActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private ProgressBar progressBar;
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent.hasExtra("movName")) {
+            movName = intent.getStringExtra("movName");
+            movCode = intent.getStringExtra("movCode");
+            tvChooseMov.setText(movName);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,20 +76,10 @@ public class ReviewEditorActivity extends AppCompatActivity {
         topbar = findViewById(R.id.topAppBarInEditor);
         progressBar = findViewById(R.id.progressInEditor);
 
-
-        if(getIntent().hasExtra("movName")){
-            movName = getIntent().getStringExtra("movName");
-            movCode = getIntent().getStringExtra("movCode");
-
-            edtTitle.setText(String.valueOf(getIntent().getStringExtra("title")));
-            edtReview.setText(String.valueOf(getIntent().getStringExtra("contents")));
-            tvChooseMov.setText(movName);
-        }
-
         topbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menu_upload:
                         progressBar.setVisibility(View.VISIBLE);
                         longReviewWrite();
@@ -90,9 +97,9 @@ public class ReviewEditorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ReviewEditorActivity.this, SearchMovForChooseActivity.class);
-                intent.putExtra("title", edtTitle.getText().toString());
-                intent.putExtra("contents", edtReview.getText().toString());
+                intent.addFlags(FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -126,20 +133,16 @@ public class ReviewEditorActivity extends AppCompatActivity {
                     SharedPreferences sharedPreferences_login = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
 
                     Log.d(TAG, "onResponse: res:" + response.getString("res"));
-                    if(response.getString("res").equals("200")){
+                    if (response.getString("res").equals("200")) {
                         progressBar.setVisibility(View.INVISIBLE);
                         topbar.setEnabled(false);
                         Intent intent = new Intent(getApplicationContext(), DetailOfBoardActivity.class);
-//                        intent.putExtra("title", edtTitle.getText().toString());
-//                        intent.putExtra("writing", edtReview.getText().toString());
-//                        intent.putExtra("nickname", sharedPreferences_user.getString("nickname",""));
-//                        intent.putExtra("mbti", sharedPreferences_user.getString("mbti",""));
-//                        intent.putExtra("userId",sharedPreferences_login.getString("memNum",""));
-//                        intent.putExtra("boardId","00000");
-//                        intent.putExtra("movCode", movCode);
-                        intent.putExtra("writingId",response.getString("data"));
-                        intent.putExtra("movCode",movCode);
+                        intent.putExtra("writingId", response.getString("data"));
+                        intent.putExtra("movCode", movCode);
+                        intent.addFlags(FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        finish();
                     }
 
                 } catch (JSONException e) {

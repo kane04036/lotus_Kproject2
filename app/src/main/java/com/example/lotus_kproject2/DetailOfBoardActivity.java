@@ -45,9 +45,17 @@ public class DetailOfBoardActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_long_review_detail_of_board);
+        overridePendingTransition(0, 0);
 
         tvTitle = findViewById(R.id.tvLongReviewTitleInDetailOfBoard);
         tvMbti = findViewById(R.id.tvMbtiInLongReviewDetailOfBoard);
@@ -74,6 +82,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MovieDetailActivity.class);
                 intent.putExtra("movCode",movCode);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
         tvMovName.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +91,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MovieDetailActivity.class);
                 intent.putExtra("movCode",movCode);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -106,6 +116,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                 intent.putExtra("userId", reviewData.getUserId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -373,6 +384,10 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                         tvThumbUpNum.setText(String.valueOf(reviewData.getLikeNum()));
                         if(reviewData.getIsLike().equals("1")){
                             imgThumbUP.setImageResource(R.drawable.thumb_up_filled_medium);
+                            isLike = true;
+                        }else{
+                            imgThumbUP.setImageResource(R.drawable.thumb_up_medium);
+                            isLike = false;
                         }
 
                     }
@@ -419,6 +434,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                         tvThumbUpNum.setText(String.valueOf(likeNum));
                         reviewData.setLikeNum(likeNum);
                         reviewData.setIsLike("1");
+                        isLike = true;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -461,6 +477,7 @@ public class DetailOfBoardActivity extends AppCompatActivity {
                         tvThumbUpNum.setText(String.valueOf(likeNum));
                         reviewData.setLikeNum(likeNum);
                         reviewData.setIsLike("0");
+                        isLike = false;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

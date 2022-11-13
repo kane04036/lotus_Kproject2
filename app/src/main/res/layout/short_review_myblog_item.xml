@@ -11,7 +11,7 @@
         android:text="살인의 추억"
         android:textColor="@color/black"
         android:textSize="13dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:textStyle="bold" />
 
     <ImageView

@@ -59,7 +59,7 @@ public class ShortReviewInDetailFragment extends Fragment {
     private RecyclerView recyViewShortReviewInDetail;
     private ShortReviewInDetailRecyclerViewAdapter shortReviewInDetailRecyclerViewAdapter;
     private ArrayList<ReviewDataList> dataLists = new ArrayList<>();
-    private RelativeLayout layoutWriteShortReview, layoutMyShortReview;
+    private RelativeLayout layoutWriteShortReview, layoutMyShortReview,layoutNothingMessage;
     private ReviewDataList myReview;
     private Boolean isModify = false;
 
@@ -97,6 +97,7 @@ public class ShortReviewInDetailFragment extends Fragment {
 
         layoutMyShortReview = view.findViewById(R.id.layoutMyShortReview);
         layoutWriteShortReview = view.findViewById(R.id.layoutWriteShortReview);
+        layoutNothingMessage = view.findViewById(R.id.layoutShortReviewNothing);
         layoutMyShortReview.setVisibility(View.INVISIBLE);
         layoutWriteShortReview.setVisibility(View.INVISIBLE);
 
@@ -264,6 +265,12 @@ public class ShortReviewInDetailFragment extends Fragment {
                         }
                         Resources res = getResources();
                         String[] mbtiList = res.getStringArray(R.array.mbti_array);
+
+                        if(mineArray.length()==0&&dataJsonArray.length()==0){
+                            layoutNothingMessage.setVisibility(View.VISIBLE);
+                        }else{
+                            layoutNothingMessage.setVisibility(View.INVISIBLE);
+                        }
 
                         if (mineArray.length() > 0) {
                             layoutWriteShortReview.setVisibility(View.INVISIBLE);

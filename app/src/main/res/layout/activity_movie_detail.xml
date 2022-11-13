@@ -183,6 +183,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="25dp"
+                android:lineSpacingExtra="2dp"
                 android:textColor="@color/black"
                 android:textSize="14dp" />
 
@@ -192,8 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvSummary"
                 android:layout_alignEnd="@id/tvSummary"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginTop="2dp"
                 android:text="더보기"
                 android:textColor="@color/gray"
                 android:textSize="13dp"
@@ -261,8 +261,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvActor"
                 android:layout_alignEnd="@id/tvSummary"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginTop="2dp"
                 android:text="더보기"
                 android:textColor="@color/gray"
                 android:textSize="13dp"

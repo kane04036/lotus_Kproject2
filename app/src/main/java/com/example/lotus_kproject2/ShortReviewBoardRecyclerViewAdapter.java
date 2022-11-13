@@ -2,6 +2,7 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -74,19 +75,23 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
         holder.imgMov.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MovieDetailActivity.class);
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, MovieDetailActivity.class);
                 intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(0,0);
             }
         });
         holder.tvMovName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MovieDetailActivity.class);
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, MovieDetailActivity.class);
                 intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(0,0);
             }
         });
 
@@ -181,12 +186,14 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
         holder.tvNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, OtherUserBlogActivity.class);
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, OtherUserBlogActivity.class);
                 intent.putExtra("nickname", dataLists.get(holder.getAdapterPosition()).getNickname());
                 intent.putExtra("mbti", dataLists.get(holder.getAdapterPosition()).getMbti());
                 intent.putExtra("userId", dataLists.get(holder.getAdapterPosition()).getUserId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(0,0);
             }
         });
 
@@ -223,12 +230,14 @@ public class ShortReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Sh
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
                                 case R.id.menu_modify_in_myBlog:
-                                    Intent intent = new Intent(context, ModifyShortReviewActivity.class);
+                                    Activity activity = (Activity) context;
+                                    Intent intent = new Intent(activity, ModifyShortReviewActivity.class);
                                     intent.putExtra("star", String.valueOf(dataLists.get(holder.getAdapterPosition()).getStar()));
                                     intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovId());
                                     intent.putExtra("writing", dataLists.get(holder.getAdapterPosition()).getWriting());
                                     intent.putExtra("boardId", dataLists.get(holder.getAdapterPosition()).getWritingId());
-                                    context.startActivity(intent);
+                                    activity.startActivity(intent);
+                                    activity.overridePendingTransition(0,0);
                                     break;
                                 case R.id.menu_delete_in_myBlog:
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);

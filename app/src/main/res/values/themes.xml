@@ -24,6 +24,9 @@
     <style name="koddiButton" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/koddibold</item>
     </style>
+    <style name="noAnimTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
 
 
 </resources>

@@ -37,6 +37,13 @@ public class ModifyShortReviewActivity extends AppCompatActivity {
     private TextView tvWritingCount, tvTotalWritingCount;
     private String movCode, boardId, star;
     private MaterialToolbar appbar;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

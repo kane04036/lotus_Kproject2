@@ -9,7 +9,7 @@
         android:id="@+id/tvMovNameInLongReviewBoard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/tvMbtiInLongReviewBoard"
         android:text="살인의 추억"
         android:textColor="@color/black"

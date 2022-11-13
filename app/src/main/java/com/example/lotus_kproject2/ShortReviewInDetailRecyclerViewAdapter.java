@@ -2,7 +2,9 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,6 +63,19 @@ public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter
             holder.imgThumbUp.setImageResource(R.drawable.thumb_up_small);
         }
 
+        holder.tvNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, OtherUserBlogActivity.class);
+                intent.putExtra("nickname", dataList.get(holder.getAdapterPosition()).getNickname());
+                intent.putExtra("mbti", dataList.get(holder.getAdapterPosition()).getMbti());
+                intent.putExtra("userId", dataList.get(holder.getAdapterPosition()).getUserId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(0,0);
+            }
+        });
         holder.imgThumbUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

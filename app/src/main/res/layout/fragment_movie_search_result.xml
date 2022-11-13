@@ -8,7 +8,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <ProgressBar
+            android:id="@+id/progressInResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/signature_color"
+            />
         <RelativeLayout
             android:id="@+id/searchLayout"
             android:layout_width="wrap_content"
@@ -47,7 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/searchLayout"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
 
             <TextView
                 android:id="@+id/tvMovie2"
@@ -78,7 +89,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvMovie2"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:orientation="horizontal" />
 
         </RelativeLayout>
@@ -105,15 +115,45 @@
             android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
             android:background="@null"
-            android:src="@drawable/forward" />
+            android:src="@drawable/forward"/>
+        <RelativeLayout
+            android:id="@+id/layoutNothingLongReviewInResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLongReview2"
+            android:layout_alignStart="@+id/tvLongReview2"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="invisible"
+            >
+
+            <ImageView
+                android:id="@+id/imgNoIdea"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/search_nothing" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imgNoIdea"
+                android:layout_alignBottom="@+id/imgNoIdea"
+                android:layout_toRightOf="@+id/imgNoIdea"
+                android:text="해당 키워드에 대한 검색 결과가 없습니다. "
+                android:textColor="@color/gray"
+                android:textSize="13dp" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyViewLongReviewInResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvLongReview2"
-            android:layout_margin="10dp" />
-
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp" />
 
         <TextView
             android:id="@+id/tvShortReview2"
@@ -122,7 +162,7 @@
             android:layout_below="@+id/recyViewLongReviewInResult"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="한 줄 느낌"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -139,6 +179,33 @@
             android:adjustViewBounds="true"
             android:background="@null"
             android:src="@drawable/forward" />
+        <RelativeLayout
+            android:id="@+id/layoutNothingShortReviewInResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvShortReview2"
+            android:layout_alignStart="@+id/tvShortReview2"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
+            >
+            <ImageView
+                android:id="@+id/imgNoIdea2"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/search_nothing" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imgNoIdea2"
+                android:layout_alignBottom="@+id/imgNoIdea2"
+                android:layout_toRightOf="@+id/imgNoIdea2"
+                android:gravity="center"
+                android:text="해당 키워드에 대한 검색 결과가 없습니다. "
+                android:textColor="@color/gray"
+                android:textSize="13dp" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyViewShortReviewInResult"
@@ -146,7 +213,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvShortReview2"
             android:layout_margin="10dp" />
-
 
     </RelativeLayout>
 

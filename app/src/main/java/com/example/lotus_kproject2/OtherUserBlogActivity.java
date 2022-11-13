@@ -44,6 +44,11 @@ public class OtherUserBlogActivity extends AppCompatActivity {
 
     Bundle result = new Bundle();
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

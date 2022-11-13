@@ -2,6 +2,7 @@ package com.example.lotus_kproject2;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -64,10 +65,12 @@ public class LongReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter<
         holder.imgMov.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MovieDetailActivity.class);
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, MovieDetailActivity.class);
                 intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(0,0);
             }
         });
         holder.tvMovName.setOnClickListener(new View.OnClickListener() {

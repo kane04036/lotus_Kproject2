@@ -1,5 +1,6 @@
 package com.example.lotus_kproject2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -42,10 +43,12 @@ public class PreferListRecyclerViewAdapter extends RecyclerView.Adapter<PreferLi
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MovieDetailActivity.class);
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, MovieDetailActivity.class);
                 intent.putExtra("movCode", dataLists.get(holder.getAdapterPosition()).getMovCode());
                 Log.d("TAG", "prefer movie code"+dataLists.get(holder.getAdapterPosition()).getMovCode());
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(0,0);
             }
         });
 

@@ -80,6 +80,13 @@ public class HomeActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -116,6 +123,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.menu_search:
                         Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(0, 0);
                         break;
                 }
                 return false;
@@ -188,6 +196,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
     void showGenderAlertDialog() {
@@ -464,6 +473,7 @@ public class HomeActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), ReviewEditorActivity.class);
                         intent.putExtra("existMovie", 0);
                         startActivity(intent);
+                        overridePendingTransition(0, 0);
                         break;
                     case 2:
                         topAppbar.setTitle("내 블로그");

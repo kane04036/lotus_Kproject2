@@ -48,6 +48,12 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
     private ArrayList<String> yearArrray = new ArrayList<>();
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_mov);
@@ -58,9 +64,6 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
         reviewAppBar = findViewById(R.id.topAppBarInEditor);
         tvCancel = findViewById(R.id.tvCancelInMovSelect);
 
-        String title = getIntent().getStringExtra("title");
-        String contents = getIntent().getStringExtra("contents");
-
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +72,7 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
         });
 
 
-        recyclerViewAdapter = new MovieListRecyclerViewAdapter(getApplicationContext(), nameArray, imgArray, codeArray, yearArrray, title, contents);
+        recyclerViewAdapter = new MovieListRecyclerViewAdapter(getApplicationContext(), nameArray, imgArray, codeArray, yearArrray);
         recyclerViewInMovSearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         recyclerViewInMovSearch.setAdapter(recyclerViewAdapter);
 

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ public class LongReviewInDetailFragment extends Fragment {
     private LongReviewInDetailRecyclerViewAdapter longReviewInDetailRecyclerViewAdapter;
     private String movCode;
     private ArrayList<ReviewDataList> dataList = new ArrayList<>();
+    private RelativeLayout layoutNothingMessage;
 
 //    private ArrayList<String> nicknameArray = new ArrayList<>();
 //    private ArrayList<String> mbtiArray = new ArrayList<>();
@@ -72,6 +74,7 @@ public class LongReviewInDetailFragment extends Fragment {
 
 
         recyclerView = view.findViewById(R.id.recyViewLongReviewInDetail);
+        layoutNothingMessage = view.findViewById(R.id.layoutLongReviewNothing);
         longReviewInDetailRecyclerViewAdapter = new LongReviewInDetailRecyclerViewAdapter(getActivity(), dataList);
 
 
@@ -87,9 +90,9 @@ public class LongReviewInDetailFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("movie_id", movCode);
-            jsonObject.put("token", sharedPreferences.getString("token",""));
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
             Log.d(TAG, "longReviewListRequest: movieId" + movCode);
 
         } catch (Exception e) {
@@ -110,19 +113,24 @@ public class LongReviewInDetailFragment extends Fragment {
                         JSONArray likeArray = response.getJSONArray("like");
                         JSONArray isLikeArray = response.getJSONArray("isLike");
 
-                        if(getActivity() == null){
+                        if (getActivity() == null) {
                             return;
                         }
                         Resources res = getResources();
                         String[] mbtiList = res.getStringArray(R.array.mbti_array);
 
                         dataList.clear();
-                        for (int i = 0; i < dataJsonArray.length(); i++) {
-                            JSONObject dataObj = dataJsonArray.getJSONObject(i);
+                        if (dataJsonArray.length() == 0) {
+                            layoutNothingMessage.setVisibility(View.VISIBLE);
+                        } else {
+                            layoutNothingMessage.setVisibility(View.INVISIBLE);
+                            for (int i = 0; i < dataJsonArray.length(); i++) {
+                                JSONObject dataObj = dataJsonArray.getJSONObject(i);
 
-                            dataList.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"), dataObj.getString("movie_name"),
-                                    dataObj.getString("title"), dataObj.getString("user_id"), mbtiList[dataObj.getInt("user_mbti")], dataObj.getString("user_nickname"),
-                                    dataObj.getString("writing"), likeArray.getInt(i),isLikeArray.getString(i)));
+                                dataList.add(new ReviewDataList(dataObj.getString("_id"), dataObj.getString("movie_id"), dataObj.getString("movie_name"),
+                                        dataObj.getString("title"), dataObj.getString("user_id"), mbtiList[dataObj.getInt("user_mbti")], dataObj.getString("user_nickname"),
+                                        dataObj.getString("writing"), likeArray.getInt(i), isLikeArray.getString(i)));
+                            }
                         }
                         longReviewInDetailRecyclerViewAdapter.notifyDataSetChanged();
 

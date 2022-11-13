@@ -31,6 +31,13 @@ public class ModifyLongReviewActivity extends AppCompatActivity {
     private EditText edtTitle, edtWriting;
     private MaterialToolbar appbar;
     private String boardId;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

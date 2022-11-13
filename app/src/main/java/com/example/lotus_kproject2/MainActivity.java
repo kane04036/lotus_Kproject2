@@ -45,8 +45,16 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0, 0);
+
 
         KakaoSdk.init(this, getString(R.string.nativeAppKey));
 //        kakaoDelete();
@@ -140,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("isNew", "0");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
 
             }
             return null;
@@ -224,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         intent.putExtra("isNew", isNew);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        overridePendingTransition(0, 0);
                         startActivity(intent);
                     }
 
@@ -251,5 +261,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

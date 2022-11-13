@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
@@ -47,7 +49,8 @@ public class MovieSearchResultFragment extends Fragment {
     private EditText edtSearchInMovieResult;
     private ImageView imgBtnMoreMovie, imgBtnMoreLongReview, imgBtnMoreShortReview;
     private RecyclerView movieRecyclerView, longReivewRecyView, shortReviewRecyView;
-
+    private ProgressBar progressBar;
+    private RelativeLayout layoutNothingShort, layoutNothingLong;
     private ArrayList<ReviewDataList> shortReviewDataList = new ArrayList<>();
     private ArrayList<ReviewDataList> longReviewDataList = new ArrayList<>();
     private ArrayList<MovieDataList> movieDataList = new ArrayList<>();
@@ -85,7 +88,9 @@ public class MovieSearchResultFragment extends Fragment {
         imgBtnMoreMovie = view.findViewById(R.id.imgBtnMoreMovie);
         imgBtnMoreLongReview = view.findViewById(R.id.imgBtnMoreLongReview);
         imgBtnMoreShortReview = view.findViewById(R.id.imgBtnMoreShortReview);
-
+        layoutNothingShort = view.findViewById(R.id.layoutNothingShortReviewInResult);
+        layoutNothingLong = view.findViewById(R.id.layoutNothingLongReviewInResult);
+        progressBar = view.findViewById(R.id.progressInResult);
 
         movieAdapter = new MovieRecyclerViewAdapter(getActivity(), movieDataList);
         longReviewAdapter = new LongReviewInSearchResultRecyclerAdapter(getActivity(), longReviewDataList);
@@ -104,8 +109,8 @@ public class MovieSearchResultFragment extends Fragment {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 if ((keyEvent.getAction() == keyEvent.ACTION_DOWN) && (keyEvent.getKeyCode() == keyEvent.KEYCODE_ENTER)) {
+                    progressBar.setVisibility(View.VISIBLE);
                     movieSearchRequest(edtSearchInMovieResult.getText().toString());
-                    Log.d(TAG, "onKey: enter click");
                     return true;
                 }
                 return false;
@@ -119,6 +124,7 @@ public class MovieSearchResultFragment extends Fragment {
                 intent.putExtra("type", 0);
                 intent.putExtra("keyword", searchWord);
                 startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
             }
         });
 
@@ -129,6 +135,7 @@ public class MovieSearchResultFragment extends Fragment {
                 intent.putExtra("type", 1);
                 intent.putExtra("keyword", searchWord);
                 startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
             }
         });
 
@@ -139,6 +146,7 @@ public class MovieSearchResultFragment extends Fragment {
                 intent.putExtra("type", 2);
                 intent.putExtra("keyword", searchWord);
                 startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
             }
         });
 
@@ -192,6 +200,10 @@ public class MovieSearchResultFragment extends Fragment {
                         JSONArray longReviewArray = response.getJSONArray("long_board");
                         JSONArray longReviewLikeArray = response.getJSONArray("longLike");
                         JSONArray longReviewIsLikeArray = response.getJSONArray("long_isLike");
+
+                        if(longReviewArray.length()==0) layoutNothingLong.setVisibility(View.VISIBLE);
+                        else layoutNothingLong.setVisibility(View.INVISIBLE);
+
                         for (int i = 0; i < longReviewArray.length(); i++) {
                             JSONObject jsonObject = longReviewArray.getJSONObject(i);
                             longReviewDataList.add(new ReviewDataList(jsonObject.getString("_id"), jsonObject.getString("movie_id"), jsonObject.getString("movie_name"),
@@ -203,6 +215,9 @@ public class MovieSearchResultFragment extends Fragment {
                         JSONArray shortReviewArray = response.getJSONArray("short_board");
                         JSONArray shortReviewLikeArray = response.getJSONArray("shortLike");
                         JSONArray shortReviewIsLikeArray = response.getJSONArray("short_isLike");
+
+                        if(shortReviewArray.length() == 0) layoutNothingShort.setVisibility(View.VISIBLE);
+                        else layoutNothingShort.setVisibility(View.INVISIBLE);
                         for (int i = 0; i < shortReviewArray.length(); i++) {
                             JSONObject jsonObject = shortReviewArray.getJSONObject(i);
                             shortReviewDataList.add(new ReviewDataList(jsonObject.getString("_id"), jsonObject.getString("movie_id"), jsonObject.getString("movie_name"),
@@ -210,6 +225,8 @@ public class MovieSearchResultFragment extends Fragment {
                                     jsonObject.getString("writing"), Float.valueOf(jsonObject.getInt("star")), shortReviewLikeArray.getInt(i), shortReviewIsLikeArray.getString(i)));
                         }
                         shortReviewAdapter.notifyDataSetChanged();
+
+                        progressBar.setVisibility(View.INVISIBLE);
 
                     }
 

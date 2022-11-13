@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,10 +40,17 @@ public class MoreListActivity extends AppCompatActivity {
     private ArrayList<ReviewDataList> shortReviewDataList = new ArrayList<>();
     private ArrayList<ReviewDataList> longReviewDataList = new ArrayList<>();
     private ArrayList<MovieDataList> movieDataList = new ArrayList<>();
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
+    private ProgressBar progressBar;
     private String keyword;
     private Integer type;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +63,7 @@ public class MoreListActivity extends AppCompatActivity {
 
         appbar = findViewById(R.id.topBarMoreList);
         recyclerView = findViewById(R.id.recyViewMoreList);
+        progressBar = findViewById(R.id.progressInMoreList);
 
         appbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,13 +81,16 @@ public class MoreListActivity extends AppCompatActivity {
 
         switch (type){
             case 0:
+                progressBar.setVisibility(View.VISIBLE);
                 recyclerView.setAdapter(movieAdapter);
                 break;
             case 1:
+                progressBar.setVisibility(View.VISIBLE);
                 recyclerView.setAdapter(longReviewAdapter);
                 requestLongReview(keyword);
                 break;
             case 2:
+                progressBar.setVisibility(View.VISIBLE);
                 recyclerView.setAdapter(shortReviewAdapter);
                 requestShortReview(keyword);
                 break;
@@ -132,6 +144,7 @@ public class MoreListActivity extends AppCompatActivity {
                                     object.getString("user_nickname"), object.getString("writing"), star,likeArray.getInt(i),movieData,isLikeArray.getString(i)));
                         }
                         shortReviewAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
 
                 } catch (JSONException e) {
@@ -196,6 +209,7 @@ public class MoreListActivity extends AppCompatActivity {
                                     object.getString("user_nickname"), object.getString("writing"), likeArray.getInt(i),movieData,isLikeArray.getString(i)));
                         }
                         longReviewAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
 
                 } catch (JSONException e) {

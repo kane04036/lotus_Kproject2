@@ -62,11 +62,12 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieRecycler
         holder.imageMovieResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MovieDetailActivity.class);
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, MovieDetailActivity.class);
                 intent.putExtra("movName", dataLists.get(holder.getAdapterPosition()).getMovName());
                 intent.putExtra("movImage",dataLists.get(holder.getAdapterPosition()).getMovImg());
                 intent.putExtra("movCode",dataLists.get(holder.getAdapterPosition()).getMovCode());
-                context.startActivity(intent);
+                activity.startActivity(intent);
             }
         });
     }

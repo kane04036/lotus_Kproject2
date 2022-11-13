@@ -53,6 +53,11 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     boolean isClose = false, summary_long = true, isLike = false, isCloseActors = false;
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -220,7 +225,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                         actors = actors.replaceAll("\\]", "");
 
                         if (actors.length() > 30) {
-                            actors_sub = actors.substring(0, 30);
+                            actors_sub = actors.substring(0, 27);
                             tvActor.setText(actors_sub + "...");
                         } else {
                             actors_sub = actors;
@@ -230,8 +235,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
                         summary = (String) dataJsonArray.get(9);
-                        if (summary.length() > 100) {
-                            summary_sub = summary.substring(0, 100);
+                        if (summary.length() > 90) {
+                            summary_sub = summary.substring(0, 90);
                         } else {
                             summary_sub = summary;
                             summary_long = false;

@@ -30,19 +30,16 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
     private ArrayList<String> nameArray = new ArrayList();
     private ArrayList<String> codeArray = new ArrayList();
     private ArrayList<String> yearArray = new ArrayList<>();
-    private String title, contents;
     private boolean isSelected = false;
     private int selectedPosition = -1;
 
     Context context;
 
-    public MovieListRecyclerViewAdapter(Context context, ArrayList nameArray, ArrayList imgArray, ArrayList codeArray, ArrayList yearArray, String title, String contents) {
+    public MovieListRecyclerViewAdapter(Context context, ArrayList nameArray, ArrayList imgArray, ArrayList codeArray, ArrayList yearArray) {
         this.imgArray = imgArray;
         this.nameArray = nameArray;
         this.codeArray = codeArray;
         this.yearArray = yearArray;
-        this.title = title;
-        this.contents = contents;
         this.context = context;
     }
 
@@ -71,9 +68,8 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
                 Intent intent = new Intent(context, ReviewEditorActivity.class);
                 intent.putExtra("movName", nameArray.get(holder.getAdapterPosition()));
                 intent.putExtra("movCode", codeArray.get(holder.getAdapterPosition()));
-                intent.putExtra("title", title);
-                intent.putExtra("contents",contents);
-                context.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                context.startActivity(intent);
             }
         });
 

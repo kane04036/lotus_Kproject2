@@ -36,6 +36,12 @@ public class SearchActivity extends AppCompatActivity {
     private TextView tvCancel;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
@@ -58,6 +64,7 @@ public class SearchActivity extends AppCompatActivity {
                     intent.putExtra("searchWord", edtSearch.getText().toString());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
                     return true;
                 }
                 return false;
