@@ -26,20 +26,14 @@ import java.util.ArrayList;
 import java.util.concurrent.BlockingDeque;
 
 public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieListRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<String> imgArray = new ArrayList();
-    private ArrayList<String> nameArray = new ArrayList();
-    private ArrayList<String> codeArray = new ArrayList();
-    private ArrayList<String> yearArray = new ArrayList<>();
+    ArrayList<MovieDataList> dataLists = new ArrayList<>();
     private boolean isSelected = false;
     private int selectedPosition = -1;
 
     Context context;
 
-    public MovieListRecyclerViewAdapter(Context context, ArrayList nameArray, ArrayList imgArray, ArrayList codeArray, ArrayList yearArray) {
-        this.imgArray = imgArray;
-        this.nameArray = nameArray;
-        this.codeArray = codeArray;
-        this.yearArray = yearArray;
+    public MovieListRecyclerViewAdapter(Context context, ArrayList dataLists) {
+        this.dataLists = dataLists;
         this.context = context;
     }
 
@@ -54,22 +48,25 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
 
-            holder.tvMovieNmaeInList.setText(nameArray.get(holder.getAdapterPosition()));
-            if (!yearArray.get(holder.getAdapterPosition()).isEmpty())
-                holder.tvYearInList.setText(yearArray.get(holder.getAdapterPosition()).substring(0, 4));
+            holder.tvMovieNmaeInList.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
+            if (!dataLists.get(holder.getAdapterPosition()).getReleaseDate().isEmpty())
+                holder.tvYearInList.setText(dataLists.get(holder.getAdapterPosition()).getReleaseDate().substring(0, 4));
             else
                 holder.tvYearInList.setText("개봉일자 불명");
             holder.imgMovieList.setClipToOutline(true);
-            Glide.with(context).load(imgArray.get(holder.getAdapterPosition())).error(R.drawable.gray_profile).into(holder.imgMovieList);
+            Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovImg()).error(R.drawable.gray_profile).into(holder.imgMovieList);
 
         holder.layoutMovieList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ReviewEditorActivity.class);
-                intent.putExtra("movName", nameArray.get(holder.getAdapterPosition()));
-                intent.putExtra("movCode", codeArray.get(holder.getAdapterPosition()));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                context.startActivity(intent);
+                Activity activity = (Activity) context;
+                Intent intent = new Intent(activity, ReviewEditorActivity.class);
+                intent.putExtra("movName",dataLists.get(holder.getAdapterPosition()).getMovName());
+                intent.putExtra("movCode",dataLists.get(holder.getAdapterPosition()).getMovCode());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(0,0);
+                activity.finish();
             }
         });
 
@@ -85,7 +82,7 @@ public class MovieListRecyclerViewAdapter extends RecyclerView.Adapter<MovieList
 
     @Override
     public int getItemCount() {
-        return imgArray.size();
+        return dataLists.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

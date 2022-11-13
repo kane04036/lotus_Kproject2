@@ -42,10 +42,7 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
     private MaterialToolbar reviewAppBar;
     private TextView tvCancel;
 
-    private ArrayList<String> imgArray = new ArrayList<>();
-    private ArrayList<String> nameArray = new ArrayList<>();
-    private ArrayList<String> codeArray = new ArrayList<>();
-    private ArrayList<String> yearArrray = new ArrayList<>();
+    private ArrayList<MovieDataList> dataLists = new ArrayList<>();
 
     @Override
     protected void onPause() {
@@ -72,7 +69,7 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
         });
 
 
-        recyclerViewAdapter = new MovieListRecyclerViewAdapter(getApplicationContext(), nameArray, imgArray, codeArray, yearArrray);
+        recyclerViewAdapter = new MovieListRecyclerViewAdapter(SearchMovForChooseActivity.this, dataLists);
         recyclerViewInMovSearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         recyclerViewInMovSearch.setAdapter(recyclerViewAdapter);
 
@@ -117,12 +114,8 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
                     JSONArray imageJsonArray = dataJsonArray.getJSONArray(3);
                     JSONArray yearJsonArray = dataJsonArray.getJSONArray(4);
 
-                    nameArray.clear(); imgArray.clear(); codeArray.clear(); yearArrray.clear();
                     for(int i = 0; i< nameJsonArray.length(); i++){
-                        nameArray.add(String.valueOf(nameJsonArray.get(i)));
-                        imgArray.add(String.valueOf(imageJsonArray.get(i)));
-                        codeArray.add(String.valueOf(codeJsonArray.get(i)));
-                        yearArrray.add(String.valueOf(yearJsonArray.get(i)));
+                        dataLists.add(new MovieDataList(codeJsonArray.getString(i),nameJsonArray.getString(i), imageJsonArray.getString(i),yearJsonArray.getString(i)));
                     }
                     recyclerViewAdapter.notifyDataSetChanged();
                     hideKeyboard();

@@ -386,6 +386,8 @@ public class ShortReviewInDetailFragment extends Fragment {
                     Log.d(TAG, "onResponse: delete: res" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
                         shortReviewListRequest(movCode);
+                        edtShortReview.setText("");
+                        ratingBarInShortReview.setRating(0);
                     }
 
 

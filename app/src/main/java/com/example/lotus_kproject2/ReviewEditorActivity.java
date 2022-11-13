@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -47,13 +48,19 @@ public class ReviewEditorActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private ProgressBar progressBar;
 
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
+    }
 
-        if (intent.hasExtra("movName")) {
-            movName = intent.getStringExtra("movName");
-            movCode = intent.getStringExtra("movCode");
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(getIntent().hasExtra("movCode")){
+            movName = getIntent().getStringExtra("movName");
+            movCode = getIntent().getStringExtra("movCode");
             tvChooseMov.setText(movName);
         }
     }
@@ -97,11 +104,25 @@ public class ReviewEditorActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ReviewEditorActivity.this, SearchMovForChooseActivity.class);
-                intent.addFlags(FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
+
+//        tvChooseMov.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                switch (motionEvent.getAction()){
+//                    case MotionEvent.ACTION_DOWN:
+//                        Intent intent = new Intent(ReviewEditorActivity.this, SearchMovForChooseActivity.class);
+//                        startActivity(intent);
+//                        overridePendingTransition(0, 0);
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
 
 
     }
