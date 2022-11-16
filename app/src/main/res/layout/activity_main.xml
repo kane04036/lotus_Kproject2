@@ -29,10 +29,10 @@
         android:id="@+id/tvLook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="구경하러가기"
+        android:text="로그인 없이 구경하기"
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:layout_below="@+id/btnKakaoLogin"
         android:layout_marginTop="40dp"
         />
