@@ -56,64 +56,79 @@
         android:background="@drawable/round_rectangle_signaturecolor"
         android:text="팔로우"
         android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/tvFollowingText"
+    <RelativeLayout
+        android:id="@+id/layoutFollowing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvNickNameInUserBlog"
         android:layout_alignStart="@+id/tvNickNameInUserBlog"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="3dp"
-        android:text="팔로잉"
-        android:textColor="@color/black"
-        android:textSize="12dp" />
+        >
+        <TextView
+            android:id="@+id/tvFollowingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="3dp"
+            android:text="팔로잉"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
 
-    <TextView
-        android:id="@+id/tvFollowingNumber"
+        <TextView
+            android:id="@+id/tvFollowingNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tvFollowingText"
+            android:layout_alignBottom="@+id/tvFollowingText"
+            android:textColor="@color/black"
+            android:layout_marginRight="3dp"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutFollower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
-        android:textStyle="bold"
-        android:layout_toRightOf="@+id/tvFollowingText"
-        android:layout_alignBottom="@+id/tvFollowingText"
-        android:textColor="@color/black"
-        android:layout_marginRight="3dp"
-        android:textSize="12dp" />
+        android:layout_toRightOf="@+id/wall"
+        android:layout_alignBottom="@+id/layoutFollowing"
+        >
+        <TextView
+            android:id="@+id/tvFollowerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="팔로워"
+
+            android:textColor="@color/black"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tvFollowerNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tvFollowerText"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/wall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="|"
-        android:layout_toRightOf="@+id/tvFollowingNumber"
-        android:layout_alignBottom="@+id/tvFollowingText"
+        android:layout_toRightOf="@+id/layoutFollowing"
+        android:layout_alignBottom="@+id/layoutFollowing"
         android:textSize="12dp"
         android:textColor="@color/gray"
         />
-    <TextView
-        android:id="@+id/tvFollowerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="팔로워"
-        android:layout_toRightOf="@+id/wall"
-        android:layout_alignBottom="@+id/tvFollowingText"
-        android:textColor="@color/black"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:textSize="12dp" />
 
-    <TextView
-        android:id="@+id/tvFollowerNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/tvFollowingText"
-        android:layout_toRightOf="@+id/tvFollowerText"
-        android:textColor="@color/black"
-        android:textSize="12dp" />
 
 
     <!--    <View-->
@@ -191,7 +206,7 @@
         android:id="@+id/reviewSelectLayoutInUserBlog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvFollowingText"
+        android:layout_below="@+id/layoutFollowing"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 

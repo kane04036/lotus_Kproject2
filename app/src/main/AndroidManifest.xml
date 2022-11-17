@@ -50,6 +50,10 @@
         <activity android:name=".MoreListActivity"/>
         <activity android:name=".ModifyShortReviewActivity"/>
         <activity android:name=".ModifyLongReviewActivity"/>
+        <activity android:name=".FollowActivity"/>
+        <activity android:name=".EditMbtiActivity"/>
+        <activity android:name=".EditNicknameActivity"/>
+        <activity android:name=".EditProfileActivity"/>
     </application>
 
 

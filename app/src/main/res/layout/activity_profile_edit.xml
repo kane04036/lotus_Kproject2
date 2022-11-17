@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarLayoutInEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBarInEditProfile"
+            style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/back_simple_small"
+            app:titleCentered="true" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tvFillowInEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="FILLOW"
+        android:layout_below="@+id/appbarLayoutInEditProfile"
+        android:textColor="@color/signature_color"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+
+    <TableLayout
+        android:id="@+id/tablelayoutInEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvFillowInEditProfile"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp">
+
+
+
+        <TableRow >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="닉네임"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5">
+
+                <TextView
+                    android:id="@+id/tvNicknameInEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/under_line"
+                    android:clickable="true"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tvNicknameInEditProfile"
+                    android:layout_alignEnd="@+id/tvNicknameInEditProfile"
+                    android:layout_alignBottom="@+id/tvNicknameInEditProfile"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/pencil" />
+            </RelativeLayout>
+
+
+        </TableRow>
+        <TableRow android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="MBTI"
+                android:textColor="@color/black"
+                android:textSize="13dp" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5">
+
+                <TextView
+                    android:id="@+id/tvMbtiInEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/under_line"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tvMbtiInEditProfile"
+                    android:layout_alignEnd="@+id/tvMbtiInEditProfile"
+                    android:layout_alignBottom="@+id/tvMbtiInEditProfile"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/pencil" />
+            </RelativeLayout>
+
+
+        </TableRow>
+
+    </TableLayout>
+
+
+
+
+</RelativeLayout>

@@ -3,12 +3,14 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -34,6 +36,8 @@ public class OtherUserBlogActivity extends AppCompatActivity {
     private ShortReviewInMyBlogFragment shortReviewInMyBlogFragment = new ShortReviewInMyBlogFragment();
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FrameLayout frameLayout;
+    RelativeLayout layoutFollowing, layoutFollower;
+
 
     private MaterialToolbar appbar;
     private TextView tvNickname, tvMbti, tvFollowingNum, tvFollowerNum, tvTabBarLongReview, tvTabBarShortReview, btnFollow;
@@ -76,6 +80,32 @@ public class OtherUserBlogActivity extends AppCompatActivity {
         }
 
         requestMyPageData(memNum);
+
+               layoutFollower = findViewById(R.id.layoutFollower);
+        layoutFollowing = findViewById(R.id.layoutFollowing);
+
+        layoutFollowing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),FollowActivity.class);
+                intent.putExtra("userId",memNum);
+                intent.putExtra("type",0);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+
+            }
+        });
+
+        layoutFollower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),FollowActivity.class);
+                intent.putExtra("userId",memNum);
+                intent.putExtra("type",1);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+            }
+        });
 
         appbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,7 +243,6 @@ public class OtherUserBlogActivity extends AppCompatActivity {
                             btnFollow.setTextColor(Color.WHITE);
                             isFollow = false;
                         }
-                        Log.d(TAG, "onResponse: following:" + dataArray.getString(4) + "follower:" + dataArray.getString(3));
 
                     }
 

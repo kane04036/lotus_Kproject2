@@ -102,7 +102,6 @@ public class LongReviewInMyBlogFragment extends Fragment {
                         for (int i = 0; i < dataJsonArray.length(); i++) {
                             JSONObject dataObj = dataJsonArray.getJSONObject(i);
                             JSONArray movieInfoObject = movieInfoArray.getJSONArray(i);
-                            Log.d(TAG, "onResponse: longreview movie info"+movieInfoObject);
 
                             if(getActivity() == null){
                                 return;

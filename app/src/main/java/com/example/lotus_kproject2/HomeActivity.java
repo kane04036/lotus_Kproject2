@@ -4,7 +4,6 @@ import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,12 +13,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -47,7 +43,6 @@ import com.kakao.sdk.user.UserApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -62,22 +57,23 @@ public class HomeActivity extends AppCompatActivity {
     private MovieRecommandFragment movieRecommandFragment = new MovieRecommandFragment();
     private MyBlogFragment myBlogFragment = new MyBlogFragment();
     private PreferFragment preferFragment = new PreferFragment();
+    private EditProfileActivity editProfileActivity = new EditProfileActivity();
 
-    DrawerLayout drawrLayout;
-    MaterialToolbar topAppbar;
-    NavigationView navigationView;
-    EditText edtSearch;
-    Boolean femaleCheck = false, maleCheck = false;
-    ArrayList registerResult = new ArrayList();
-    AlertDialog alertDialog;
-    AHBottomNavigation bottomNavigation;
-    TextView tvValidNickname;
-    View header;
-    TextView tvNicknameInDawer, tvMbtiInDrawer;
+    private DrawerLayout drawrLayout;
+    private MaterialToolbar topAppbar;
+    private NavigationView navigationView;
+    private EditText edtSearch;
+    private Boolean femaleCheck = false, maleCheck = false;
+    private ArrayList registerResult = new ArrayList();
+    private AlertDialog alertDialog;
+    private AHBottomNavigation bottomNavigation;
+    private TextView tvValidNickname, tvEditProfile, tvMyBlog;
+    private  View header;
+    private TextView tvNicknameInDawer, tvMbtiInDrawer;
 
     private String isNew;
 
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onPause() {
@@ -133,6 +129,28 @@ public class HomeActivity extends AppCompatActivity {
         header = navigationView.getHeaderView(0);
         tvNicknameInDawer = header.findViewById(R.id.tvNicknameInDrawer);
         tvMbtiInDrawer = header.findViewById(R.id.tvMbtiInDrawer);
+        tvEditProfile = header.findViewById(R.id.tvEditProfile);
+        tvMyBlog = header.findViewById(R.id.tvMyBlog);
+
+        tvEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+            }
+        });
+
+        tvMyBlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                topAppbar.setTitle("내 블로그");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frameLayout, myBlogFragment).commitAllowingStateLoss();
+                drawrLayout.close();
+            }
+        });
+
 
         sharedPreferences = getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
         String nickname = sharedPreferences.getString("nickname", "");

@@ -39,7 +39,7 @@ public class MovieRecommandFragment extends Fragment {
     ArrayList<RecommendMovieList> recmdMovLists = new ArrayList<>();
 
     String token;
-    int position = 1;
+    int position = 0;
 
     ImageView imgMovMain1, imgMovMain2, imgMovMain3, imgNext, imgPre, imgMovSub1, imgMovSub2, imgMovSub3;
     private TextView tvMovTitleMain, tvMovGenreMain, tvMovNameSub1, tvMovNameSub2, tvMovNameSub3,tvMbti;
@@ -79,7 +79,6 @@ public class MovieRecommandFragment extends Fragment {
             public void onClick(View view) {
                 int len = recmdMovLists.size()-1;
                 position++;
-
                 Glide.with(getActivity()).load(recmdMovLists.get(position%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain1);
                 Glide.with(getActivity()).load(recmdMovLists.get((position + 1)%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain2);
                 Glide.with(getActivity()).load(recmdMovLists.get((position + 2)%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain3);

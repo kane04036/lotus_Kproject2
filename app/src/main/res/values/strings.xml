@@ -64,6 +64,7 @@
     <string name="shortLikeAdd">/short_like/add</string>
     <string name="shortLikeCancel">/short_like/sub</string>
     <string name="viewFollower">/follow/view_follower</string>
+    <string name="viewFollowing">/follow/view_following</string>
     <string name="viewShortReviewKeyWord">/board/short_reviews/view/keyword</string>
     <string name="viewLongReviewKeyWord">/board/long_reviews/view/keyword</string>
     <string name="mypage">/screen/mypage</string>
@@ -75,5 +76,7 @@
     <string name="deleteLongReview">/board/long_reviews/delete</string>
     <string name="viewLongReviewWritingId">/board/long_reviews/view/board_id</string>
     <string name="cancelFollow">/follow/following_cancel</string>
-    
+    <string name="editNickname">/umanager/change_nickname/kakao</string>
+    <string name="editMbti">/umanager/change_mbti_kakao</string>
+
 </resources>
