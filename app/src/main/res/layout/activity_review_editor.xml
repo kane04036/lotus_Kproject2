@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             app:menu="@menu/review_top_app_bar"
             app:navigationIcon="@drawable/back_simple_small"
-            app:title="리뷰 쓰기"
+            app:title="한줄평 쓰기"
             app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -70,10 +70,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/LayoutChooseMov"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:layout_marginRight="15dp"
         android:hint="제목을 입력하세요"
-        android:textSize="18dp" />
+        android:textSize="30dp" />
 
     <EditText
         android:id="@+id/edtReview"
@@ -83,8 +83,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:gravity="top"
-        android:hint="내용을 입력하세요"
-        android:textSize="15dp" />
+        android:hint="영화 선택 후 작성해주세요!"
+        android:textSize="17dp" />
 
 
 </RelativeLayout>
