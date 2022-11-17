@@ -77,7 +77,7 @@
         android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
         android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/tvLongReviewWritingInBoard"
@@ -90,7 +90,7 @@
         android:maxLines="2"
         android:text="긴 리뷰 내용 일부"
         android:textColor="@color/gray"
-        android:textSize="13dp" />
+        android:textSize="11dp" />
 
     <ImageView
         android:id="@+id/imgThumbUpLongReviewInBoard"
