@@ -42,6 +42,19 @@
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/layout/drawer_top_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/layout/fragment_longreview.xml" value="0.16576086956521738" />
         <entry key="..\:/Users/82108/AndroidStudioProjects/lotus_Kproject2/app/src/main/res/layout/fragment_mypage.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/activity_home.xml" value="0.10847628657921292" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/activity_long_review_detail_of_board.xml" value="0.10847628657921292" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/activity_more_list.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/activity_review_editor.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/fragment_home.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/fragment_longreview_board.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/fragment_movie.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/fragment_movierecommand.xml" value="0.10847628657921292" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/long_review_board_item.xml" value="0.2" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/long_review_in_detail_item.xml" value="0.22395833333333334" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/long_review_item.xml" value="0.264" />
+        <entry key="..\:/Users/82108/AndroidStudioProjects/realkp2/app/src/main/res/layout/long_review_myblog_item.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3277777777777778" />
         <entry key="app/src/main/res/drawable/back_simple_small.xml" value="0.3416666666666667" />
         <entry key="app/src/main/res/drawable/back_small.xml" value="0.33240740740740743" />
