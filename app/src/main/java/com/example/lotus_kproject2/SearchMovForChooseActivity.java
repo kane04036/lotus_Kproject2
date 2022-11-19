@@ -107,18 +107,23 @@ public class SearchMovForChooseActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: res:"+response.getString("res"));
-                    JSONArray dataJsonArray = response.getJSONArray("data");
-                    JSONArray nameJsonArray = dataJsonArray.getJSONArray(1);
-                    JSONArray codeJsonArray = dataJsonArray.getJSONArray(2);
-                    JSONArray imageJsonArray = dataJsonArray.getJSONArray(3);
-                    JSONArray yearJsonArray = dataJsonArray.getJSONArray(4);
+                    Log.d(TAG, "movie search: res:"+response.getString("res"));
+                    if(response.getString("res").equals("200")){
+                        JSONArray dataJsonArray = response.getJSONArray("data");
+                        JSONArray nameJsonArray = dataJsonArray.getJSONArray(1);
+                        JSONArray codeJsonArray = dataJsonArray.getJSONArray(2);
+                        JSONArray imageJsonArray = dataJsonArray.getJSONArray(3);
+                        JSONArray yearJsonArray = dataJsonArray.getJSONArray(4);
 
-                    for(int i = 0; i< nameJsonArray.length(); i++){
-                        dataLists.add(new MovieDataList(codeJsonArray.getString(i),nameJsonArray.getString(i), imageJsonArray.getString(i),yearJsonArray.getString(i)));
+                        dataLists.clear();
+                        for(int i = 0; i< nameJsonArray.length(); i++){
+                            dataLists.add(new MovieDataList(codeJsonArray.getString(i),nameJsonArray.getString(i), imageJsonArray.getString(i),yearJsonArray.getString(i)));
+                        }
+                        recyclerViewAdapter.notifyDataSetChanged();
+                        recyclerViewInMovSearch.smoothScrollToPosition(0);
+                        hideKeyboard();
                     }
-                    recyclerViewAdapter.notifyDataSetChanged();
-                    hideKeyboard();
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

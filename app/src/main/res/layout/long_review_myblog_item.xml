@@ -4,23 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/imgMovIconLongReviewInMyBlog"
+        android:layout_width="9dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvMovNameInLongReviewMyblog"
+        android:layout_alignBottom="@+id/tvMovNameInLongReviewMyblog"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_toRightOf="@+id/imgMovInLongReviewMyBlog"
+        android:adjustViewBounds="true"
+        android:clipToOutline="true"
+        android:src="@drawable/movie_circle" />
+
     <TextView
         android:id="@+id/tvMovNameInLongReviewMyblog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_alignTop="@+id/imgMovInLongReviewMyBlog"
+        android:layout_toRightOf="@+id/imgMovIconLongReviewInMyBlog"
         android:text="살인의 추억"
         android:textColor="@color/black"
-        android:textSize="13dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imgMovInLongReviewMyBlog"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMovNameInLongReviewMyblog"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/round_rectangle"
         android:src="@drawable/movie_poster4" />
 
 
@@ -46,13 +60,13 @@
         android:id="@+id/tvLongReviewTitleInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imgMovInLongReviewMyBlog"
+        android:layout_below="@+id/tvMovNameInLongReviewMyblog"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/imgMovInLongReviewMyBlog"
         android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
-        android:textSize="25dp" />
+        android:textSize="13dp" />
 
     <TextView
         android:id="@+id/tvLongReviewWritingInMyBlog"
@@ -60,12 +74,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvLongReviewTitleInMyBlog"
         android:layout_alignStart="@+id/tvLongReviewTitleInMyBlog"
-        android:layout_marginTop="4dp"
         android:layout_toRightOf="@+id/imgMovInLongReviewMyBlog"
         android:maxLines="2"
+        android:minLines="2"
         android:text="긴 리뷰 내용 일부"
         android:textColor="@color/gray"
-        android:textSize="15dp" />
+        android:textSize="11dp" />
 
     <ImageView
         android:id="@+id/imgThumbUpLongReviewMyBlog"
@@ -80,10 +94,10 @@
         android:id="@+id/tvThumbUpNumInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgMovInLongReviewMyBlog"
+        android:layout_below="@+id/tvLongReviewWritingInMyBlog"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="3dp"
-        android:layout_marginTop="-2dp"
+        android:layout_marginTop="3dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="2dp"
         android:text="120"

@@ -8,11 +8,11 @@
         android:id="@+id/tvMovNameShortReviewInSearchResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingbarShortReviewInSearchResult"
+        android:layout_toLeftOf="@+id/tvMbtiShortReviewInSearchResult"
         android:text="살인의 추억"
         android:textColor="@color/black"
-        android:layout_toLeftOf="@+id/tvMbtiShortReviewInSearchResult"
         android:textSize="13dp"
-        android:layout_marginTop="10dp"
         android:textStyle="bold" />
 
 <!--    <ImageView-->
@@ -27,13 +27,12 @@
         android:id="@+id/tvMbtiShortReviewInSearchResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/tvNicknameShortReviewInSearchResult"
-        android:layout_alignBottom="@+id/tvMovNameShortReviewInSearchResult"
-        android:text="ISFP"
-        android:textStyle="bold"
-        android:textColor="@color/signature_color"
         android:layout_marginTop="5dp"
-        android:textSize="12dp" />
+        android:layout_toLeftOf="@+id/tvNicknameShortReviewInSearchResult"
+        android:text="ISFP"
+        android:textColor="@color/signature_color"
+        android:textSize="12dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvNicknameShortReviewInSearchResult"
@@ -51,7 +50,7 @@
         android:id="@+id/ratingbarShortReviewInSearchResult"
         android:layout_width="80dp"
         android:layout_height="15dp"
-        android:layout_below="@+id/tvMovNameShortReviewInSearchResult"
+        android:layout_alignBottom="@+id/tvMbtiShortReviewInSearchResult"
         app:mrb_progressBackgroundTint="@color/gray"
         app:mrb_progressTint="@color/signature_color"
         app:mrb_secondaryProgressTint="@color/gray" />
@@ -62,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tvNicknameShortReviewInSearchResult"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="2dp"
         android:adjustViewBounds="true"
         android:src="@drawable/more" />
 
@@ -70,7 +69,7 @@
         android:id="@+id/tvShortReviewWritingInSearchResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ratingbarShortReviewInSearchResult"
+        android:layout_below="@id/tvMovNameShortReviewInSearchResult"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:text="영화 봤는데 진짜 재밌더라"

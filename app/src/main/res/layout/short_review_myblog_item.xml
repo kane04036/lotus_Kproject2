@@ -4,32 +4,45 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/imgMovIconShortReviewInMyBlog"
+        android:layout_width="9dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvMovNameInShortReviewMyBlog"
+        android:layout_alignBottom="@+id/tvMovNameInShortReviewMyBlog"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_toRightOf="@+id/imgMovInShortReviewMyBlog"
+        android:adjustViewBounds="true"
+        android:clipToOutline="true"
+        android:src="@drawable/movie_circle" />
+
     <TextView
         android:id="@+id/tvMovNameInShortReviewMyBlog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgMovInShortReviewMyBlog"
+        android:layout_toRightOf="@+id/imgMovIconShortReviewInMyBlog"
         android:text="살인의 추억"
         android:textColor="@color/black"
-        android:textSize="13dp"
-        android:layout_marginTop="10dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imgMovInShortReviewMyBlog"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMovNameInShortReviewMyBlog"
+        android:layout_below="@+id/ratingbarShortReviewInMyBlog"
         android:layout_marginTop="5dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/round_rectangle"
         android:src="@drawable/movie_poster4" />
 
     <me.zhanghai.android.materialratingbar.MaterialRatingBar
         android:id="@+id/ratingbarShortReviewInMyBlog"
         android:layout_width="80dp"
         android:layout_height="15dp"
-        android:layout_alignTop="@+id/imgMovInShortReviewMyBlog"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/imgMovInShortReviewMyBlog"
+        android:layout_marginTop="5dp"
         app:mrb_progressBackgroundTint="@color/gray"
         app:mrb_progressTint="@color/signature_color"
         app:mrb_secondaryProgressTint="@color/gray" />
@@ -38,7 +51,6 @@
         android:id="@+id/imgMoreShortReviewInBlog"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvMovNameInShortReviewMyBlog"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="5dp"
         android:adjustViewBounds="true"
@@ -48,11 +60,12 @@
         android:id="@+id/tvShortReviewWritingInMyBlog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ratingbarShortReviewInMyBlog"
+        android:layout_below="@id/tvMovNameInShortReviewMyBlog"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_toRightOf="@+id/imgMovInShortReviewMyBlog"
+        android:minLines="3"
         android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
         android:textSize="12dp" />
@@ -62,16 +75,17 @@
         android:layout_height="wrap_content"
         android:src="@drawable/thumb_up_small"
         android:layout_toLeftOf="@id/tvThumbUpNumShortReviewInMyBlog"
-        android:layout_below="@+id/imgMovInShortReviewMyBlog"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/tvShortReviewWritingInMyBlog"
         />
 
     <TextView
         android:id="@+id/tvThumbUpNumShortReviewInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgThumbUpShortReviewInMyBlog"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="3dp"
-        android:layout_alignBottom="@+id/imgThumbUpShortReviewInMyBlog"
         android:text="120"
         android:textColor="@color/black"
         android:textSize="12dp" />

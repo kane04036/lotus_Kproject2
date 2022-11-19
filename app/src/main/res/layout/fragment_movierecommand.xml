@@ -8,14 +8,14 @@
         android:id="@+id/layoutHomeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="false">
+        android:layout_centerHorizontal="true">
 
         <TextView
             android:id="@+id/tvMbtiInHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="ISFP"
             android:textColor="@color/signature_color"
             android:textSize="20dp"
@@ -31,6 +31,17 @@
             android:fontFamily="@font/koddibold"
             android:textColor="@color/black"
             android:textSize="20dp" />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:text="나와 같은 mbti를 가진 사람들이 많이 찾은 영화"
+            android:textColor="@color/darkGray"
+            android:textSize="14dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/koddiregular" />
     </RelativeLayout>
 
 
@@ -40,8 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/layoutHomeTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/round_rectangle"
         />
 
     <ImageView
@@ -52,6 +64,7 @@
         android:layout_alignBottom="@+id/imgMovMain2"
         android:layout_marginLeft="10dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/round_rectangle"
         />
 
     <ImageView
@@ -63,6 +76,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/round_rectangle"
         />
 
     <ImageView
@@ -116,6 +130,7 @@
     </RelativeLayout>
 
 
+
     <RelativeLayout
         android:id="@+id/layoutSub1"
         android:layout_width="wrap_content"
@@ -127,9 +142,10 @@
         <ImageView
             android:id="@+id/imgMovSub1"
             android:layout_width="110dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_above="@+id/tvMovNameSub1"
             android:adjustViewBounds="true"
+            android:background="@drawable/round_rectangle"
             />
 
         <TextView
@@ -139,9 +155,9 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
+            android:maxLines="1"
             android:textColor="@color/black" />
     </RelativeLayout>
-
 
 
     <RelativeLayout
@@ -150,16 +166,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        >
+        android:layout_marginBottom="20dp">
 
         <ImageView
             android:id="@+id/imgMovSub2"
             android:layout_width="110dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_above="@+id/tvMovNameSub2"
-            android:adjustViewBounds="true"
-            />
+            android:background="@drawable/round_rectangle"
+            android:adjustViewBounds="true" />
 
         <TextView
             android:id="@+id/tvMovNameSub2"
@@ -168,6 +183,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
+            android:maxLines="1"
             android:textColor="@color/black" />
     </RelativeLayout>
 
@@ -184,9 +200,10 @@
         <ImageView
             android:id="@+id/imgMovSub3"
             android:layout_width="110dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_above="@+id/tvMovNameSub3"
             android:adjustViewBounds="true"
+            android:background="@drawable/round_rectangle"
             />
 
         <TextView
@@ -196,6 +213,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
+            android:maxLines="1"
             android:textColor="@color/black" />
     </RelativeLayout>
 

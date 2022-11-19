@@ -64,6 +64,7 @@ public class ShortReviewInMyBlogRecyclerViewAdapter extends RecyclerView.Adapter
         holder.tvThumbupNum.setText(String.valueOf(dataLists.get(holder.getAdapterPosition()).getLikeNum()));
         Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
                 .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
+        holder.imgMov.setClipToOutline(true);
 
         if (dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")) {
             holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);

@@ -59,6 +59,10 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
         holder.tvThumbUpNum.setText(String.valueOf(dataLists.get(holder.getAdapterPosition()).getLikeNum()));
         Glide.with(context).load(dataLists.get(holder.getAdapterPosition()).getMovieData()
                 .getMovImg()).error(R.drawable.gray_profile).into(holder.imgMov);
+        holder.imgMov.setClipToOutline(true);
+        holder.imgMovIcon.setClipToOutline(true);
+
+
         if (dataLists.get(holder.getAdapterPosition()).getIsLike().equals("1")) {
             holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
         }else {
@@ -206,7 +210,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMovName, tvMbti, tvNickname, tvTitle, tvWriting, tvThumbUpNum;
         RelativeLayout layout;
-        ImageView imgMov, imgThumbUp;
+        ImageView imgMov, imgThumbUp, imgMovIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -219,6 +223,7 @@ public class LongReviewBoardRecyclerViewAdapter extends RecyclerView.Adapter<Lon
             imgMov = itemView.findViewById(R.id.imgMovInLongReviewBoard);
             layout = itemView.findViewById(R.id.layoutLongReviewItemInBoard);
             imgThumbUp = itemView.findViewById(R.id.imgThumbUpLongReviewInBoard);
+            imgMovIcon = itemView.findViewById(R.id.imgMovIcon);
         }
     }
 

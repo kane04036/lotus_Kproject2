@@ -84,7 +84,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvLongReviewTitleInSearchResult"
         android:layout_alignStart="@+id/tvLongReviewTitleInSearchResult"
-        android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:maxLines="2"
         android:text="긴 리뷰 내용 일부"

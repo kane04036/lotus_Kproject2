@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             app:menu="@menu/review_top_app_bar"
             app:navigationIcon="@drawable/back_simple_small"
-            app:title="한줄평 쓰기"
+            app:title="감상평 쓰기"
             app:titleCentered="true" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,18 +40,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/appbarLayoutInEditor"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        >
 
         <TextView
             android:id="@+id/tvChooseMov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="영화 선택하기 "
-            android:fontFamily="@font/koddibold"
-            android:textColor="@color/black"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:textSize="15dp" />
+            android:fontFamily="@font/koddibold"
+            android:text="영화 선택하기 "
+            android:textColor="@color/black"
+            android:textSize="17dp" />
 
         <ImageView
             android:layout_width="18dp"
@@ -73,7 +74,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginRight="15dp"
         android:hint="제목을 입력하세요"
-        android:textSize="30dp" />
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/edtReview"
@@ -83,7 +84,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:gravity="top"
-        android:hint="영화 선택 후 작성해주세요!"
+        android:hint="내용을 입력해주세요"
         android:textSize="17dp" />
 
 

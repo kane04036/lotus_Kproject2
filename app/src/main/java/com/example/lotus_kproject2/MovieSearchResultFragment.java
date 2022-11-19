@@ -225,7 +225,8 @@ public class MovieSearchResultFragment extends Fragment {
                                     jsonObject.getString("writing"), Float.valueOf(jsonObject.getInt("star")), shortReviewLikeArray.getInt(i), shortReviewIsLikeArray.getString(i)));
                         }
                         shortReviewAdapter.notifyDataSetChanged();
-
+                        movieRecyclerView.smoothScrollToPosition(0);
+                        hideKeyboard();
                         progressBar.setVisibility(View.INVISIBLE);
 
                     }

@@ -63,6 +63,7 @@ public class ShortReviewInDetailRecyclerViewAdapter extends RecyclerView.Adapter
         holder.ratingBar.setIsIndicator(true);
         holder.tvWriting.setText(dataList.get(holder.getAdapterPosition()).getWriting());
         holder.tvThumbupNum.setText(String.valueOf(dataList.get(holder.getAdapterPosition()).getLikeNum()));
+
         if (dataList.get(holder.getAdapterPosition()).getIsLike().equals("1")) {
             holder.imgThumbUp.setImageResource(R.drawable.thumbs_up_filled_small);
         }else {

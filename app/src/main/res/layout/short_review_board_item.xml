@@ -4,36 +4,50 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/imgMovIconShortReviewInBoard"
+        android:layout_width="9dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvMovNameShortReviewInBoard"
+        android:layout_alignBottom="@+id/tvMovNameShortReviewInBoard"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_toRightOf="@+id/imgMovInShortReviewBoard"
+        android:adjustViewBounds="true"
+        android:clipToOutline="true"
+        android:src="@drawable/movie_circle" />
+
     <TextView
         android:id="@+id/tvMovNameShortReviewInBoard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/tvMbtiShortReviewInBoard"
+        android:layout_alignTop="@id/imgMovInShortReviewBoard"
+        android:layout_toRightOf="@+id/imgMovIconShortReviewInBoard"
         android:text="살인의 추억"
         android:textColor="@color/black"
-        android:textSize="13dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imgMovInShortReviewBoard"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMovNameShortReviewInBoard"
+        android:layout_below="@+id/tvMbtiShortReviewInBoard"
         android:layout_marginTop="5dp"
         android:adjustViewBounds="true"
+        android:background="@drawable/round_rectangle"
         android:src="@drawable/movie_poster4" />
+
     <TextView
         android:id="@+id/tvMbtiShortReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/tvNicknameShortReviewInBoard"
-        android:layout_alignBottom="@+id/tvMovNameShortReviewInBoard"
-        android:text="ISFP"
-        android:textStyle="bold"
-        android:textColor="@color/signature_color"
         android:layout_marginTop="5dp"
-        android:textSize="12dp" />
+        android:text="ISFP"
+        android:layout_toLeftOf="@+id/tvNicknameShortReviewInBoard"
+        android:textColor="@color/signature_color"
+        android:textSize="11dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvNicknameShortReviewInBoard"
@@ -41,19 +55,18 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvMbtiShortReviewInBoard"
         android:layout_marginLeft="5dp"
-        android:layout_toLeftOf="@+id/imgMoreShortReviewInBoard"
         android:text="짱아찌"
+        android:layout_toLeftOf="@+id/imgMoreShortReviewInBoard"
         android:textColor="@color/black"
-        android:textSize="12dp"
+        android:textSize="11dp"
         android:textStyle="bold" />
 
     <me.zhanghai.android.materialratingbar.MaterialRatingBar
         android:id="@+id/ratingbarShortReviewInBoard"
         android:layout_width="80dp"
         android:layout_height="15dp"
-        android:layout_alignTop="@+id/imgMovInShortReviewBoard"
-        android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/imgMovInShortReviewBoard"
+        android:layout_alignBottom="@+id/imgMoreShortReviewInBoard"
+        android:layout_alignParentLeft="true"
         app:mrb_progressBackgroundTint="@color/gray"
         app:mrb_progressTint="@color/signature_color"
         app:mrb_secondaryProgressTint="@color/gray" />
@@ -62,9 +75,8 @@
         android:id="@+id/imgMoreShortReviewInBoard"
         android:layout_width="15dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvNicknameShortReviewInBoard"
+        android:layout_alignTop="@+id/tvMbtiShortReviewInBoard"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="5dp"
         android:adjustViewBounds="true"
         android:src="@drawable/more" />
 
@@ -72,30 +84,32 @@
         android:id="@+id/tvShortReviewWritingInBoard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ratingbarShortReviewInBoard"
-        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/tvMovNameShortReviewInBoard"
+        android:layout_alignStart="@+id/imgMovIconShortReviewInBoard"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/imgMovInShortReviewBoard"
+        android:minLines="3"
         android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
         android:textSize="12dp" />
+
     <ImageView
         android:id="@+id/imgThumbUpInShortReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/thumb_up_small"
+        android:layout_below="@+id/tvShortReviewWritingInBoard"
+        android:layout_marginTop="3dp"
+
         android:layout_toLeftOf="@id/tvThumbUpNumInShortReviewBoard"
-        android:layout_below="@+id/imgMovInShortReviewBoard"
-        />
+        android:src="@drawable/thumb_up_small" />
 
     <TextView
         android:id="@+id/tvThumbUpNumInShortReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgThumbUpInShortReviewBoard"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="3dp"
-        android:layout_alignBottom="@+id/imgThumbUpInShortReviewBoard"
         android:text="120"
         android:textColor="@color/black"
         android:textSize="12dp" />

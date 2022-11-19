@@ -3,6 +3,7 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class MovieRecommandFragment extends Fragment {
     ArrayList<RecommendMovieList> recmdMovLists = new ArrayList<>();
 
     String token;
-    int position = 0;
+    Integer len, position = 0;
 
     ImageView imgMovMain1, imgMovMain2, imgMovMain3, imgNext, imgPre, imgMovSub1, imgMovSub2, imgMovSub3;
     private TextView tvMovTitleMain, tvMovGenreMain, tvMovNameSub1, tvMovNameSub2, tvMovNameSub3,tvMbti;
@@ -71,13 +72,20 @@ public class MovieRecommandFragment extends Fragment {
         tvMovNameSub3 = view.findViewById(R.id.tvMovNameSub3);
         tvMbti = view.findViewById(R.id.tvMbtiInHome);
 
+        imgMovMain1.setClipToOutline(true);
+        imgMovMain2.setClipToOutline(true);
+        imgMovMain3.setClipToOutline(true);
+        imgMovSub1.setClipToOutline(true);
+        imgMovSub2.setClipToOutline(true);
+        imgMovSub3.setClipToOutline(true);
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
         tvMbti.setText(sharedPreferences.getString("mbti",""));
 
         imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int len = recmdMovLists.size()-1;
+                len = recmdMovLists.size() -1;
                 position++;
                 Glide.with(getActivity()).load(recmdMovLists.get(position%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain1);
                 Glide.with(getActivity()).load(recmdMovLists.get((position + 1)%len).getMovImg()).error(R.drawable.gray_profile).into(imgMovMain2);
@@ -90,7 +98,7 @@ public class MovieRecommandFragment extends Fragment {
         imgPre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int len = recmdMovLists.size()-1;
+                len = recmdMovLists.size() -1;
                 position--;
                 if(position < 0)
                     position = len;
@@ -101,6 +109,66 @@ public class MovieRecommandFragment extends Fragment {
                 tvMovTitleMain.setText(recmdMovLists.get((position + 1)%len).getMovName());
                 tvMovGenreMain.setText(recmdMovLists.get((position + 1)%len).getMovGenre());
 
+            }
+        });
+
+        imgMovMain1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra("movCode",recmdMovLists.get(position%len).getMovCode());
+                startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
+            }
+        });
+
+        imgMovMain2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra("movCode",recmdMovLists.get((position + 1)%len).getMovCode());
+                startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
+            }
+        });
+
+        imgMovMain3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra("movCode",recmdMovLists.get((position + 2)%len).getMovCode());
+                startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
+            }
+        });
+
+        imgMovSub1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra("movCode",recmdMovLists.get(3).getMovCode());
+                startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
+            }
+        });
+
+        imgMovSub2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra("movCode",recmdMovLists.get(4).getMovCode());
+                startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
+            }
+        });
+
+        imgMovSub3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+                intent.putExtra("movCode",recmdMovLists.get(5).getMovCode());
+                startActivity(intent);
+                getActivity().overridePendingTransition(0,0);
             }
         });
 
@@ -135,6 +203,7 @@ public class MovieRecommandFragment extends Fragment {
                             JSONArray tmpJsonArray = dataJsonArray.getJSONArray(i);
                             recmdMovLists.add(new RecommendMovieList( tmpJsonArray.getString(0),  tmpJsonArray.getString(1),  tmpJsonArray.getString(2),  tmpJsonArray.getString(3)));
                         }
+                        len = recmdMovLists.size() -1;
                         if(getActivity()==null){
                             return;
                         }
@@ -151,6 +220,7 @@ public class MovieRecommandFragment extends Fragment {
                         tvMovNameSub1.setText(recmdMovLists.get(3).getMovName());
                         tvMovNameSub2.setText(recmdMovLists.get(4).getMovName());
                         tvMovNameSub3.setText(recmdMovLists.get(5).getMovName());
+
                     }
 
                 } catch (JSONException e) {

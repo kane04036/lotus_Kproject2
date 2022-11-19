@@ -94,6 +94,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvGenre = findViewById(R.id.tvGenre);
         progressBar = findViewById(R.id.progressInDetail);
 
+        imageMovDetail.setClipToOutline(true);
+
         topBarInDetail.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

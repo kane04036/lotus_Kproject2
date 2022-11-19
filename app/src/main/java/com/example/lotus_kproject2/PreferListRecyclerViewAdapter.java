@@ -39,6 +39,7 @@ public class PreferListRecyclerViewAdapter extends RecyclerView.Adapter<PreferLi
         holder.tvMovName.setText(dataLists.get(holder.getAdapterPosition()).getMovName());
         if (!dataLists.get(holder.getAdapterPosition()).getReleaseDate().isEmpty())
             holder.tvReleaseDate.setText(dataLists.get(holder.getAdapterPosition()).getReleaseDate().substring(0, 4));
+        holder.imgViewMov.setClipToOutline(true);
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override

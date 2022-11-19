@@ -5,37 +5,49 @@
     android:id="@+id/layoutLongReviewItemInBoard"
     >
 
+    <ImageView
+        android:id="@+id/imgMovIcon"
+        android:layout_width="9dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvMovNameInLongReviewBoard"
+        android:layout_alignBottom="@+id/tvMovNameInLongReviewBoard"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="3dp"
+        android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
+        android:adjustViewBounds="true"
+        android:clipToOutline="true"
+        android:src="@drawable/movie_circle" />
+
     <TextView
         android:id="@+id/tvMovNameInLongReviewBoard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/tvMbtiInLongReviewBoard"
+        android:layout_alignTop="@+id/imgMovInLongReviewBoard"
+        android:layout_toRightOf="@+id/imgMovIcon"
         android:text="살인의 추억"
         android:textColor="@color/black"
-        android:textSize="13dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imgMovInLongReviewBoard"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMovNameInLongReviewBoard"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tvMbtiInLongReviewBoard"
         android:adjustViewBounds="true"
+        android:background="@drawable/round_rectangle"
         android:src="@drawable/movie_poster4" />
 
     <TextView
         android:id="@+id/tvMbtiInLongReviewBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvMovNameInLongReviewBoard"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/tvNicknameInLongReviewBoard"
         android:text="ISFP"
         android:textColor="@color/signature_color"
-        android:textSize="12dp"
+        android:textSize="11dp"
         android:textStyle="bold" />
 
     <TextView
@@ -46,7 +58,7 @@
         android:layout_alignParentRight="true"
         android:text="짱아찌"
         android:textColor="@color/black"
-        android:textSize="12dp"
+        android:textSize="11dp"
         android:textStyle="bold" />
 
 <!--    <View-->
@@ -71,13 +83,13 @@
         android:id="@+id/tvLongReviewTitleInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imgMovInLongReviewBoard"
+        android:layout_below="@+id/tvMovNameInLongReviewBoard"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
         android:text="영화 봤는데 진짜 재밌더라"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="13dp" />
 
     <TextView
         android:id="@+id/tvLongReviewWritingInBoard"
@@ -85,12 +97,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvLongReviewTitleInBoard"
         android:layout_alignStart="@+id/tvLongReviewTitleInBoard"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="1dp"
         android:layout_toRightOf="@+id/imgMovInLongReviewBoard"
         android:maxLines="2"
+        android:minLines="2"
         android:text="긴 리뷰 내용 일부"
         android:textColor="@color/gray"
-        android:textSize="13dp" />
+        android:textSize="11dp" />
 
     <ImageView
         android:id="@+id/imgThumbUpLongReviewInBoard"
@@ -105,10 +118,10 @@
         android:id="@+id/tvThumbUpNumLongReviewInBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imgMovInLongReviewBoard"
+        android:layout_below="@+id/tvLongReviewWritingInBoard"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="3dp"
-        android:layout_marginTop="-2dp"
+        android:layout_marginTop="2dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="2dp"
         android:text="120"
