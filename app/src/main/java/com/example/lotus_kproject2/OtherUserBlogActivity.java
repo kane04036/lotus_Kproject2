@@ -55,6 +55,12 @@ public class OtherUserBlogActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        requestMyPageData(memNum);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_blog);
@@ -79,7 +85,6 @@ public class OtherUserBlogActivity extends AppCompatActivity {
             btnFollow.setEnabled(false);
         }
 
-        requestMyPageData(memNum);
 
                layoutFollower = findViewById(R.id.layoutFollower);
         layoutFollowing = findViewById(R.id.layoutFollowing);

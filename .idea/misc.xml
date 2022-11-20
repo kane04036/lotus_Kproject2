@@ -118,7 +118,7 @@
         <entry key="app/src/main/res/layout/alertdialog_nickname.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/drawer_top_layout.xml" value="0.29846014492753625" />
         <entry key="app/src/main/res/layout/flower_list_item.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/following_list_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/following_list_item.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_blog.xml" value="0.2817028985507246" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
@@ -166,6 +166,8 @@
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/top_app_bar_for_more_function.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/menu/top_app_bar_plus.xml" value="0.39166666666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3921875" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3921875" />
       </map>
     </option>
   </component>

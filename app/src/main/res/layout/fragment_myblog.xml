@@ -27,62 +27,77 @@
         android:textColor="@color/signature_color"
         android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/tvFollowingTextInMyBlog"
+    <RelativeLayout
+        android:id="@+id/layoutFollowingInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvNickNameInMyBlog"
         android:layout_alignStart="@+id/tvNickNameInMyBlog"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginLeft="3dp"
-        android:text="팔로잉"
-        android:textColor="@color/black"
-        android:textSize="12dp" />
+        >
 
-    <TextView
-        android:id="@+id/tvFollowingNumberInMyBlog"
+        <TextView
+            android:id="@+id/tvFollowingTextInMyBlog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="3dp"
+            android:text="팔로잉"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tvFollowingNumberInMyBlog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tvFollowingTextInMyBlog"
+            android:layout_alignBottom="@+id/tvFollowingTextInMyBlog"
+            android:textColor="@color/black"
+            android:layout_marginRight="3dp"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutFollowerInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:textStyle="bold"
-        android:layout_toRightOf="@+id/tvFollowingTextInMyBlog"
-        android:layout_alignBottom="@+id/tvFollowingTextInMyBlog"
-        android:textColor="@color/black"
-        android:layout_marginRight="3dp"
-        android:textSize="12dp" />
+        android:layout_toRightOf="@+id/wallInMyBlog"
+        android:layout_alignBottom="@+id/layoutFollowingInMyBlog"
+        >
+        <TextView
+            android:id="@+id/tvFollowerTextInMyBlog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="팔로워"
+
+            android:textColor="@color/black"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tvFollowerNumberInMyBlog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tvFollowerTextInMyBlog"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/wallInMyBlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvFollowingTextInMyBlog"
-        android:layout_toRightOf="@+id/tvFollowingNumberInMyBlog"
+        android:layout_alignBottom="@+id/layoutFollowingInMyBlog"
+        android:layout_toRightOf="@+id/layoutFollowingInMyBlog"
         android:text="|"
         android:textColor="@color/gray"
         android:textSize="12dp" />
-    <TextView
-        android:id="@+id/tvFollowerTextInMyBlog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="팔로워"
-        android:layout_toRightOf="@+id/wallInMyBlog"
-        android:layout_alignBottom="@+id/tvFollowingTextInMyBlog"
-        android:textColor="@color/black"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:textSize="12dp" />
 
-    <TextView
-        android:id="@+id/tvFollowerNumberInMyBlog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/tvFollowingTextInMyBlog"
-        android:layout_toRightOf="@+id/tvFollowerTextInMyBlog"
-        android:textColor="@color/black"
-        android:textSize="12dp" />
 
 <!--    <View-->
 <!--        android:layout_width="match_parent"-->
@@ -159,7 +174,7 @@
         android:id="@+id/reviewSelectLayoutInMyBlog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvFollowingTextInMyBlog"
+        android:layout_below="@+id/layoutFollowingInMyBlog"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 

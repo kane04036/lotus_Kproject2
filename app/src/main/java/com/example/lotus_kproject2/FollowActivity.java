@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -37,9 +39,10 @@ public class FollowActivity extends AppCompatActivity {
     private Integer type;
     private String userId;
     private ArrayList<UserDataList> dataLists = new ArrayList<>();
-    private FollowRecyclerViewAdapter adapter = new FollowRecyclerViewAdapter(dataLists);
+    private FollowRecyclerViewAdapter adapter;
     private MaterialToolbar appbar;
     private ProgressBar progressBar;
+    private TextView tvErrorMessage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +51,9 @@ public class FollowActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyViewMoreList);
         appbar = findViewById(R.id.topBarMoreList);
         progressBar = findViewById(R.id.progressInMoreList);
+        tvErrorMessage = findViewById(R.id.tvFollowErrorMessage);
 
+        adapter = new FollowRecyclerViewAdapter(FollowActivity.this ,dataLists);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -80,7 +85,10 @@ public class FollowActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("user_id", userId);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            Log.d(TAG, "requestFollowerList: user id, token:"+userId+" "+sharedPreferences.getString("token",""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,6 +104,7 @@ public class FollowActivity extends AppCompatActivity {
                     if (response.getString("res").equals("200")) {
                         JSONArray userIdArray = response.getJSONArray("data");
                         JSONArray nicknameMbtiArray = response.getJSONArray("data2");
+                        JSONArray isFollowArray = response.getJSONArray("isfollow");
                         if (getApplicationContext() == null) {
                             return;
                         }
@@ -107,10 +116,12 @@ public class FollowActivity extends AppCompatActivity {
                             JSONArray userIdObject = userIdArray.getJSONArray(i);
                             JSONArray nicknameMbtiObject = nicknameMbtiArray.getJSONArray(i);
                             Log.d(TAG, "onResponse: nickname, mbti, userid:" + nicknameMbtiObject.getString(0) + " " + mbtiArray[nicknameMbtiObject.getInt(1)] + " " + userIdObject.getString(0));
-                            dataLists.add(new UserDataList(nicknameMbtiObject.getString(0), mbtiArray[nicknameMbtiObject.getInt(1)], userIdObject.getString(0)));
+                            dataLists.add(new UserDataList(nicknameMbtiObject.getString(0), mbtiArray[nicknameMbtiObject.getInt(1)], userIdObject.getString(0), isFollowArray.getString(i)));
                         }
                         progressBar.setVisibility(View.INVISIBLE);
                         adapter.notifyDataSetChanged();
+                    }else if(response.getString("res").equals("201")){
+                        tvErrorMessage.setText("팔로워가 없습니다.");
                     }
 
                 } catch (JSONException e) {
@@ -134,7 +145,10 @@ public class FollowActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("user_id", userId);
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
+            Log.d(TAG, "requestFollowerList: user id, token:"+userId+" "+sharedPreferences.getString("token",""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,6 +164,7 @@ public class FollowActivity extends AppCompatActivity {
                     if (response.getString("res").equals("200")) {
                         JSONArray userIdArray = response.getJSONArray("data");
                         JSONArray nicknameMbtiArray = response.getJSONArray("data2");
+                        JSONArray isFollowArray = response.getJSONArray("isfollow");
                         Log.d(TAG, "onResponse: useridarray:" + userIdArray);
                         Log.d(TAG, "onResponse: useridArray size: " + userIdArray.length());
                         if (getApplicationContext() == null) {
@@ -163,11 +178,13 @@ public class FollowActivity extends AppCompatActivity {
                             JSONArray userIdObject = userIdArray.getJSONArray(i);
                             JSONArray nicknameMbtiObject = nicknameMbtiArray.getJSONArray(i);
                             Log.d(TAG, "onResponse: nickname, mbti, userid:" + nicknameMbtiObject.getString(0) + " " + mbtiArray[nicknameMbtiObject.getInt(1)] + " " + userIdObject.getString(0));
-                            dataLists.add(new UserDataList(nicknameMbtiObject.getString(0), mbtiArray[nicknameMbtiObject.getInt(1)], userIdObject.getString(0)));
+                            dataLists.add(new UserDataList(nicknameMbtiObject.getString(0), mbtiArray[nicknameMbtiObject.getInt(1)], userIdObject.getString(0),isFollowArray.getString(i)));
                         }
                         progressBar.setVisibility(View.INVISIBLE);
                         adapter.notifyDataSetChanged();
 
+                    }else if(response.getString("res").equals("201")){
+                        tvErrorMessage.setText("팔로우하고 있는 사용자가 없습니다.");
                     }
 
                 } catch (JSONException e) {

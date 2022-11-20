@@ -3,6 +3,7 @@ package com.example.lotus_kproject2;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,16 +34,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MyBlogFragment extends Fragment {
-    FragmentManager fragmentManager;
-    LongReviewInMyBlogFragment longReviewInMyBlogFragment = new LongReviewInMyBlogFragment();
-    ShortReviewInMyBlogFragment shortReviewInMyBlogFragment = new ShortReviewInMyBlogFragment();
-
+    private FragmentManager fragmentManager;
+    private LongReviewInMyBlogFragment longReviewInMyBlogFragment = new LongReviewInMyBlogFragment();
+    private ShortReviewInMyBlogFragment shortReviewInMyBlogFragment = new ShortReviewInMyBlogFragment();
     private TextView tvTabBarLongReviewInMyBlog, tvTabBarShortReviewInMyBlog, tvNickname, tvMbti, tvFollowingNum, tvFollowerNum;
-    FrameLayout frameLayoutInMyBlog;
+    private FrameLayout frameLayoutInMyBlog;
+    private Bundle result = new Bundle();
+    private RelativeLayout layoutFollowing, layoutFollower;
+    private String userId;
 
-    Bundle result = new Bundle();
-
-    String follower, following;
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestMyBlogData(userId);
+    }
 
     @Nullable
     @Override
@@ -51,12 +57,10 @@ public class MyBlogFragment extends Fragment {
         fragmentManager = getChildFragmentManager();
 
         SharedPreferences sharedPreferences_loginData = getActivity().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
-        result.putString("userId", sharedPreferences_loginData.getString("memNum", ""));
-        Log.d(TAG, "user id:" + sharedPreferences_loginData.getString("memNum", ""));
+        userId = sharedPreferences_loginData.getString("memNum", "");
+        result.putString("userId", userId);
         fragmentManager.setFragmentResult("userData_long", result);
         fragmentManager.setFragmentResult("userData_short", result);
-
-        requestMyBlogData(sharedPreferences_loginData.getString("memNum", ""));
 
         tvTabBarLongReviewInMyBlog = view.findViewById(R.id.tvTabBarLongReviewInMyBlog);
         tvTabBarShortReviewInMyBlog = view.findViewById(R.id.tvTabBarShortReviewInMyBlog);
@@ -65,14 +69,38 @@ public class MyBlogFragment extends Fragment {
         tvMbti = view.findViewById(R.id.tvMbtiInMyBlog);
         tvFollowerNum = view.findViewById(R.id.tvFollowerNumberInMyBlog);
         tvFollowingNum = view.findViewById(R.id.tvFollowingNumberInMyBlog);
+        layoutFollower = view.findViewById(R.id.layoutFollowerInMyBlog);
+        layoutFollowing = view.findViewById(R.id.layoutFollowingInMyBlog);
 
         SharedPreferences sharedPreferences_userData = getActivity().getSharedPreferences(getString(R.string.userData), Context.MODE_PRIVATE);
-        tvNickname.setText(sharedPreferences_userData.getString("nickname",""));
-        tvMbti.setText(sharedPreferences_userData.getString("mbti",""));
+        tvNickname.setText(sharedPreferences_userData.getString("nickname", ""));
+        tvMbti.setText(sharedPreferences_userData.getString("mbti", ""));
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frameLayoutInMyBlog, longReviewInMyBlogFragment).commitAllowingStateLoss();
 
+        layoutFollowing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FollowActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("type", 0);
+                startActivity(intent);
+                getActivity().overridePendingTransition(0, 0);
+
+            }
+        });
+
+        layoutFollower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FollowActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("type", 1);
+                startActivity(intent);
+                getActivity().overridePendingTransition(0, 0);
+            }
+        });
         tvTabBarLongReviewInMyBlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,14 +130,14 @@ public class MyBlogFragment extends Fragment {
         return view;
     }
 
-    private void requestMyBlogData(String memNum){
+    private void requestMyBlogData(String memNum) {
         RequestQueue Queue = Volley.newRequestQueue(getActivity());
 
         JSONObject jsonObject = new JSONObject();
         try {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData),Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.loginData), Context.MODE_PRIVATE);
             jsonObject.put("userNm", memNum);
-            jsonObject.put("token", sharedPreferences.getString("token",""));
+            jsonObject.put("token", sharedPreferences.getString("token", ""));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,12 +150,12 @@ public class MyBlogFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.d(TAG, "onResponse: my page: res:"+response.getString("res"));
-                    if(response.getString("res").equals("200")){
+                    Log.d(TAG, "onResponse: my page: res:" + response.getString("res"));
+                    if (response.getString("res").equals("200")) {
                         JSONArray dataArray = response.getJSONArray("data");
                         tvFollowerNum.setText(dataArray.getString(3));
                         tvFollowingNum.setText(dataArray.getString(4));
-                        Log.d(TAG, "onResponse: following:"+dataArray.getString(4)+"follower:"+dataArray.getString(3));
+                        Log.d(TAG, "onResponse: following:" + dataArray.getString(4) + "follower:" + dataArray.getString(3));
                     }
 
 
