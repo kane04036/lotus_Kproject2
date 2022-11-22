@@ -102,6 +102,7 @@ public class FollowActivity extends AppCompatActivity {
                 try {
                     Log.d(TAG, "onResponse: follower res:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
+                        tvErrorMessage.setVisibility(View.INVISIBLE);
                         JSONArray userIdArray = response.getJSONArray("data");
                         JSONArray nicknameMbtiArray = response.getJSONArray("data2");
                         JSONArray isFollowArray = response.getJSONArray("isfollow");
@@ -121,7 +122,9 @@ public class FollowActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.INVISIBLE);
                         adapter.notifyDataSetChanged();
                     }else if(response.getString("res").equals("201")){
+                        tvErrorMessage.setVisibility(View.VISIBLE);
                         tvErrorMessage.setText("팔로워가 없습니다.");
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
 
                 } catch (JSONException e) {
@@ -162,6 +165,7 @@ public class FollowActivity extends AppCompatActivity {
                 try {
                     Log.d(TAG, "onResponse: following res:" + response.getString("res"));
                     if (response.getString("res").equals("200")) {
+                        tvErrorMessage.setVisibility(View.INVISIBLE);
                         JSONArray userIdArray = response.getJSONArray("data");
                         JSONArray nicknameMbtiArray = response.getJSONArray("data2");
                         JSONArray isFollowArray = response.getJSONArray("isfollow");
@@ -184,7 +188,10 @@ public class FollowActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
 
                     }else if(response.getString("res").equals("201")){
+                        tvErrorMessage.setVisibility(View.VISIBLE);
                         tvErrorMessage.setText("팔로우하고 있는 사용자가 없습니다.");
+                        progressBar.setVisibility(View.INVISIBLE);
+
                     }
 
                 } catch (JSONException e) {

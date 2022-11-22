@@ -39,16 +39,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/appbarLayoutInEditor"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        >
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/tvChooseMov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
             android:fontFamily="@font/koddibold"
             android:text="영화 선택하기 "
             android:textColor="@color/black"
@@ -57,6 +54,7 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
+            android:layout_alignTop="@+id/tvChooseMov"
             android:layout_alignBottom="@+id/tvChooseMov"
             android:layout_toRightOf="@+id/tvChooseMov"
             android:src="@drawable/forward_small"
